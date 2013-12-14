@@ -3,7 +3,7 @@
 
 using namespace std;
 
-#define maxSize 1000
+#define maxSize 5000
 #define POSINF 9999999
 
 int dp[maxSize][maxSize];
@@ -22,7 +22,7 @@ bool validBond(char a, char b) {
 }
 
 int nussWeight(int a, int b) {
-    validBond(rnaSeq[a], rnaSeq[b]) ? 1 : -99999;
+    return validBond(rnaSeq[a], rnaSeq[b]) ? 1 : -9999999;
 }
 
 int zukWeight(int a, int b) {
@@ -35,7 +35,18 @@ int zukWeight(int a, int b) {
     return 0;
 }
 
+int nuss(int i, int j) {
+    if(dp[i][j] != -1) return dp[i][j];
+    int best = max(dp[i][j-1], dp[i+1][j]);
+    best = max(best, dp[i+1][j-1] + nussWeight(i, j));
+    for(int k = i+1; k < j; ++k)
+        best = max(best, dp[i][k] + dp[k+1][j]);
+    return dp[i][j] = best;
+
+}
+
 int nussinovs(int i, int j) {
+    //cout << i << " " << j << endl;
     if(i >= j) return 0;
     if(dp[i][j] != -1) return dp[i][j];
     int best = nussinovs(i+1, j-1) + nussWeight(i, j);
@@ -44,7 +55,18 @@ int nussinovs(int i, int j) {
     return dp[i][j] = best;
 }
 
-
+int buNussinovs() {
+    for(int i = rnaSeq.size()-2; i >= 0; --i) {
+        for(int j = i+1; j < rnaSeq.size(); ++j) {
+            dp[i][j] = max(dp[i+1][j-1] + nussWeight(i,j), 0);
+            dp[i][j] = max(dp[i][j], dp[i+1][j]);
+            dp[i][j] = max(dp[i][j], dp[i][j-1]);
+            for(int k = i+1; k < j; ++k)
+                dp[i][j] = max(dp[i][j], dp[i][k] + dp[k+1][j]);
+        }
+    }
+    return dp[0][rnaSeq.size()-1];
+}
 
 int zuker(int i, int j) {
     if(i >= j) return POSINF;
@@ -61,6 +83,10 @@ int main() {
             for(int j = 0; j < maxSize; ++j)
                 dp[i][j] = -1;
         cout << nussinovs(0, rnaSeq.size()-1) << endl;
+        for(int i = 0; i < maxSize; ++i)
+            for(int j = 0; j < maxSize; ++j)
+                dp[i][j] = 0;
+        cout << buNussinovs() << endl << endl;
     }
     return 0;
 }
