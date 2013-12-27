@@ -33,15 +33,97 @@ public:
 		this->score = s;
 		this->sstruct = "";
 	}
+	int size() const
+	{
+		return this->right - this->left;
+	}
 	bool compatibleWith(const RNAInterval& other) const
 	{
-		return other.right < this->left;
+		return other.right < this->left || other.left > this->right;
 	}
 	bool operator< (const RNAInterval& other) const
 	{
 		return right < other.right;
 	}
 };
+
+bool size_comp(const RNAInterval& a, const RNAInterval& b)
+{
+	return a.size() < b.size();
+}
+
+bool fe_comp(const RNAInterval& a, const RNAInterval& b)
+{
+	return a.score < b.score;
+}
+
+vector<int> bottomUpSelection(vector<RNAInterval>& intervals)
+{
+	//sort by size, asc
+	sort(intervals.begin(), intervals.end(), size_comp);
+	vector<int> chosen;
+	for(int i = 0; i < intervals.size(); ++i)
+	{
+		bool choose = true;
+		for(int j = 0; j < chosen.size(); ++j)
+		{
+			if(!intervals[i].compatibleWith(intervals[chosen[j]]))
+			{
+				choose = false;
+				break;
+			}
+		}
+		if(choose)
+			chosen.push_back(i);
+	}
+	return chosen;
+}
+
+vector<int> topDownSelection(vector<RNAInterval>& intervals)
+{
+	//sort by size, asc
+	sort(intervals.begin(), intervals.end(), size_comp);
+	reverse(intervals.begin(), intervals.end());
+	vector<int> chosen;
+	for(int i = 0; i < intervals.size(); ++i)
+	{
+		bool choose = true;
+		for(int j = 0; j < chosen.size(); ++j)
+		{
+			if(!intervals[i].compatibleWith(intervals[chosen[j]]))
+			{
+				choose = false;
+				break;
+			}
+		}
+		if(choose)
+			chosen.push_back(i);
+	}
+	return chosen;
+}
+
+vector<int> greedyMFESelection(vector<RNAInterval>& intervals)
+{
+	//sort by score (abs(free energy)), asc
+	sort(intervals.begin(), intervals.end(), fe_comp);
+	reverse(intervals.begin(), intervals.end());
+	vector<int> chosen;
+	for(int i = 0; i < intervals.size(); ++i)
+	{
+		bool choose = true;
+		for(int j = 0; j < chosen.size(); ++j)
+		{
+			if(!intervals[i].compatibleWith(intervals[chosen[j]]))
+			{
+				choose = false;
+				break;
+			}
+		}
+		if(choose)
+			chosen.push_back(i);
+	}
+	return chosen;
+}
 
 vector<int> weightedActivitySelection(vector<RNAInterval>& intervals)
 {
@@ -99,26 +181,25 @@ vector<int> weightedActivitySelection(vector<RNAInterval>& intervals)
 
 RNAInterval zuker(const string& rna, const int l, const int r)
 {
+    //get the interval string and calculate the score
 	int sz = r-l+1;
     char* ss = new char[sz+1];
     double score = fold(rna.substr(l, sz).c_str(), ss);
-    /*
-    for(int i = 0; i < sz; ++i)
-    {
-    	if(ss[i] == '.')
-    		score += 1.5;
-    	else
-    		break;
-    }
-    for(int i = sz-1; i >= 0; ++i)
-    {
-    	if(ss[i] == '.')
-    		score += 1.5;
-    	else
-    		break;
-    }
-    */
-    return RNAInterval(l, r, -score, string(ss));
+    //trim the string of danging ends
+	//int ll, rr;
+    //for(ll = l; ll <= r && rna[ll] == '.'; ++ll);
+    //for(rr = r; r >= 0 && rna[rr] == '.'; --rr);
+    //cerr << ss << endl;
+    return RNAInterval(l, r, -score, ss);
+}
+
+vector<RNAInterval> zukerMultiFold(const string& rna, const int windowSize) {
+	vector<RNAInterval> ints;
+	for(int i = 0; i < rna.size()-windowSize; ++i) {
+		//cerr << "Zuker: " << i << endl;
+		ints.push_back(zuker(rna, i, i+windowSize));
+	}
+	return ints;
 }
 
 vector<RNAInterval> RNALfold(const string& rna, int windowSize)
@@ -166,29 +247,42 @@ void testSelection()
 	}
 }
 
+int countUnbonded(const string& structure)
+{
+	int count = 0;
+	for(int i = 0; i < structure.size(); ++i)
+	{
+		if(structure[i] == '.')
+			++count;
+	}
+	return count;
+}
+
 
 int main()
 {
 	
-	string rna;
+	string rna, name;
 	string targetStructure;
 	while(cin.good())
 	{
 		
-		cin >> rna >> targetStructure;
+		cin >> name >> rna >> targetStructure;
+		cout << "SSTRAND ID = " << name << endl;
 		//normal RNAfold
 		RNAInterval vanilla = zuker(rna, 0, rna.size()-1);
 		int vanillaErrors = countErrors(targetStructure, vanilla.sstruct);
-		cout << "RNA size: " << rna.size() << endl;
+		cout << "RNA size: " << rna.size() << " with " << vanillaErrors << " errors." << endl;
 		vector<RNAInterval> windows;
 		int minErrors = 999999999;
 		int size;
 		vector<RNAInterval> bestWindows;
+		string windowsStruct;
 		for(int sz = 40; sz < 400; ++sz)
 		{
+			windowsStruct = string(rna.size(), '.');
 			windows = RNALfold(rna, sz);
 			//cout << "Finished sliding windows." << endl;
-			string windowsStruct(rna.size(), '.');
 			//cout << "Starting activity selection... " << endl;
 			vector<int> selectedWindows = weightedActivitySelection(windows);
 			//cout << "Finished activity selection." << endl;
@@ -200,6 +294,7 @@ int main()
 					windowsStruct[push+j] = str[j];
 			}
 			int windowsError = countErrors(targetStructure, windowsStruct);
+			//cout << "Trying window size of " << sz << " had " << windowsError << " errors." << endl;
 			if(windowsError < minErrors)
 			{
 				minErrors = windowsError;
@@ -208,6 +303,7 @@ int main()
 					bestWindows.push_back(windows[selectedWindows[i]]);
 				size = sz;
 			}
+			cout << "Size = " << sz << " errors = " << windowsError << " unbonded = " << countUnbonded(windowsStruct) << endl;
 		}
 		cout << "Zuker errors: " << vanillaErrors << endl;
 		if(minErrors < vanillaErrors)
@@ -224,9 +320,10 @@ int main()
 		}
 		else
 			cout << "Windows was NOT better!" << " with a minimum of " << minErrors << " errors." << endl;
+		cout << "Window Predicted Structure: " << endl << windowsStruct << endl;
 		cout << "---------------------------------" << endl;
 		
-
+		cin >> ws;
 
 	}
 	
