@@ -259,6 +259,89 @@ int countUnbonded(const string& structure)
 }
 
 
+void incremental_prediction(const string& rna, const string& target_sstruct)
+{
+	vector<RNAInterval> current_sstruct;
+	for(int i = 10; i < 400; i*=2)
+	{
+		vector<RNAInterval> windows = RNALfold(rna, i);
+		for(int j = 0; j < windows.size(); ++j)
+		{
+			int score_loss = 0;
+			vector<int> to_remove;
+			for(int k = 0; k < current_sstruct.size(); ++k)
+				if (!current_sstruct[k].compatibleWith(windows[j]))
+				{
+					score_loss += current_sstruct[k].score;
+					to_remove.push_back(k);
+				}
+			if (windows[j].score > score_loss)
+			{
+				for(int k = 0; k < to_remove.size(); ++k)
+					current_sstruct.erase(current_sstruct.begin()+to_remove[k]);
+				current_sstruct.push_back(windows[j]);
+			}
+		}
+	}
+	string sstruct(rna.size(), '.');
+	for(int k = 0; k < current_sstruct.size(); ++k)
+	{
+		int push = current_sstruct[k].left;
+		string str = current_sstruct[k].sstruct;
+		for(int l = 0; l < str.size(); ++l)
+			sstruct[push+l] = str[l];
+	}
+	int errors = countErrors(target_sstruct, sstruct);
+	cout << "Windows errors = " << errors << endl;
+	cout << sstruct << endl;
+	cout << "---------------------------------" << endl;
+
+}
+
+void two_window_prediction(const string& rna, const string& target_sstruct)
+{
+	vector<vector<RNAInterval> > all_windows;
+	vector<RNAInterval> windows;
+	vector<int> selectedWindows;
+	string windowsStruct;
+	string best_struct;
+	for(int sz = 10; sz < 400; sz++)
+		all_windows.push_back(RNALfold(rna, sz));
+	int besti, bestj;
+	int min_errors = 9999999;
+	for(int i = 0; i < all_windows.size(); ++i)
+		for(int j = i; j < all_windows.size(); ++j)
+		{
+			windows.clear();
+			windows.insert(windows.end(), all_windows[i].begin(), all_windows[i].end());
+			if(i != j)
+				windows.insert(windows.end(), all_windows[j].begin(), all_windows[j].end());
+			selectedWindows = weightedActivitySelection(windows);
+			vector<int> selectedWindows = weightedActivitySelection(windows);
+			string windowsStruct(rna.size(), '.');
+			for(int k = 0; k < selectedWindows.size(); ++k)
+			{
+				int push = windows[selectedWindows[k]].left;
+				string str = windows[selectedWindows[k]].sstruct;
+				for(int l = 0; l < str.size(); ++l)
+					windowsStruct[push+l] = str[l];
+			}
+			int windowsError = countErrors(target_sstruct, windowsStruct);
+			if(windowsError < min_errors)
+			{
+				min_errors = windowsError;
+				besti = i;
+				bestj = j;
+				best_struct = windowsStruct;
+			}
+			
+		}
+	cout << "Windows errors = " << min_errors << " at i = " << besti << ", j = " << bestj << endl;
+	cout << best_struct << endl;
+	cout << "---------------------------------" << endl;
+}
+
+
 int main()
 {
 	
@@ -273,11 +356,12 @@ int main()
 		RNAInterval vanilla = zuker(rna, 0, rna.size()-1);
 		int vanillaErrors = countErrors(targetStructure, vanilla.sstruct);
 		cout << "RNA size: " << rna.size() << " with " << vanillaErrors << " errors." << endl;
-		vector<RNAInterval> windows;
-		int minErrors = 999999999;
-		int size;
-		vector<RNAInterval> bestWindows;
-		string windowsStruct;
+		// vector<RNAInterval> windows;
+		// int minErrors = 999999999;
+		// int size;
+		// vector<RNAInterval> bestWindows;
+		// string windowsStruct;
+		/*
 		for(int sz = 40; sz < 400; ++sz)
 		{
 			windowsStruct = string(rna.size(), '.');
@@ -305,10 +389,52 @@ int main()
 			}
 			cout << "Size = " << sz << " errors = " << windowsError << " unbonded = " << countUnbonded(windowsStruct) << endl;
 		}
-		cout << "Zuker errors: " << vanillaErrors << endl;
-		if(minErrors < vanillaErrors)
-		{
-			cout << "Windows was better at size " << size << " with " << minErrors << " errors." << endl;
+		*/
+
+		vector<vector<RNAInterval> > all_windows;
+		vector<RNAInterval> windows;
+		vector<int> selectedWindows;
+		string windowsStruct;
+		string best_struct;
+		for(int sz = 10; sz < 400; sz++)
+			all_windows.push_back(RNALfold(rna, sz));
+		int besti, bestj;
+		int min_errors = 9999999;
+		for(int i = 0; i < all_windows.size(); ++i)
+			for(int j = i; j < all_windows.size(); ++j)
+			{
+				windows.clear();
+				windows.insert(windows.end(), all_windows[i].begin(), all_windows[i].end());
+				if(i != j)
+					windows.insert(windows.end(), all_windows[j].begin(), all_windows[j].end());
+				selectedWindows = weightedActivitySelection(windows);
+				vector<int> selectedWindows = weightedActivitySelection(windows);
+				string windowsStruct(rna.size(), '.');
+				for(int k = 0; k < selectedWindows.size(); ++k)
+				{
+					int push = windows[selectedWindows[k]].left;
+					string str = windows[selectedWindows[k]].sstruct;
+					for(int l = 0; l < str.size(); ++l)
+						windowsStruct[push+l] = str[l];
+				}
+				int windowsError = countErrors(targetStructure, windowsStruct);
+				if(windowsError < min_errors)
+				{
+					min_errors = windowsError;
+					besti = i;
+					bestj = j;
+					best_struct = windowsStruct;
+				}
+				
+			}
+		cout << "Windows errors = " << min_errors << " at i = " << besti << ", j = " << bestj << endl;
+		cout << best_struct << endl;
+
+		// cout << "Zuker errors: " << vanillaErrors << endl;
+		
+		// if(minErrors < vanillaErrors)
+		// {
+		// 	cout << "Windows was better at size " << size << " with " << minErrors << " errors." << endl;
 			/*
 			cout << "Windows chosen... " << endl;
 			for(int i = 0; i < bestWindows.size(); ++i)
@@ -317,10 +443,11 @@ int main()
 				cout << bestWindows[i].sstruct << " " << "   fe: " << bestWindows[i].score << endl;
 			}
 			*/
-		}
-		else
-			cout << "Windows was NOT better!" << " with a minimum of " << minErrors << " errors." << endl;
-		cout << "Window Predicted Structure: " << endl << windowsStruct << endl;
+		// }
+		// else
+		// 	cout << "Windows was NOT better!" << " with a minimum of " << minErrors << " errors." << endl;
+
+		// cout << "Window Predicted Structure: " << endl << windowsStruct << endl;
 		cout << "---------------------------------" << endl;
 		
 		cin >> ws;
