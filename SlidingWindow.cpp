@@ -211,7 +211,17 @@ vector<RNAInterval> RNALfold(const string& rna, int windowSize)
     while(n->next != 0) 
     {
     	s = string(n->sstruct);
-        tmp.push_back(RNAInterval(n->left-1, n->left+s.size()-1, -(n->fe), s));
+    	int ll = n->left-1, rr = n->left+s.size()-1;
+    	int l = ll, r = rr;
+    	int i;
+    	for(i = 0; s[i] == '.'; ++i)
+    		++ll;
+    	l = i;
+    	for(i = s.size()-1; s[i] == '.'; --i)
+    		--rr;
+    	r = i;
+        tmp.push_back(RNAInterval(ll, rr, -(n->fe), s.substr(l, r)));
+        //cout << s << " ::: " << s.substr(l, r) << endl;
         //cout << tmp[tmp.size()-1].left << " " << tmp[tmp.size()-1].right << " " << tmp[tmp.size()-1].score << endl;
         //int span = tmp[tmp.size()-1].right - tmp[tmp.size()-1].left;
         //if(span > windowSize)
@@ -233,10 +243,11 @@ int countErrors(const string& model, const string& proband)
 void testSelection()
 {
 	std::vector<RNAInterval> v;
-	v.push_back(RNAInterval(1, 2, 12.4));
+	v.push_back(RNAInterval(0, 2, 33.4));
+	v.push_back(RNAInterval(0, 3, 22.4));
 	v.push_back(RNAInterval(0, 29, 12.4));
 	v.push_back(RNAInterval(6, 66, 8.4));
-	v.push_back(RNAInterval(33, 66, 8.4));
+	v.push_back(RNAInterval(6, 12, 8.4));
 	v.push_back(RNAInterval(67, 68, 8.4));
 	v.push_back(RNAInterval(69, 70, 8.4));
 	v.push_back(RNAInterval(6, 71, 22.0));
@@ -344,7 +355,7 @@ void two_window_prediction(const string& rna, const string& target_sstruct)
 
 int main()
 {
-	
+	// testSelection();
 	string rna, name;
 	string targetStructure;
 	while(cin.good())
@@ -357,7 +368,7 @@ int main()
 		int vanillaErrors = countErrors(targetStructure, vanilla.sstruct);
 		cout << "RNA size: " << rna.size() << " with " << vanillaErrors << " errors." << endl;
 
-		incremental_prediction(rna, targetStructure);
+		two_window_prediction(rna, targetStructure);
 
 
 		
