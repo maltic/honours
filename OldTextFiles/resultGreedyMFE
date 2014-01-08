@@ -1,0 +1,44 @@
+RNA size: 2904 with 957 errors.
+Zuker errors: 957
+Windows was better at size 227 with 843 errors.
+---------------------------------
+RNA size: 545 with 118 errors.
+Zuker errors: 118
+Windows was better at size 105 with 50 errors.
+---------------------------------
+RNA size: 2738 with 1232 errors.
+Zuker errors: 1232
+Windows was better at size 351 with 1127 errors.
+---------------------------------
+RNA size: 2828 with 1040 errors.
+Zuker errors: 1040
+Windows was better at size 292 with 1038 errors.
+---------------------------------
+RNA size: 500 with 184 errors.
+Zuker errors: 184
+Windows was better at size 195 with 178 errors.
+---------------------------------
+RNA size: 1513 with 585 errors.
+Zuker errors: 585
+Windows was better at size 248 with 540 errors.
+---------------------------------
+RNA size: 1174 with 656 errors.
+Zuker errors: 656
+Windows was better at size 187 with 532 errors.
+---------------------------------
+RNA size: 1688 with 617 errors.
+Zuker errors: 617
+Windows was NOT better! with a minimum of 653 errors.
+---------------------------------
+RNA size: 968 with 279 errors.
+Zuker errors: 279
+Windows was NOT better! with a minimum of 281 errors.
+---------------------------------
+RNA size: 2937 with 1161 errors.
+Zuker errors: 1161
+Windows was better at size 359 with 1072 errors.
+---------------------------------
+RNA size: 3012 with 1087 errors.
+Zuker errors: 1087
+Windows was better at size 225 with 1004 errors.
+---------------------------------

@@ -1,3 +1,4 @@
+//Really hacky way of getting stats from the reuslt file
 #include <iostream>
 #include <string>
 #include <vector>

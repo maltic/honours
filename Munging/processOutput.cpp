@@ -1,3 +1,4 @@
+//Process scraped data from the strand database
 #include <iostream>
 #include <string>
 

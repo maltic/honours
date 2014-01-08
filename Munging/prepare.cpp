@@ -1,3 +1,5 @@
+
+//prepares a simple comma delimited rna file
 #include <iostream>
 #include <cctype>
 
