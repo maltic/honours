@@ -27,7 +27,7 @@ int test_splat()
 		int total_errors = 0;
 		for(int i = 0; i < rnas.size(); ++i)
 		{
-			total_errors += splat_prediction(sz, rnas[i], targets[i]);
+			//total_errors += splat_prediction(sz, rnas[i], targets[i]);
 		}
 		std::cout << sz << " " << total_errors << std::endl;
 	}
@@ -50,17 +50,20 @@ int main()
 		// typedef std::chrono::high_resolution_clock Clock;
 	 //    typedef std::chrono::milliseconds milliseconds;
 	 //    Clock::time_point t0 = Clock::now();
-	    RNAInterval vanilla = zuker_fold(rna, 0, rna.size()-1);
+	    //RNAInterval vanilla = zuker_fold(rna, 0, rna.size()-1);
 	    // Clock::time_point t1 = Clock::now();
 	    // milliseconds ms = std::chrono::duration_cast<milliseconds>(t1 - t0);
 	    // std::cout << ms.count() << "ms\n";
 
 		//normal RNAfold
-		int vanillaErrors = count_errors(targetStructure, vanilla.sstruct);
-		tot += vanillaErrors;
+		//int vanillaErrors = count_errors(targetStructure, vanilla.sstruct);
+		//tot += vanillaErrors;
 		//std::cout << "RNA size: " << rna.size() << " with " << vanillaErrors << " errors." << std::endl;
 
-		// splat_prediction(rna, targetStructure);
+		int fib[] = {21, 34, 55, 89, 144, 233, 377, 610, 987, 1597, 2584, 4181};
+		std::vector<int> fibVec(fib, fib+12);
+
+		tot += splat_prediction(fibVec, rna, targetStructure);
 
 
 		

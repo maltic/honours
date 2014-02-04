@@ -47,7 +47,7 @@ std::string get_dotbracket(int rna_sz, const std::vector<RNAInterval>& windows)
 	return windowsStruct;
 }
 
-int splat_prediction(int start, const std::string& rna, const std::string& target_sstruct) 
+int splat_prediction(const std::vector<int>& splat, const std::string& rna, const std::string& target_sstruct) 
 {
 
 	// typedef std::chrono::high_resolution_clock Clock;
@@ -57,9 +57,9 @@ int splat_prediction(int start, const std::string& rna, const std::string& targe
     
 	std::vector<RNAInterval> all_windows;
 
-	for(int sz = start; sz <= rna.size() / 4; sz *= 2)
+	for(int i = 0; i < splat.size() && splat[i] <= rna.size() / 4; ++i)
 	{
-		std::vector<RNAInterval> windows = rnal_fold(rna, sz);
+		std::vector<RNAInterval> windows = rnal_fold(rna, splat[i]);
 		all_windows.insert(all_windows.end(), windows.begin(), windows.end());
 	}
 
