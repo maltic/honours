@@ -1,8 +1,9 @@
 //Compile from project root
-//g++ SlidingWindows/main.cpp vienna/libVienna.a
+//g++ SlidingWindows/main.cpp vienna/libVienna.a -std=c++11 -O2
 #include <iostream>
 #include <string>
 #include "prediction.h"
+#include "magic_seq.h"
 #include <chrono>
 
 int test_splat()
@@ -36,6 +37,11 @@ int test_splat()
 
 int main()
 {
+	MagicSequenceOptimizer mso (100, 100);
+	mso.optimize(std::vector<std::string> (10, ""), std::vector<std::string> (10, ""));
+
+	return 0;
+
 	std::string rna, name;
 	std::string targetStructure;
 
