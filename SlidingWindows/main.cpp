@@ -20,27 +20,30 @@ int test_splat()
 		std::cin >> std::ws;
 	}
 
+	MagicSequenceOptimizer mso (30, 100);
+	mso.optimize(rnas, targets);
+
+	return 0;
 
 
 
-	for(int sz = 20; sz <= 50; ++sz)
-	{
-		int total_errors = 0;
-		for(int i = 0; i < rnas.size(); ++i)
-		{
-			//total_errors += splat_prediction(sz, rnas[i], targets[i]);
-		}
-		std::cout << sz << " " << total_errors << std::endl;
-	}
+
+	// for(int sz = 20; sz <= 50; ++sz)
+	// {
+	// 	int total_errors = 0;
+	// 	for(int i = 0; i < rnas.size(); ++i)
+	// 	{
+	// 		total_errors += splat_prediction(sz, rnas[i], targets[i]);
+	// 	}
+	// 	std::cout << sz << " " << total_errors << std::endl;
+	// }
 
 }
 
 int main()
 {
-	MagicSequenceOptimizer mso (100, 100);
-	mso.optimize(std::vector<std::string> (10, ""), std::vector<std::string> (10, ""));
-
-	return 0;
+	//test_splat();
+	//return 0;
 
 	std::string rna, name;
 	std::string targetStructure;
@@ -69,7 +72,10 @@ int main()
 		int fib[] = {21, 34, 55, 89, 144, 233, 377, 610, 987, 1597, 2584, 4181};
 		std::vector<int> fibVec(fib, fib+12);
 
-		tot += splat_prediction(fibVec, rna, targetStructure);
+		int magic[] = {23, 47, 97, 191, 373, 619, 971, 1549, 2551};
+		std::vector<int> magicVec(magic, magic+9);
+
+		tot += splat_prediction(magicVec, rna, targetStructure);
 
 
 		

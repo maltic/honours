@@ -11,6 +11,7 @@
 #include <random>
 #include <algorithm>
 #include <iostream>
+#include "prediction.h"
 
 
 // The follow two classes (MagicSequence, and MagicSequenceOptimizer) implement a Generic Algorithm (GA).
@@ -38,6 +39,9 @@ struct MagicSequence
 	void calc_fitness( const std::vector<std::string>& rnas, const std::vector<std::string>& targets )
 	{
 		this->fitness = 0.0;
+
+		for (int i = 0; i < rnas.size(); ++i)
+			this->fitness -= splat_prediction(sequence, rnas[i], targets[i]);
 	}
 
 	bool operator< (const MagicSequence& other) const
@@ -61,14 +65,14 @@ protected:
 
 	int valid_random_num()
 	{
-		return this->generator() % (max_num - min_num) + min_num;
+		return (this->generator() % (max_num - min_num)) + min_num + 1;
 	}
 
 	MagicSequence gen_magic_seq()
 	{
 		// get a sequence random but valid numbers
 		int num = this->generator() % max_nums + 1;
-		std::vector<int> seq (num);
+		std::vector<int> seq;
 		for (int j = 0; j < num; ++j)
 			seq.push_back (this->valid_random_num());
 		// turn them into a magic sequence as if by magic
@@ -107,7 +111,7 @@ protected:
 		std::vector<int> v = ms.sequence;
 
 		// deletions
-		int deletions = this->generator() % max_deletions + 1;
+		int deletions = this->generator() % mut_deletion_factor;
 		if (deletions > ms.sequence.size())
 			deletions = ms.sequence.size();
 		
@@ -116,11 +120,24 @@ protected:
 			v.pop_back();
 
 		// insertions
-		int insertions = this->generator() % max_insertions + 1;
+		int insertions = this->generator() % mut_insertion_factor;
 		if (insertions + v.size() > max_nums)
 			insertions = max_nums - v.size();
 		for (int i = 0; i < insertions; ++i)
 			v.push_back (this->valid_random_num());
+
+		// modifications
+		int mods = this->generator() % mut_mod_factor;
+		for (int i = 0; i < mods; ++i)
+		{
+			int index = generator() % v.size();
+			// increase
+			if (generator() % 2 == 1)
+				v[index] = min (max_num, v[index] + (generator() % mut_mod_amount + 1));
+			// decrease
+			else
+				v[index] = max (min_num, v[index] - (generator() % mut_mod_amount + 1));
+		}
 
 		MagicSequence ns (v);
 		ns.calc_fitness (this->rnas, this->targets);
@@ -134,7 +151,7 @@ public:
 
 	// min and max for a magic sequnce number
 	int min_num = 10;
-	int max_num = 2500;
+	int max_num = 2000;
 
 	// maximum number of items in a magic sequence
 	int max_nums = 20;
@@ -151,8 +168,10 @@ public:
 	int replacement_odds = 1;
 
 	// mutation operators
-	int max_deletions = 2;
-	int max_insertions = 2;
+	int mut_deletion_factor = 2;
+	int mut_insertion_factor = 2;
+	int mut_mod_amount = 10;
+	int mut_mod_factor = 3;
 
 
 	MagicSequenceOptimizer (int n_genomes, int gens)
@@ -170,6 +189,12 @@ public:
 	{
 		// select by sorting into ascending order
 		std::sort (genomes.begin(), genomes.end());
+
+		std::cout << genomes[0].fitness << std::endl;
+
+		for (int i = 0; i < genomes[0].sequence.size(); ++i)
+			std::cout << genomes[0].sequence[i] << " ";
+		std::cout << std::endl;
 		
 		int survivors = (int) (truncation_pcnt * genomes.size());
 
@@ -184,8 +209,6 @@ public:
 
 		// the current genome we're doing a selection event on
 		int curr_g = 0;
-
-		std::cout << "about to select events " << survivors << " " << genomes.size() << std::endl;
 
 		while (next_gen.size() < num_genomes)
 		{
