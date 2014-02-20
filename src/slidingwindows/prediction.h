@@ -9,8 +9,9 @@
 #include <stack>
 #include <utility>
 #include <chrono>
-#include "rnainterval.h"
-#include "vienna.h"
+#include <cmath>
+#include "../common/rnainterval.h"
+#include "../common/vienna.h"
 #include "selection.h"
 
 int count_errors(const std::string& model, const std::string& proband)
@@ -52,7 +53,9 @@ int splat_prediction(const std::vector<int>& splat, const std::string& rna, cons
 
 	std::vector<RNAInterval> all_windows;
 
-	for(int i = 0; i < splat.size() && splat[i] <= rna.size() / 4; ++i)
+	int upper_bound = rna.size() * ( 3.5 / log2 (rna.size()) ) ;
+
+	for(int i = 0; i < splat.size() && splat[i] <= upper_bound; ++i)
 	{
 		std::vector<RNAInterval> windows = rnal_fold(rna, splat[i]);
 		all_windows.insert(all_windows.end(), windows.begin(), windows.end());
@@ -66,19 +69,49 @@ int splat_prediction(const std::vector<int>& splat, const std::string& rna, cons
 
 	int windows_errors = count_errors(target_sstruct, windows_struct);
 
+	std::cout << "Windows errors = " << windows_errors << std::endl;
+	std::cout << windows_struct << std::endl;
+	std::cout << "---------------------------------" << std::endl;
+
 	return windows_errors;
 
 }
 
 
-void two_window_prediction(const std::string& rna, const std::string& target_sstruct)
+int splat_tester(float mult, float cut, int start, const std::string& rna, const std::string& target_sstruct) 
+{
+
+	std::vector<RNAInterval> all_windows;
+
+	for (float i = (float) start; i < ((float) rna.size()) / cut; i *= mult)
+	{
+		std::vector<RNAInterval> windows = rnal_fold(rna, (int) i);
+		all_windows.insert(all_windows.end(), windows.begin(), windows.end());
+	}
+
+	std::vector<int> selected_windows = weighted_activity_selection(all_windows);
+
+
+
+	std::string windows_struct = get_dotbracket(rna.size(), all_windows, selected_windows);
+
+	int windows_errors = count_errors(target_sstruct, windows_struct);
+
+
+
+	return windows_errors;
+
+}
+
+
+int two_window_prediction(const std::string& rna, const std::string& target_sstruct)
 {
 	std::vector<std::vector<RNAInterval> > all_windows;
 	std::vector<RNAInterval> windows;
 	std::vector<int> selectedWindows;
 	std::string windowsStruct;
 	std::string best_struct;
-	for(int sz = 10; sz < 400; sz++)
+	for(int sz = 4; sz < 500; sz++)
 		all_windows.push_back(rnal_fold(rna, sz));
 	int besti, bestj;
 	int min_errors = 9999999;
@@ -93,6 +126,7 @@ void two_window_prediction(const std::string& rna, const std::string& target_sst
 			std::vector<int> selectedWindows = weighted_activity_selection(windows);
 			std::string windowsStruct = get_dotbracket(rna.size(), windows, selectedWindows);
 			int windowsError = count_errors(target_sstruct, windowsStruct);
+
 			if(windowsError < min_errors)
 			{
 				min_errors = windowsError;
@@ -102,9 +136,10 @@ void two_window_prediction(const std::string& rna, const std::string& target_sst
 			}
 			
 		}
-	std::cout << "Windows errors = " << min_errors << " at i = " << besti << ", j = " << bestj << std::endl;
+	std::cout << "Windows errors = " << min_errors << " at i = " << besti + 4 << ", j = " << bestj + 4 << std::endl;
 	std::cout << best_struct << std::endl;
 	std::cout << "---------------------------------" << std::endl;
+	return min_errors;
 }
 
 int min(int a, int b)

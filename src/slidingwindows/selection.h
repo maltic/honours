@@ -4,7 +4,7 @@
 
 #include <vector>
 #include <algorithm>
-#include "rnainterval.h"
+#include "../common/rnainterval.h"
 
 std::vector<int> bottom_up_selection(std::vector<RNAInterval>& intervals)
 {

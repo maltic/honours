@@ -41,8 +41,13 @@ std::vector<RNAInterval> rnal_fold(const std::string& rna, int windowSize)
     while(n->next != 0) 
     {
     	s = std::string(n->sstruct);
-    	int ll = n->left-1, rr = n->left+s.size()-1;
-    	int l = ll, r = rr;
+
+        //global left/right index
+    	int ll = n->left - 1;
+        int rr = ll + s.size() - 1;
+
+        //trim dangling ends
+    	int l = ll, r = rr; //l and r are used to store substring indexs in 's'
     	int i;
     	for(i = 0; s[i] == '.'; ++i)
     		++ll;
@@ -50,7 +55,9 @@ std::vector<RNAInterval> rnal_fold(const std::string& rna, int windowSize)
     	for(i = s.size()-1; s[i] == '.'; --i)
     		--rr;
     	r = i;
-        tmp.push_back(RNAInterval(ll, rr, -(n->fe), s.substr(l, r)));
+
+        tmp.push_back ( RNAInterval ( ll, rr, -(n->fe), s.substr (l, (r - l) + 1) ) );
+
         n = n->next;
     }
     return tmp;
