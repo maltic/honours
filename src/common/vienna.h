@@ -21,7 +21,9 @@ RNAInterval zuker_fold(const std::string& rna, const int l, const int r)
 	int sz = r-l+1;
     char* ss = new char[sz+1];
     double score = fold(rna.substr(l, sz).c_str(), ss);
-    return RNAInterval(l, r, -score, ss);
+    RNAInterval ret(l, r, -score, ss);
+    delete[] ss;
+    return ret;
 }
 
 std::vector<RNAInterval> zuker_multi_fold(const std::string& rna, const int windowSize) {
@@ -36,6 +38,7 @@ std::vector<RNAInterval> rnal_fold(const std::string& rna, int windowSize)
 {
     char* ss = new char[rna.size()+1];
     struct mnode* n = mLfold(rna.c_str(), ss, windowSize);
+    delete[] ss;
     std::vector<RNAInterval> tmp;
     std::string s;
     while(n->next != 0) 
@@ -47,7 +50,7 @@ std::vector<RNAInterval> rnal_fold(const std::string& rna, int windowSize)
         int rr = ll + s.size() - 1;
 
         //trim dangling ends
-    	int l = ll, r = rr; //l and r are used to store substring indexs in 's'
+    	int l = ll, r = rr; //l and r are used to store substring indexes in 's'
     	int i;
     	for(i = 0; s[i] == '.'; ++i)
     		++ll;
@@ -57,8 +60,10 @@ std::vector<RNAInterval> rnal_fold(const std::string& rna, int windowSize)
     	r = i;
 
         tmp.push_back ( RNAInterval ( ll, rr, -(n->fe), s.substr (l, (r - l) + 1) ) );
-
+        struct mnode* prev = n;
         n = n->next;
+        free (prev->sstruct);
+        free (prev);
     }
     return tmp;
 }
