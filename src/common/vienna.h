@@ -6,13 +6,25 @@
 #include <string>
 #include "rnainterval.h"
 #include <vector>
+
 //include external lib
 extern "C" 
 {
     #include "vienna/fold.h"
     #include "vienna/Lfold.h"
+    #include "vienna/part_func.h"
 }
 
+
+double * boltzmann_fold (const std::string& rna)
+{
+    double fe = pf_fold (rna.c_str(), NULL);
+    double * bppm = export_bppm();
+    for (int i = 0; i < rna.size(); ++i)
+        for (int j = 0; j < rna.size(); ++j)
+            std::cout << bppm[i + j] << " " << std::endl;
+    return bppm;
+}
 
 
 RNAInterval zuker_fold(const std::string& rna, const int l, const int r)

@@ -9,6 +9,15 @@
                   Vienna RNA package
 */
 
+
+//THIS SECTION WAS MODIFIED BY MAX WARD (2014) AS PART OF HIS HONOURS PROJECT
+//It is intended as a drop in replacement for the standard Lfold.h
+//Created from a modified version of Vienna 2.14
+//lfoldz was changed and mlfold was added
+//A modified Lfold function the returns a linked list of local structures, rather than printing them to console
+//mlfold inits ll correctly and then runs lfold
+//it is not recommended to call lfold or lfoldz by themselves now
+
 #include "config.h"
 #include <stdio.h>
 #include <stdlib.h>
@@ -107,7 +116,7 @@ PRIVATE int   fill_arrays(const char *sequence, int maxdist, int zsc, double min
 #################################
 */
 
-//my stuff
+//ADDED BY MAX
 struct mnode* mLfold(const char *string,
             char *structure,
             int maxdist)
@@ -119,6 +128,7 @@ struct mnode* mLfold(const char *string,
   Lfold(string, structure, maxdist);
   return toReturn;
 }
+//END OF ADDED FUNCTION
 
 /*--------------------------------------------------------------------------*/
 PRIVATE void initialize_Lfold(int length, int maxdist){
@@ -192,6 +202,10 @@ PUBLIC  float Lfold(const char *string, char *structure, int maxdist){
   return Lfoldz(string, structure, maxdist, 0, 0.0);
 }
 
+//THIS FUNCTION WAS MODIFIED BY MAX WARD
+//Changed the printf statements
+//now structures are added to the global linked list 'll'
+//this allows one to get the structures after the algorithm is run
 PUBLIC  float Lfoldz(const char *string, char *structure, int maxdist, int zsc, double min_z){
   int i, energy;
 

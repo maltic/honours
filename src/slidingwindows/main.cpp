@@ -4,7 +4,29 @@
 #include <string>
 #include "prediction.h"
 #include "magic_seq.h"
+#include "../common/rna_util.h"
 #include <chrono>
+
+void magic_seq_train()
+{
+	std::string rna, name;
+	std::string targetStructure;
+	std::vector<std::string> rnas;
+	std::vector<std::string> targets;
+	while(std::cin.good())
+	{
+		std::cin >> name >> rna >> targetStructure;
+		std::cin >> std::ws;
+		if (rna.size() < 300)
+			continue;
+		rnas.push_back(rna);
+		targets.push_back(targetStructure);
+	}
+
+	MagicSequenceOptimizer mso (32, 100);
+
+	mso.optimize (rnas, targets);
+}
 
 int test_splat()
 {
@@ -41,7 +63,8 @@ int test_splat()
 
 int main()
 {
-
+	magic_seq_train();
+	return 0;
 	std::string rna, name;
 	std::string targetStructure;
 
@@ -59,8 +82,17 @@ int main()
 
 		std::cout << "SSTRAND ID = " << name << std::endl;
 
-
+		typedef std::chrono::high_resolution_clock Clock;
+	    typedef std::chrono::milliseconds milliseconds;
+	    Clock::time_point t0 = Clock::now();
 		RNAInterval vanilla = zuker_fold(rna, 0, rna.size()-1);
+		Clock::time_point t1 = Clock::now();
+		milliseconds ms = std::chrono::duration_cast<milliseconds>(t1 - t0);
+	    std::cout << "RNAfold took " << ms.count() << "ms\n";
+
+	    std::cout << "RNAfold Sensitivity: " << calc_sensitivity (targetStructure, vanilla.sstruct) 
+	    	<< " PPV: " << calc_ppv(targetStructure, vanilla.sstruct) << std::endl;
+
 		int vanillaErrors = count_errors(targetStructure, vanilla.sstruct);
 		std::cout << "RNA size: " << rna.size() << " with " << vanillaErrors << " Zuker errors." << std::endl;
 

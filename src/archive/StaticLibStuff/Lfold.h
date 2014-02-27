@@ -1,8 +1,12 @@
 #ifndef __VIENNA_RNA_PACKAGE_LFOLD_H__
 #define __VIENNA_RNA_PACKAGE_LFOLD_H__
 
-//my stuff
 
+//THIS SECTION WAS MODIFIED BY MAX WARD (2014) AS PART OF HIS HONOURS PROJECT
+//It is intended as a drop in replacement for the standard Lfold.h
+//Created from a modified version of Vienna 2.14
+
+//A Linked List node
 struct mnode {
   char* sstruct;
   float fe;
@@ -10,9 +14,12 @@ struct mnode {
   struct mnode *next;
 };
 
+//A modified Lfold function the returns a linked list of local structures, rather than printing them to console
 struct mnode* mLfold(const char *string,
             char *structure,
             int maxdist);
+
+//END MODIFICATIONS
 
 
 /**

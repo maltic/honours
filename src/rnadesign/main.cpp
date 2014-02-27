@@ -9,47 +9,8 @@
 #include <stack>
 #include <algorithm>
 #include "../common/vienna.h"
+#include "../common/rna_util.h"
 
-char bases [4] = { 'A', 'U', 'G', 'C' };
-
-
-bool valid_bond (const char a, const char b) 
-{
-    return  (a == 'A' && b == 'U')
-         || (a == 'U' && b == 'A')
-         || (a == 'G' && b == 'C')
-         || (a == 'C' && b == 'G')
-         || (a == 'U' && b == 'G')
-         || (a == 'G' && b == 'U');
-}
-
-
-std::vector<int> get_matching_bonds (const std::string& structure)
-{
-	std::stack<int> s;
-	std::vector<int> matches (structure.size(), -1);
-
-	for ( int i = 0; i < structure.size(); ++i )
-	{
-		if (structure[i] == ')')
-		{
-
-			if ( s.empty() )
-			{
-				std::cerr << "Empty stack, therefore invalid secondary structure" << std::endl;
-				throw 1;
-			}
-
-			matches[i] = s.top();
-			s.pop();
-		}
-		else if (structure[i] == '(')
-			s.push (i);
-
-	}
-
-	return matches;
-}
 
 class GARNADesigner
 {
@@ -355,8 +316,11 @@ std::string design_rna (const int max_iterations, const std::string& target_stru
 
 int main()
 {
+
 	std::string target_structure;
 	std::cin >> target_structure;
+	boltzmann_fold (target_structure);
+	return 0;
 	GARNADesigner designer;
 	std::cout << designer.design_rna (target_structure) << std::endl;
 	//std::cout << design_rna (10000, target_structure) << std::endl;

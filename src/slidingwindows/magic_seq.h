@@ -41,7 +41,9 @@ struct MagicSequence
 		this->fitness = 0.0;
 
 		for (int i = 0; i < rnas.size(); ++i)
-			this->fitness -= splat_prediction(sequence, rnas[i], targets[i]);
+			this->fitness -= splat_prediction (sequence, rnas[i], targets[i]);
+
+		std::cerr << "Fitness calculated " << this->fitness << std::endl;
 	}
 
 	bool operator< (const MagicSequence& other) const
@@ -112,8 +114,8 @@ protected:
 
 		// deletions
 		int deletions = this->generator() % mut_deletion_factor;
-		if (deletions > ms.sequence.size())
-			deletions = ms.sequence.size();
+		if ( deletions >= ms.sequence.size() ) //cant have a seq of size 0
+			deletions = ms.sequence.size() - 1;
 		
 		std::shuffle (v.begin(), v.end(), generator); //so we can delete randomly
 		for (int i = 0; i < deletions; ++i)
@@ -151,10 +153,10 @@ public:
 
 	// min and max for a magic sequnce number
 	int min_num = 10;
-	int max_num = 2000;
+	int max_num = 500;
 
 	// maximum number of items in a magic sequence
-	int max_nums = 20;
+	int max_nums = 9;
 
 	// GA settings
 	int num_genomes;
@@ -164,7 +166,7 @@ public:
 
 	// odds for selection events
 	int breed_odds = 4;
-	int mutation_odds = 4;
+	int mutation_odds = 8;
 	int replacement_odds = 1;
 
 	// mutation operators
