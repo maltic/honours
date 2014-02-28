@@ -1,0 +1,102 @@
+SSTRAND ID = NDB_00014
+RNAfold took 0ms
+RNAfold Sensitivity: 0.8 PPV: 1
+RNA size: 20 with 4 Zuker errors.
+Windows errors = 4 at i = 4, j = 4 k = 16
+Sensitivity = 0.8 PPV = 1
+---------------------------------
+SSTRAND ID = NDB_00015
+RNAfold took 0ms
+RNAfold Sensitivity: 0.666667 PPV: 0.4
+RNA size: 24 with 6 Zuker errors.
+Windows errors = 6 at i = 4, j = 4 k = 18
+Sensitivity = 0.571429 PPV = 0.444444
+---------------------------------
+SSTRAND ID = NDB_00016
+RNAfold took 0ms
+RNAfold Sensitivity: 0.833333 PPV: 1
+RNA size: 24 with 4 Zuker errors.
+Windows errors = 4 at i = 4, j = 4 k = 20
+Sensitivity = 0.833333 PPV = 1
+---------------------------------
+SSTRAND ID = NDB_00047
+RNAfold took 0ms
+RNAfold Sensitivity: 0.833333 PPV: 1
+RNA size: 24 with 4 Zuker errors.
+Windows errors = 4 at i = 4, j = 4 k = 20
+Sensitivity = 0.833333 PPV = 1
+---------------------------------
+SSTRAND ID = NDB_00048
+RNAfold took 1ms
+RNAfold Sensitivity: 0 PPV: 0
+RNA size: 56 with 28 Zuker errors.
+Windows errors = 8 at i = 4, j = 4 k = 24
+Sensitivity = 0.857143 PPV = 1
+---------------------------------
+SSTRAND ID = NDB_00049
+RNAfold took 0ms
+RNAfold Sensitivity: 0.846154 PPV: 1
+RNA size: 26 with 4 Zuker errors.
+Windows errors = 4 at i = 4, j = 4 k = 22
+Sensitivity = 0.846154 PPV = 1
+---------------------------------
+SSTRAND ID = NDB_00051
+RNAfold took 2ms
+RNAfold Sensitivity: 0.611111 PPV: 0.478261
+RNA size: 75 with 22 Zuker errors.
+Windows errors = 22 at i = 4, j = 4 k = 67
+Sensitivity = 0.611111 PPV = 0.478261
+---------------------------------
+SSTRAND ID = PDB_00001
+RNAfold took 0ms
+RNAfold Sensitivity: 0 PPV: 0
+RNA size: 24 with 18 Zuker errors.
+Windows errors = 18 at i = 4, j = 4 k = 8
+Sensitivity = 0 PPV = 0
+---------------------------------
+SSTRAND ID = PDB_00006
+RNAfold took 0ms
+RNAfold Sensitivity: 1 PPV: 1
+RNA size: 38 with 0 Zuker errors.
+Windows errors = 0 at i = 4, j = 4 k = 34
+Sensitivity = 1 PPV = 1
+---------------------------------
+SSTRAND ID = PDB_00010
+RNAfold took 0ms
+RNAfold Sensitivity: 1 PPV: 1
+RNA size: 30 with 0 Zuker errors.
+Windows errors = 0 at i = 4, j = 4 k = 26
+Sensitivity = 1 PPV = 1
+---------------------------------
+SSTRAND ID = PDB_00011
+RNAfold took 0ms
+RNAfold Sensitivity: 0.833333 PPV: 1
+RNA size: 24 with 4 Zuker errors.
+Windows errors = 4 at i = 4, j = 4 k = 20
+Sensitivity = 0.833333 PPV = 1
+---------------------------------
+SSTRAND ID = PDB_00012
+RNAfold took 0ms
+RNAfold Sensitivity: 1 PPV: 0.7
+RNA size: 29 with 6 Zuker errors.
+Windows errors = 2 at i = 4, j = 4 k = 21
+Sensitivity = 1 PPV = 0.875
+---------------------------------
+SSTRAND ID = PDB_00013
+RNAfold took 0ms
+RNAfold Sensitivity: 1 PPV: 0.909091
+RNA size: 29 with 2 Zuker errors.
+Windows errors = 2 at i = 4, j = 4 k = 25
+Sensitivity = 1 PPV = 0.909091
+---------------------------------
+SSTRAND ID = PDB_00020
+RNAfold took 0ms
+RNAfold Sensitivity: 0 PPV: 0
+RNA size: 40 with 30 Zuker errors.
+Windows errors = 14 at i = 4, j = 4 k = 17
+Sensitivity = 1 PPV = 0.866667
+---------------------------------
+SSTRAND ID = PDB_00029
+RNAfold took 13709ms
+RNAfold Sensitivity: 0.706708 PPV: 0.486051
+RNA size: 2904 with 957 Zuker errors.

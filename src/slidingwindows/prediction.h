@@ -57,6 +57,8 @@ int splat_prediction(const std::vector<int>& splat, const std::string& rna, cons
 	std::vector<RNAInterval> all_windows;
 
 	int upper_bound = rna.size() * ( 3.0 / log2 (rna.size()) ) ;
+	//this is O(n lg n), might be better to do sqrt(n) * c => O(sqrt(n))
+	// int upper_bound = sqrt(rna.size() * 9.0);
 
 	for(int i = 0; i < splat.size() && splat[i] <= upper_bound; ++i)
 	{
@@ -70,19 +72,19 @@ int splat_prediction(const std::vector<int>& splat, const std::string& rna, cons
 
 	std::string windows_struct = get_dotbracket(rna.size(), all_windows, selected_windows);
 
-	// Clock::time_point t1 = Clock::now();
-	// milliseconds ms = std::chrono::duration_cast<milliseconds>(t1 - t0);
- //    std::cout << "splat_prediction took " << ms.count() << "ms\n";
+	Clock::time_point t1 = Clock::now();
+	milliseconds ms = std::chrono::duration_cast<milliseconds>(t1 - t0);
+    std::cout << "splat_prediction took " << ms.count() << "ms\n";
 
- //    std::cout << "Splat Sensitivity: " << calc_sensitivity (target_sstruct, windows_struct) 
-	//     	<< " PPV: " << calc_ppv(target_sstruct, windows_struct) << std::endl;
+    std::cout << "Splat Sensitivity: " << calc_sensitivity (target_sstruct, windows_struct) 
+	    	<< " PPV: " << calc_ppv(target_sstruct, windows_struct) << std::endl;
 
 
 	int windows_errors = count_errors(target_sstruct, windows_struct);
 
-	// std::cout << "Windows errors = " << windows_errors << std::endl;
+	std::cout << "Windows errors = " << windows_errors << std::endl;
 	//std::cout << windows_struct << std::endl;
-	//std::cout << "---------------------------------" << std::endl;
+	std::cout << "---------------------------------" << std::endl;
 
 	return windows_errors;
 
@@ -115,7 +117,7 @@ int splat_tester(float mult, float cut, int start, const std::string& rna, const
 }
 
 
-int two_window_prediction(const std::string& rna, const std::string& target_sstruct)
+int multi_window_prediction(const std::string& rna, const std::string& target_sstruct)
 {
 	std::vector<std::vector<RNAInterval> > all_windows;
 	std::vector<RNAInterval> windows;
@@ -124,31 +126,39 @@ int two_window_prediction(const std::string& rna, const std::string& target_sstr
 	std::string best_struct;
 	for(int sz = 4; sz < 500; sz++)
 		all_windows.push_back(rnal_fold(rna, sz));
-	int besti, bestj;
+	int besti, bestj, bestk;
 	int min_errors = 9999999;
 	for(int i = 0; i < all_windows.size(); ++i)
 		for(int j = i; j < all_windows.size(); ++j)
-		{
-			windows.clear();
-			windows.insert(windows.end(), all_windows[i].begin(), all_windows[i].end());
-			if(i != j)
-				windows.insert(windows.end(), all_windows[j].begin(), all_windows[j].end());
-			selectedWindows = weighted_activity_selection(windows);
-			std::vector<int> selectedWindows = weighted_activity_selection(windows);
-			std::string windowsStruct = get_dotbracket(rna.size(), windows, selectedWindows);
-			int windowsError = count_errors(target_sstruct, windowsStruct);
-
-			if(windowsError < min_errors)
+			for (int k = j; k < all_windows.size(); ++k)
 			{
-				min_errors = windowsError;
-				besti = i;
-				bestj = j;
-				best_struct = windowsStruct;
+				windows.clear();
+				windows.insert(windows.end(), all_windows[i].begin(), all_windows[i].end());
+				if(i != j)
+					windows.insert(windows.end(), all_windows[j].begin(), all_windows[j].end());
+
+				if (j != k)
+					windows.insert(windows.end(), all_windows[k].begin(), all_windows[k].end());
+
+				selectedWindows = weighted_activity_selection(windows);
+				std::vector<int> selectedWindows = weighted_activity_selection(windows);
+				std::string windowsStruct = get_dotbracket(rna.size(), windows, selectedWindows);
+				int windowsError = count_errors(target_sstruct, windowsStruct);
+
+				if(windowsError < min_errors)
+				{
+					min_errors = windowsError;
+					besti = i;
+					bestj = j;
+					bestk = k;
+					best_struct = windowsStruct;
+				}
+				
 			}
-			
-		}
-	std::cout << "Windows errors = " << min_errors << " at i = " << besti + 4 << ", j = " << bestj + 4 << std::endl;
-	std::cout << best_struct << std::endl;
+	std::cout << "Windows errors = " << min_errors << " at i = " << besti + 4 
+		<< ", j = " << bestj + 4 << " k = " << bestk << std::endl;
+	std::cout << "Sensitivity = " << calc_sensitivity (target_sstruct, best_struct) 
+		<< " PPV = " << calc_ppv (target_sstruct, best_struct) << std::endl;
 	std::cout << "---------------------------------" << std::endl;
 	return min_errors;
 }
