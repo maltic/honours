@@ -16,16 +16,21 @@ extern "C"
 }
 
 
-double * boltzmann_fold (const std::string& rna)
+std::vector<std::vector<double> > boltzmann_fold (const std::string& rna)
 {
     double fe = pf_fold (rna.c_str(), NULL);
     double * bppm = export_bppm();
-    for (int i = 0; i < rna.size(); ++i)
-        for (int j = 0; j < rna.size(); ++j)
-            std::cout << bppm[i + j] << " " << std::endl;
-    return bppm;
+    plist *pl = NULL;
+    assign_plist_from_pr (&pl, bppm, rna.size(), 0.0);
+    int i = 0;
+    std::vector<std::vector<double> > probs ( rna.size(), std::vector<double> (rna.size(), 0.0) );
+    while ( pl[i].i != 0 )
+    {
+        probs[pl[i].i-1][pl[i].j-1] = pl[i].p;
+        ++i;
+    }
+    return probs;
 }
-
 
 RNAInterval zuker_fold(const std::string& rna, const int l, const int r)
 {

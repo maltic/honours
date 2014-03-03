@@ -49,6 +49,29 @@ std::string get_dotbracket(int rna_sz, const std::vector<RNAInterval>& windows)
 	return windowsStruct;
 }
 
+
+//splat prediction used in magic_seq.h
+std::string splat_prediction_ga(const std::vector<int>& splat, const std::string& rna) 
+{
+	std::vector<RNAInterval> all_windows;
+
+	// int upper_bound = rna.size() * ( 3.0 / log2 (rna.size()) ) ;
+	// this is O(n lg n), might be better to do sqrt(n) * c => O(sqrt(n))
+	// now implemented!
+	int upper_bound = sqrt ( rna.size() ) * 9.0;
+
+	for(int i = 0; i < splat.size() && splat[i] <= upper_bound; ++i)
+	{
+		std::vector<RNAInterval> windows = rnal_fold(rna, splat[i]);
+		all_windows.insert(all_windows.end(), windows.begin(), windows.end());
+	}
+
+	std::vector<int> selected_windows = weighted_activity_selection(all_windows);
+
+	return get_dotbracket(rna.size(), all_windows, selected_windows);
+
+}
+
 int splat_prediction(const std::vector<int>& splat, const std::string& rna, const std::string& target_sstruct) 
 {
 	typedef std::chrono::high_resolution_clock Clock;
@@ -56,9 +79,10 @@ int splat_prediction(const std::vector<int>& splat, const std::string& rna, cons
     Clock::time_point t0 = Clock::now();
 	std::vector<RNAInterval> all_windows;
 
-	int upper_bound = rna.size() * ( 3.0 / log2 (rna.size()) ) ;
-	//this is O(n lg n), might be better to do sqrt(n) * c => O(sqrt(n))
-	// int upper_bound = sqrt(rna.size() * 9.0);
+	// int upper_bound = rna.size() * ( 3.0 / log2 (rna.size()) ) ;
+	// this is O(n lg n), might be better to do sqrt(n) * c => O(sqrt(n))
+	// now implemented!
+	int upper_bound = sqrt(rna.size() * 9.0);
 
 	for(int i = 0; i < splat.size() && splat[i] <= upper_bound; ++i)
 	{
@@ -156,7 +180,7 @@ int multi_window_prediction(const std::string& rna, const std::string& target_ss
 				
 			}
 	std::cout << "Windows errors = " << min_errors << " at i = " << besti + 4 
-		<< ", j = " << bestj + 4 << " k = " << bestk << std::endl;
+		<< ", j = " << bestj + 4 << " k = " << bestk + 4 << std::endl;
 	std::cout << "Sensitivity = " << calc_sensitivity (target_sstruct, best_struct) 
 		<< " PPV = " << calc_ppv (target_sstruct, best_struct) << std::endl;
 	std::cout << "---------------------------------" << std::endl;

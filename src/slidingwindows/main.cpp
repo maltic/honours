@@ -17,8 +17,8 @@ void magic_seq_train()
 	{
 		std::cin >> name >> rna >> targetStructure;
 		std::cin >> std::ws;
-		if (rna.size() < 300)
-			continue;
+		// if (rna.size() < 300)
+		// 	continue;
 		rnas.push_back(rna);
 		targets.push_back(targetStructure);
 	}
@@ -63,13 +63,15 @@ int test_splat()
 
 int main()
 {
+	magic_seq_train();
+	return 0;
 
 	std::string rna, name;
 	std::string targetStructure;
 
-	// for splat prediction
-	// int magic[] = {11, 23, 47, 97, 191, 373, 619, 971, 1549};
-	// std::vector<int> magicVec(magic, magic+9);
+	//for splat prediction
+	int magic[] = {49, 95, 233};
+	std::vector<int> magicVec(magic, magic+3);
 
 	int tot = 0, zukTot = 0;
 	while(std::cin.good())
@@ -77,8 +79,8 @@ int main()
 		
 		std::cin >> name >> rna >> targetStructure;
 
-		// if (rna.size() < 400)
-		// 	continue;
+		if (rna.size() < 300)
+			continue;
 
 		std::cout << "SSTRAND ID = " << name << std::endl;
 
@@ -96,7 +98,7 @@ int main()
 		int vanillaErrors = count_errors(targetStructure, vanilla.sstruct);
 		std::cout << "RNA size: " << rna.size() << " with " << vanillaErrors << " Zuker errors." << std::endl;
 
-		int err = multi_window_prediction(rna, targetStructure);
+		int err = splat_prediction(magicVec, rna, targetStructure);
 
 		tot += err;
 		zukTot += vanillaErrors;

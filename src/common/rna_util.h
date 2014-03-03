@@ -111,6 +111,7 @@ float calc_sensitivity (const std::string& target, const std::string& prediction
 	std::vector<int> mpred = get_matching_bonds (prediction); 
 	float tp = count_true_positives (mtrue, mpred);
 	float fn = count_false_negatives (mtrue, mpred);
+	if (tp <= 0.0) return 0.0;
 	return tp / (tp + fn);
 }
 
@@ -120,6 +121,7 @@ float calc_ppv (const std::string& target, const std::string& prediction)
 	std::vector<int> mpred = get_matching_bonds (prediction); 
 	float tp = count_true_positives (mtrue, mpred);
 	float fp = count_false_positives (mtrue, mpred);
+	if (tp <= 0.0) return 0.0;
 	return tp / (tp + fp);
 }
 

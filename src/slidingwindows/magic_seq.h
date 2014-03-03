@@ -41,9 +41,17 @@ struct MagicSequence
 		this->fitness = 0.0;
 
 		for (int i = 0; i < rnas.size(); ++i)
-			this->fitness -= splat_prediction (sequence, rnas[i], targets[i]);
+		{
+			std::string sstruct = splat_prediction_ga (sequence, rnas[i]);
+			this->fitness += calc_sensitivity (targets[i], sstruct) + calc_ppv (targets[i], sstruct);
+
+		}
 
 		std::cerr << "Fitness calculated " << this->fitness << std::endl;
+
+		for (int i = 0; i < sequence.size(); ++i)
+			std::cerr << sequence[i] << " ";
+		std::cerr << std::endl << std::endl;
 	}
 
 	bool operator< (const MagicSequence& other) const
@@ -156,7 +164,7 @@ public:
 	int max_num = 500;
 
 	// maximum number of items in a magic sequence
-	int max_nums = 9;
+	int max_nums = 7;
 
 	// GA settings
 	int num_genomes;
@@ -173,7 +181,7 @@ public:
 	int mut_deletion_factor = 2;
 	int mut_insertion_factor = 2;
 	int mut_mod_amount = 10;
-	int mut_mod_factor = 3;
+	int mut_mod_factor = 4;
 
 
 	MagicSequenceOptimizer (int n_genomes, int gens)
