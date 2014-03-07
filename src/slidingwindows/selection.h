@@ -11,10 +11,14 @@
 // The type signature of an RNA window selection algorithm 
 typedef std::vector<int> (*t_selection_algorithm)(std::vector<RNAInterval>&);
 
+// Note that I have used stable_sort for all collection algorithms
+// Determinism is more important than speed when doing performance comparisons
+// And when calculating fitness for a genetic/evolutionary algorithm
+
 
 // Given a selection algorithm and a collection of precomputed windows
 // This function will perform a test on the accuracy of the function
-void selection_algorithm_test (t_selection_algorithm algo, std::vector<PrecomputedWindows>& precomp)
+void selection_algorithm_test (const t_selection_algorithm algo, std::vector<PrecomputedWindows>& precomp)
 {
 	float avg_f1 = 0.0;
 	for (int i = 0; i < precomp.size(); ++i)
@@ -23,6 +27,9 @@ void selection_algorithm_test (t_selection_algorithm algo, std::vector<Precomput
 		float bestf1 = -1.0;
 		for (int j = 0; j < precomp[i].windows.size(); ++j)
 		{
+			// Since a previous selection algorithm may have changed the order, this forces determinism
+			// std::stable_sort ( precomp[i].windows[j].begin(), precomp[i].windows[j].end() );
+
 			std::vector<int> selected = algo (precomp[i].windows[j]);
 			std::string sstruct = get_dotbracket (precomp[i].rna.size(), precomp[i].windows[j], selected);
 			float f1score = calc_f1score (precomp[i].actual_sstruct, sstruct);
@@ -33,11 +40,11 @@ void selection_algorithm_test (t_selection_algorithm algo, std::vector<Precomput
 			}
 		}
 
-		std::cout << precomp[i].name << ": Best F1 score = " << bestf1 << " at window size = " 
-			<< (best_window_index + MIN_WINDOW_SIZE) << " for RNA size = " << precomp[i].rna.size() << std::endl;
+		// std::cout << precomp[i].name << ": Best F1 score = " << bestf1 << " at window size = " 
+		// 	<< (best_window_index + MIN_WINDOW_SIZE) << " for RNA size = " << precomp[i].rna.size() << std::endl;
 
 		// this commented line was used to produce spreadsheet compatible output
-		// std::cout << bestf1 << "\t" << (best_window_index + MIN_WINDOW_SIZE) << "\t" << precomp[i].rna.size() << std::endl;
+		std::cout << bestf1 << "\t" << (best_window_index + MIN_WINDOW_SIZE) << "\t" << precomp[i].rna.size() << std::endl;
 
 		avg_f1 += bestf1;
 	}
@@ -48,7 +55,7 @@ void selection_algorithm_test (t_selection_algorithm algo, std::vector<Precomput
 std::vector<int> bottom_up_selection(std::vector<RNAInterval>& intervals)
 {
 	//sort by size, asc
-	std::sort(intervals.begin(), intervals.end(), size_comp);
+	std::sort(intervals.begin(), intervals.end(), rna_int_size_comp);
 
 	std::vector<int> chosen;
 	for(int i = 0; i < intervals.size(); ++i)
@@ -56,7 +63,7 @@ std::vector<int> bottom_up_selection(std::vector<RNAInterval>& intervals)
 		bool choose = true;
 		for(int j = 0; j < chosen.size(); ++j)
 		{
-			if(!intervals[i].compatible_with(intervals[chosen[j]]))
+			if ( !intervals[i].compatible_with(intervals[chosen[j]]) )
 			{
 				choose = false;
 				break;
@@ -70,8 +77,10 @@ std::vector<int> bottom_up_selection(std::vector<RNAInterval>& intervals)
 
 std::vector<int> top_down_selection(std::vector<RNAInterval>& intervals)
 {
+
+
 	//sort by size, desc
-	std::sort(intervals.begin(), intervals.end(), size_comp);
+	std::sort(intervals.begin(), intervals.end(), rna_int_size_comp);
 	std::reverse(intervals.begin(), intervals.end());
 
 	std::vector<int> chosen;
@@ -94,8 +103,9 @@ std::vector<int> top_down_selection(std::vector<RNAInterval>& intervals)
 
 std::vector<int> greedy_MFE_selection(std::vector<RNAInterval>& intervals)
 {
+
 	//sort by score (abs(free energy)), desc
-	std::sort(intervals.begin(), intervals.end(), fe_comp);
+	std::sort(intervals.begin(), intervals.end(), rna_int_fe_comp);
 	std::reverse(intervals.begin(), intervals.end());
 
 	std::vector<int> chosen;
@@ -120,7 +130,7 @@ std::vector<int> greedy_MFE_selection(std::vector<RNAInterval>& intervals)
 std::vector<int> weighted_activity_selection (std::vector<RNAInterval>& intervals)
 {
 	//sort by right end point
-	std::sort(intervals.begin(), intervals.end());
+	std::sort ( intervals.begin(), intervals.end() );
 	std::vector<int> q(intervals.size()+1, 0);
 	//compute q values
 	for(int i = 1; i < intervals.size(); ++i)

@@ -5,6 +5,8 @@
 #include <string>
 #include <iostream>
 #include "../common/rnainterval.h"
+#include <utility>
+#include <set>
 
 const unsigned MIN_WINDOW_SIZE = 5;
 const unsigned MAX_WINDOW_SIZE = 500;
@@ -29,10 +31,10 @@ struct PrecomputedWindows
 				std::cerr << "Something went wrong, window size was wrong ( i = " 
 					<< i << " vs sz = " << sz << ")" << std::endl;
 			this->windows.push_back ( std::vector<RNAInterval>() );
+
 			for (int j = 0; j < num; ++j)
 				this->windows.back().push_back ( RNAInterval (strm) );
-			if (this->windows.back().size() != num)
-				std::cerr << "Something went wrong, number of windows was wrong" << std::endl;
+			
 
 		}
 

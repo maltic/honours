@@ -151,8 +151,10 @@ std::string get_dotbracket(int rna_sz, const std::vector<RNAInterval>& windows, 
 	for(int k = 0; k < selected.size(); ++k)
 	{
 		int push = windows[selected[k]].left;
+
 		for(int l = 0; l < windows[selected[k]].sstruct.size(); ++l)
 			windowsStruct[push+l] = windows[selected[k]].sstruct[l];
+
 	}
 	return windowsStruct;
 }
@@ -169,6 +171,7 @@ std::string get_dotbracket(int rna_sz, const std::vector<RNAInterval>& windows)
 	}
 	return windowsStruct;
 }
+
 
 
 #endif

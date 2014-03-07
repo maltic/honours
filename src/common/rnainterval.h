@@ -63,9 +63,11 @@ struct RNAInterval
 	}
 	bool operator< (const RNAInterval& other) const
 	{
+		if (right == other.right)
+			return left < other.left;
 		return right < other.right;
 	}
-	std::string to_string()
+	std::string to_string() const
 	{
 		std::stringstream ss;
 		ss << sstruct << " " << left << " " << right << " " << score;
@@ -73,13 +75,17 @@ struct RNAInterval
 	}
 };
 
-bool size_comp(const RNAInterval& a, const RNAInterval& b)
+bool rna_int_size_comp(const RNAInterval& a, const RNAInterval& b)
 {
+	if ( a.size() == b.size() )
+		return a < b;
 	return a.size() < b.size();
 }
 
-bool fe_comp(const RNAInterval& a, const RNAInterval& b)
+bool rna_int_fe_comp(const RNAInterval& a, const RNAInterval& b)
 {
+	if (a.score == b.score)
+		return a < b;
 	return a.score < b.score;
 }
 

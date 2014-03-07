@@ -1,5 +1,5 @@
 //Compile from project root
-//g++ slidingwindows/main.cpp common/vienna/libRNA.a -std=c++11 -O2
+//g++ src/slidingwindows/main.cpp src/common/vienna/libRNA.a -std=c++11 -O2
 #include <iostream>
 #include <string>
 #include "prediction.h"
@@ -70,6 +70,9 @@ void run_selection_tests ()
 
 	std::cout << "Loading precomputed windows..." << std::endl;
 	std::vector<PrecomputedWindows> precomp = load_precomputed_windows (std::cin);
+
+	std::sort (precomp.begin(), precomp.end(), precomputed_windows_size_cmp);
+
 	std::cout << "Finished loading precomputed windows!" << std::endl;
 
 	std::cout << "Weighted Activity Selection: " << std::endl;
