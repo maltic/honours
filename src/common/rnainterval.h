@@ -4,11 +4,14 @@
 #define RNAINTERVAL_H
 
 #include <string>
+#include <sstream>
 
 /*
 	The RNA Inteval class
 	Used to represent an interval of an RNA Secondary structure.
 	For use with algorithms that require sub-structures, such as an RNA sliding window algorithm.
+
+	The term RNA Interval is interchanable with 'window' in the thesis
 */
 struct RNAInterval
 {
@@ -32,6 +35,19 @@ struct RNAInterval
 		this->score = s;
 		this->sstruct = "";
 	}
+
+	RNAInterval (const std::string& ri)
+	{
+		std::stringstream ss (ri);
+		ss >> this->sstruct >> this->left >> this->right >> this->score;
+	}
+
+
+	RNAInterval (std::istream& strm)
+	{
+		strm >> this->sstruct >> this->left >> this->right >> this->score;
+	}
+
 	int size() const
 	{
 		return this->right - this->left;
@@ -48,6 +64,12 @@ struct RNAInterval
 	bool operator< (const RNAInterval& other) const
 	{
 		return right < other.right;
+	}
+	std::string to_string()
+	{
+		std::stringstream ss;
+		ss << sstruct << " " << left << " " << right << " " << score;
+		return ss.str();
 	}
 };
 

@@ -125,5 +125,50 @@ float calc_ppv (const std::string& target, const std::string& prediction)
 	return tp / (tp + fp);
 }
 
+float calc_f1score (const std::string& target, const std::string& prediction)
+{
+	std::vector<int> mtrue = get_matching_bonds (target);
+	std::vector<int> mpred = get_matching_bonds (prediction);
+	float tp = count_true_positives (mtrue, mpred);
+	float fp = count_false_positives (mtrue, mpred);
+	float fn = count_false_negatives (mtrue, mpred);
+	return (2 * tp) / (2 * tp + fp + fn);
+}
+
+
+int count_errors(const std::string& model, const std::string& proband)
+{
+	int count = 0;
+	for(int i = 0; i < model.size(); ++i)
+		if(model[i] != proband[i])
+			++count;
+	return count;
+}
+
+std::string get_dotbracket(int rna_sz, const std::vector<RNAInterval>& windows, const std::vector<int>& selected)
+{
+	std::string windowsStruct(rna_sz, '.');
+	for(int k = 0; k < selected.size(); ++k)
+	{
+		int push = windows[selected[k]].left;
+		for(int l = 0; l < windows[selected[k]].sstruct.size(); ++l)
+			windowsStruct[push+l] = windows[selected[k]].sstruct[l];
+	}
+	return windowsStruct;
+}
+
+
+std::string get_dotbracket(int rna_sz, const std::vector<RNAInterval>& windows)
+{
+	std::string windowsStruct(rna_sz, '.');
+	for(int k = 0; k < windows.size(); ++k)
+	{
+		int push = windows[k].left;
+		for(int l = 0; l < windows[k].sstruct.size(); ++l)
+			windowsStruct[push+l] = windows[k].sstruct[l];
+	}
+	return windowsStruct;
+}
+
 
 #endif

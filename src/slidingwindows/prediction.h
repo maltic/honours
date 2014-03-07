@@ -14,40 +14,8 @@
 #include "../common/vienna.h"
 #include "../common/rna_util.h"
 #include "selection.h"
+#include "precomputed_windows.h"
 
-int count_errors(const std::string& model, const std::string& proband)
-{
-	int count = 0;
-	for(int i = 0; i < model.size(); ++i)
-		if(model[i] != proband[i])
-			++count;
-	return count;
-}
-
-std::string get_dotbracket(int rna_sz, const std::vector<RNAInterval>& windows, const std::vector<int>& selected)
-{
-	std::string windowsStruct(rna_sz, '.');
-	for(int k = 0; k < selected.size(); ++k)
-	{
-		int push = windows[selected[k]].left;
-		for(int l = 0; l < windows[selected[k]].sstruct.size(); ++l)
-			windowsStruct[push+l] = windows[selected[k]].sstruct[l];
-	}
-	return windowsStruct;
-}
-
-
-std::string get_dotbracket(int rna_sz, const std::vector<RNAInterval>& windows)
-{
-	std::string windowsStruct(rna_sz, '.');
-	for(int k = 0; k < windows.size(); ++k)
-	{
-		int push = windows[k].left;
-		for(int l = 0; l < windows[k].sstruct.size(); ++l)
-			windowsStruct[push+l] = windows[k].sstruct[l];
-	}
-	return windowsStruct;
-}
 
 
 //splat prediction used in magic_seq.h
@@ -139,6 +107,7 @@ int splat_tester(float mult, float cut, int start, const std::string& rna, const
 	return windows_errors;
 
 }
+
 
 
 int multi_window_prediction(const std::string& rna, const std::string& target_sstruct)

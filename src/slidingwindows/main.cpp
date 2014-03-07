@@ -1,11 +1,13 @@
 //Compile from project root
-//g++ slidingwindows/main.cpp common/vienna/libVienna.a -std=c++11 -O2
+//g++ slidingwindows/main.cpp common/vienna/libRNA.a -std=c++11 -O2
 #include <iostream>
 #include <string>
 #include "prediction.h"
 #include "magic_seq.h"
+#include "precomputed_windows.h"
 #include "../common/rna_util.h"
 #include <chrono>
+
 
 void magic_seq_train()
 {
@@ -22,7 +24,6 @@ void magic_seq_train()
 		rnas.push_back(rna);
 		targets.push_back(targetStructure);
 	}
-
 	MagicSequenceOptimizer mso (32, 100);
 
 	mso.optimize (rnas, targets);
@@ -61,8 +62,35 @@ int test_splat()
 
 }
 
+// This function is used to test the various different selection strategies
+// Note to self, link to thesis section
+void run_selection_tests ()
+{
+	std::cout << "Testing selection algorithns..." << std::endl;
+
+	std::cout << "Loading precomputed windows..." << std::endl;
+	std::vector<PrecomputedWindows> precomp = load_precomputed_windows (std::cin);
+	std::cout << "Finished loading precomputed windows!" << std::endl;
+
+	std::cout << "Weighted Activity Selection: " << std::endl;
+	selection_algorithm_test (weighted_activity_selection, precomp);
+	std::cout << "Top Down Selection: " << std::endl;
+	selection_algorithm_test (top_down_selection, precomp);
+	std::cout << "Bottom Up Selection: " << std::endl;
+	selection_algorithm_test (bottom_up_selection, precomp);
+	std::cout << "MFE Selection: " << std::endl;
+	selection_algorithm_test (greedy_MFE_selection, precomp);
+
+	std::cout << "Done!" << std::endl;
+}
+
 int main()
 {
+	run_selection_tests();
+	return 0;
+
+
+	//all bullshit bellow this point
 	magic_seq_train();
 	return 0;
 
