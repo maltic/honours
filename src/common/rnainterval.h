@@ -61,12 +61,15 @@ struct RNAInterval
 	{
 		return !this->compatible_with(other);
 	}
+
+	// I've gone to great lengths to ensure these comparators ensure determinism in sorting
 	bool operator< (const RNAInterval& other) const
 	{
 		if (right == other.right)
 			return left < other.left;
 		return right < other.right;
 	}
+	
 	std::string to_string() const
 	{
 		std::stringstream ss;

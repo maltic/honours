@@ -12,6 +12,7 @@
 #include <algorithm>
 #include <iostream>
 #include "prediction.h"
+#include "precomputed_windows.h"
 
 
 // The follow two classes (MagicSequence, and MagicSequenceOptimizer) implement a Generic Algorithm (GA).
@@ -36,27 +37,24 @@ struct MagicSequence
 		this->sequence.resize ( std::distance (this->sequence.begin(), it) );
 	}
 
-	void calc_fitness( const std::vector<std::string>& rnas, const std::vector<std::string>& targets )
+	void calc_fitness( const std::vector<PrecomputedWindows>& test_data)
 	{
 		this->fitness = 0.0;
 
-		for (int i = 0; i < rnas.size(); ++i)
+		for (int i = 0; i < test_data.size(); ++i)
 		{
-			std::string sstruct = splat_prediction_ga (sequence, rnas[i]);
-			this->fitness += calc_sensitivity (targets[i], sstruct) + calc_ppv (targets[i], sstruct);
-
+			std::string sstruct = splat_prediction_ga (sequence, test_data[i]);
+			this->fitness += calc_f1score (test_data[i].actual_sstruct, sstruct);
 		}
 
-		std::cerr << "Fitness calculated " << this->fitness << std::endl;
-
-		for (int i = 0; i < sequence.size(); ++i)
-			std::cerr << sequence[i] << " ";
-		std::cerr << std::endl << std::endl;
 	}
 
 	bool operator< (const MagicSequence& other) const
 	{
-		// want to sort in ascending order
+		// prefer smaller solutions
+		if (fitness == other.fitness)
+			return sequence.size() > other.sequence.size();
+		// want to sort in descending order, hence >
 		return fitness > other.fitness;
 	}
 
@@ -69,8 +67,7 @@ class MagicSequenceOptimizer
 protected:
 	// protected class members
 	std::vector<MagicSequence> genomes;
-	std::vector<std::string> rnas;
-	std::vector<std::string> targets;
+	std::vector<PrecomputedWindows> test_data;
 	std::minstd_rand0 generator;
 
 	int valid_random_num()
@@ -87,7 +84,7 @@ protected:
 			seq.push_back (this->valid_random_num());
 		// turn them into a magic sequence as if by magic
 		MagicSequence ms (seq);
-		ms.calc_fitness (this->rnas, this->targets);
+		ms.calc_fitness (this->test_data);
 		return ms;
 	}
 
@@ -110,7 +107,7 @@ protected:
 				seq.push_back (b.sequence[i]);
 
 		MagicSequence ms (seq);
-		ms.calc_fitness (rnas, targets);
+		ms.calc_fitness (test_data);
 		return ms;
 	}
 
@@ -150,7 +147,7 @@ protected:
 		}
 
 		MagicSequence ns (v);
-		ns.calc_fitness (this->rnas, this->targets);
+		ns.calc_fitness (test_data);
 
 		return ns;
 	}
@@ -164,7 +161,7 @@ public:
 	int max_num = 500;
 
 	// maximum number of items in a magic sequence
-	int max_nums = 7;
+	int max_nums = 11;
 
 	// GA settings
 	int num_genomes;
@@ -247,11 +244,10 @@ public:
 		genomes = next_gen;
 	}
 
-	std::vector<MagicSequence> optimize ( const std::vector<std::string>& rnas, const std::vector<std::string>& targets )
+	std::vector<MagicSequence> optimize (const std::vector<PrecomputedWindows>& pcw)
 	{ 
 		// fill the test data
-		this->rnas = rnas;
-		this->targets = targets;
+		this->test_data = pcw;
 
 		// init the genomes
 		this->genomes = std::vector<MagicSequence> (genomes);
@@ -261,7 +257,10 @@ public:
 
 		// evolve through generations
 		for (int i = 0; i < num_generations; ++i)
+		{
+			std::cout << "Generation #" << i << std::endl;
 			evolve();
+		}
 
 		return this->genomes;
 	}

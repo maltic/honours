@@ -19,24 +19,23 @@
 
 
 //splat prediction used in magic_seq.h
-std::string splat_prediction_ga(const std::vector<int>& splat, const std::string& rna) 
+std::string splat_prediction_ga (const std::vector<int>& splat, const PrecomputedWindows& precomp) 
 {
 	std::vector<RNAInterval> all_windows;
 
 	// int upper_bound = rna.size() * ( 3.0 / log2 (rna.size()) ) ;
 	// this is O(n lg n), might be better to do sqrt(n) * c => O(sqrt(n))
 	// now implemented!
-	int upper_bound = sqrt ( rna.size() ) * 9.0;
+	int upper_bound = sqrt ( precomp.rna.size() ) * 9.0;
 
 	for(int i = 0; i < splat.size() && splat[i] <= upper_bound; ++i)
 	{
-		std::vector<RNAInterval> windows = rnal_fold(rna, splat[i]);
-		all_windows.insert(all_windows.end(), windows.begin(), windows.end());
+		all_windows.insert(all_windows.end(), precomp.windows[splat[i]].begin(), precomp.windows[splat[i]].end());
 	}
 
 	std::vector<int> selected_windows = weighted_activity_selection(all_windows);
 
-	return get_dotbracket(rna.size(), all_windows, selected_windows);
+	return get_dotbracket (precomp.rna.size(), all_windows, selected_windows);
 
 }
 

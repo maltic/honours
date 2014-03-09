@@ -9,25 +9,25 @@
 #include <chrono>
 
 
-void magic_seq_train()
-{
-	std::string rna, name;
-	std::string targetStructure;
-	std::vector<std::string> rnas;
-	std::vector<std::string> targets;
-	while(std::cin.good())
-	{
-		std::cin >> name >> rna >> targetStructure;
-		std::cin >> std::ws;
-		// if (rna.size() < 300)
-		// 	continue;
-		rnas.push_back(rna);
-		targets.push_back(targetStructure);
-	}
-	MagicSequenceOptimizer mso (32, 100);
+// void magic_seq_train()
+// {
+// 	std::string rna, name;
+// 	std::string targetStructure;
+// 	std::vector<std::string> rnas;
+// 	std::vector<std::string> targets;
+// 	while(std::cin.good())
+// 	{
+// 		std::cin >> name >> rna >> targetStructure;
+// 		std::cin >> std::ws;
+// 		// if (rna.size() < 300)
+// 		// 	continue;
+// 		rnas.push_back(rna);
+// 		targets.push_back(targetStructure);
+// 	}
+// 	MagicSequenceOptimizer mso (32, 100);
 
-	mso.optimize (rnas, targets);
-}
+// 	mso.optimize (rnas, targets);
+// }
 
 int test_splat()
 {
@@ -64,8 +64,9 @@ int test_splat()
 
 // This function is used to test the various different selection strategies
 // Note to self, link to thesis section
-void run_selection_tests ()
+void run_selection_tests (const int n_windows)
 {
+	SelectionTester st;
 	std::cout << "Testing selection algorithns..." << std::endl;
 
 	std::cout << "Loading precomputed windows..." << std::endl;
@@ -76,25 +77,35 @@ void run_selection_tests ()
 	std::cout << "Finished loading precomputed windows!" << std::endl;
 
 	std::cout << "Weighted Activity Selection: " << std::endl;
-	selection_algorithm_test (weighted_activity_selection, precomp);
+	st.selection_algorithm_test (n_windows, weighted_activity_selection, precomp);
 	std::cout << "Top Down Selection: " << std::endl;
-	selection_algorithm_test (top_down_selection, precomp);
+	st.selection_algorithm_test (n_windows, top_down_selection, precomp);
 	std::cout << "Bottom Up Selection: " << std::endl;
-	selection_algorithm_test (bottom_up_selection, precomp);
+	st.selection_algorithm_test (n_windows, bottom_up_selection, precomp);
 	std::cout << "MFE Selection: " << std::endl;
-	selection_algorithm_test (greedy_MFE_selection, precomp);
+	st.selection_algorithm_test (n_windows, greedy_MFE_selection, precomp);
 
+	std::cout << "Done!" << std::endl;
+}
+
+
+void run_magic_seq_training()
+{
+	std::cout << "Training a magic sequence!" << std::endl;
+	std::cout << "Loading precomputed windows..." << std::endl;
+	std::vector<PrecomputedWindows> precomp = load_precomputed_windows (std::cin, 300);
+	std::cout << "Finished loading precomputed windows!" << std::endl;
+
+	MagicSequenceOptimizer mso (2048, 256);
+
+	mso.optimize (precomp);
 	std::cout << "Done!" << std::endl;
 }
 
 int main()
 {
-	run_selection_tests();
-	return 0;
 
-
-	//all bullshit bellow this point
-	magic_seq_train();
+	run_selection_tests (3);
 	return 0;
 
 	std::string rna, name;

@@ -11,46 +11,90 @@
 // The type signature of an RNA window selection algorithm 
 typedef std::vector<int> (*t_selection_algorithm)(std::vector<RNAInterval>&);
 
-// Note that I have used stable_sort for all collection algorithms
-// Determinism is more important than speed when doing performance comparisons
-// And when calculating fitness for a genetic/evolutionary algorithm
-
-
-// Given a selection algorithm and a collection of precomputed windows
-// This function will perform a test on the accuracy of the function
-void selection_algorithm_test (const t_selection_algorithm algo, std::vector<PrecomputedWindows>& precomp)
+// A SelectionTester object can be used to compare various selection algorithms
+// Because I wanted to be able to test using an arbitrary number of combinatorically best windows
+// I needed to make a class to 'hide' the state variables for the recursion
+class SelectionTester
 {
-	float avg_f1 = 0.0;
-	for (int i = 0; i < precomp.size(); ++i)
-	{
-		int best_window_index;
-		float bestf1 = -1.0;
-		for (int j = 0; j < precomp[i].windows.size(); ++j)
-		{
-			// Since a previous selection algorithm may have changed the order, this forces determinism
-			// std::stable_sort ( precomp[i].windows[j].begin(), precomp[i].windows[j].end() );
+private:
 
-			std::vector<int> selected = algo (precomp[i].windows[j]);
-			std::string sstruct = get_dotbracket (precomp[i].rna.size(), precomp[i].windows[j], selected);
-			float f1score = calc_f1score (precomp[i].actual_sstruct, sstruct);
-			if (f1score > bestf1)
+	// hidden recursion variables
+	float best_f1score;
+	std::vector<int> best_windows;
+	std::vector<int> chosen;
+
+	void selection_test_recursion (const int n, const t_selection_algorithm algo, const PrecomputedWindows& precomp)
+	{
+		if (n == 0)
+		{
+			std::vector<RNAInterval> windows;
+
+			for (int i = 0; i < chosen.size(); ++i)
 			{
-				bestf1 = f1score;
-				best_window_index = j;
+				if (i == 0 || chosen[i] > chosen[i-1])
+					windows.insert ( windows.end(), precomp.windows[chosen[i]].begin(), precomp.windows[chosen[i]].end() );
+			}
+
+			std::vector<int> selected = algo (windows);
+			std::string sstruct = get_dotbracket (precomp.rna.size(), windows, selected);
+			float f1score = calc_f1score (precomp.actual_sstruct, sstruct);
+
+			if (f1score > best_f1score)
+			{
+				best_f1score = f1score;
+				best_windows = chosen;
 			}
 		}
+		else
+		{
+			// start the loop at the index of the previously selected window
+			// this optimization is possible since index order doesnt matter
+			// windows 1,2,3 are the same as 2,1,3
+			int start = chosen.size() == 0 ? 0 : chosen.back();
 
-		// std::cout << precomp[i].name << ": Best F1 score = " << bestf1 << " at window size = " 
-		// 	<< (best_window_index + MIN_WINDOW_SIZE) << " for RNA size = " << precomp[i].rna.size() << std::endl;
-
-		// this commented line was used to produce spreadsheet compatible output
-		std::cout << bestf1 << "\t" << (best_window_index + MIN_WINDOW_SIZE) << "\t" << precomp[i].rna.size() << std::endl;
-
-		avg_f1 += bestf1;
+			for (int i = start; i < precomp.windows.size(); ++i)
+			{
+				chosen.push_back (i);
+				selection_test_recursion (n-1, algo, precomp);
+				chosen.pop_back();
+			}
+		}
 	}
-	avg_f1 = avg_f1 / precomp.size();
-	std::cout << "Average best F1 score = " << avg_f1 << std::endl;
-}
+
+
+public:
+
+	// Given a n (the number of windows to use), a selection algorithm and a collection of precomputed windows
+	// This function will perform a test on the accuracy of the selection function
+	void selection_algorithm_test (const int n, const t_selection_algorithm algo, std::vector<PrecomputedWindows>& precomp)
+	{
+		float avg_f1 = 0.0;
+		for (int i = 0; i < precomp.size(); ++i)
+		{
+			// init recursion variables
+			best_windows.clear();
+			best_f1score = -1.0;
+			chosen.clear();
+			//do recursion
+			selection_test_recursion (n, algo, precomp[i]);
+
+			// std::cout << precomp[i].name << ": Best F1 score = " << bestf1 << " at window size = " 
+			// 	<< (best_window_index + MIN_WINDOW_SIZE) << " for RNA size = " << precomp[i].rna.size() << std::endl;
+
+			// this commented line was used to produce spreadsheet compatible output
+			std::cout << best_f1score << "\t";
+			for (int & i : best_windows)
+				std::cout << (i + MIN_WINDOW_SIZE) << " ";
+			std::cout << "\t" << precomp[i].rna.size() << std::endl;
+
+			avg_f1 += best_f1score;
+		}
+		avg_f1 = avg_f1 / precomp.size();
+		std::cout << "Average best F1 score = " << avg_f1 << std::endl;
+	}
+};
+
+
 
 std::vector<int> bottom_up_selection(std::vector<RNAInterval>& intervals)
 {
@@ -104,7 +148,7 @@ std::vector<int> top_down_selection(std::vector<RNAInterval>& intervals)
 std::vector<int> greedy_MFE_selection(std::vector<RNAInterval>& intervals)
 {
 
-	//sort by score (abs(free energy)), desc
+	//sort by score (free energy * -1), desc
 	std::sort(intervals.begin(), intervals.end(), rna_int_fe_comp);
 	std::reverse(intervals.begin(), intervals.end());
 

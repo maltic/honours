@@ -34,7 +34,7 @@ struct PrecomputedWindows
 
 			for (int j = 0; j < num; ++j)
 				this->windows.back().push_back ( RNAInterval (strm) );
-			
+
 
 		}
 
@@ -46,14 +46,19 @@ bool precomputed_windows_size_cmp(const PrecomputedWindows& a, const Precomputed
 	return a.rna.size() < b.rna.size();
 }
 
+
+
 // Load precomputed windows from an input stream
-std::vector<PrecomputedWindows> load_precomputed_windows (std::istream& strm)
+std::vector<PrecomputedWindows> load_precomputed_windows (std::istream& strm, int min_rna_size = 0)
 {
 	std::vector<PrecomputedWindows> precomputed;
 	while ( std::cin.good() )
 	{
-		precomputed.push_back ( PrecomputedWindows (strm) );
+		PrecomputedWindows pw (strm);
 		std::cin >> std::ws;
+		if (pw.rna.size() < min_rna_size)
+			continue;
+		precomputed.push_back ( pw );
 	}
 	return precomputed;
 }
