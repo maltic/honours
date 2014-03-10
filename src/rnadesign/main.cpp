@@ -74,8 +74,7 @@ private:
 
 		void calc_fitness()
 		{
-			// eventually this will change to a boltzmann based fold
-			// or better yet a fully custom CFG approach
+			// boltzmann based fold for pair probs
 			std::vector<std::vector<double> > probs = boltzmann_fold (rna);
 			std::vector<std::pair<double, int> > bonds;
 			std::vector<bool> done (rna.size(), false);

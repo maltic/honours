@@ -280,7 +280,7 @@ void incremental_prediction(const std::string& rna, const std::string& target_ss
 			for(int j = 0; j < selected.size(); ++j)
 				if(selected[j].first.overlaps(sz_windows[i]))
 				{
-					total_score_loss += selected[j].first.score + (fold_epoch - selected[j].second) * score_threshold;
+					total_score_loss += selected[j].first.score * (fold_epoch - selected[j].second) * score_threshold;
 					to_remove.push_back(j);
 				}
 			if(total_score_loss < sz_windows[i].score)

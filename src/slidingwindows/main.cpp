@@ -9,25 +9,6 @@
 #include <chrono>
 
 
-// void magic_seq_train()
-// {
-// 	std::string rna, name;
-// 	std::string targetStructure;
-// 	std::vector<std::string> rnas;
-// 	std::vector<std::string> targets;
-// 	while(std::cin.good())
-// 	{
-// 		std::cin >> name >> rna >> targetStructure;
-// 		std::cin >> std::ws;
-// 		// if (rna.size() < 300)
-// 		// 	continue;
-// 		rnas.push_back(rna);
-// 		targets.push_back(targetStructure);
-// 	}
-// 	MagicSequenceOptimizer mso (32, 100);
-
-// 	mso.optimize (rnas, targets);
-// }
 
 int test_splat()
 {
@@ -59,6 +40,30 @@ int test_splat()
 			}
 		}
 	}
+
+}
+
+
+// Runs Zukers algorithm (RNAfold) on the same testing data as used by run_selection_tests
+// Used for comparison
+void run_zuker_test()
+{
+	// this is extremely suboptimal, as we could just read in the scraped RNA data
+	// however this saves me having to write more code, and wirte a new way to sort stuff
+	std::cout << "Loading precomputed windows..." << std::endl;
+	std::vector<PrecomputedWindows> precomp = load_precomputed_windows (std::cin);
+	std::sort (precomp.begin(), precomp.end(), precomputed_windows_size_cmp);
+	std::cout << "Finished loading precomputed windows!" << std::endl;
+
+	std::cout << "Testing RNAfold..." << std::endl;
+	for (auto & pc : precomp)
+	{
+		RNAInterval folded = zuker_fold(pc.rna, 0, pc.rna.size()-1);
+		float f1score = calc_f1score (pc.actual_sstruct, folded.sstruct);
+		std::cout << f1score << "\t" << pc.rna.size() << std::endl;
+	}
+	std::cout << "Done!" << std::endl;
+
 
 }
 
@@ -105,7 +110,7 @@ void run_magic_seq_training()
 int main()
 {
 
-	run_selection_tests (3);
+	run_zuker_test();
 	return 0;
 
 	std::string rna, name;
