@@ -49,7 +49,7 @@ int splat_prediction(const std::vector<int>& splat, const std::string& rna, cons
 	// int upper_bound = rna.size() * ( 3.0 / log2 (rna.size()) ) ;
 	// this is O(n lg n), might be better to do sqrt(n) * c => O(sqrt(n))
 	// now implemented!
-	int upper_bound = sqrt(rna.size() * 9.0);
+	int upper_bound = sqrt ( rna.size() ) * 9.0;
 
 	for(int i = 0; i < splat.size() && splat[i] <= upper_bound; ++i)
 	{
@@ -82,28 +82,20 @@ int splat_prediction(const std::vector<int>& splat, const std::string& rna, cons
 }
 
 
-int splat_tester(float mult, float cut, int start, const std::string& rna, const std::string& target_sstruct) 
+std::string ab_splat (int a, float b, const PrecomputedWindows& precomp) 
 {
 
 	std::vector<RNAInterval> all_windows;
 
-	for (float i = (float) start; i < ((float) rna.size()) / cut; i *= mult)
-	{
-		std::vector<RNAInterval> windows = rnal_fold(rna, (int) i);
-		all_windows.insert(all_windows.end(), windows.begin(), windows.end());
-	}
+	int threshold = sqrt ( precomp.rna.size() ) * 9.5;
+
+	for (int i = a; i < threshold && (i-MIN_WINDOW_SIZE) < precomp.windows.size(); i = (float) i * b)
+		all_windows.insert ( all_windows.end(), precomp.windows[i-MIN_WINDOW_SIZE].begin(), precomp.windows[i-MIN_WINDOW_SIZE].end() );
+	
 
 	std::vector<int> selected_windows = weighted_activity_selection(all_windows);
 
-
-
-	std::string windows_struct = get_dotbracket(rna.size(), all_windows, selected_windows);
-
-	int windows_errors = count_errors(target_sstruct, windows_struct);
-
-
-
-	return windows_errors;
+	return get_dotbracket(precomp.rna.size(), all_windows, selected_windows);
 
 }
 

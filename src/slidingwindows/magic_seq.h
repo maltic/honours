@@ -186,6 +186,7 @@ public:
 		// init prng
   		unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
   		this->generator = std::minstd_rand0 (seed);
+  		
 
   		this->num_generations = gens;
   		this->num_genomes = n_genomes;

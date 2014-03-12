@@ -8,38 +8,75 @@
 #include "../common/rna_util.h"
 #include <chrono>
 
-
-
-int test_splat()
+void test_ab_splat (int a, float b)
 {
-	std::string rna, name;
-	std::string targetStructure;
-	std::vector<std::string> rnas;
-	std::vector<std::string> targets;
-	while(std::cin.good())
+
+
+	// this is extremely suboptimal, as we could just read in the scraped RNA data
+	// however this saves me having to write more code, and wirte a new way to sort stuff
+	std::cout << "Loading precomputed windows..." << std::endl;
+	std::vector<PrecomputedWindows> precomp = load_precomputed_windows (std::cin);
+	std::sort (precomp.begin(), precomp.end(), precomputed_windows_size_cmp);
+	std::cout << "Finished loading precomputed windows!" << std::endl;
+
+	std::cout << "Starting AB-splat test with a = " << a << " and b = " << b << std::endl;
+
+	for (auto & pc : precomp)
 	{
-		std::cin >> name >> rna >> targetStructure;
-		rnas.push_back(rna);
-		targets.push_back(targetStructure);
-		std::cin >> std::ws;
+		std::string ss = ab_splat (a, b, pc);
+		float f1score = calc_f1score (pc.actual_sstruct, ss);
+		std::cout << f1score << "\t" << pc.rna.size() << std::endl;
 	}
 
+	std::cout << "Done!" << std::endl;
+}
 
-	for (float mult = 2.1; mult <= 2.1; mult += 0.1)
+
+void brute_force_ab()
+{
+	std::cout << "Loading precomputed windows..." << std::endl;
+	std::vector<PrecomputedWindows> precomp = load_precomputed_windows (std::cin);
+
+	// shuffle randomly so odd and even indexes are random sets of even* size
+  	// * as even as possible!
+  	std::random_shuffle ( precomp.begin(), precomp.end() );
+
+	std::cout << "Finished loading precomputed windows!" << std::endl;
+
+
+  	
+
+  	std::cout << "Starting brute force..." << std::endl;
+
+	for (int a = 10; a <= 30; ++a)
 	{
-		for (float cutoff = 3; cutoff <= 5; cutoff += 1.0)
+		for (float b = 1.5; b <= 4.0; b += 0.1)
 		{
-			for (int start = 10; start < 30; start += 4)
+			float sumf1_even = 0.0, sumf1_odd = 0.0;
+			int ne = 0, no = 0;
+			for (int i = 0; i < precomp.size(); ++i)
 			{
-				int total_errors = 0;
-				for (int i = 0; i < rnas.size(); ++i)
-					total_errors += splat_tester(mult, cutoff, start, rnas[i], targets[i]);
-
-				std::cout << mult << " " << cutoff << " " << start << " " << total_errors << std::endl;
-
+				std::string ss = ab_splat (a, b, precomp[i]);
+				float f1score = calc_f1score (precomp[i].actual_sstruct, ss);
+				if (i % 2 == 0)
+				{
+					ne++;
+					sumf1_even += f1score;
+				}
+				else
+				{
+					no++;
+					sumf1_odd += f1score;
+				}
+				//std::cout << f1score << "\t" << i.rna.size() << std::endl;
 			}
+			std::cout << a << "\t" << b << "\t" << (sumf1_even / ne) << "\t" << (sumf1_odd / no) << std::endl;
 		}
 	}
+
+
+	std::cout << "Done!" << std::endl;
+
 
 }
 
@@ -54,6 +91,7 @@ void run_zuker_test()
 	std::vector<PrecomputedWindows> precomp = load_precomputed_windows (std::cin);
 	std::sort (precomp.begin(), precomp.end(), precomputed_windows_size_cmp);
 	std::cout << "Finished loading precomputed windows!" << std::endl;
+
 
 	std::cout << "Testing RNAfold..." << std::endl;
 	for (auto & pc : precomp)
@@ -110,7 +148,7 @@ void run_magic_seq_training()
 int main()
 {
 
-	run_zuker_test();
+	test_ab_splat (24, 1.8);
 	return 0;
 
 	std::string rna, name;
