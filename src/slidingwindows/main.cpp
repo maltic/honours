@@ -8,6 +8,60 @@
 #include "../common/rna_util.h"
 #include <chrono>
 
+
+void benchmark_zukers()
+{
+	typedef std::chrono::high_resolution_clock Clock;
+	typedef std::chrono::milliseconds milliseconds;
+
+	std::cout << "Loading precomputed windows..." << std::endl;
+	std::vector<PrecomputedWindows> precomp = load_precomputed_windows (std::cin);
+	std::sort (precomp.begin(), precomp.end(), precomputed_windows_size_cmp);
+	std::cout << "Finished loading precomputed windows!" << std::endl;
+	for (auto & pc : precomp)
+	{
+
+		Clock::time_point t0 = Clock::now();
+		RNAInterval folded = zuker_fold(pc.rna, 0, pc.rna.size()-1);
+		Clock::time_point t1 = Clock::now();
+		milliseconds ms = std::chrono::duration_cast<milliseconds>(t1 - t0);
+		float f1score = calc_f1score (pc.actual_sstruct, folded.sstruct);
+		std::cout << f1score << "\t" << ms.count() << "\t" << pc.rna.size() << std::endl;
+	}
+	std::cout << "Done!" << std::endl;
+
+
+}
+
+void benchmark_ab_splat (int a, float b, bool precompute = true)
+{
+	typedef std::chrono::high_resolution_clock Clock;
+	typedef std::chrono::milliseconds milliseconds;
+
+	std::cout << "Loading precomputed windows..." << std::endl;
+
+	std::vector<PrecomputedWindows> precomp = load_precomputed_windows (std::cin);
+	std::sort (precomp.begin(), precomp.end(), precomputed_windows_size_cmp);
+
+	std::cout << "Finished loading precomputed windows!" << std::endl;
+
+	std::cout << "Starting AB-splat test with a = " << a << " and b = " << b << std::endl;
+		
+	for (auto & pc : precomp)
+	{
+
+		Clock::time_point t0 = Clock::now();
+		std::string ss = precompute ? ab_splat (a, b, pc) : ab_splat (a, b, pc.rna);
+		Clock::time_point t1 = Clock::now();
+		milliseconds ms = std::chrono::duration_cast<milliseconds>(t1 - t0);
+		float f1score = calc_f1score (pc.actual_sstruct, ss);
+		std::cout << f1score << "\t" << ms.count() << "\t" << pc.rna.size() << std::endl;
+	}
+	std::cout << "Done!" << std::endl;
+
+
+}
+
 void test_ab_splat (int a, float b)
 {
 
@@ -81,30 +135,6 @@ void brute_force_ab()
 }
 
 
-// Runs Zukers algorithm (RNAfold) on the same testing data as used by run_selection_tests
-// Used for comparison
-void run_zuker_test()
-{
-	// this is extremely suboptimal, as we could just read in the scraped RNA data
-	// however this saves me having to write more code, and wirte a new way to sort stuff
-	std::cout << "Loading precomputed windows..." << std::endl;
-	std::vector<PrecomputedWindows> precomp = load_precomputed_windows (std::cin);
-	std::sort (precomp.begin(), precomp.end(), precomputed_windows_size_cmp);
-	std::cout << "Finished loading precomputed windows!" << std::endl;
-
-
-	std::cout << "Testing RNAfold..." << std::endl;
-	for (auto & pc : precomp)
-	{
-		RNAInterval folded = zuker_fold(pc.rna, 0, pc.rna.size()-1);
-		float f1score = calc_f1score (pc.actual_sstruct, folded.sstruct);
-		std::cout << f1score << "\t" << pc.rna.size() << std::endl;
-	}
-	std::cout << "Done!" << std::endl;
-
-
-}
-
 // This function is used to test the various different selection strategies
 // Note to self, link to thesis section
 void run_selection_tests (const int n_windows)
@@ -136,19 +166,51 @@ void run_magic_seq_training()
 {
 	std::cout << "Training a magic sequence!" << std::endl;
 	std::cout << "Loading precomputed windows..." << std::endl;
-	std::vector<PrecomputedWindows> precomp = load_precomputed_windows (std::cin, 300);
+	std::vector<PrecomputedWindows> precomp = load_precomputed_windows (std::cin);
+
+	// random shuffle time
+	std::random_shuffle ( precomp.begin(), precomp.end() );
+
 	std::cout << "Finished loading precomputed windows!" << std::endl;
 
-	MagicSequenceOptimizer mso (2048, 256);
+	std::cout << "Running GA to find a 'magic sequence'..." << std::endl;
 
-	mso.optimize (precomp);
+	MagicSequenceOptimizer mso (512, 256);
+
+
+
+	// first half is the training set
+	std::vector<MagicSequence> pop = mso.optimize ( precomp.begin(), precomp.begin() + precomp.size() / 2 );
+
+	std::vector<int> best = pop[0].sequence;
+
+	std::cout << "Done! Best sequence was... " << std::endl;
+
+	for (int & i : best)
+		std::cout << i << " ";
+	std::cout << std::endl;
+
+	std::cout << "Using best found sequence on testing set..." << std::endl;
+
+
+	// now compare to test set, which is second half
+	for (	std::vector<PrecomputedWindows>::iterator it = (precomp.begin() + precomp.size() / 2 + 1);
+			it != precomp.end();
+			++it)
+	{
+		std::string ss = splat_prediction_ga (best, *it);
+		float f1score = calc_f1score (it->actual_sstruct, ss);
+		std::cout << f1score << "\t" << it->rna.size() << std::endl;
+	}
+
 	std::cout << "Done!" << std::endl;
+
 }
 
 int main()
 {
 
-	test_ab_splat (24, 1.8);
+	run_magic_seq_training();
 	return 0;
 
 	std::string rna, name;

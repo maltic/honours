@@ -29,7 +29,7 @@ struct MagicSequence
 		this->fitness = 0.0;
 	}
 
-	void set_seq(const std::vector<int>& seq)
+	void set_seq (const std::vector<int>& seq)
 	{
 		this->sequence = seq;
 		std::sort (this->sequence.begin(), this->sequence.end());
@@ -37,14 +37,15 @@ struct MagicSequence
 		this->sequence.resize ( std::distance (this->sequence.begin(), it) );
 	}
 
-	void calc_fitness( const std::vector<PrecomputedWindows>& test_data)
+	void calc_fitness (const std::vector<PrecomputedWindows>::iterator& start, 
+		const std::vector<PrecomputedWindows>::iterator& end)
 	{
 		this->fitness = 0.0;
 
-		for (int i = 0; i < test_data.size(); ++i)
+		for (std::vector<PrecomputedWindows>::iterator it = start; it != end; ++it)
 		{
-			std::string sstruct = splat_prediction_ga (sequence, test_data[i]);
-			this->fitness += calc_f1score (test_data[i].actual_sstruct, sstruct);
+			std::string sstruct = splat_prediction_ga (sequence, *it);
+			this->fitness += calc_f1score ((*it).actual_sstruct, sstruct);
 		}
 
 	}
@@ -68,6 +69,8 @@ protected:
 	// protected class members
 	std::vector<MagicSequence> genomes;
 	std::vector<PrecomputedWindows> test_data;
+	std::vector<PrecomputedWindows>::iterator test_set_begin;
+	std::vector<PrecomputedWindows>::iterator test_set_end;
 	std::minstd_rand0 generator;
 
 	int valid_random_num()
@@ -84,7 +87,7 @@ protected:
 			seq.push_back (this->valid_random_num());
 		// turn them into a magic sequence as if by magic
 		MagicSequence ms (seq);
-		ms.calc_fitness (this->test_data);
+		ms.calc_fitness (this->test_set_begin, this->test_set_end);
 		return ms;
 	}
 
@@ -107,7 +110,7 @@ protected:
 				seq.push_back (b.sequence[i]);
 
 		MagicSequence ms (seq);
-		ms.calc_fitness (test_data);
+		ms.calc_fitness (this->test_set_begin, this->test_set_end);
 		return ms;
 	}
 
@@ -147,7 +150,7 @@ protected:
 		}
 
 		MagicSequence ns (v);
-		ns.calc_fitness (test_data);
+		ns.calc_fitness (this->test_set_begin, this->test_set_end);
 
 		return ns;
 	}
@@ -245,10 +248,12 @@ public:
 		genomes = next_gen;
 	}
 
-	std::vector<MagicSequence> optimize (const std::vector<PrecomputedWindows>& pcw)
+	std::vector<MagicSequence> optimize (const std::vector<PrecomputedWindows>::iterator& start, 
+			const std::vector<PrecomputedWindows>::iterator& end)
 	{ 
 		// fill the test data
-		this->test_data = pcw;
+		this->test_set_begin = start;
+		this->test_set_end = end;
 
 		// init the genomes
 		this->genomes = std::vector<MagicSequence> (genomes);

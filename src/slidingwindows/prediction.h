@@ -99,6 +99,26 @@ std::string ab_splat (int a, float b, const PrecomputedWindows& precomp)
 
 }
 
+std::string ab_splat (int a, float b, const std::string& rna) 
+{
+
+	std::vector<RNAInterval> all_windows;
+
+	int threshold = sqrt ( rna.size() ) * 9.5;
+
+	for (int i = a; i < threshold && i <= 500; i = (float) i * b)
+	{
+		std::vector<RNAInterval> windows = rnal_fold(rna, i);
+		all_windows.insert ( all_windows.end(), windows.begin(), windows.end() );
+	}
+	
+
+	std::vector<int> selected_windows = weighted_activity_selection(all_windows);
+
+	return get_dotbracket(rna.size(), all_windows, selected_windows);
+
+}
+
 
 
 int multi_window_prediction(const std::string& rna, const std::string& target_sstruct)
