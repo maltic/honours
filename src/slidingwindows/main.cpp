@@ -7,6 +7,13 @@
 #include "precomputed_windows.h"
 #include "../common/rna_util.h"
 #include <chrono>
+#include <random>
+
+std::default_random_engine make_prng()
+{
+	unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
+  	return std::default_random_engine (seed);
+}
 
 
 void benchmark_zukers()
@@ -93,7 +100,7 @@ void brute_force_ab()
 
 	// shuffle randomly so odd and even indexes are random sets of even* size
   	// * as even as possible!
-  	std::random_shuffle ( precomp.begin(), precomp.end() );
+  	std::shuffle ( precomp.begin(), precomp.end(), make_prng() );
 
 	std::cout << "Finished loading precomputed windows!" << std::endl;
 
@@ -166,16 +173,16 @@ void run_magic_seq_training()
 {
 	std::cout << "Training a magic sequence!" << std::endl;
 	std::cout << "Loading precomputed windows..." << std::endl;
-	std::vector<PrecomputedWindows> precomp = load_precomputed_windows (std::cin);
 
+	std::vector<PrecomputedWindows> precomp = load_precomputed_windows (std::cin);
 	// random shuffle time
-	std::random_shuffle ( precomp.begin(), precomp.end() );
+	std::shuffle ( precomp.begin(), precomp.end(), make_prng() );
 
 	std::cout << "Finished loading precomputed windows!" << std::endl;
 
 	std::cout << "Running GA to find a 'magic sequence'..." << std::endl;
 
-	MagicSequenceOptimizer mso (512, 256);
+	MagicSequenceOptimizer mso (5000, 256);
 
 
 

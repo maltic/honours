@@ -68,7 +68,7 @@ class MagicSequenceOptimizer
 protected:
 	// protected class members
 	std::vector<MagicSequence> genomes;
-	std::vector<PrecomputedWindows> test_data;
+	//std::vector<PrecomputedWindows> test_data;
 	std::vector<PrecomputedWindows>::iterator test_set_begin;
 	std::vector<PrecomputedWindows>::iterator test_set_end;
 	std::minstd_rand0 generator;
