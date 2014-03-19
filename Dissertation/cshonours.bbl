@@ -1,0 +1,69 @@
+\begin{thebibliography}{10}
+
+\bibitem{albertsessential}
+{\sc Alberts, B., Bray, D., Hopkin, K., Johnson, A., Lewis, J., Raff, M.,
+  Roberts, K., and Walter, P.}
+\newblock {\em Essential Cell Biology}, third~ed.
+\newblock Garland Science: New York, 2009.
+
+\bibitem{beaton1999eukaryotic}
+{\sc Beaton, M.~J., and Cavalier-Smithf, T.}
+\newblock Eukaryotic non-coding dna is functional: evidence from the
+  differential scaling of cryptomonad genomes.
+\newblock {\em Proceedings of the Royal Society of London. Series B: Biological
+  Sciences 266}, 1433 (1999), 2053--2059.
+
+\bibitem{condon2003problems}
+{\sc Condon, A.}
+\newblock Problems on rna secondary structure prediction and design.
+\newblock In {\em Automata, Languages and Programming}. Springer, 2003,
+  pp.~22--32.
+
+\bibitem{conn1998rna}
+{\sc Conn, G.~L., and Draper, D.~E.}
+\newblock Rna structure.
+\newblock {\em Current opinion in structural biology 8}, 3 (1998), 278--285.
+
+\bibitem{doggie}
+{\sc Goossens, M., Mittelbach, F., and Samarin, A.}
+\newblock {\em The {LaTeX} Companion}.
+\newblock Addison-Wesley, 1994.
+
+\bibitem{hofacker2008rna}
+{\sc Hofacker, I.~L.}
+\newblock Rna consensus structure prediction with rnaalifold.
+\newblock In {\em Comparative Genomics}. Springer, 2008, pp.~527--543.
+
+\bibitem{bible}
+{\sc Lamport, L.}
+\newblock {\em {LaTeX} : A Documentation Preparation System User's Guide and
+  Reference Manual}, second~ed.
+\newblock Adison-Wesley, 1994.
+
+\bibitem{leung2013coral}
+{\sc Leung, Y.~Y., Ryvkin, P., Ungar, L.~H., Gregory, B.~D., and Wang, L.-S.}
+\newblock Coral: predicting non-coding rnas from small rna-sequencing data.
+\newblock {\em Nucleic acids research 41}, 14 (2013), e137--e137.
+
+\bibitem{neidle2010principles}
+{\sc Neidle, S.}
+\newblock {\em Principles of nucleic acid structure}.
+\newblock Academic Press, 2010.
+
+\bibitem{tinoco1999rna}
+{\sc Tinoco~Jr, I., and Bustamante, C.}
+\newblock How rna folds.
+\newblock {\em Journal of molecular biology 293}, 2 (1999), 271--281.
+
+\bibitem{watson1953molecular}
+{\sc Watson, J.~D., Crick, F.~H., et~al.}
+\newblock Molecular structure of nucleic acids.
+\newblock {\em Nature 171}, 4356 (1953), 737--738.
+
+\bibitem{xu2012statistical}
+{\sc Xu, Z., Almudevar, A., and Mathews, D.~H.}
+\newblock Statistical evaluation of improvement in rna secondary structure
+  prediction.
+\newblock {\em Nucleic acids research 40}, 4 (2012), e26--e26.
+
+\end{thebibliography}
