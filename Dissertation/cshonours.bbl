@@ -45,10 +45,40 @@
 \newblock Coral: predicting non-coding rnas from small rna-sequencing data.
 \newblock {\em Nucleic acids research 41}, 14 (2013), e137--e137.
 
+\bibitem{lorenz2011viennarna}
+{\sc Lorenz, R., Bernhart, S.~H., Zu~Siederdissen, C.~H., Tafer, H., Flamm, C.,
+  Stadler, P.~F., Hofacker, I.~L., et~al.}
+\newblock Viennarna package 2.0.
+\newblock {\em Algorithms for Molecular Biology 6}, 1 (2011), 26.
+
 \bibitem{neidle2010principles}
 {\sc Neidle, S.}
 \newblock {\em Principles of nucleic acid structure}.
 \newblock Academic Press, 2010.
+
+\bibitem{nussinov1980fast}
+{\sc Nussinov, R., and Jacobson, A.~B.}
+\newblock Fast algorithm for predicting the secondary structure of
+  single-stranded rna.
+\newblock {\em Proceedings of the National Academy of Sciences 77}, 11 (1980),
+  6309--6313.
+
+\bibitem{nussinov1978algorithms}
+{\sc Nussinov, R., Pieczenik, G., Griggs, J.~R., and Kleitman, D.~J.}
+\newblock Algorithms for loop matchings.
+\newblock {\em SIAM Journal on Applied mathematics 35}, 1 (1978), 68--82.
+
+\bibitem{reuter2010rnastructure}
+{\sc Reuter, J.~S., and Mathews, D.~H.}
+\newblock Rnastructure: software for rna secondary structure prediction and
+  analysis.
+\newblock {\em BMC bioinformatics 11}, 1 (2010), 129.
+
+\bibitem{studnicka1978computer}
+{\sc Studnicka, G.~M., Rahn, G.~M., Cummings, I.~W., and Salser, W.~A.}
+\newblock Computer method for predicting the secondary structure of
+  single-stranded rna.
+\newblock {\em Nucleic acids research 5}, 9 (1978), 3365--3388.
 
 \bibitem{tinoco1999rna}
 {\sc Tinoco~Jr, I., and Bustamante, C.}
@@ -65,5 +95,11 @@
 \newblock Statistical evaluation of improvement in rna secondary structure
   prediction.
 \newblock {\em Nucleic acids research 40}, 4 (2012), e26--e26.
+
+\bibitem{zuker1981optimal}
+{\sc Zuker, M., and Stiegler, P.}
+\newblock Optimal computer folding of large rna sequences using thermodynamics
+  and auxiliary information.
+\newblock {\em Nucleic acids research 9}, 1 (1981), 133--148.
 
 \end{thebibliography}
