@@ -31,27 +31,41 @@
   bioinformatics-Volume 29\/} (2004), Australian Computer Society, Inc.,
   pp.~239--246.
 
-\bibitem{doggie}
-{\sc Goossens, M., Mittelbach, F., and Samarin, A.}
-\newblock {\em The {LaTeX} Companion}.
-\newblock Addison-Wesley, 1994.
+\bibitem{do2006contrafold}
+{\sc Do, C.~B., Woods, D.~A., and Batzoglou, S.}
+\newblock Contrafold: Rna secondary structure prediction without physics-based
+  models.
+\newblock {\em Bioinformatics 22}, 14 (2006), e90--e98.
 
 \bibitem{hofacker2008rna}
 {\sc Hofacker, I.~L.}
 \newblock Rna consensus structure prediction with rnaalifold.
 \newblock In {\em Comparative Genomics}. Springer, 2008, pp.~527--543.
 
+\bibitem{hofacker2004prediction}
+{\sc Hofacker, I.~L., Priwitzer, B., and Stadler, P.~F.}
+\newblock Prediction of locally stable rna secondary structures for genome-wide
+  surveys.
+\newblock {\em Bioinformatics 20}, 2 (2004), 186--190.
+
+\bibitem{horesh2009rnaslider}
+{\sc Horesh, Y., Wexler, Y., Lebenthal, I., Ziv-Ukelson, M., and Unger, R.}
+\newblock Rnaslider: a faster engine for consecutive windows folding and its
+  application to the analysis of genomic folding asymmetry.
+\newblock {\em BMC bioinformatics 10}, 1 (2009), 76.
+
+\bibitem{kato2006stochastic}
+{\sc Kato, Y., Seki, H., and Kasami, T.}
+\newblock Stochastic multiple context-free grammar for rna pseudoknot modeling.
+\newblock In {\em Proceedings of the Eighth International Workshop on Tree
+  Adjoining Grammar and Related Formalisms\/} (2006), Association for
+  Computational Linguistics, pp.~57--64.
+
 \bibitem{koessler2010predictive}
 {\sc Koessler, D.~R., Knisley, D.~J., Knisley, J., and Haynes, T.}
 \newblock A predictive model for secondary rna structure using graph theory and
   a neural network.
 \newblock {\em BMC bioinformatics 11}, Suppl 6 (2010), S21.
-
-\bibitem{bible}
-{\sc Lamport, L.}
-\newblock {\em {LaTeX} : A Documentation Preparation System User's Guide and
-  Reference Manual}, second~ed.
-\newblock Adison-Wesley, 1994.
 
 \bibitem{leung2013coral}
 {\sc Leung, Y.~Y., Ryvkin, P., Ungar, L.~H., Gregory, B.~D., and Wang, L.-S.}
@@ -109,6 +123,12 @@
 \newblock A dynamic programming algorithm for rna structure prediction
   including pseudoknots.
 \newblock {\em Journal of molecular biology 285}, 5 (1999), 2053--2068.
+
+\bibitem{rivas2012range}
+{\sc Rivas, E., Lang, R., and Eddy, S.~R.}
+\newblock A range of complex probabilistic models for rna secondary structure
+  prediction that includes the nearest-neighbor model and more.
+\newblock {\em RNA 18}, 2 (2012), 193--212.
 
 \bibitem{sperschneider2010dotknot}
 {\sc Sperschneider, J., and Datta, A.}

@@ -156,7 +156,7 @@ much worse asymptotic and implementation complexities.
 
 \begin{figure}
 \begin{center}
-\scalebox{0.3}{\includegraphics{figure4}}
+\scalebox{0.27}{\includegraphics{figure4}}
 \end{center}
 \caption{Diagram of faces used in the Zuker algorithm. Taken from original
 publication \cite{zuker1981optimal}.}
@@ -253,7 +253,7 @@ seemingly restrictive, this did, in fact, predict a large array of pseudoknots a
 In recent years different approaches have been explored. In 2010, DotKnot \cite{sperschneider2010dotknot} improved upon previous algorithms by using probability dot-plot guided heuristics, and an updated energy model, to predict pseudoknots. DotKnot was able to predict pseudoknots more accurately than existing methods with more frugal space and time requirements. This technique was later refined so that it could predict H-type pseudoknots and intramolecular kissing hairpins \cite{sperschneider2011heuristic}.
 
 
-\subsection{Accuracy}
+\section{Accuracy}
 It is important to test and compare the accuracy of various prediction methods.
 As such, well established nomenclature and techniques have been developed over
 the history of RNA structure prediction. These methods are simple but effective. Usually accuracy is determined by comparing predicted structures to known
@@ -343,338 +343,68 @@ Mfold \cite{zuker2003mfold} which uses a similarly complex model. Wiese, Deschen
 
 
 \subsection{Context Free Grammars}
-RNA sequences and their secondary structures can be represented as context free
-grammars. Various production rules output different internal structures (such as
+RNA sequences and their secondary structures can be represented as Context Free
+Grammars (CFGs). Various production rules output different internal structures (such as
 hairpin loops, or internal bulges), with the terminals producing the bases A, U, G,
 and C. This is a fundamentally different approach to those discussed previously,
-however it can, in fact, use the same thermodynamic energy model. Stochas-
-tic Context Free Grammars (SCFGs) can be used to encode the plausibility of
-structures, and thus find the most plausible looking structure using a thermo-
-dynamic model [21]. In addition, these kinds of algorithms can be trained to
+however it can, in fact, use the same thermodynamic energy model. Stochastic Context Free Grammars (SCFGs) can be used to encode the plausibility of
+structures, and thus find the most plausible looking structure using a thermodynamic model \cite{rivas2012range}. In addition, these kinds of algorithms can be trained to
 incorporate statistical information such as phylogenetic similarity, or machine
-learned parameters [21]. These kinds of methods have trouble with pseudoknots,
-as non-nested structures are not compatible with typical context free grammars.
-One notable workaround was applied by Kato, Seki, and Kasami [10], who used
-multiple context free grammars to model pseudoknots. This approach, however,
-increases the time and space requirements of the typical algorithm.
+learned parameters \cite{rivas2012range}. 
+
+These kinds of methods have trouble with pseudoknots as non-nested structures are not compatible with CFGs.
+A notable workaround was applied by Kato, Seki, and Kasami \cite{kato2006stochastic}, who used
+multiple context free grammars to model pseudoknots. However, their approach
+increases the time and space requirements prodigiously.
+
+
 The greatest strength of context free grammar based approaches is that they
-can diverge from the use of free energy entirely. This is advantageous as using
-a physics based model–such as free energy minimization–requires a large volume
-of experimentally verified parameters. For this reason, many parameters are of-
-ten not included in such models because they cannot be quantified empirically.
-The energy value of multibranch loops, for example, is not known and is usually
-guessed at in modern RNA prediction algorithms. Likewise, the inter-structural
-interactions of hairpin loops, bulges, multibranch loops, and internal loops has
-not been quantified experimentally and is thus not used as a free energy param-
-eter. CONTRAfold [6] was one of the first SCFG based algorithms to achieve
+can diverge from the use of free energy minimisation entirely. This is advantageous as using
+a physics based model---such as free energy minimization---requires a large volume
+of experimentally verified parameters. For this reason, many parameters are often not included in such models because they cannot be quantified empirically.
+The energy value of multi-branch loops, for example, is not known and is usually
+guessed in modern RNA prediction algorithms. Likewise, the inter-structural
+interactions of hairpin loops, bulges, multi-branch loops, and internal loops has
+not been quantified experimentally and is thus not used as a free energy parameter. CONTRAfold \cite{do2006contrafold} was one of the first SCFG based algorithms to achieve
 comparable performance to Zuker-like free energy minimization methods. It does
-away with the notion of free energy minimization altogether and instead uses a
+away with the notion of free energy minimization altogether, and instead uses a
 set of trained parameters based on conditional log-linear models. CONTRAfold
 achieved an average prediction sensitivity higher than RNAfold, and also higher
-10
-than that of Mfold [32] (an RNA prediction package similar to RNAfold). It
-is important, however, to remember that none of these approaches are able to
+than that of Mfold \cite{zuker2003mfold}, an RNA prediction package similar to RNAfold. It
+is important for the reader to remember that none of these approaches are able to
 model pseudoknots.
 
-1.4 Locally Optimal Structure Prediction
-DNA sequences, unlike typical RNA molecules, are very large indeed. Usually
+\section{Locally Optimal Structure Prediction}
+DNA sequences, unlike typical RNA sequences, are very large indeed. Usually
 on the order of hundreds of megabytes of data. Such sequences contain DNA
 subsequences that code for RNAs. Functionally important RNAs typically have
-a recognizable secondary structure. When searching a large genome for func-
-tional RNAs, one could use a sliding window of fixed size to find locally optimal
-structures. This might be done by running a typical cubic time algorithm like
-RNAfold or Mfold at every window location. Let L be defined as the chosen
-window size, and N represent the length of the RNA. This leads to a total com-
-plexity of O(N L3 ). While not prohibitive, this becomes intractable for many
-genomes, which are typically extremely large–millions or billions of bases. In
-2004, Hofacker, Priwitzer, and Stadler [8] provided an excellent insight and were
-able to lower this bound to O(N L2 ), making it possible to scan large genomes
+a recognizable secondary structure. When searching a large genome for functional RNAs, one can use a sliding window of fixed size to find locally optimal
+structures. This can be done by running a typical cubic time algorithm like
+RNAfold or Mfold at every window location. Let $L$ be defined as the chosen
+window size, and $N$ represent the length of the genome. This leads to a total complexity of $O(NL^3)$. While not prohibitive, this becomes intractable for many
+genomes which are typically extremely large: millions or billions of bases. 
+
+In 2004, Hofacker, Priwitzer, and Stadler \cite{hofacker2004prediction} provided an excellent insight, and were
+able to lower this bound to $O(NL^2)$, making it possible to scan large genomes
 for interesting RNA secondary structure motifs. This was achieved by using the
 dynamic programming table from the previous step to quickly fill the table for
-the next window in quadratic time; because consecutive windows overlap, pre-
-ceding information can be meaningfully used in each forward computational step.
-As a result it requires only a single table of size O(L2 ), and as such its memory complexity is only O(N + L2 ). Later, in 2009, Horesh et al. [9] managed
-to lower the expected time bound to O(N L) under the assumption that one is
-folding RNAs that are typical of naturally occurring sequences. This complex-
-ity bound was experimentally verified, and their algorithm was shown to clearly
-outperform that of Hofacker, Priwitzer, and Stadler. Clearly good algorithms are
+the next window in quadratic time; because consecutive windows overlap, preceding information can be meaningfully used in each forward computational step.
+As a result it requires only a single table of size $O(L^2)$, and as such its memory complexity is only $O(N + L^2)$.
+
+Later, in 2009, Horesh et al. \cite{horesh2009rnaslider} managed
+to lower the expected time bound to $O(NL)$ under the assumption that one is
+folding RNAs that are typical of naturally occurring sequences. This time complexity bound was experimentally verified, and their algorithm was shown to clearly
+outperform that of Hofacker, Priwitzer, and Stadler. 
+
+Clearly good algorithms are
 available for the folding of consecutive RNA windows. For even a modest size
-RNA, such algorithms perform orders of magnitude faster than holistic secondary
-structure prediction algorithms, with the major caveat of not actually predicting
+RNA such algorithms perform orders of magnitude faster than holistic secondary
+structure prediction algorithms with the major caveat of not actually predicting
 a complete secondary structure, but only a set of locally optimal structures.
 
 
 
 
-
-The {\tt cshonours} files are located in:
-\begin{verbatim}
-/cslinux/cstex/local
-\end{verbatim}
-
-In order to use the {\tt cshonours} class you need to tell \TeX\ how
-to find it. To do this simply add the following to your shell resource
-file (ie.\ {\tt .zshrc}, {\tt .bashrc}, etc):
-\begin{verbatim}
-export TEXINPUTS=$TEXINPUTS:.:/cslinux/cstex//
-\end{verbatim}
-(The double-slash \verb!//! tells \TeX\ to search the tree from this
-point.) Then open a new shell window to run \LaTeX\ in.
-
-If you are using a machine that doesn't mount {\tt cslinux} or a
-stand-alone system such as a home machine, you can take a copy of the
-{\tt cshonours.cls} file and put it on your own machine. Please copy
-the class file directly from the original in the above directory to
-make sure you have an unadulterated copy.
-
-Once you have told \TeX\ how to find the class file, the easiest way
-to get started is to copy this example file, {\tt cshonours.tex}, and
-the accompanying example bibliography file, {\tt cshonours.bib}, from
-the above directory, give them a new name, and start modifying the text.
-
-\section{What does it all mean?}
-\label{code}
-
-The example file is pretty self explanatory, but here's a little
-elucidation for those who are interested.
-
-\begin{verbatim}
-\documentclass{cshonours}
-\end{verbatim}
-\ldots tells \LaTeX\ to use the {\tt cshonours} class. The commands
-between here and the \verb!\begin{document}! command are known as the
-{\em preamble\/} of the latex document. Font size is automatically set
-to 12pt in this class.
-
-\begin{verbatim}
-\bibliographystyle{acm}
-\end{verbatim}
-\ldots sets the bibliography style. Default is the style used in
-Transactions of the ACM.
-
-\begin{verbatim}
-\usepackage{graphics}  %optional
-\end{verbatim}
-\ldots this is only needed if you want to include postscript images.
-
-\begin{verbatim}
-\title{The Honours Dissertation Class for \LaTeX2e}
-\author{Cara MacNish}
-\end{verbatim}
-\ldots same as usual.
-
-\begin{verbatim}
-\keywords{Honours, report preparation, \LaTeX}
-\categories{A.2, I.7.2}
-\end{verbatim}
-\ldots keywords and Computing Reviews classification numbers. These
-will be put at the bottom of the abstract page.
-
-\begin{verbatim}
-\begin{document}
-\end{verbatim}
-\ldots so much for the preamble, now we start the document proper.
-
-\begin{verbatim}
-\maketitle
-\end{verbatim}
-\ldots produces the title page using the title and author stored
-earlier. Unlike the standard {\tt report} class it also starts roman
-page numbering.
-
-\begin{verbatim}
-\begin{abstract}
-This is a short report...
-\end{abstract}
-\end{verbatim}
-\ldots produces the abstract page, including the keywords and
-categories stored earlier.
-
-\begin{verbatim}
-\begin{acknowledgements}
-This style is designed...
-\end{acknowledgements}
-\end{verbatim}
-\ldots produces the acknowledgements page.
-
-\begin{verbatim}
-\tableofcontents
-\listoftables  %optional
-\listoffigures  %optional
-\end{verbatim}
-\ldots you guessed it! \verb!\listoftables! and \verb!listoffigures!
-can be omitted if you have no tables or figures respectively.
-
-\begin{verbatim}
-\chapter{The Honours Dissertation Style Guide}
-\end{verbatim}
-
-\ldots and so the first chapter begins. Unlike the standard {\tt
-report} class the first \verb!\chapter! command also switches
-pagenumbering to arabic.
-
-The main body is created using the usual \LaTeX\ commands. At the end
-we come to:
-
-\begin{verbatim}
-\appendix
-\end{verbatim}
-\ldots starts off the appendices.
-
-\begin{verbatim}
-\bibliography{cshonours}
-\end{verbatim}
-\ldots puts in the bibliography, generated in this case from the
-file {\tt cshonours.bib}.
-
-
-\section{Carrying on\ldots}
-
-The rest of the document proceeds in the usual way, with all standard
-\LaTeX\ commands available. These are described in~\cite{bible}, which
-is written by the author of \LaTeX, Leslie Lamport, and commonly known
-as the \LaTeX\ ``Bible''.
-
-For those who are feeling ambitious, a wealth of contributed
-packages, some of which are included in our distribution, and some of
-which you would need to download yourself, are described
-in~\cite{doggie}, commonly known as the ``Doggie Book''.
-
-
-\section{Including Postscript Files}
-
-Most drawing packages (such as {\tt xfig} and {\tt xpaint}) and image
-manipulation packages (such as {\tt xv} and {\tt gimp}) allow you to
-save your work as (encapsulated) postscript, which can be easily
-included in your \LaTeX\ document. The recommended (and simplest!) way
-of doing this is by including the command \verb!\usepackage{graphics}!
-in the preamble (see Section~\ref{code}) and then include the
-postscript file using the \verb!\includegraphics! command.
-
-\begin{figure}
-\begin{center}
-\includegraphics{gnu}
-\end{center}
-\caption{This is a Gnu.}
-\label{gnu}
-\end{figure}
-
-For example, Figure~\ref{gnu} shows a Gnu, produced by the following code:
-\begin{verbatim}
-\begin{figure}
-\begin{center}
-\includegraphics{gnu}
-\end{center}
-\caption{This is a Gnu.}
-\label{gnu}
-\end{figure}
-\end{verbatim}
-
-\begin{figure}
-\begin{center}
-\scalebox{0.6}{\includegraphics{gnu}}
-\end{center}
-\caption{This is a smaller Gnu.}
-\label{smallergnu}
-\end{figure}
-
-You can scale graphics using the \verb!\scalebox! command. For
-example, Figure~\ref{smallergnu} shows a smaller Gnu, produced as follows:
-\begin{verbatim}
-\begin{figure}
-\begin{center}
-\scalebox{0.6}{\includegraphics{gnu}}
-\end{center}
-\caption{This is a smaller Gnu.}
-\label{smallergnu}
-\end{figure}
-\end{verbatim}
-
-
-\section{Producing Postscript Output}
-
-\LaTeX\ produces a {\tt .dvi} file which you can convert to postscript
-using {\tt dvips}. If you have included encapsulated postscript figures the
-bounding boxes of those figures sometime confuse the printing
-routines. To overcome this it is recommended you use the {\tt -K}
-option to strip bounding box comments out. The full recommended format
-is:
-
-\begin{verbatim}
-dvips -K -f myfile.dvi > myfile.ps
-\end{verbatim}
-
-To save typing I just use a simple script for
-all my {\LaTeX}ing. Just create a file, called say {\tt laps}, containing something like:
-\begin{verbatim}
-latex $1
-dvips -K -o $1.ps $1.dvi
-\end{verbatim}
-Then make it executable, run \LaTeX\ with the command
-\begin{verbatim}
-laps myfile
-\end{verbatim}
-and view with ghostview (with ``State'' set to ``Watch file'').
-
-\section{Producing PDF}
-
-If you prefer PDF output you can produce this using {\tt
-pdfelatex}. This does not use {\tt dvi} as an intermediary so you just
-say:
-\begin{verbatim}
-pdfelatex myfile
-\end{verbatim}
-
-Note that any graphics you include must also be in
-suitable PDF. There are conversion programs, such as {\tt ps2pdf}, but
-I've found they often don't work well. It is better to produce the
-graphics directly in {\tt pdf}.
-
-I've also found that {\tt pdf} viewers don't tend to refresh well, so
-that you need to keep opening the file. As a result I tend to
-postscript where possible.
-
-
-\section{Emacs and \LaTeX}
-
-Gnu Emacs and Xemacs recognise both {\tt .tex} and {\tt .bib} files,
-and provide a number of tools for preparing them. For example you can
-select {\tt .bib} entry templates from a drop-down menu. Simple
-commands like \verb!C-c C-e! (puts in the \verb!\end! command to
-finish an environment) save lots of typing.
-
-
-\section{Appendices}
-
-After the main body comes the appendices. See Appendix~\ref{appa} and
-Appendix~\ref{appb}.
-
-\section{Bibliography}
-
-Finally, the bibliography can be produced automatically from a {\tt .bib} file
-using {\tt bibtex} in the usual way. This is described
-in~\cite{bible}. 
-
-The bibliography is the only change from the \LaTeX 2.09 {\tt
-cshonours} style file. The bibliography now comes after the
-appendices, in line with printed books, and uses alphanumeric citation
-tags to make reading (and marking) easier.
-
-
-\appendix
-
-\chapter{Original Honours Proposal}
-\label{appa}
-
-You must include as your first appendix an exact copy (in wording) of
-your original project proposal. This aids other readers to establish
-what was the initial focus of the project.
-
-\chapter{Another Appendix}
-\label{appb}
-
-Other appendices might include pseudocode 
-for your implementation, a Users Manual, an important data file, etc. 
 
 \bibliography{cshonours}
 
