@@ -240,69 +240,109 @@ structures with pseudoknots has been shown to be NP-Complete \cite{lyngso2000rna
 \subsection{Pseudoknots}
 In my investigation I did not consider the prediction of pseudoknotted RNA as they are uncommon. However I deem it important to understand how such structures could be integrated into the algorithms presented in this paper. As such, I have included a brisk overview of current pseudoknot prediction techniques.
 
-Despite the problem being NP-Complete, in 1999 Rivas \& Eddy [20] introduced an ingenious dynamic
+Despite the problem being NP-Complete, in 1999 Rivas \& Eddy \cite{rivas1999dynamic} introduced an ingenious dynamic
 programming algorithm based on a new thermodynamic model encompassing pseudoknots. Their algorithm could predict a large set of pseudoknot classes using
-O(N 6 ) time and O(N 4 ) memory. They generalised the Zuker method by us-
-ing a gap matrix to represent regions being considered for bonding, rather than
-the single continuous region used in the Zuker method. Because of its heavy
-space and time requirements, this algorithm is used only sparingly in practice;
-as such, other thermodynamic based methods for pseudoknot prediction have
-been formulated based on similar principals. Deogun et al. [5] described an algo-
-rithm which could handle a restricted class of pseudoknots (only those containing
-non-recursive pseudoknots) in O(N 4 ) time and using O(N 3 ) space. Shortly after which Reeder \& Giegerich [19] presented an algorithm which could predict
-only simple recursive pseudoknots which met their `canonization' criteria. While
+$O(N^6)$ time and $O(N^4)$ memory. They generalised the Zuker method by using a gap matrix to represent regions being considered for bonding, rather than
+the single continuous region used in the Zuker method. Because of its extreme
+space and time requirements this algorithm is used only sparingly in practice; other thermodynamic based methods for pseudoknot prediction have
+been formulated based on similar principals. Deogun et al. \cite{deogun2004rna} described an algorithm which could handle a restricted class of pseudoknots (only those containing
+non-recursive pseudoknots) in $O(N^4)$ time and using $O(N^3)$ space. Shortly after which Reeder \& Giegerich \cite{reeder2004design} presented an algorithm which could predict
+only simple recursive pseudoknots which met their `canonization' criteria, and which required $O(N^4)$ time and $O(N^2)$ space. While
 seemingly restrictive, this did, in fact, predict a large array of pseudoknots accurately. 
 
-In recent years, parallel algorithms have become more important for
-achieving large speed-ups. In keeping with this, Guillaume \& Lavenier [22] implemented Zuker’s algorithm on the Graphics Processing Unit (GPU), yielding
-a 17 fold speed-up despite the complex memory access pattern of the algorithm.
-Thus far none of the pseudoknot capable algorithms have been implemented to
-run on GPUs.
+In recent years different approaches have been explored. In 2010, DotKnot \cite{sperschneider2010dotknot} improved upon previous algorithms by using probability dot-plot guided heuristics, and an updated energy model, to predict pseudoknots. DotKnot was able to predict pseudoknots more accurately than existing methods with more frugal space and time requirements. This technique was later refined so that it could predict H-type pseudoknots and intramolecular kissing hairpins \cite{sperschneider2011heuristic}.
 
 
-1.2.3 Accuracy
+\subsection{Accuracy}
 It is important to test and compare the accuracy of various prediction methods.
 As such, well established nomenclature and techniques have been developed over
-the history of RNA structure prediction. These methods are simple but effec-
-tive. Usually accuracy is determined by comparing predicted structures to known
-structures. True Positives (T P ) is defined as the number of base pairs which ap-
-pear in both the predicted structure and the actual structure. False Positives
-(F P ) is the number of base pairs in the predicted structure but not in the true
-structure \cite{lorenz2011viennarna}. Similarly, False Negatives (F N ) is defined as the number of base
+the history of RNA structure prediction. These methods are simple but effective. Usually accuracy is determined by comparing predicted structures to known
+structures. True Positives ($TP$) is defined as the number of base pairs which appear in both the predicted structure and the actual structure. False Positives
+($FP$) is the number of predicted base pairs not in the true
+structure \cite{lorenz2011viennarna}. Similarly, False Negatives ($FN$) is defined as the number of base
 pairings in the reference structure but not present in the predicted structure \cite{lorenz2011viennarna}.
-Using these terms one can defined sensitivity as the True Positive Rate (T P R),
-or in other words the fraction of correctly predicted pairs [31].
-TP
-(1.1)
-TP + FN
-Precision, also known as Positive Predictive Value (P P V ), can also be calculated
-using these values.
-TPR =
-PPV =
-TP
-TP + FP
-(1.2)
+Sensitivity is also called the True Positive Rate ($TPR$), and can be defined using the previously introduced values. I have given a mathematical definition of the $TPR$ in Equation \ref{eq:tpr}.
+
+\begin{equation} \label{eq:tpr}
+ \frac{TP}{TP + FN}
+\end{equation}
+
+Precision, also known as Positive Predictive Value ($PPV$), can also be calculated
+using these values (see Equation \ref{eq:ppv}).
+
+
+\begin{equation} \label{eq:ppv}
+ \frac{TP}{TP + FP}
+\end{equation}
+
 RNAfold is one of the leading RNA folding algorithms, and is made available
-as part of the Vienna RNA package \cite{lorenz2011viennarna}. At its heart it is an implementation
+as part of the Vienna RNA package \cite{lorenz2011viennarna}. At its heart, it is an implementation
 of the original dynamic programming algorithm first discovered by Zuker, albeit
 with a more refined energy model. It is an extremely efficient implementation of
 this algorithm, and is also one of the most accurate in terms of sensitivity and
 PPV as compared to other implementations of the same algorithm \cite{lorenz2011viennarna}. When
-Reeder \& Giegerich [19] first described their algorithm (implemented in the pack-
-age pknotsRG) for pseudoknot prediction they compared it to RNAfold, and the
-algorithm of Rivas \& Eddy [20] (implemented in the same package and hereafter
-referred to as pknotsRE). Their algorithm generally had higher sensitivity than
-9
-both other methods, but it is worth noting that pknotsRE was extremely close,
+Reeder \& Giegerich \cite{reeder2004design} first described their algorithm (implemented in the package pknotsRG) for pseudoknot prediction they compared it to RNAfold, and the
+algorithm of Rivas \& Eddy (implemented in the same package and hereafter
+referred to as pknotsRE) \cite{rivas1999dynamic}. 
+
+Their algorithm generally had higher sensitivity than
+both other methods, but it is worth noting that pknotsRE was extremely close
 despite being based on an outdated energy model. This is possibly explained by
-the fact that it is a more general and thus a more powerful algorithm. RNAfold
-lagged behind both in sensitivity, but executed orders of magnitude faster. In-
-deed, it has been shown to have excellent accuracy for smaller RNAs containing
+the fact that it is a more general, and thus a more powerful algorithm. RNAfold
+lagged behind pknotsRE and pknotsRG in sensitivity, but executed orders of magnitude faster. Indeed, it has been shown to have excellent accuracy for smaller RNAs containing
 no pseudoknots while also exhibiting unrivalled computation speed \cite{lorenz2011viennarna}.
 
 
-1.3 Alternative Techniques
-1.3.1 Context Free Grammars
+\section{Alternative Techniques}
+
+
+\subsection{Soft Computing}
+The use of soft computing techniques has also yielded some success in the prediction of RNA secondary structure. Koessler et al. \cite{koessler2010predictive} modeled RNA structures
+as a tree of internal structures, then used artificial neural networks to recognize
+which of these trees appeared most RNA like. The trees were generated by constructing basic secondary structures and combinatorially merging them together
+to form many trees, each of which was represented as a vector of simpler trees.
+This vector was used as the input to the neural network. 
+
+This kind of combinatorial blending of RNA stems is also a techniques shared by genetic algorithms. Indeed, this
+is precisely the starting point of Van Batenburg, Gultyaev, and Pleij \cite{van1995apl}, who
+used a simple genetic algorithm to predict secondary structure. Their algorithm
+started by computing an array of all possible stems; each genome was represented
+as a binary string where \texttt{1} indicates a stem is in the candidate structure, and \texttt{0}
+indicates that it was not. Their genetic algorithm proceeded by seeding the genomes
+with random bits, then in a series of generation steps performed typical binary
+mutation, crossover and breeding, conserving and selectively breeding the fittest
+solutions. Fitness was defined in their algorithm as the summed total length
+(number of bonds) of all stems. In an improved version the summed stacking
+free energy reduction of all stems was used.
+
+Unfortunately they discovered a problem with this approach: the population
+contained a relatively large portion of zero fitness individuals. This was because
+many combinations of stems are incompatible with each other, yielding impossible
+structures. Instead of giving these structures zero fitness, they altered their algorithm slightly to disallow crossover for stems that created an invalid structure.
+In addition to this, they also explored an important advantage of genetic algorithms for RNA secondary structure prediction: that of kinetic folding. Kinetic
+folding is the hypothesis that some RNAs, particularly large ones, have a rugged
+energy landscape, and because of the incremental process of transcription and
+folding (which happen simultaneously) become stuck in suboptimal areas during
+folding \cite{treiber2001beyond, van1995apl}. 
+
+The algorithm of Van Batenburg, Gultyaev, and Pleij simulated
+this process by limiting the size of stems that could contribute to a genome, and
+increasing this size over time until the length of the RNA was reached. This
+single modification to their algorithm yielded the greatest improvement in predictive power. It should also be noted that it could also predict pseudoknots, as
+the algorithm did not force stems to be nested. Despite this, their approach was
+still less accurate than the dynamic programming approaches they compared it
+to. This was likely because their energy model was puerile in comparison rather than because the algorithm was flawed.
+
+
+Indeed, Wiese, Deschenes, and Hendriks \cite{wiese2008rnapredict} introduced an improved
+genetic algorithm based on the same principles as that of Van Batenburg, Gultyaev,
+and Pleij which instead used an advanced energy model for fitness. They then
+demonstrated that it outperformed the popular dynamic programming algorithm
+Mfold \cite{zuker2003mfold} which uses a similarly complex model. Wiese, Deschenes, and Hendriks noted that as the length of RNA molecules increased the correlation between lower free energy and accuracy decreased. The concluded that this was due to the incompleteness of our current thermodynamic model of RNA folding. The algorithm of Van Batenburg, Gultyaev, and Pleij avoided this problem by simulating kinetic folding. Such a heuristic was not present in the algorithm of Wiese, Deschenes, and Hendriks.
+
+
+
+\subsection{Context Free Grammars}
 RNA sequences and their secondary structures can be represented as context free
 grammars. Various production rules output different internal structures (such as
 hairpin loops, or internal bulges), with the terminals producing the bases A, U, G,
@@ -336,64 +376,6 @@ than that of Mfold [32] (an RNA prediction package similar to RNAfold). It
 is important, however, to remember that none of these approaches are able to
 model pseudoknots.
 
-1.3.2 Soft Computing
-The use of soft computing techniques has also yielded some success in the predic-
-tion of RNA secondary structure. Koessler et al. [11] modeled RNA structures
-as a tree of internal structures, then used artificial neural networks to recognize
-which of these trees appeared most RNA like. The trees were generated by con-
-structing basic secondary structures and combinatorially merging them together
-to form many trees, each of which was represented as a vector of simpler trees.
-This vector was used as the input to the neural network. This kind of combina-
-torial blending of RNA stems is also common to genetic algorithms. Indeed, this
-is precisely the starting point of Van Batenburg, Gultyaev, and Pleij [28], who
-used a simple genetic algorithm to predict secondary structure. Their algorithm
-starts by computing an array of all possible stems; each genome is represented
-as a binary string where 1 indicates a stem is in the candidate structure, and 0
-indicates that it is not. Their genetic algorithm proceeds by seeding the genomes
-with random bits, then, in a series of generation steps, performs typical binary
-mutation, crossover and breeding, conserving and selectively breeding the fittest
-solutions. Fitness was defined in their algorithm as the summed total length
-(number of bases) of all stems, and in an improved version, the summed stacking
-free energy reduction of all stems.
-
-Unfortunately they discovered a problem with this approach: the population
-contained a relatively large portion of zero fitness individuals. This was because
-many combinations of stems are incompatible with each other, yielding impossible
-structures. Instead of giving these structures zero fitness, they altered their algo-
-rithm slightly to disallow merging for any stems that created an invalid structure.
-In addition to this, they also explored an important advantage of genetic algo-
-rithms for RNA secondary structure prediction: that of kinetic folding. Kinetic
-folding is the hypothesis that some RNAs, particularly large ones, have a rugged
-energy landscape and, because of the incremental process of transcription and
-folding (which happen simultaneously), become stuck in suboptimal areas during
-folding [28, 27]. The algorithm of Van Batenburg, Gultyaev, and Pleij simulated
-this process by limiting the size of stems that could contribute to a genome, and
-increasing this size over time until the length of the RNA was reached. This
-single modification to their algorithm yielded the greatest improvement in pre-
-dictive power. It should also be noted that it could also predict pseudoknots, as
-the algorithm did not force stems to be nested. Despite this, their approach was
-still less accurate than the dynamic programming approaches they compared it
-to. This was most likely because their energy model was puerile in comparison,
-rather than because the algorithm was flawed.
-
-
-Indeed, Wiese, Deschenes, and Hendriks [30] recently introduced an improved
-genetic algorithm based on the same principles as that of Van Batenburg, Gultyaev,
-and Pleij, which instead used an advanced energy model for fitness. They then
-demonstrated that it outperformed the popular dynamic programming algorithm
-Mfold [32], which uses a similarly complex model. Genetic algorithms for RNA
-secondary structure prediction have also been implemented on massively parallel
-architectures. Shapiro et al. [23] reported on implementations for both Single
-Instruction, Multiple Data (SIMD) architectures, and Multiple Instruction, Mul-
-tiple Data MIMD architectures. These algorithms used several populations, and
-treated each population as an island which evolved separately and therefore con-
-currently. These islands would occasionally share their fittest solutions, which
-allowed the algorithm to converge on a globally optimal solution. An interesting
-observation is that, in recent years, many consumer computers have powerful
-SIMD architectures in the form of their GPUs. While this avenue has already
-been explored for Zuker’s algorithm [22], there is, as yet, no GPU implementation
-of a genetic algorithm for RNA folding.
-
 1.4 Locally Optimal Structure Prediction
 DNA sequences, unlike typical RNA molecules, are very large indeed. Usually
 on the order of hundreds of megabytes of data. Such sequences contain DNA
@@ -411,9 +393,7 @@ for interesting RNA secondary structure motifs. This was achieved by using the
 dynamic programming table from the previous step to quickly fill the table for
 the next window in quadratic time; because consecutive windows overlap, pre-
 ceding information can be meaningfully used in each forward computational step.
-As a result it requires only a single table of size O(L2 ), and as such its mem-
-12
-ory complexity is only O(N + L2 ). Later, in 2009, Horesh et al. [9] managed
+As a result it requires only a single table of size O(L2 ), and as such its memory complexity is only O(N + L2 ). Later, in 2009, Horesh et al. [9] managed
 to lower the expected time bound to O(N L) under the assumption that one is
 folding RNAs that are typical of naturally occurring sequences. This complex-
 ity bound was experimentally verified, and their algorithm was shown to clearly
