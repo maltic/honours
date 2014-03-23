@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012/Debian) (format=pdflatex 2014.3.17)  21 MAR 2014 15:46
+This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012/Debian) (format=pdflatex 2014.3.17)  23 MAR 2014 10:31
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -217,36 +217,36 @@ Missing character: There is no ’ in font cmr12!
 Missing character: There is no â in font cmr12!
 Missing character: There is no € in font cmr12!
 Missing character: There is no ™ in font cmr12!
- [8] [9] [10] [11] [12] [13] (./cshonours.bbl [14]
-[15
+ [8] [9] [10] [11] [12] [13] [14] (./cshonours.bbl
+[15] [16
 
-] [16]
+] [17] [18]
 Missing character: There is no â in font cmr12!
 Missing character: There is no € in font cmr12!
 Missing character: There is no ” in font cmr12!
- [17]) [18] (./cshonours.aux) ) 
+) [19] (./cshonours.aux) ) 
 Here is how much of TeX's memory you used:
- 1526 strings out of 495059
- 21625 string characters out of 3182030
- 77872 words of memory out of 3000000
- 4705 multiletter control sequences out of 15000+200000
+ 1531 strings out of 495059
+ 21706 string characters out of 3182030
+ 77888 words of memory out of 3000000
+ 4710 multiletter control sequences out of 15000+200000
  9933 words of font info for 35 fonts, out of 3000000 for 9000
  14 hyphenation exceptions out of 8191
  37i,6n,23p,1688b,237s stack positions out of 5000i,500n,10000p,200000b,50000s
-</usr/share/texlive/texmf-dist/fonts/type1/publi
-c/amsfonts/cm/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsf
-onts/cm/cmcsc10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/
-cm/cmmi12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr
-12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb>
-</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/sh
-are/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/te
-xlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texlive/t
-exmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/share/texlive/texmf-d
-ist/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
-Output written on cshonours.pdf (24 pages, 1258030 bytes).
+</usr/share/texlive/texmf-dist/fonts/type1/public/ams
+fonts/cm/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/
+cm/cmcsc10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cm
+mi12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pf
+b></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr
+/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/t
+exlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive
+/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texlive/texmf-
+dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/share/texlive/texmf-dist/f
+onts/type1/public/amsfonts/cm/cmtt12.pfb>
+Output written on cshonours.pdf (25 pages, 1263106 bytes).
 PDF statistics:
- 130 PDF objects out of 1000 (max. 8388607)
- 85 compressed objects within 1 object stream
+ 134 PDF objects out of 1000 (max. 8388607)
+ 88 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  21 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -10,3 +10,4 @@
 \contentsline {subsection}{\numberline {1.4.1}Soft Computing}{11}
 \contentsline {subsection}{\numberline {1.4.2}Context Free Grammars}{12}
 \contentsline {section}{\numberline {1.5}Locally Optimal Structure Prediction}{13}
+\contentsline {section}{\numberline {1.6}State of the Art: Global Optimization}{14}

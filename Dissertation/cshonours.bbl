@@ -6,6 +6,11 @@
 \newblock {\em Essential Cell Biology}, third~ed.
 \newblock Garland Science: New York, 2009.
 
+\bibitem{anfinsen1973principles}
+{\sc Anfinsen, C.}
+\newblock Principles that govern the protein folding chains.
+\newblock {\em Science 181\/} (1973), 233--230.
+
 \bibitem{beaton1999eukaryotic}
 {\sc Beaton, M.~J., and Cavalier-Smithf, T.}
 \newblock Eukaryotic non-coding dna is functional: evidence from the
@@ -24,12 +29,24 @@
 \newblock Rna structure.
 \newblock {\em Current opinion in structural biology 8}, 3 (1998), 278--285.
 
+\bibitem{dawson2013new}
+{\sc Dawson, W., Takai, T., Ito, N., Shimizu, K., and Kawai, G.}
+\newblock A new entropy model for rna: part iii, is the folding free energy
+  landscape of rna funnel shaped?
+\newblock {\em Journal of Nucleic Acids Investigation 4}, 1 (2013).
+
 \bibitem{deogun2004rna}
 {\sc Deogun, J.~S., Donis, R., Komina, O., and Ma, F.}
 \newblock Rna secondary structure prediction with simple pseudoknots.
 \newblock In {\em Proceedings of the second conference on Asia-Pacific
   bioinformatics-Volume 29\/} (2004), Australian Computer Society, Inc.,
   pp.~239--246.
+
+\bibitem{ditzler2008rugged}
+{\sc Ditzler, M.~A., Rueda, D., Mo, J., H{\aa}kansson, K., and Walter, N.~G.}
+\newblock A rugged free energy landscape separates multiple functional rna
+  folds throughout denaturation.
+\newblock {\em Nucleic acids research 36}, 22 (2008), 7088--7099.
 
 \bibitem{do2006contrafold}
 {\sc Do, C.~B., Woods, D.~A., and Batzoglou, S.}
@@ -117,6 +134,12 @@
 \newblock Rnastructure: software for rna secondary structure prediction and
   analysis.
 \newblock {\em BMC bioinformatics 11}, 1 (2010), 129.
+
+\bibitem{rivas2013four}
+{\sc Rivas, E.}
+\newblock The four ingredients of single-sequence rna secondary structure
+  prediction. a unifying perspective.
+\newblock {\em RNA biology 10}, 7 (2013), 1185.
 
 \bibitem{rivas1999dynamic}
 {\sc Rivas, E., and Eddy, S.~R.}
