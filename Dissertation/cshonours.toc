@@ -16,10 +16,10 @@
 \contentsline {subsection}{\numberline {2.1.1}Environment}{16}
 \contentsline {subsection}{\numberline {2.1.2}Software}{16}
 \contentsline {subsection}{\numberline {2.1.3}Testing Set}{17}
-\contentsline {section}{\numberline {2.2}Algorithms}{17}
-\contentsline {subsection}{\numberline {2.2.1}Merging RNA Intervals}{17}
-\contentsline {subsubsection}{Top-Down Selection}{18}
-\contentsline {subsubsection}{Bottom-Up Selection}{19}
-\contentsline {subsubsection}{MFE Selection}{19}
-\contentsline {subsubsection}{Weighted Activity Selection}{19}
-\contentsline {subsubsection}{Comparison}{20}
+\contentsline {section}{\numberline {2.2}Merging RNA Intervals}{17}
+\contentsline {subsection}{\numberline {2.2.1}Top-Down Selection}{18}
+\contentsline {subsection}{\numberline {2.2.2}Bottom-Up Selection}{19}
+\contentsline {subsection}{\numberline {2.2.3}MFE Selection}{19}
+\contentsline {subsection}{\numberline {2.2.4}Weighted Activity Selection}{19}
+\contentsline {subsection}{\numberline {2.2.5}Comparison of RNA Interval Selection Algorithms}{20}
+\contentsline {section}{\numberline {2.3}Prediction With Windows}{20}

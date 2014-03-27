@@ -435,43 +435,51 @@ Statistical tests were performed using SOFA Statistics version 1.4.2. Regression
 The RNA secondary structures used to test the algorithms presented in this paper were taken from the RNA STRAND database \cite{andronescu2008rna}. The RNA STRAND database is a free-to-use, curated collection of RNA secondary structures taken from various publicly available databases and publications. A subset of RNA structural data was extracted from the database. This subset contained only RNA structures that were marked having been verified using X-Ray Crystallography, or Nuclear Magnetic Resonance imaging. It also comprises only whole RNAs; none of the RNAs used were fragments or subsequences of larger RNA molecules. Finally, no duplicates were allowed in the test set.
 
 
-\section{Algorithms}
-\subsection{Merging RNA Intervals}
+\section{Merging RNA Intervals}
 Running an algorithm to generate consecutive windows of size $L$ over a RNA primary sequence of size $N$ will produce $N-L$ windows of size $L$. Each of these windows may contain more than one discrete structural element. For example, a window may contain two disjoint stems. After generating these windows, a post-processing step was executed in which any such disjoint secondary structural elements were split up into their own `intervals'. While RNALfold does this without modification, it might be necessary to encode this manually using a different sliding window algorithm implementation.
 
 Generating a set of locally optimal secondary structure intervals is trivial once the Vienna RNA package is set up correctly. However, many of the predicted intervals overlap. To produce a valid secondary structure from these substructures, I devised a procedure to select a set of non-intersecting windows. Such a set should form the most accurate possible secondary structure when merged. Several procedures were tested.
 
 Let $W$ be the set of all windows to choose from, and let the set $S$ represent the set of selected secondary structures. Also, note that every window has an associated score, which relates inversely to its free energy contribution. This is to say that a higher score is equivalent to a lower free energy.
 
-\subsubsection{Top-Down Selection}
+\subsection{Top-Down Selection}
 In this method, $W$ is sorted by window size in descending order. The algorithm then examines each element of $W$ in order. If an element of $W$ is compatible, it is added to $S$. A window is compatible if it does not overlap any window in $S$, and if it neither contains nor is contained by any window in $S$.
 
 
-\texttt{
-S = \{\} \\\
-heapify(W)\\\
-while W <> \{\} \\\
-	if compatible(W.Max, S) \\\
-		S = S U W.Max \\\
-	W.PopMax() \\\
-	}
+
+\begin{algorithm}
+  \caption{Top-Down Selection}
+  \label{tds}
+  \begin{algorithmic}[1]
+  \State Let $W$ be the set of RNA intervals
+  \State Let $S$ = \{\}
+  \State \Call {Sort}{$W$}
+  \ForAll{$W$ as $e$}
+  	\If {\Call{Compatible}{$e$, $S$}}
+  		\State $S = S \cup e$
+  	\EndIf
+  \EndFor
+  \State \Return $S$
+  \end{algorithmic}
+\end{algorithm}
+
 	
 	
-The algorithm examines every element of $W$ exactly once, and for each element checks if it is compatible with every element in $S$. The naive way to check for compatibility would be to examine every element in $S$. This would give the algorithm a final worst case time complexity of $O(N^2)$, where $N$ is the number of intervals, as all the intervals in $W$ may be compatible. This is a result of the algorithm first checking $S$ of size \texttt{0}, then 1, up to $N-1$. The closed form of this is $(N-1)((N-1)+1) / 2$. Additionally it requires $O(N)$ space to store $S$.
+The algorithm (see Algorithm \ref{tds}) examines every element of $W$ exactly once, and for each element checks if it is compatible with every element in $S$. The naive way to check for compatibility would be to examine every element in $S$. This would give the algorithm a final worst case time complexity of $O(N^2)$, where $N$ is the number of intervals, as all the intervals in $W$ may be compatible. This is a result of the algorithm first checking $S$ of size \texttt{0}, then 1, up to $N-1$. The closed form of this is $(N-1)((N-1)+1) / 2$. Additionally it requires $O(N)$ space to store $S$.
 
-It is possible to lower the time complexity to $O(N \log N)$ by storing the elements of $S$ in an Augmented Interval Tree. Querying this tree finds any elements of $S$ that intersect the interval in question. This query takes $O(lg N)$ time and is executed $N$ times---once for every element of $W$.
+It is possible to lower the time complexity to $O(N \log N)$ by storing the elements of $S$ in an Augmented Interval Tree. Querying this tree finds any elements of $S$ that intersect the interval in question. This query takes $O(\log N)$ time and is executed $N$ times---once for every element of $W$.
 
-This is optimal, since the \texttt{PopMax} operation on a heap also requires $O(\log N)$ time and is executed for every element in $W$. However, the number of elements in the heap is reduced by one every iterations. Ergo the operation takes an average of $\log \frac{N}{2}$ time, which is still $O(\log N)$, thus implying a final bound of $O(N \log N)$. Interval trees and heaps require only $O(N)$ space, hence the space complexity of this optimized algorithm is still $O(N)$.
+This is optimal, since the \texttt{Sort} operation requires $O(N \log N)$ time. Hence, the final worst case time complexity is $O(N \log N)$ and the final worst case space complexity is $O(N)$.
 
 
-\subsubsection{Bottom-Up Selection}
+\subsection{Bottom-Up Selection}
 This algorithm is identical to Top-Down Selection, except that $W$ is sorted by interval size in ascending order.
 
-\subsubsection{MFE Selection}
+\subsection{MFE Selection}
 This algorithm is identical to Top-Down Selection, except that $W$ is sorted by score in descending order.
 
 
-\subsubsection{Weighted Activity Selection}
+\subsection{Weighted Activity Selection}
 The weighted activity selection problem is a generalization of the activity selection problem. Given a set of intervals, each of which is assigned a weight, the problem is to find a subset such that none of these intervals are touching one-another, and the sum of their weights is maximised. This maps naturally to the problem domain of this investigation. I used this algorithm to find the subset of compatible windows which have the minimum sum free energy, or put another way, the maximum score.
 
 \begin{algorithm}
@@ -490,19 +498,82 @@ The weighted activity selection problem is a generalization of the activity sele
   \For{$i = 1 \to N$}
   	\State $dp$[$i$] = $\max (weight[i] + dp[q[i]], dp[i-1])$
   \EndFor
+  \State \Return $dp[N]$
   \end{algorithmic}
 \end{algorithm}
 
-The initial sort (line 1) requires $O(N \log N)$ time. In the following loop (line 4) the algorithm finds the right most element in W, such that it is compatible with $i$ (see Figure X). This can be done using a binary search. Hence the total worst case run time of the loop is also $O(N \log N)$. The final dynamic programming array fill (line 9) requires only $O(N)$ time. As a result the final time complexity of this algorithm is $O(N \log N)$. Additionally, $O(N)$ space is required for the arrays $q$ and $dp$.
+The initial sort (see line 1 in Algorithm \ref{was}) requires $O(N \log N)$ time. In the following loop (line 4) the algorithm finds the right most element in W, such that it is compatible with $i$ (see Figure X). This can be done using a binary search. Hence the total worst case run time of the loop is also $O(N \log N)$. The final dynamic programming array fill (line 9) requires only $O(N)$ time. As a result the final time complexity of this algorithm is $O(N \log N)$. Additionally, $O(N)$ space is required for the arrays $q$ and $dp$.
+
+
+\subsection{Comparison of RNA Interval Selection Algorithms}
 
 The reader should note that all presented selection algorithms have the same $O(N \log N)$ worst case time complexity, and the same auxiliary space complexity of $O(N)$. None of these algorithms have large constant factors. Therefore, my final choice of algorithm was based solely on the accuracy of the computed secondary structure.
 
-\subsubsection{Comparison}
-
 In order to test and compare these selection algorithms, all the windows of size 5 to 500 were precomputed for every RNA in the testing set. This is to say that the sliding window algorithm was run for a window size of 5, then 6, up to and including size 500 for each RNA. The minimum size of 5 was chosen because meaningful stems rarely form with a size fewer than five nucleotides. The maximum of 500 was due to space and time constraints. Computing these windows took several days, and used 2.5 gigabytes of RAM to store.
 
-Each selection algorithm was run using these data. For every RNA, the single most accurate window size was chosen. Accuracy was judged to be the F1-Score, which is the harmonic mean of sensitivity and precision (positive predictive value). 
+Each selection algorithm was run using these data. For every RNA, the single most accurate window size was chosen. Accuracy was judged to be the F1-Score, which is the harmonic mean of sensitivity and precision (positive predictive value).
 
+
+
+
+\section{Prediction With Windows}
+In this approach I computed sliding windows using a `splat' of sizes. WAS was then done on the resulting set of computed windows.
+
+
+\begin{algorithm}
+  \caption{Splat RNA-Prediction}
+  \label{splatpred}
+  \begin{algorithmic}[1]
+  \State Let $RNA$ be the primary RNA sequence being folded
+  \State Let $Splat$ be the set of window sizes
+  \State Let $S = \{\}$
+  \ForAll{$Splat$ as $s$}
+  	\State $S = S \: \cup $ \Call{ComputeSlidingWindows}{$RNA$, $s$}
+  \EndFor
+  \State \Return \Call{WeightedActivitySelection}{$S$}
+  \end{algorithmic}
+\end{algorithm}
+
+I explored several methods for finding good splats. I present here to most successful technique, which I call `AB-Splat' prediction. Initially the algorithm started at a small window size, and exponentially increased the scope of the window until a threshold was exceeded. This is explained using pseudocode in Algorithm \ref{absplat}.
+
+\begin{algorithm}
+  \caption{AB-Splat}
+  \label{absplat}
+  \begin{algorithmic}[1]
+  \State Let $RNA$ be the primary RNA sequence being folded
+  \State Let $i = a$
+  \State Let $S = \{\}$
+  \While{$i \leq $ \Call{Treshold}{$RNA$} }
+  	\State $S = S \: \cup $ \Call{ComputeSlidingWindows}{$RNA$, $i$}
+  	\State $i = i \times b$
+  \EndWhile
+  \State \Return \Call{WeightedActivitySelection}{$S$}
+  \end{algorithmic}
+\end{algorithm}
+
+The time complexity of this algorithm is non-trivial to deduce. The runtime of \texttt{ComputeSlidingWindows} is $O(NL^2)$, which is called one for every window of size $O(\sqrt{N})$, due to the threshold function. The sizes of windows are exponentially expanding Thus we arrive at
+
+$$n a^2 + n(a b)^2 + n(a b^2)^2 + n(a b^3)^2 + \cdots + n^2$$
+$$n^2 ( \frac{n a^2}{n^2} + \frac{n(a b)^2}{n^2} + \frac{n(a b^2)^2}{n^2} + \frac{n(a b^3)^2}{n^2} + \cdots + 1)$$
+$$O(n^2)$$
+
+Every window size produces n windows of size i.
+
+$$na + nab + nab^2 + nab^3 + \cdots + n^\frac{3}{2}$$
+$$O(n^\frac{3}{2})$$
+
+Weighted Activity selection uses $O(n \log n)$ time. As we have $O(n^\frac{3}{2})$ windows in the worst case, this leads to a worst case time complexity of $O(n^\frac{3}{2} \log n^\frac{3}{2})$ which is dominated by $O(n^2)$.
+
+
+Zuker's algorithm requires $O(n^3)$ time and $O(n^2)$ space. The computational bottleneck is usually time, however.
+
+A brute force method was used to test a combinatorial set of values for $a$ and $a$ such that $10 \leq a \leq 30$ and $1.5 \leq B \leq 4.0$. In this method all integer values for $a$ were attempted, and values for $b$ were generated with a step size of 0.1. The threshold function was defined as $\min \{ \sqrt{ RNALength} \times 9.5, 500 \}$.
+
+To test this algorithm the test set was randomly partitioned into two sets containing an equal number of RNAs. One of these sets I shall call  the training set, the other I shall call the validation set. A brute force search was done (as described in ref) on the training set, and the F1-Scores for $a$ and $b$ pairs was recorded; $ab$-pairs with highest F1-Scores were deemed the best. 
+
+These scores were then validated by running the same procedure on the validation set, then attempting to correlate the scores of $ab$ pairs between training and validation sets. An ordinary least squares linear regression was done for correlation. The resulting model indicates if high scores in the training set are related to high scores in the testing set. This allowed me to determine if results found in the training set are valid.
+
+The best $ab$-pair was used to configure the splat algorithm, which was then run on the full test set, and it's F1-Scores was recorded. These F1-Scores were then compared directly to F1-Scores produced by RNAfold, which was also run on the full test set. In addition to this, the time to execute each algorithm was recorded and compared.
 
 
 \bibliography{cshonours}
