@@ -376,14 +376,26 @@ is important for the reader to remember that none of these approaches are able t
 model pseudoknots.
 
 \section{Locally Optimal Structure Prediction}
+\label{sec:locopt}
+
+
 DNA sequences, unlike typical RNA sequences, are very large indeed. Usually
 on the order of hundreds of megabytes of data. Such sequences contain DNA
 subsequences that code for RNAs. Functionally important RNAs typically have
 a recognizable secondary structure. When searching a large genome for functional RNAs, one can use a sliding window of fixed size to find locally optimal
-structures. This can be done by running a typical cubic time algorithm like
+structures (see Figure \ref{fig:slidingwindow}). This can be done by running a typical cubic time algorithm like
 RNAfold or Mfold at every window location. Let $L$ be defined as the chosen
 window size, and $N$ represent the length of the genome. This leads to a total complexity of $O(NL^3)$. While not prohibitive, this becomes intractable for many
 genomes which are typically extremely large: millions or billions of bases. 
+
+
+\begin{figure}
+\begin{center}
+\scalebox{0.3}{\includegraphics{slidingwindow}}
+\end{center}
+\caption{Depiction of how sliding windows can explore an RNA sequence.}
+\label{fig:slidingwindow}
+\end{figure}
 
 In 2004, Hofacker, Priwitzer, and Stadler \cite{hofacker2004prediction} provided an excellent insight, and were
 able to lower this bound to $O(NL^2)$, making it possible to scan large genomes
@@ -415,37 +427,53 @@ If my hypothesis is supported, I aim to leverage the insights provided to improv
 
 \section{Materials}
 \subsection{Environment}
-All algorithms were implemented and tested using Ubuntu 13.10 running on an Intel i5-3210m processor with four gigabytes of RAM. The GNU C compiler version X was used to compile all C and C++ code. 
+All algorithms were implemented and tested using Ubuntu 13.10 running on an Intel i5-3210m processor with four gigabytes of RAM. The GNU C compiler (GCC) version 4.8.2 was used to compile all C and C++ code. 
 
 \subsection{Software}
-The Vienna RNA package was used as a base for all algorithms presented in this paper. This package contains many useful programs for working with RNA. The RNAfold and RNALfold functions were used in this investigation. 
+The Vienna RNA package was used as a base for all algorithms presented in this paper. This package contains many useful programs for working with RNA. The RNAfold and RNALfold modules were used in this investigation. 
 
-RNAfold is a modern implementation of Zuker’s folding algorithm. It predicts the MFE secondary structure of an RNA, given the primary sequence. It can also calculate the Boltzmann partition function and produce a matrix of base pair probabilities. Both of these features were used. 
+RNAfold is a modern implementation of Zuker's folding algorithm. It predicts the MFE secondary structure of an RNA given the primary sequence. It can also calculate the Boltzmann partition function, and produce a matrix of base pair probabilities. Both of these features were used. 
 
-RNALfold implements a sliding window RNA folding algorithm that is designed to find all locally optimal secondary structures using a window of fixed size $L$. It is an implementation of Hofacker, Priwitzer, and Stadler's algorithm \cite{hofacker2004prediction}, and thus uses $O(NL^2)$ time and $O(N + L^2)$ space. I note here that this is not the most optimal algorithm available. Horesh et al. \cite{horesh2009rnaslider} presented an algorithm that also folds consecutive windows using a similar MFE model. However, they achieved a typical time complexity of $O(NL)$. This algorithm was not used because the implementation give by the authors is based on an older energy model taken from the Mfold package. RNALfold is based on the same energy model as RNAfold, which has been recently updated \cite{lorenz2011viennarna}. For the sake of accurate comparison to RNAfold, and to ensure a state-of-the-art energy model, RNALfold was used.
+The RNALfold module implements a sliding window RNA folding algorithm. It is designed to find all locally optimal secondary structures for an RNA of size $n$, using a window of fixed size $L$. RNALfold implements of Hofacker, Priwitzer, and Stadler's algorithm \cite{hofacker2004prediction}, and thus uses $O(nL^2)$ time and $O(n + L^2)$ space. I note here that this is not the most optimal algorithm available. As I have discussed in section~\ref{sec:locopt}, Horesh et al. \cite{horesh2009rnaslider} presented an algorithm that also folds consecutive windows using a similar MFE model. However, they achieved a typical time complexity of $O(nL)$. This algorithm was not used because the implementation give by the authors is based on an older energy model taken from the Mfold package. RNALfold is based on the same energy model as RNAfold, which has been recently updated \cite{lorenz2011viennarna}. For the sake of accurate comparison to RNAfold, and to ensure a state-of-the-art energy model, RNALfold was used.
 
-Version 2.1.6 of the ViennaRNA package was used. The package was built from the C source code after minor modifications were made to Lfold.c and Lfold.h. The Vienna RNA makefile was used to compile the package, and the resulting RNAlib static library was linked at compile time.
+Version 2.1.6 of the Vienna RNA package was used. The package was built from the C source code after minor modifications were made to the RNALfold module. The Vienna RNA makefile was used to compile the package. The makefile compiles numerous standalone console applications for Vienna RNA's modules. It also creates a static library called RNAlib. This library was linked at compile time, and used to call RNAfold and RNALfold from the algorithms I shall subsequently describe.
 
-The Lfold.c and Lfold.h files were modified so that, when the algorithm was executed, RNALfold returned a linked list of local secondary structures and their free energy. Before modification it would instead print them to the standard output stream. The modified versions of these files are available here.
+The \texttt{Lfold.c} and \texttt{Lfold.h} files (which comprise RNALfold) were modified so that, when the algorithm was executed, RNALfold returned a linked list of local secondary structures and their free energy. Before modification it would instead print them to the standard output stream. The modified versions of these files are available in the files associated with this report.
 
-Statistical tests were performed using SOFA Statistics version 1.4.2. Regression analyses and plots were generated using Gretl version 1.9.14.
+Statistical tests were performed using SOFA Statistics version 1.4.2. Regression analyses and plots were generated using GNU Regression, Econometrics and Time-series Library (as called `gretl') version 1.9.14.
 
 
 \subsection{Testing Set}
-The RNA secondary structures used to test the algorithms presented in this paper were taken from the RNA STRAND database \cite{andronescu2008rna}. The RNA STRAND database is a free-to-use, curated collection of RNA secondary structures taken from various publicly available databases and publications. A subset of RNA structural data was extracted from the database. This subset contained only RNA structures that were marked having been verified using X-Ray Crystallography, or Nuclear Magnetic Resonance imaging. It also comprises only whole RNAs; none of the RNAs used were fragments or subsequences of larger RNA molecules. Finally, no duplicates were allowed in the test set.
+The RNA secondary structures used to test algorithms presented in this paper were taken from the RNA STRAND database \cite{andronescu2008rna}. The RNA STRAND database is a free-to-use, curated collection of RNA secondary structures taken from various publicly available databases and publications. A subset of RNA structural data was extracted from the database. This subset contained only RNA structures that were marked having been verified using X-Ray Crystallography, or Nuclear Magnetic Resonance imaging. It also comprises only whole RNAs; none of the RNAs used were fragments or subsequences of larger RNA molecules. Finally, no duplicates were allowed in the test set. Hereafter, I shall refer to this collection of RNA secondary structures as the `test set'.
+
+
+\section{RNA Intervals}
+Running an algorithm which generates consecutive windows of size $L$ over a RNA primary sequence of size $n$ will produce $n-L$ windows of size $L$. Each of these windows may contain one or more discrete structural element. For example, a window may contain two disjoint stems. After generating these windows, a post-processing step was executed in which any such disjoint secondary structural elements were split up. While RNALfold does this without modification, it might be necessary to encode this manually using a different implementation.
+
+\begin{figure}
+\begin{center}
+\scalebox{0.3}{\includegraphics{rnainterval}}
+\end{center}
+\caption{The relationship between a sliding window and an RNA interval. RNA secondary structures are represented in the diagram using dot-bracket notation.}
+\label{fig:rnainterval}
+\end{figure}
+
+Once all disjoint structural elements were split up, they were assigned a score. This score was proportional to their free energy reduction. I call this pair of stem and score an `RNA interval'. Every window generated using a sliding window algorithm was processed into a collection of RNA intervals. A window may contain none or many RNA intervals depending on the density of stems.
+
+
+
 
 
 \section{Merging RNA Intervals}
-Running an algorithm to generate consecutive windows of size $L$ over a RNA primary sequence of size $N$ will produce $N-L$ windows of size $L$. Each of these windows may contain more than one discrete structural element. For example, a window may contain two disjoint stems. After generating these windows, a post-processing step was executed in which any such disjoint secondary structural elements were split up into their own `intervals'. While RNALfold does this without modification, it might be necessary to encode this manually using a different sliding window algorithm implementation.
 
-Generating a set of locally optimal secondary structure intervals is trivial once the Vienna RNA package is set up correctly. However, many of the predicted intervals overlap. To produce a valid secondary structure from these substructures, I devised a procedure to select a set of non-intersecting windows. Such a set should form the most accurate possible secondary structure when merged. Several procedures were tested.
+Given an RNA sequence, it is easy to generate a set of RNA intervals by running any sliding window algorithm, and storing the RNA intervals generated for each window. Many of these intervals will overlap, or contain fragments of one-another. To construct a plausible and complete secondary structure for the original RNA out of these intervals, a procedure must select a subset of the RNA intervals generated this way. I devised several methods for doing this. The goal of an RNA interval merging algorithm is to produce a valid secondary structure out of a set of RNA intervals which is as accurate (when compared to the actual secondary structure) as possible.
 
-Let $W$ be the set of all windows to choose from, and let the set $S$ represent the set of selected secondary structures. Also, note that every window has an associated score, which relates inversely to its free energy contribution. This is to say that a higher score is equivalent to a lower free energy.
+Let $W$ be the set of all RNA intervals to choose from, and let the set $S$ represent the set of selected intervals. Also, an interval is compatible with another iff they do not overlap, and neither interval contains the other. Taking only mutually compatible intervals will result in a valid RNA  structure. Furthermore, the way in which these intervals are selected determines the accuracy of the resulting structure.
+
+If any RNA merging algorithm can find RNA secondary structures which are consistently more accurate than those generated by conventional prediction algorithms, my hypothesis would be supported. Such an algorithm builds final structures out of RNA intervals generated by a locally optimizing sliding window.
 
 \subsection{Top-Down Selection}
-In this method, $W$ is sorted by window size in descending order. The algorithm then examines each element of $W$ in order. If an element of $W$ is compatible, it is added to $S$. A window is compatible if it does not overlap any window in $S$, and if it neither contains nor is contained by any window in $S$.
-
-
+In this method, $W$ is sorted by RNA interval size in descending order. The algorithm then examines each element of $W$ in order. If an element of $W$ is compatible with all elements of $S$, it is added to $S$.
 
 \begin{algorithm}
   \caption{Top-Down Selection}
@@ -464,45 +492,44 @@ In this method, $W$ is sorted by window size in descending order. The algorithm 
 \end{algorithm}
 
 	
-	
-The algorithm (see Algorithm \ref{tds}) examines every element of $W$ exactly once, and for each element checks if it is compatible with every element in $S$. The naive way to check for compatibility would be to examine every element in $S$. This would give the algorithm a final worst case time complexity of $O(N^2)$, where $N$ is the number of intervals, as all the intervals in $W$ may be compatible. This is a result of the algorithm first checking $S$ of size \texttt{0}, then 1, up to $N-1$. The closed form of this is $(N-1)((N-1)+1) / 2$. Additionally it requires $O(N)$ space to store $S$.
+The algorithm (see Algorithm \ref{tds}) examines every element of $W$ exactly once, and for each element checks for compatibility with $S$. The naive way to check for compatibility is to examine every element in $S$. This would give the algorithm a worst case time complexity of $O(n^2)$, where $n$ is the number of intervals, as all the intervals in $W$ may be mutually compatible. This is a result of the algorithm first checking $S$ of size \texttt{0}, then 1, up to $n-1$, totalling $(n-1)((n-1)+1) / 2$ steps. Additionally it requires $O(n)$ space to store $S$.
 
-It is possible to lower the time complexity to $O(N \log N)$ by storing the elements of $S$ in an Augmented Interval Tree. Querying this tree finds any elements of $S$ that intersect the interval in question. This query takes $O(\log N)$ time and is executed $N$ times---once for every element of $W$.
+It is possible to lower the time complexity to $O(n \log n)$ by storing the elements of $S$ in an Augmented Interval Tree. Querying this tree finds any elements of $S$ that intersect the interval in question. This query takes $O(\log n)$ time and is executed $n$ times---once for every element of $W$.
 
-This is optimal, since the \texttt{Sort} operation requires $O(N \log N)$ time. Hence, the final worst case time complexity is $O(N \log N)$ and the final worst case space complexity is $O(N)$.
+This is optimal, since the \texttt{Sort} operation requires $O(n \log n)$ time. Hence, the final worst case time complexity is $O(n \log n)$ and the final worst case space complexity is $O(n)$.
 
 
 \subsection{Bottom-Up Selection}
 This algorithm is identical to Top-Down Selection, except that $W$ is sorted by interval size in ascending order.
 
-\subsection{MFE Selection}
+\subsection{Score Selection}
 This algorithm is identical to Top-Down Selection, except that $W$ is sorted by score in descending order.
 
 
 \subsection{Weighted Activity Selection}
-The weighted activity selection problem is a generalization of the activity selection problem. Given a set of intervals, each of which is assigned a weight, the problem is to find a subset such that none of these intervals are touching one-another, and the sum of their weights is maximised. This maps naturally to the problem domain of this investigation. I used this algorithm to find the subset of compatible windows which have the minimum sum free energy, or put another way, the maximum score.
+The weighted activity selection problem is a generalization of the activity selection problem. Given a set of intervals, each of which is assigned a weight, the problem is to find a subset such that none of these intervals touch one-another, and the sum of their weights is maximised. This maps naturally to the problem domain of this investigation. I used this algorithm to find the subset of compatible windows which have the minimum sum free energy, or put another way the maximum score.
 
 \begin{algorithm}
   \caption{Weighted Activity Selection}
   \label{was}
   \begin{algorithmic}[1]
   \State Sort $W$ by right end points
-  \State Let $N$ = $|W|$
-  \State Let $q$ = array[$1..N$]
+  \State Let $n$ = $|W|$
+  \State Let $q$ = array[$1..n$]
   
-  \For{$i = 1 \to N$}
+  \For{$i = 1 \to n$}
   	\State $q$[$i$] = highest index $< i$ which is compatible with $i$
   \EndFor
-  \State Let $dp$ = array[$0..N$]  
+  \State Let $dp$ = array[$0..n$]  
   \State $dp$[0] = 0
-  \For{$i = 1 \to N$}
-  	\State $dp$[$i$] = $\max (weight[i] + dp[q[i]], dp[i-1])$
+  \For{$i = 1 \to n$}
+  	\State $dp$[$i$] = $\max (weight[i] + dp[q[i]], \: dp[i-1])$
   \EndFor
-  \State \Return $dp[N]$
+  \State \Return $dp[n]$
   \end{algorithmic}
 \end{algorithm}
 
-The initial sort (see line 1 in Algorithm \ref{was}) requires $O(N \log N)$ time. In the following loop (line 4) the algorithm finds the right most element in W, such that it is compatible with $i$ (see Figure X). This can be done using a binary search. Hence the total worst case run time of the loop is also $O(N \log N)$. The final dynamic programming array fill (line 9) requires only $O(N)$ time. As a result the final time complexity of this algorithm is $O(N \log N)$. Additionally, $O(N)$ space is required for the arrays $q$ and $dp$.
+The initial sort (see line 1 in Algorithm \ref{was}) requires $O(n \log n)$ time. In the following loop (line 4) the algorithm finds the right most element in $W$ such that it is compatible with element $i$ (see Figure X). This can be done using a binary search. Hence the total worst case run time of the loop is also $O(n \log n)$. The final dynamic programming array fill (line 9) requires only $O(n)$ time. As a result the final time complexity of this algorithm is $O(n \log n)$. Additionally, $O(n)$ space is required for the arrays $q$ and $dp$.
 
 
 \subsection{Comparison of RNA Interval Selection Algorithms}
