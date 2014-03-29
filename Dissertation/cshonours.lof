@@ -6,3 +6,5 @@
 \contentsline {figure}{\numberline {1.5}{\ignorespaces Depiction of how sliding windows can explore an RNA sequence.}}{13}
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {2.1}{\ignorespaces The relationship between a sliding window and an RNA interval. RNA secondary structures are represented in the diagram using dot-bracket notation.}}{18}
+\contentsline {figure}{\numberline {2.2}{\ignorespaces Case 1 shows RNA intervals that are not compatible. Case 2 shows an example of compatible intervals.}}{19}
+\contentsline {figure}{\numberline {2.3}{\ignorespaces The interval stored in $q[i]$ for the RNA interval $W[i]$.}}{20}

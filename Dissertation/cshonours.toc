@@ -19,8 +19,8 @@
 \contentsline {section}{\numberline {2.2}RNA Intervals}{17}
 \contentsline {section}{\numberline {2.3}Merging RNA Intervals}{18}
 \contentsline {subsection}{\numberline {2.3.1}Top-Down Selection}{19}
-\contentsline {subsection}{\numberline {2.3.2}Bottom-Up Selection}{19}
+\contentsline {subsection}{\numberline {2.3.2}Bottom-Up Selection}{20}
 \contentsline {subsection}{\numberline {2.3.3}Score Selection}{20}
 \contentsline {subsection}{\numberline {2.3.4}Weighted Activity Selection}{20}
 \contentsline {subsection}{\numberline {2.3.5}Comparison of RNA Interval Selection Algorithms}{21}
-\contentsline {section}{\numberline {2.4}Prediction With Windows}{21}
+\contentsline {section}{\numberline {2.4}Prediction Using Windows}{22}
