@@ -424,7 +424,7 @@ I propose that in large RNA molecules, local interactions are stronger than glob
 
 If my hypothesis is supported, I aim to leverage the insights provided to improve the accuracy and speed of large RNA secondary structure prediction.
 
-\chapter{Methology}
+\chapter{Methodology}
 
 \section{Materials}
 \subsection{Environment}
@@ -557,7 +557,7 @@ The reader should note that all presented selection algorithms have the same $O(
 
 In order to test and compare these selection algorithms, all the windows of size five to 500 were precomputed for every RNA in the testing set. This is to say that the sliding window algorithm was run for a window size of five, then size, up to and including size 500 for each RNA. The minimum size of five was chosen because meaningful stems rarely form with a size fewer than five nucleotides. The maximum of 500 was due to space and time constraints. Computing these windows took several days, and used 2.5 gigabytes of memory to store.
 
-Each selection algorithm was run using these data as input. For every RNA, the single most accurate window size was chosen. Accuracy was judged as the F-Score, which is the harmonic mean of sensitivity and precision (defined in Section \ref{sec:accuracy}).
+Each selection algorithm was run using these data as input. For every RNA, the single most accurate window size was recorded. Accuracy was judged as the F-Score, which is the harmonic mean of sensitivity and precision (defined in Section \ref{sec:accuracy}).
 
 
 
@@ -582,7 +582,7 @@ I explored several methods for finding good splats. I present here to most succe
   \end{algorithmic}
 \end{algorithm}
 
-The \texttt{Threshold} function was defined as $\min(\sqrt{ RNALength} \times 9.5, \: 500)$. This formula was found using empirical experimentation. The maximum value of 500 was because only windows up to size 500 were precomputed.
+The \texttt{Threshold} function was defined as $\sqrt{RNALength} \times 9.5$. This formula was found using empirical experimentation.
 
 The time complexity of this algorithm is non-trivial to deduce. The runtime of \texttt{ComputeSlidingWindows} is $O(nL^2)$, which is called once for every window size, and where $L$ is the window size, and $n$ is the length of the RNA. In addition \texttt{WeightedActivitySelection} uses $O(n \log n)$ time, where $n$ is the number of RNA intervals in the set $S$. I shall now show that $ab$-splat has a worst case time complexity of $O(n^2)$.
 
@@ -609,13 +609,91 @@ Weighted Activity selection uses $O(n \log n)$ time. As we have $O(n^\frac{3}{2}
 
 As all of these RNA intervals must be stored in $S$, $ab$-splat will use $O(n^\frac{3}{2})$ memory in the worst case. In contrast, Zuker's algorithm requires $O(n^3)$ time and $O(n^2)$ space. The computational bottleneck is usually time, however. 
 
-A brute force method was used to test a combinatorial set of values for $a$ and $a$ such that $10 \leq a \leq 30$ and $1.5 \leq B \leq 4.0$. In this method all integer values for $a$ were attempted, and values for $b$ were generated with a step size of \texttt{0.1}.
+A brute force method was used to test a combinatorial set of values for $a$ and $a$ such that $10 \leq a \leq 30$ and $1.5 \leq B \leq 4.0$. In this method all integer values for $a$ were attempted, and values for $b$ were generated with a step size of \texttt{0.1}. This method was exhaustive, but slow. To speed up computation, precomputed window were used. This meant that the \texttt{Threshold} function has to be altered slightly, as only windows up to size 500 were precomputed:  $min(\sqrt{RNALength} \times 9.5, \: 500)$.
 
 To test this algorithm the testing set was randomly partitioned into two sets containing an equal number of RNAs. One of these sets I called the training set, the other I called the validation set. The aforementioned brute force search was done on the training set, and the F-Scores for $ab$ pairs was recorded; $ab$ pairs with highest F-Scores were deemed the best. 
 
 These scores were then validated by running the same procedure on the validation set, then attempting to correlate the scores of $ab$ pairs between training and validation sets. An ordinary least squares linear regression was done for correlation. The resulting model indicates if high scores in the training set are related to high scores in the validation set. This allowed me to determine if results found in the training set were valid.
 
-The best $ab$ pair was used to configure the $ab$-splat algorithm, which was then run on the full testing set, and it's F-Scores recorded. These F-Scores were then compared directly to F-Scores produced by RNAfold, which was also run on the full testing set. In addition to this, the time to execute each algorithm was recorded and compared.
+The best $ab$ pair was used to configure the $ab$-splat algorithm, which was then run on the full testing set, and it's F-Scores recorded. These F-Scores were then compared directly to F-Scores produced by RNAfold, which was also run on the full testing set. In addition to this, the time to execute each algorithm was recorded and compared. Precomputed windows were not used so that the runtime and accuracy could be fairly compared to RNAfold. Because of this, the standard \texttt{Threshold} function was used.
+
+\chapter{Results}
+
+\section{RNA Interval Selection}
+
+The average score between all RNA Interval Selection algorithms was compared (see Table \ref{tab:selectionavg}). The best algorithm appeared to be Top-Down Selection, closely followed by Weighted Activity Selection, then by Bottom-Up Selection. To verify this performance gap, a Wilcoxon Signed Ranks Test was done to compare the recorded F-Scores for each RNA. This test was chosen because the data recorded did not appear to be parametric.
+
+
+\begin{table}
+\centering
+\begin{tabular}{l*{6}{c}r}
+Selection Method	& Average F-Score  \\
+\hline
+Weighted Activity Selection 	& 0.703947  \\
+Top-Down Selection            	& 0.71684  \\
+Bottom-Up Selection           	& 0.381222 \\
+Score Selection     	& 0.683729 \\
+RNAfold      	& 0.57483 \\
+\end{tabular}
+
+\caption{Comparison of RNA Interval Selection algorithms average best F-Score's. RNAfold is also included for comparison.}
+\label{tab:selectionavg}
+\end{table}
+
+While this test reflected the difference in averages (see Table \ref{tab:wasvstds}), it was not statistically significant ($p = 0.881$). To further test Top-Down Selection and Weighted Activity Selection, another Wilcoxon Signed Ranks Test was done on only RNAs of length $\geq 300$ bases (see Table \ref{tab:wasvstds300}). This revealed a statistically significant difference, indicating that Weighted Activity Selection had higher F-Scores for larger RNAs ($p < 0.001, W = 362$). Finally, a Wilcoxon Signed Ranks Test was done between Weighted Activity Selection and Score Selection to check for circular dominance (see Table \ref{tab:wasvsss}). In accordance with the average population score, Weighted Activity Selection appeared to have higher F-Scores than Score Selection ($p < 0.001, W = 1004.5$).
+
+
+\begin{table}
+\centering
+\begin{tabular}{l*{6}{c}r}
+Selection Method	& N & Median & Min & Max  \\
+\hline
+Weighted Activity Selection 	& 392 &	0.757	& 0.0 &	1.0  \\
+Top-Down Selection & 392 &	0.8 &	0.0	 & 1.0  \\
+\end{tabular}
+
+\caption{Results of a Wilcoxon Signed Ranks Test comparing Weighted Activity Selection and Top-Down Selection ($p = 0.881, W = 2788$).}
+\label{tab:wasvstds}
+\end{table}
+
+
+\begin{table}
+\centering
+\begin{tabular}{l*{6}{c}r}
+Selection Method	& N & Median & Min & Max  \\
+\hline
+Weighted Activity Selection 	& 68 &	0.585 &	0.39726 &	0.854167  \\
+Top-Down Selection & 68	& 0.566 &	0.359511 &	0.854167  \\
+\end{tabular}
+
+\caption{Results of a Wilcoxon Signed Ranks Test comparing Weighted Activity Selection and Top-Down Selection for RNAs with length $\geq 300$ bases ($p < 0.001, W = 362$).}
+\label{tab:wasvstds300}
+\end{table}
+
+
+\begin{table}
+\centering
+\begin{tabular}{l*{6}{c}r}
+Selection Method	& N & Median & Min & Max  \\
+\hline
+Weighted Activity Selection 	& 392 &	0.757 &	0.0 &	1.0  \\
+Score Selection & 392 &	0.731 &	0.0 &	1.0  \\
+\end{tabular}
+
+\caption{Results of a Wilcoxon Signed Ranks Test comparing Weighted Activity Selection and Score Selection ($p < 0.001, W = 1004.5$).}
+\label{tab:wasvsss}
+\end{table}
+
+A Wilcoxon Signed Ranks Test was also used to compare the best recorded F-Scores for Weighted Activity Selection, and those recorded for RNAfold. 
+
+
+Instead of having lots of tables, lets just have one table with all the tests as separate rows.
+
+Finish off with a graph showing the accuracy of WAS vs Zukers.
+
+
+
+
 
 \bibliography{cshonours}
 
