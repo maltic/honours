@@ -621,75 +621,60 @@ The best $ab$ pair was used to configure the $ab$-splat algorithm, which was the
 
 \section{RNA Interval Selection}
 
-The average score between all RNA Interval Selection algorithms was compared (see Table \ref{tab:selectionavg}). The best algorithm appeared to be Top-Down Selection, closely followed by Weighted Activity Selection, then by Bottom-Up Selection. To verify this performance gap, a Wilcoxon Signed Ranks Test was done to compare the recorded F-Scores for each RNA. This test was chosen because the data recorded did not appear to be parametric.
+The average score between all RNA Interval Selection algorithms was compared (see Table \ref{tab:summaryselection}). The best algorithm appeared to be Top-Down Selection, closely followed by Weighted Activity Selection, then by Bottom-Up Selection. To verify this performance gap, a Wilcoxon Signed-Rank Test was done to compare the recorded F-Scores for corresponding RNA. This test was chosen because the data recorded did not appear to be parametric.
+
+While this test reflected the small difference in averages ($z = 1.33066$, see Table \ref{tab:wilcoxonselection}), it was not statistically significant ($p > 0.001$). To further test Top-Down Selection and Weighted Activity Selection, another Wilcoxon Signed-Rank Test was done on only RNAs of length $\geq 300$ bases. This revealed a moderate, and statistically, significant difference, indicating that Weighted Activity Selection had higher F-Scores for larger RNAs ($p < 0.001, z = 4.55591$). Finally, a Wilcoxon Signed-Rank Test was done between Weighted Activity Selection and Score Selection to check for circular dominance. In accordance with the mean F-score values, Weighted Activity Selection appeared to have higher F-Scores than Score Selection ($p < 0.001, z = 12.0957$).
+
+\begin{table}
+\centering
+\begin{tabular}{l*{6}{c}r}
+Algorithm	& Mean & Median \\
+\hline
+BUS &  0.38122    &    0.35065   \\
+SS & 0.68373    &    0.73098  \\
+WAS & 0.70395   &     0.75709  \\
+TDS & 0.71684   &     0.80000  \\
+\hline
+RNAfold & 0.57483    &    0.60870 \\
+\end{tabular}
+
+\caption{Summary statics of recorded F-Scores for Weighted Activity Selection (WAS), Top-Down Selection (TDS), Bottom-Up Selection (BUS), Score Selection (SS), and RNAfold.}
+\label{tab:summaryselection}
+\end{table}
+
+
+
+A Wilcoxon Signed Ranks Test was also used to compare the best recorded F-Scores for all RNA interval selection algorithms, and those recorded for RNAfold (see Table \ref{tab:wilcoxonselection}). All tests were statistically significant ($p < 0.001$). All algorithms but Bottom-Up Selection were shown to outperform RNAfold; Weighted Activity Selection in particular ($z = 13.2082$). Figure \ref{fig:wasrnafold} depicts this performance difference clearly.
 
 
 \begin{table}
 \centering
 \begin{tabular}{l*{6}{c}r}
-Selection Method	& Average F-Score  \\
+Test Subjects	& $z$-value & Two-tailed $p$-value \\
 \hline
-Weighted Activity Selection 	& 0.703947  \\
-Top-Down Selection            	& 0.71684  \\
-Bottom-Up Selection           	& 0.381222 \\
-Score Selection     	& 0.683729 \\
-RNAfold      	& 0.57483 \\
+WAS \& TDS 	& 1.33066 &	0.183301 \\
+WAS \& TDS (RNA length $\geq 300$)	& 4.55591 &	$2.60801 \times 10 ^{-6}$ \\
+WAS \& SS & 5.94681 &	$2.73418 \times 10^{-9}$  \\
+\hline
+BUS \& RNAfold & -9.13933 &	$6.28392 \times 10^{-20}$  \\
+SS \& RNAfold & 12.0957 &	0  \\
+TDS \& RNAfold & 13.119 &	0  \\
+WAS \& RNAfold & 13.2082 &	0  \\
 \end{tabular}
 
-\caption{Comparison of RNA Interval Selection algorithms average best F-Score's. RNAfold is also included for comparison.}
-\label{tab:selectionavg}
-\end{table}
-
-While this test reflected the difference in averages (see Table \ref{tab:wasvstds}), it was not statistically significant ($p = 0.881$). To further test Top-Down Selection and Weighted Activity Selection, another Wilcoxon Signed Ranks Test was done on only RNAs of length $\geq 300$ bases (see Table \ref{tab:wasvstds300}). This revealed a statistically significant difference, indicating that Weighted Activity Selection had higher F-Scores for larger RNAs ($p < 0.001, W = 362$). Finally, a Wilcoxon Signed Ranks Test was done between Weighted Activity Selection and Score Selection to check for circular dominance (see Table \ref{tab:wasvsss}). In accordance with the average population score, Weighted Activity Selection appeared to have higher F-Scores than Score Selection ($p < 0.001, W = 1004.5$).
-
-
-\begin{table}
-\centering
-\begin{tabular}{l*{6}{c}r}
-Selection Method	& N & Median & Min & Max  \\
-\hline
-Weighted Activity Selection 	& 392 &	0.757	& 0.0 &	1.0  \\
-Top-Down Selection & 392 &	0.8 &	0.0	 & 1.0  \\
-\end{tabular}
-
-\caption{Results of a Wilcoxon Signed Ranks Test comparing Weighted Activity Selection and Top-Down Selection ($p = 0.881, W = 2788$).}
-\label{tab:wasvstds}
+\caption{Results of Wilcoxon Signed-Rank Testing for F-Scores. Weighted Activity Selection (WAS), Top-Down Selection (TDS), Bottom-Up Selection (BUS), Score Selection (SS), and RNAfold are included.}
+\label{tab:wilcoxonselection}
 \end{table}
 
 
-\begin{table}
-\centering
-\begin{tabular}{l*{6}{c}r}
-Selection Method	& N & Median & Min & Max  \\
-\hline
-Weighted Activity Selection 	& 68 &	0.585 &	0.39726 &	0.854167  \\
-Top-Down Selection & 68	& 0.566 &	0.359511 &	0.854167  \\
-\end{tabular}
+\begin{figure}
+\begin{center}
+\scalebox{1}{\includegraphics{wasrnafoldplot}}
+\end{center}
+\caption{F-Scores for matching RNA test cases achieved by Weighted Activity Selection and RNAfold plotted against one-another. The green line represents parity. Any points above the line are cases in which Weighted Activity Selection performed better, points below the line indicate that RNAfold was more accurate. Note that a maximum F-Score is \texttt{1.0}.}
+\label{fig:wasrnafold}
+\end{figure}
 
-\caption{Results of a Wilcoxon Signed Ranks Test comparing Weighted Activity Selection and Top-Down Selection for RNAs with length $\geq 300$ bases ($p < 0.001, W = 362$).}
-\label{tab:wasvstds300}
-\end{table}
-
-
-\begin{table}
-\centering
-\begin{tabular}{l*{6}{c}r}
-Selection Method	& N & Median & Min & Max  \\
-\hline
-Weighted Activity Selection 	& 392 &	0.757 &	0.0 &	1.0  \\
-Score Selection & 392 &	0.731 &	0.0 &	1.0  \\
-\end{tabular}
-
-\caption{Results of a Wilcoxon Signed Ranks Test comparing Weighted Activity Selection and Score Selection ($p < 0.001, W = 1004.5$).}
-\label{tab:wasvsss}
-\end{table}
-
-A Wilcoxon Signed Ranks Test was also used to compare the best recorded F-Scores for Weighted Activity Selection, and those recorded for RNAfold. 
-
-
-Instead of having lots of tables, lets just have one table with all the tests as separate rows.
-
-Finish off with a graph showing the accuracy of WAS vs Zukers.
 
 
 

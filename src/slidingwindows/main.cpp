@@ -217,7 +217,7 @@ void run_magic_seq_training()
 int main()
 {
 
-	run_magic_seq_training();
+	benchmark_ab_splat(24, 1.8, false);
 	return 0;
 
 	std::string rna, name;

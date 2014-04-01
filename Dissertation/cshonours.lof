@@ -9,3 +9,4 @@
 \contentsline {figure}{\numberline {2.2}{\ignorespaces Case 1 shows RNA intervals that are not compatible. Case 2 shows an example of compatible intervals.}}{19}
 \contentsline {figure}{\numberline {2.3}{\ignorespaces The interval stored in $q[i]$ for the RNA interval $W[i]$.}}{20}
 \addvspace {10\p@ }
+\contentsline {figure}{\numberline {3.1}{\ignorespaces F-Scores for matching RNA test cases achieved by Weighted Activity Selection and RNAfold plotted against one-another. The green line represents parity. Any points above the line are cases in which Weighted Activity Selection performed better, points below the line indicate that RNAfold was more accurate. Note that a maximum F-Score is \texttt {1.0}.}}{27}

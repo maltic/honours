@@ -1,7 +1,5 @@
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {3.1}{\ignorespaces Comparison of RNA Interval Selection algorithms average best F-Score's. RNAfold is also included for comparison.}}{25}
-\contentsline {table}{\numberline {3.2}{\ignorespaces Results of a Wilcoxon Signed Ranks Test comparing Weighted Activity Selection and Top-Down Selection ($p = 0.881, W = 2788$).}}{26}
-\contentsline {table}{\numberline {3.3}{\ignorespaces Results of a Wilcoxon Signed Ranks Test comparing Weighted Activity Selection and Top-Down Selection for RNAs with length $\geq 300$ bases ($p < 0.001, W = 362$).}}{26}
-\contentsline {table}{\numberline {3.4}{\ignorespaces Results of a Wilcoxon Signed Ranks Test comparing Weighted Activity Selection and Score Selection ($p < 0.001, W = 1004.5$).}}{26}
+\contentsline {table}{\numberline {3.1}{\ignorespaces Summary statics of recorded F-Scores for Weighted Activity Selection (WAS), Top-Down Selection (TDS), Bottom-Up Selection (BUS), Score Selection (SS), and RNAfold.}}{25}
+\contentsline {table}{\numberline {3.2}{\ignorespaces Results of Wilcoxon Signed-Rank Testing for F-Scores. Weighted Activity Selection (WAS), Top-Down Selection (TDS), Bottom-Up Selection (BUS), Score Selection (SS), and RNAfold are included.}}{26}
