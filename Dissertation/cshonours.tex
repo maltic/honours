@@ -151,7 +151,7 @@ hairpin loops, internal bulges, multiloops, unbonded base pairs, and stacked bas
 pairs. The algorithm is similar to the Nussinov algorithm
 but adds another mutually recursive dynamic programming recurrence to inject
 a complex and relatively comprehensive energy system. The original energy system used is borrowed from the work of Studnicka et al. \cite{studnicka1978computer} who presented a
-complex algorithm which predicted similar RNA secondary structures, albeit with
+complex but theoretically similar algorithm, albeit with
 much worse asymptotic and implementation complexities. 
 
 
@@ -165,13 +165,12 @@ publication \cite{zuker1981optimal}.}
 \end{figure}
 
 First I shall introduce some useful terminology which should clarify aspects of Zuker \& Stiegler’s
-algorithm. The bases of an RNA molecule can be thought of as vertices in a
-graph. Edges between such vertices can be represented as chords on a semicircular diagram (Figures \ref{nuss_rna} and \ref{zuk_struct}), such chords are not allowed to touch. A chord
-is admissible if the bonds connected by it are chemically valid bonds, and an
+algorithm. The bases of an RNA molecule can be thought of as vertices in a planar graph. Edges between such vertices are then represented as chords on a semicircular diagram (Figures \ref{nuss_rna} and \ref{zuk_struct}). These chords are not allowed to touch. A chord
+is admissible if it represents a chemically valid bond, and an
 admissible structure is a structure whose graph contains only admissible bonds.
-Thence one can define a face of such a graph as any planar region bounded on all
-sides; these faces represent the basic substructures of an RNA molecule \cite{zuker1981optimal}. The
-folding algorithm of Zuker \& Stiegler considers such faces as the basic contributing factor to a molecule’s stability, unlike the algorithm of Nussinov \& Jacobson
+Thence, one can define a face of such a graph as any planar region bounded on all
+sides---either by chords, or the edge of the graph. The
+folding algorithm of Zuker \& Stiegler considers such faces as the basic contributing factor to a molecule's stability, unlike the algorithm of Nussinov \& Jacobson
 which considers only individual bonds.
 
 
@@ -180,7 +179,7 @@ an energy value of infinity, for example hairpin loops with less than three base
 intervening loop region. In addition let $V(i, j)$ be defined as the minimum free
 energy of all structures in which bases $i$ and $j$ are bonded, and let $W(i, j)$ represent
 the minimum free energy of all structures contained within bases $i$ and $j$ inclusive.
-Note that for $W(i, j)$ there may or may not be a bond between bases $i$ and $j$. Also
+Note that for $W(i, j)$ there may or may not be a bond between bases $i$ and $j$. Also,
 if $i$ and $j$ cannot bond then $V(i, j) = \infty $. Finally note that $FH(i, j)$ represents a
 hairpin loop structure from $i$ to $j$, and that $FL(i, j, i' , j' )$ is defined as the region
 bounded by the bonds $i, j$ and $i', j'$. Examples of these decompositions are shown
@@ -199,27 +198,27 @@ $$E3 = \min \left\lbrace W (i + 1, i') + W (i' + 1, j − 1) \right\rbrace \: wh
 
 As shown by the definition provided in Equation \ref{eq:zuk_v1_eq}, $V (i, j)$ is computed by minimizing
 three cases. The first case considers the bond between $i$ and $j$ closing off a hairpin
-loop (H in Figure \ref{zuk_struct}). The second accounts for cases in which $i$ and $j$ are bonded. This can result in a bulge (BU in Figure \ref{zuk_struct}), internal loop (I in Figure \ref{zuk_struct}), or the continuation of a stacking region (S in Figure \ref{zuk_struct}) between the
-interior bond $i',j'$. The third and final case considers bifurcations
-(BF in Figure \ref{zuk_struct})
+loop (H in Figure \ref{zuk_struct}). The second accounts for situations in which $i$ and $j$ are bonded. This can result in a bulge (BU in Figure \ref{zuk_struct}), internal loop (I in Figure \ref{zuk_struct}), or the continuation of a stacking region with the
+interior bond $i',j'$ (S in Figure \ref{zuk_struct}). The third and final case considers bifurcations
+(BF in Figure \ref{zuk_struct}).
 
 \begin{equation} \label{eq:zuk_v1_eq2}
-W (i, j) = \min \left\lbrace W(i + 1, j), W(i, j − 1), V(i, j), E4 \right\rbrace
+W (i, j) = \min \left\lbrace W(i + 1, j), W(i, j - 1), V(i, j), E4 \right\rbrace
 \end{equation}
 $$
 E4 = \min \left\lbrace W (i, i') + W (i' + 1, j) \right\rbrace \: where \: i < i' < j - 1
 $$
 
-In Equation \ref{eq:zuk_v1_eq2} we show the recurrence for $W(i, j)$ as described by Zuker \& Stiegler.
-Again there are three cases. The first two cases $W (i + 1, j)$ and $W(i, j − 1)$
+Equation \ref{eq:zuk_v1_eq2} is the recurrence for $W(i, j)$ as described by Zuker \& Stiegler.
+Again there are three cases. The first two cases $W (i + 1, j)$ and $W(i, j - 1)$
 should be thought of as a single case which consider situations in which there
 is no bond between $i$ and $j$. This is similar to cases $A$ and $B$ from the Nussinov algorithm (Equation \ref{eq:nuss_eq}). The final case considers taking the bond from
 $i$ to $j$. This final case allows for bifurcations in which two bonding pairs split
 the structure into two sections. The final minimum free energy of the best structure is defined by $W(1, n)$, where $n$ is the length of the RNA molecule. It should
 be noted that the free energy for small molecules (fewer than 6 nucleotides in length) can easily be
 precomputed, and forms the base case of the given recurrence relations. Because of
-its efficiency ($O(N^3)$ time and $O(N^2)$ space), robustness, and extensibility, this method,
-even today, is still the most popular technique available. The most widely used packages for RNA secondary structure prediction are all implementations of the Zuker algorithm \cite{reuter2010rnastructure, lorenz2011viennarna}.
+its efficiency ($O(N^3)$ time and $O(N^2)$ space), robustness, and extensibility, this method is,
+even today, still the most popular available. The most widely used packages for RNA secondary structure prediction all contain implementations of the Zuker algorithm \cite{lorenz2011viennarna, reuter2010rnastructure}.
 
 
 The Zuker algorithm suffers a major shortcoming, however. Because all bonding regions are assumed to be nested, it
@@ -613,7 +612,7 @@ A brute force method was used to test a combinatorial set of values for $a$ and 
 
 To test this algorithm the testing set was randomly partitioned into two sets containing an equal number of RNAs. One of these sets I called the training set, the other I called the validation set. The aforementioned brute force search was done on the training set, and the F-Scores for $ab$ pairs was recorded; $ab$ pairs with highest F-Scores were deemed the best. 
 
-These scores were then validated by running the same procedure on the validation set, then attempting to correlate the scores of $ab$ pairs between training and validation sets. An ordinary least squares linear regression was done for correlation. The resulting model indicates if high scores in the training set are related to high scores in the validation set. This allowed me to determine if results found in the training set were valid.
+These scores were then validated by running the same procedure on the validation set, then attempting to correlate the scores of $ab$ pairs between training and validation sets. This  indicated if high scores in the training set were related to high scores in the validation set. The correlation also allowed me to determine if results found in the training set were valid.
 
 The best $ab$ pair was used to configure the $ab$-splat algorithm, which was then run on the full testing set, and it's F-Scores recorded. These F-Scores were then compared directly to F-Scores produced by RNAfold, which was also run on the full testing set. In addition to this, the time to execute each algorithm was recorded and compared. Precomputed windows were not used so that the runtime and accuracy could be fairly compared to RNAfold. Because of this, the standard \texttt{Threshold} function was used.
 
@@ -673,6 +672,21 @@ WAS \& RNAfold & 13.2082 &	0  \\
 \end{center}
 \caption{F-Scores for matching RNA test cases achieved by Weighted Activity Selection and RNAfold plotted against one-another. The green line represents parity. Any points above the line are cases in which Weighted Activity Selection performed better, points below the line indicate that RNAfold was more accurate. Note that a maximum F-Score is \texttt{1.0}.}
 \label{fig:wasrnafold}
+\end{figure}
+
+
+\subsection{Using RNA Intervals For Prediction}
+An ordinary least squares linear regression was done to determine the correlation between F-scores recorded for $ab$-splat in the training and validation set. Figure \ref{fig:abcorrelation} depicts the resulting model. A strong correlation was found ($R^2 = 0.703$, $p < 0.001$) for scores in the training set versus scores in the validation set.
+
+The best $ab$ value pair found in the training set was $a = 24$, $b = 1.8$. The $ab$-splat algorithm was configured using these values. As the data did not appear to be normally distributed, a Wilcoxon Signed-Rank test was done to compare F-scores for $ab$-splat (with the best $ab$ pair) and RNAfold. This test revealed a small difference in the F-scores in the population ($z = -0.1067$), which reflected the small difference in averages (mean RNAfold score = $0.57483$, $ab$-splat = $0.58588$). However, this discrepancy was not statistically significant ($p = 0.915021$).
+
+
+\begin{figure}
+\begin{center}
+\scalebox{1}{\includegraphics{abcorrelation}}
+\end{center}
+\caption{Correlation of F-Scores for $ab$-splat in training set versus validation set. R-squared value = 0.702901, $p$-value $< 0.0001$. Standard Error of Regression = 0.025032.}
+\label{fig:abcorrelation}
 \end{figure}
 
 
