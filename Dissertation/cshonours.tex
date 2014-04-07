@@ -35,13 +35,13 @@ provided by Ken Wessen.
 
 \chapter{Introduction}
 \section{DNA and RNA}
-Deoxyribonucleic Acid (DNA) is the basic genetic building block upon which the classification of genetic material into genes and chromosomes is based. The role of DNA as the hereditary unit of genetics was determined in the 1940s \cite{albertsessential}. Soon thereafter, Watson \& Crick \cite{watson1953molecular} published a highly acclaimed paper describing the fundamental chemical structure of DNA. In it, they outlined a double helix formation which has since become as iconic as it is canonical (see Figure \ref{dna}). Each strand of the helix Watson \& Crick discovered is essentially a chain of `nucleotides' which are made of a sugar-phosphate backbone, attached to a single `base'. The bases of each strand form hydrogen bonds which hold the double helix together. The most astonishing and important of their findings was that these bases bond in a reciprocal fashion. They described four bases: Adenine (A), which always bonds to Thymine (T), and Guanine (G), which always bonds to Cytosine (C).
+Deoxyribonucleic Acid (DNA) is the basic genetic building block upon which the classification of genetic material into genes and chromosomes is based. The role of DNA as the hereditary unit of genetics was determined in the 1940s \cite{albertsessential}. Soon thereafter, Watson \& Crick \cite{watson1953molecular} published a highly acclaimed paper describing the fundamental chemical structure of DNA. In it, they outlined a double helix formation which has since become as iconic as it is canonical (see Figure \ref{dna}). Each strand of the helix Watson \& Crick discovered is essentially a chain of `nucleotides'. Each nucleotide is made of a sugar-phosphate backbone attached to a single `base'. The bases of corresponding strands form hydrogen bonds which hold the double helix together. The most astonishing and important of their findings was that these bases bond in a reciprocal fashion. They described four bases: Adenine (A), which always bonds to Thymine (T), and Guanine (G), which always bonds to Cytosine (C).
 
 \begin{figure}
 \begin{center}
 \scalebox{0.23}{\includegraphics{dna}}
 \end{center}
-\caption{The structure and composition of DNA. Diagram taken from "Essential Cell Biology" \cite{albertsessential}.}
+\caption{The structure and composition of DNA. Diagram taken from \emph{Essential Cell Biology} \cite{albertsessential}.}
 \label{dna}
 \end{figure}
 
@@ -51,18 +51,22 @@ The reciprocal bonding relationships between bases is what allows replication to
 \begin{center}
 \scalebox{0.23}{\includegraphics{transcription}}
 \end{center}
-\caption{RNA transcription. Diagram taken from "Essential Cell Biology" \cite{albertsessential}.}
+\caption{RNA transcription. Diagram taken from \emph{Essential Cell Biology} \cite{albertsessential}.}
 \label{transcription}
 \end{figure}
 
 
 
-For many years the conventional wisdom was that DNA contained genes which coded for functional proteins used by the cell \cite{albertsessential}. Though this is undoubtedly true, there was a problem: much of the human genome, and the genomes of other species, contains DNA which does not appear to code for anything \cite{beaton1999eukaryotic}. Many theories have been put forward to explain this. It was argued that this `junk' DNA is the perennial build-up of mutation, and that natural selection simply cannot act with strong enough selective force to cull this free-loading DNA \cite{beaton1999eukaryotic}. Surprisingly, much of this non-coding DNA is actually transcribed into RNA, despite having no apparent function \cite{leung2013coral}. As it turns out, RNA is more than a simple messenger for encoded proteins. Recent research has found myriad important functions for RNA. For example, RNA can act as a catalyst for RNA splicing and peptide bond formation, and can also alter the regulation of genes \cite{xu2012statistical}. It seems that much of our genome contains templates for non-coding RNAs (ncRNAs). These RNAs perform essential cellular functions without actually being translated into protein at any point in their life-cycle \cite{leung2013coral}. Because of its inherently single stranded nature, RNA forms bonds with itself, folding into secondary and tertiary structures \cite{conn1998rna}.
+For many years the conventional wisdom was that DNA contained genes which coded for functional proteins used by the cell \cite{albertsessential}. Though this is undoubtedly true, there was a problem: much of the human genome, and the genomes of other species, contains DNA which does not appear to code for anything \cite{beaton1999eukaryotic}. Many theories have been put forward to explain this. It was argued that this `junk' DNA is the perennial build-up of mutation, and that natural selection simply cannot act with strong enough selective force to cull this free-loading DNA \cite{beaton1999eukaryotic}. Surprisingly, much of this non-coding DNA is actually transcribed into RNA, despite having no apparent function \cite{leung2013coral}. 
+
+As it turns out, RNA is more than a simple messenger for encoded proteins. Recent research has found myriad important functions for RNA. For example, RNA can act as a catalyst for RNA splicing and peptide bond formation, and can also alter the regulation of genes \cite{xu2012statistical}. It seems that much of our genome contains templates for non-coding RNAs (ncRNAs). These RNAs perform essential cellular functions without actually being translated into protein at any point in their life-cycle \cite{leung2013coral}. Because of its inherently single stranded nature, RNA forms bonds with itself, folding into secondary and tertiary structures \cite{conn1998rna}.
 
 
-It is axiomatic that chemical structure is tantamount to biological function; RNA is no exception. For this reason there has and continues to be an intense interest in predicting the secondary structure and tertiary structure of RNA molecules. This is in part because it will elucidate the underlying principles of RNA structure formation and function \cite{conn1998rna}, but also because it will allow the detection and classification of unknown RNAs, enable prediction of novel RNA function, and assist the design of new RNA based drugs \cite{condon2003problems}. In fact, RNA is an extremely versatile molecule, and as such is attractive from both an engineering and computational point of view. Small combinatorial computation problems have been solved by representing the solution set using RNAs. Furthermore, a theory of computation has been put forward using self assembling RNA molecules \cite{condon2003problems}. As if to comment on the upheaval of a protein-centric view of biology in recent years, researchers have found that RNA is capable of supporting all the processes required for life without the need of protein \cite{condon2003problems}. The secondary structure of RNA is also highly conserved during evolution, indicating its importance \cite{hofacker2008rna}. Secondary and tertiary structures can be treated hierarchically, as a result it is possible to predict the secondary structure of an RNA without understanding the tertiary structure. The tertiary structure in turn builds upon the secondary structure \cite{tinoco1999rna}. This paper will focus on secondary structure prediction.
+It is axiomatic that chemical structure is tantamount to biological function; RNA is no exception. For this reason there has and continues to be an intense interest in predicting the secondary structure and tertiary structure of RNA molecules. This is in part because it will elucidate the underlying principles of RNA structure formation and function \cite{conn1998rna}, but also because it will allow the detection and classification of unknown RNAs, enable prediction of novel RNA function, and assist the design of new RNA based drugs \cite{condon2003problems}. In fact, RNA is an extremely versatile molecule, and as such is attractive from both an engineering and computational point of view. Small combinatorial computational problems have been solved by representing the solution set using RNAs. Furthermore, a theory of computation has been put forward using self assembling RNA molecules \cite{condon2003problems}. As if to comment on the upheaval of a protein-centric view of biology in recent years, researchers have found that RNA is capable of supporting all the processes required for life without the need of protein \cite{condon2003problems}. The secondary structure of RNA is also highly conserved during evolution, indicating its importance \cite{hofacker2008rna}. 
 
-It holds to reason that an algorithm for RNA secondary structure prediction can never be realised if we do not understand how these structures form, or their general morphology. For this reason it is important to understand how true RNA secondary structures can be determined, and the limitations of these techniques. DNA and RNA molecules can be analysed using X-ray crystallographic methods. These types of approaches work because the wavelengths of some X-rays are the same as the dimensions of DNA and RNA inter-atomic bonds. The diffraction of X-ray light by these molecules can thus be observed and their structures can subsequently be inferred by analysis of the resulting data. Nuclear Magnetic Resonance (NMR) is another technique which can be applied to the analysis of DNA/RNA. It relies on the spin of atoms when in a magnetic field. These spin signals can be used to determine the atomic composition and topology of a molecule. This has the advantage of not requiring the molecule under analysis to be crystallized before analysis. Arguably this gives a better in vivo view of RNAs/DNAs, which are fundamentally flexible structures. NMR also has some disadvantages; for instance, it is less accurate than X-ray crystallography, and cannot be used on extremely large molecules. The reason these techniques cannot be used for all RNA structural assays is that they are extremely expensive and time consuming \cite{neidle2010principles}.
+Secondary and tertiary structures can be treated hierarchically, as a result it is possible to predict the secondary structure of an RNA without understanding the tertiary structure. The tertiary structure in turn builds upon the secondary structure \cite{tinoco1999rna}. This paper will focus on secondary structure prediction.
+
+It holds to reason that an algorithm for RNA secondary structure prediction can never be realised if we do not understand how these structures form, or their general morphology. For this reason it is important to understand how true RNA secondary structures can be determined, and the limitations of these techniques. DNA and RNA molecules can be analysed using X-ray crystallographic methods. These types of approaches work because the wavelengths of some X-rays are the same as the dimensions of DNA and RNA inter-atomic bonds. The diffraction of X-ray light by these molecules can thus be observed and their structures can subsequently be inferred by analysis of the resulting data. Nuclear Magnetic Resonance (NMR) is another technique which can be applied to the analysis of DNA/RNA. It relies on the spin of atoms when in a magnetic field. These spin signals can be used to determine the atomic composition and topology of a molecule. This has the advantage of not requiring the molecule under observation to be crystallized before analysis. Arguably this gives a better in vivo view of RNAs/DNAs, which are fundamentally flexible structures. NMR also has some disadvantages; for instance, it is less accurate than X-ray crystallography, and cannot be used on extremely large molecules. The reason these techniques cannot be used for all RNA structural assays is that they are extremely expensive and time consuming. For more information refer to \emph{Principles of Nucleic Acid Structure} by Stephen Neidle \cite{neidle2010principles}.
 
 
 RNA secondary structure prediction techniques can be broadly broken into two categories: those that use auxiliary information to assist in prediction, and those that predict structure ex nihilo---that is, with nothing but the `proband' sequence we require a structure for. The former approach typically does consensus matching between some sequences for which a user already knows the secondary structures, and a sequence for which the structure is unknown \cite{hofacker2008rna}. In this paper I investigate the latter approach because it requires deeper knowledge about why and how RNAs fold. Also, it is the more general of the two.
@@ -71,8 +75,8 @@ RNA secondary structure prediction techniques can be broadly broken into two cat
 
 \section{Dynamic Programming Techniques}
 \subsection{Fundamental Algorithms}
-The first such algorithms were based on relatively naive brute force. All possible secondary structures were enumerated and the one with
-the most bonds was selected as the solution \cite{nussinov1978algorithms}. While being very simplistic,
+The first such algorithms were based on relatively naive brute force. All possible secondary structures were enumerated, and the one with
+the most bonds was selected as the solution \cite{nussinov1978algorithms}. While being very simplistic
 these first approaches introduce an important assumption: RNA molecules will
 form energetically stable secondary structures. Maximising bonds is a crude but
 nonetheless accurate measure of energetic stability, as every bond increases the
@@ -81,7 +85,7 @@ were being successfully sequenced, Nussinov et al. \cite{nussinov1978algorithms}
 based on loop matching for bonding pairs. Their algorithm attempted to find a
 single structure with the maximal number of bonds using dynamic programming,
 with the restriction that all bonding pairs had to be entirely nested. It did this in $O(N^3)$ time and using $O(N^2)$ space. Thence Nussinov \& Jacobson \cite{nussinov1980fast} introduced
-a refined version of the same algorithm and began testing it against experimentally verified RNA secondary structures. They had mixed success; Transfer RNAs
+a refined version of the same algorithm and began testing it against experimentally verified RNA secondary structures. They had mixed success; transfer RNAs
 (tRNAs) were conspicuous in their difference from predicted structures.
 
 \begin{figure}
@@ -96,12 +100,11 @@ Taken from the original publication \cite{nussinov1980fast}.}
 
 
 Because of its dynamic programming
-nature, this algorithm performs recursive decompositions of the RNA and builds
+nature, this algorithm performs recursive decompositions of the RNA, building
 larger structures out of repeated substructures. A natural representation of this is
 depicted in Figure \ref{nuss_rna}. Part A of Figure \ref{nuss_rna} shows bonds as arcs across a circular
 graph. In it, we see the nested nature of the structures being explored by the
-Nussinov algorithm. Part B shows how these structures translate to actual RNAs,
-and how these appear in vivo. It also introduces the standard decompositions
+Nussinov algorithm. Part B shows how these structures translate to actual RNAs in vivo. It also introduces the standard decompositions
 of secondary structures, namely the hairpin loop, the interior loop, and the branch
 junction or multi loop. Unlabelled in the diagram are stems; these are stacked
 base pairings, for example $B1$, $Bn - 1$ and $B2$, $Bn - 2$.
@@ -125,32 +128,31 @@ D = \max \left\lbrace M(i, k) + M(k+1, j) \right\rbrace \: when \: i < k < j
 
 
 
-In the recurrence relation show in Equation \ref{eq:nuss_eq} the first two cases ($A$ and $B$) find the score associated with not allowing $i$ and $j$ to bond. The case $C$ conversely determines the score given that $i$ and $j$ are bonded. The final case $D$ computes the score associated with a bifurcation. A bifurcation here means decomposition of the RNA into two separate structures between. This recurrence relation implies a $O(N^3)$
+The recurrence relation for the Nussinov algorithm is defind in Equation \ref{eq:nuss_eq}. The first two cases ($A$ and $B$) find the score associated with not allowing $i$ and $j$ to bond. Case $C$ conversely determines the score given that $i$ and $j$ are bonded. The final case $D$ computes the score associated with a bifurcation. A bifurcation here means decomposition of the RNA into two separate structures. This recurrence relation implies a $O(N^3)$
 worst case time complexity and a $O(N^2)$ space complexity, as an $O(N^2)$ state space (all combinations of $i$ and $j$) is explored
-with a linear time recurrence relation. In the original algorithm a constant $p = 3$ was introduced that indicated the minimum size of a hair-pin loop as real RNAs typically do not have hair-pin loops of fewer bases. The recurrence relation presented here has also been modified for the sake of clarity (cases $A$ and $B$ can be merged into case $D$) but the logic of the algorithm is equivalent.
+with a linear time recurrence relation. In the original algorithm a constant ($p = 3$) was introduced that indicated the minimum size of a hairpin loop, as real RNAs typically do not have hairpin loops of fewer bases. The recurrence relation presented here has also been modified for the sake of clarity (cases $A$ and $B$ can be merged into case $D$) but the logic of the algorithm is equivalent.
 
 
 This algorithm can also be extended to accommodate a more advanced energy
 model. Instead of weighting each bond equally they can be weighted
-according to the proportion they are expected to contribute to the molecule’s
+according to the proportion they are expected to contribute to the molecule's
 stability \cite{nussinov1980fast}. When considering the value of a bond, it might be given greater
 weight if it adds to the formation of a stem (a stabilizing structure), or
-given lower weight if it forms an internal loop or bulge as these generally
+given lower weight if it forms an internal loop or bulge, as these generally
 destabilize RNA molecules \cite{nussinov1980fast}. Unfortunately it is hard to find good values for
 such weights, and determining which substructure a bond contributes to requires
 backtracking in the modified algorithm presented by Nussinov \& Jacobson.
 
-The reader should note that the Nussinov algorithm is old technology and is no longer used for the prediction of RNA secondary structures. I have presented it in detail here because it forms the basis for the most widely used algorithm today, which is shall thence discuss since it in turn is the basis for my own algorithms.
+The reader should note that the Nussinov algorithm is old technology, and is no longer used for the prediction of RNA secondary structures. I have presented it in detail here because it forms the basis for the most widely used algorithm today. This algorithm in turn forms the basis for my own algorithm.
 
 
 Soon after the work of Nussinov \& Jacobson, Zuker \& Stiegler \cite{zuker1981optimal}
 described an altered version of the same algorithm which, instead of maximising
-base pairs, minimized the free energy of the secondary structure. This was done
+base pairs, minimized the free energy of secondary structures. This is done
 by introducing a number of thermodynamic rules for canonical structures like
 hairpin loops, internal bulges, multiloops, unbonded base pairs, and stacked base
-pairs. The algorithm is similar to the Nussinov algorithm
-but adds another mutually recursive dynamic programming recurrence to inject
-a complex and relatively comprehensive energy system. The original energy system used is borrowed from the work of Studnicka et al. \cite{studnicka1978computer} who presented a
+pairs. The algorithm is similar to the Nussinov algorithm, but adds another mutually recursive dynamic programming recurrence to inject
+a complex and relatively comprehensive scoring system. The original thermodynamic scoring system used is borrowed from the work of Studnicka et al. \cite{studnicka1978computer} who presented a
 complex but theoretically similar algorithm, albeit with
 much worse asymptotic and implementation complexities. 
 
@@ -177,12 +179,11 @@ which considers only individual bonds.
 Let $E(F)$ represent the energy of a face $F$; impossible structures are given
 an energy value of infinity, for example hairpin loops with less than three bases in the
 intervening loop region. In addition let $V(i, j)$ be defined as the minimum free
-energy of all structures in which bases $i$ and $j$ are bonded, and let $W(i, j)$ represent
+energy given that bases $i$ and $j$ are bonded, and let $W(i, j)$ represent
 the minimum free energy of all structures contained within bases $i$ and $j$ inclusive.
-Note that for $W(i, j)$ there may or may not be a bond between bases $i$ and $j$. Also,
+Note that for $W(i, j)$ there need not be a bond between bases $i$ and $j$. Also,
 if $i$ and $j$ cannot bond then $V(i, j) = \infty $. Finally note that $FH(i, j)$ represents a
-hairpin loop structure from $i$ to $j$, and that $FL(i, j, i' , j' )$ is defined as the region
-bounded by the bonds $i, j$ and $i', j'$. Examples of these decompositions are shown
+hairpin loop structure from $i$ to $j$, and that $FL(i, j, i' , j' )$ is defined as the face bounded by the bonds $i, j$ and $i', j'$. Examples of these decompositions are shown
 diagrammatically in the right half of Figure \ref{zuk_struct}. The labelled regions show faces
 in a semicircular graph representing a strand of RNA. In the accompanying left
 half of the figure, the same RNA structure is shown as it would appear in a real
@@ -193,14 +194,13 @@ V(i, j) = \min \left\lbrace E1, E2, E3 \right\rbrace
 \end{equation}
 $$E1 = E(FH(i, j))$$
 $$E2 = \min \left\lbrace E(FL(i, j, i', j')) + V (i', j') \right\rbrace \: where \: i < i' < j' < j$$
-$$E3 = \min \left\lbrace W (i + 1, i') + W (i' + 1, j − 1) \right\rbrace \: where \: i + 1 < i' < j - 2$$
+$$E3 = \min \left\lbrace W (i + 1, i') + W (i' + 1, j - 1) \right\rbrace \: where \: i + 1 < i' < j - 2$$
 
 
 As shown by the definition provided in Equation \ref{eq:zuk_v1_eq}, $V (i, j)$ is computed by minimizing
 three cases. The first case considers the bond between $i$ and $j$ closing off a hairpin
 loop (H in Figure \ref{zuk_struct}). The second accounts for situations in which $i$ and $j$ are bonded. This can result in a bulge (BU in Figure \ref{zuk_struct}), internal loop (I in Figure \ref{zuk_struct}), or the continuation of a stacking region with the
-interior bond $i',j'$ (S in Figure \ref{zuk_struct}). The third and final case considers bifurcations
-(BF in Figure \ref{zuk_struct}).
+interior bond $i',j'$ (S in Figure \ref{zuk_struct}). The third and final case considers bifurcations ending with a bond between $i$ and $j$ (BF in Figure \ref{zuk_struct}).
 
 \begin{equation} \label{eq:zuk_v1_eq2}
 W (i, j) = \min \left\lbrace W(i + 1, j), W(i, j - 1), V(i, j), E4 \right\rbrace
@@ -212,8 +212,8 @@ $$
 Equation \ref{eq:zuk_v1_eq2} is the recurrence for $W(i, j)$ as described by Zuker \& Stiegler.
 Again there are three cases. The first two cases $W (i + 1, j)$ and $W(i, j - 1)$
 should be thought of as a single case which consider situations in which there
-is no bond between $i$ and $j$. This is similar to cases $A$ and $B$ from the Nussinov algorithm (Equation \ref{eq:nuss_eq}). The final case considers taking the bond from
-$i$ to $j$. This final case allows for bifurcations in which two bonding pairs split
+is no bond between $i$ and $j$. This is similar to cases $A$ and $B$ from the Nussinov algorithm (Equation \ref{eq:nuss_eq}). The third case considers taking the bond from
+$i$ to $j$. The fourth and final case allows for bifurcations in which two bonding regions split
 the structure into two sections. The final minimum free energy of the best structure is defined by $W(1, n)$, where $n$ is the length of the RNA molecule. It should
 be noted that the free energy for small molecules (fewer than 6 nucleotides in length) can easily be
 precomputed, and forms the base case of the given recurrence relations. Because of
@@ -227,8 +227,7 @@ base inside another bonding pair, and the other base outside said bonding pair.
 In short, it is not properly nested. 
 
 These structures are not common,
-but have been experimentally verified in numerous RNAs \cite{taufer2009pseudobase}. In addition to this,
-these kinds of structures also appear to perform useful biological functions. For
+but have been experimentally verified in numerous RNAs \cite{taufer2009pseudobase}. Additionally, pseudoknots also appear to perform useful biological functions. For
 example, pseudoknots have been shown to allow frame shifting during translation
 of proteins \cite{namy2006mechanical}. In layman’s terms, pseudoknots can change the way RNA is read
 when being translated into protein. Such frame shifting is used extensively by
@@ -238,19 +237,19 @@ structures with pseudoknots has been shown to be NP-Complete \cite{lyngso2000rna
 
 
 \subsection{Pseudoknots}
-In my investigation I did not consider the prediction of pseudoknotted RNA as they are uncommon. However I deem it important to understand how such structures could be integrated into the algorithms presented in this paper. As such, I have included a brisk overview of current pseudoknot prediction techniques.
+In my investigation I did not consider the prediction of pseudoknotted RNAs as they are uncommon and difficult to model. However, I deem it important to understand how such structures could be integrated into the algorithms presented in this paper. As such, I have included a brisk overview of pseudoknot prediction techniques.
 
 Despite the problem being NP-Complete, in 1999 Rivas \& Eddy \cite{rivas1999dynamic} introduced an ingenious dynamic
 programming algorithm based on a new thermodynamic model encompassing pseudoknots. Their algorithm could predict a large set of pseudoknot classes using
-$O(N^6)$ time and $O(N^4)$ memory. They generalised the Zuker method by using a gap matrix to represent regions being considered for bonding, rather than
+$O(N^6)$ time and $O(N^4)$ memory. They generalised the Zuker method by using a gap matrix to represent multiple regions being considered for bonding, rather than
 the single continuous region used in the Zuker method. Because of its extreme
 space and time requirements this algorithm is used only sparingly in practice; other thermodynamic based methods for pseudoknot prediction have
-been formulated based on similar principals. Deogun et al. \cite{deogun2004rna} described an algorithm which could handle a restricted class of pseudoknots (only those containing
+been formulated using similar principals. Deogun et al. \cite{deogun2004rna} described an algorithm which could handle a restricted class of pseudoknots (only those containing
 non-recursive pseudoknots) in $O(N^4)$ time and using $O(N^3)$ space. Shortly after which Reeder \& Giegerich \cite{reeder2004design} presented an algorithm which could predict
-only simple recursive pseudoknots which met their `canonization' criteria, and which required $O(N^4)$ time and $O(N^2)$ space. While
+only simple recursive pseudoknots that met their `canonization' criteria, and which required $O(N^4)$ time and $O(N^2)$ space. While
 seemingly restrictive, this did, in fact, predict a large array of pseudoknots accurately. 
 
-In recent years different approaches have been explored. In 2010, DotKnot \cite{sperschneider2010dotknot} improved upon previous algorithms by using probability dot-plot guided heuristics, and an updated energy model, to predict pseudoknots. DotKnot was able to predict pseudoknots more accurately than existing methods with more frugal space and time requirements. This technique was later refined so that it could predict H-type pseudoknots and intramolecular kissing hairpins \cite{sperschneider2011heuristic}.
+In recent years different approaches have been explored. In 2010 Sperschneider \& Datta introduced DotKnot \cite{sperschneider2010dotknot}, which improved upon previous algorithms by using probability dot-plot guided heuristics, and an updated energy model, to predict pseudoknots. DotKnot was able to predict pseudoknots more accurately than existing methods with more frugal space and time requirements. This technique was later refined so that it could predict H-type pseudoknots and intramolecular kissing hairpins \cite{sperschneider2011heuristic}.
 
 
 \section{Accuracy}
@@ -311,7 +310,7 @@ started by computing an array of all possible stems; each genome was represented
 as a binary string where \texttt{1} indicates a stem is in the candidate structure, and \texttt{0}
 indicates that it was not. Their genetic algorithm proceeded by seeding the genomes
 with random bits, then in a series of generation steps performed typical binary
-mutation, crossover and breeding, conserving and selectively breeding the fittest
+mutation, crossover, and breeding, conserving and selectively breeding the fittest
 solutions. Fitness was defined in their algorithm as the summed total length
 (number of bonds) of all stems. In an improved version the summed stacking
 free energy reduction of all stems was used.
@@ -337,9 +336,9 @@ to. This was likely because their energy model was puerile in comparison rather 
 
 Indeed, Wiese, Deschenes, and Hendriks \cite{wiese2008rnapredict} introduced an improved
 genetic algorithm based on the same principles as that of Van Batenburg, Gultyaev,
-and Pleij which instead used an advanced energy model for fitness. They then
+and Pleij, but instead using an advanced energy model for fitness. They then
 demonstrated that it outperformed the popular dynamic programming algorithm
-Mfold \cite{zuker2003mfold} which uses a similarly complex model. Wiese, Deschenes, and Hendriks noted that as the length of RNA molecules increased the correlation between lower free energy and accuracy decreased. The concluded that this was due to the incompleteness of our current thermodynamic model of RNA folding. The algorithm of Van Batenburg, Gultyaev, and Pleij avoided this problem by simulating kinetic folding. Such a heuristic was not present in the algorithm of Wiese, Deschenes, and Hendriks.
+Mfold \cite{zuker2003mfold}, which uses a similarly complex model. Wiese, Deschenes, and Hendriks noted that as the length of RNA molecules increased the correlation between lower free energy and accuracy decreased. The concluded that this was due to the incompleteness of our current thermodynamic model of RNA folding. The algorithm of Van Batenburg, Gultyaev, and Pleij avoided this problem by simulating kinetic folding. Such a heuristic was not present in the algorithm of Wiese, Deschenes, and Hendriks.
 
 
 
@@ -348,8 +347,8 @@ RNA sequences and their secondary structures can be represented as Context Free
 Grammars (CFGs). Various production rules output different internal structures (such as
 hairpin loops, or internal bulges), with the terminals producing the bases A, U, G,
 and C. This is a fundamentally different approach to those discussed previously,
-however it can, in fact, use the same thermodynamic energy model. Stochastic Context Free Grammars (SCFGs) can be used to encode the plausibility of
-structures, and thus find the most plausible looking structure using a thermodynamic model \cite{rivas2012range}. In addition, these kinds of algorithms can be trained to
+however CFGs can, in fact, use the same thermodynamic energy model. Stochastic Context Free Grammars (SCFGs) can be used to encode the plausibility of
+production rules, and thus find the most plausible parse tree using a thermodynamic model \cite{rivas2012range}. In addition, these kinds of algorithms can be trained to
 incorporate statistical information such as phylogenetic similarity, or machine
 learned parameters \cite{rivas2012range}. 
 
@@ -363,17 +362,15 @@ The greatest strength of context free grammar based approaches is that they
 can diverge from the use of free energy minimisation entirely. This is advantageous as using
 a physics based model---such as free energy minimization---requires a large volume
 of experimentally verified parameters. For this reason, many parameters are often not included in such models because they cannot be quantified empirically.
-The energy value of multi-branch loops, for example, is not known and is usually
+The energy value of multi-branch loops, for example, is not known, and is usually
 guessed in modern RNA prediction algorithms. Likewise, the inter-structural
 interactions of hairpin loops, bulges, multi-branch loops, and internal loops has
 not been quantified experimentally and is thus not used as a free energy parameter. CONTRAfold \cite{do2006contrafold} was one of the first SCFG based algorithms to achieve
 comparable performance to Zuker-like free energy minimization methods. It does
 away with the notion of free energy minimization altogether, and instead uses a
 set of trained parameters based on conditional log-linear models. CONTRAfold
-achieved an average prediction sensitivity higher than RNAfold, and also higher
-than that of Mfold \cite{zuker2003mfold}, an RNA prediction package similar to RNAfold. It
-is important for the reader to remember that none of these approaches are able to
-model pseudoknots.
+achieved an average prediction sensitivity higher than RNAfold \cite{lorenz2011viennarna}, and also higher
+than that of Mfold \cite{zuker2003mfold}, an RNA prediction package similar to RNAfold.
 
 \section{Locally Optimal Structure Prediction}
 \label{sec:locopt}
@@ -386,7 +383,7 @@ a recognizable secondary structure. When searching a large genome for functional
 structures (see Figure \ref{fig:slidingwindow}). This can be done by running a typical cubic time algorithm like
 RNAfold or Mfold at every window location. Let $L$ be defined as the chosen
 window size, and $N$ represent the length of the genome. This leads to a total complexity of $O(NL^3)$. While not prohibitive, this becomes intractable for many
-genomes which are typically extremely large: millions or billions of bases. 
+genomes which are typically extremely large---millions or billions of bases. 
 
 
 \begin{figure}
@@ -406,7 +403,7 @@ As a result it requires only a single table of size $O(L^2)$, and as such its me
 
 Later, in 2009, Horesh et al. \cite{horesh2009rnaslider} managed
 to lower the expected time bound to $O(NL)$ under the assumption that one is
-folding RNAs that are typical of naturally occurring sequences. This time complexity bound was experimentally verified, and their algorithm was shown to outperform that of Hofacker, Priwitzer, and Stadler. 
+folding RNAs that are typical of naturally occurring sequences. This average case time complexity was experimentally verified, and their algorithm was shown to outperform that of Hofacker, Priwitzer, and Stadler. 
 
 Clearly good algorithms are
 available for the folding of consecutive RNA windows. For even modest sized
@@ -415,13 +412,13 @@ structure prediction algorithms. With the major caveat of not actually predictin
 a complete secondary structure, but only a set of locally optimal structures.
 
 \section{State of the Art: Global Optimization}
-Current state of the art algorithms fold RNA in a way that globally maximises their score according to some model. The Zuker algorithm, for example, finds the global minimum free energy configuration. This bias is largely due to the `thermodynamic hypothesis'. Anfinsen \cite{anfinsen1973principles} presented this hypothesis as the underlying principle behind the formation of biologically active proteins. He held that protein fold into the minimum Gibbs free energy conformation in their typical biological environment; defined as the molecules physiological state: pH, temperature, ion concentration. Furthermore, through natural selection, molecules that are most likely to fold into the correct shape have evolved, and the atomic interactions of such molecules fully determine their final state. This insight has been invaluable for folding proteins and RNAs in silico. Despite this, it has recently become clear that methods for the prediction of RNA secondary structures have hit an upper limit in accuracy.
+Current state of the art algorithms fold RNA in a way that globally maximises their score according to some model. The Zuker algorithm, for example, finds the global minimum free energy configuration. SCFG based algorithms maximise the probability of the final parse tree. This bias is largely due to the `thermodynamic hypothesis'. Anfinsen \cite{anfinsen1973principles} presented this hypothesis as the underlying principle for the formation of biologically active proteins. He held that proteins fold into a minimum Gibbs free energy conformation in their typical biological environment; defined as the molecules physiological state: pH, temperature, ion concentration. Furthermore, through natural selection, molecules that are most likely to fold into the correct shape have evolved, and the atomic interactions of such molecules fully determine their final state. This insight has been invaluable for folding proteins and RNAs in silico. Despite this, it has recently become clear that methods for the prediction of RNA secondary structures have hit an upper limit in accuracy.
 
-In her discussion of modern RNA prediction, Rivas \cite{rivas2013four} unified pseudoknot-free RNA folding algorithms. Her core observation is that all such prediction algorithms contain the same four key components: an architecture, or the production rules of a grammar; a scoring scheme, or how scores are assigned to these production rules; and the parametrization of the scoring scheme, or the specific values assigned to it. These features are referred to by Rivas, and by myself in the following discussion, as the `model'. The fourth and final feature is the folding algorithm used to find the best structure given the model. Here Rivas notes that the two dominant folding algorithms are interchangeable. The Cocke-Younger-Kasami (CYK) algorithm used to parse SCFGs, and the MFE algorithm based on the work of Zuker, are isomorphic for the purpose of parsing RNA grammars. Rivas additionally notes that all scoring schemes and parametrizations appear to hit an accuracy upper limit, and that complex, machine learned models are only slightly more accurate than thermodynamic models. In fact, relatively basic grammars with hundreds of parameters seem to perform almost equivalently to those with tens of thousands. While Rivas manages to unify many aspects of RNA prediction she did not recognise that all such algorithms are based on those same assumptions underpinning the thermodynamic hypothesis: they seek to globally maximise a scoring function for the final RNA secondary structure. 
+In her discussion of modern RNA prediction, Rivas \cite{rivas2013four} unified pseudoknot-free RNA folding algorithms. Her core observation is that all such prediction algorithms contain the same four key components: an architecture, or the production rules of a grammar; a scoring scheme, or how scores are assigned to these production rules; and the parametrization of the scoring scheme, or the specific values assigned to it. These features are referred to by Rivas, and by myself in the following discussion, as the `model'. The fourth and final feature is the folding algorithm used to find the best structure given the model. Here Rivas notes that the two dominant folding algorithms are interchangeable. The Cocke-Younger-Kasami (CYK) algorithm used to parse SCFGs, and the MFE algorithm based on the work of Zuker, are isomorphic for the purpose of parsing RNA grammars. Rivas additionally notes that all scoring schemes and parametrizations appear to hit an accuracy upper limit, and that complex, machine learned models are only slightly more accurate than thermodynamic models. In fact, relatively basic grammars with hundreds of parameters seem to perform almost equivalently to those with tens of thousands. While Rivas managed to unify many aspects of RNA prediction she did not recognise that all such algorithms are based on those same assumptions underpinning the thermodynamic hypothesis: they seek to globally maximise a scoring function for the final RNA secondary structure. 
 
-I propose that in large RNA molecules, local interactions are stronger than global interactions. As a result RNA molecules will misfold into a global structure made up of locally optimal structures. This is my core hypothesis. If this assumption is correct it follows that there exists a set of `windows' that when folded using any reasonable model will be more accurate than the corresponding global optimum using the same model. There is already some evidence for this hypothesis. Dawson et al. \cite{dawson2013new} used variable Kuhn lengths to accurately predict RNAs containing less than 100 nucleotides. Kuhn length is the size of a segment in a polymer chain. It is a simplifying assumption that allows one to treat the entire chain as a sequence of Kuhn segments. In addition, Dawson et al. showed that the energy landscape of these RNAs, when the correct Kuhn length was applied, was funnel shaped. With such simplifying assumptions the energy landscape of RNAs is notoriously rugged with in vivo secondary structures often becoming `trapped' in suboptimal states; this is most apparent in large RNAs \cite{ditzler2008rugged}.
+I propose that in large RNA molecules, local interactions are stronger than global interactions. As a result RNA molecules will misfold into a global structure made up of locally optimal structures. This is my core hypothesis. If this assumption is correct it follows that there exists a set of `windows' that when folded using any reasonable model will be more accurate than the corresponding global optimum using the same model. There is already some evidence for this hypothesis. Dawson et al. \cite{dawson2013new} used variable Kuhn lengths to accurately predict RNAs containing less than 100 nucleotides. Kuhn length is the size of a segment in a polymer chain. It is a simplifying assumption that allows one to treat the entire chain as a sequence of Kuhn segments. In addition, Dawson et al. showed that the energy landscape of these RNAs, when the correct Kuhn length was applied, was funnel shaped. Without such simplifying assumptions the energy landscape of RNAs is notoriously rugged, with in vivo secondary structures often becoming `trapped' in suboptimal states; this is most apparent in large RNAs \cite{ditzler2008rugged}.
 
-If my hypothesis is supported, I aim to leverage the insights provided to improve the accuracy and speed of large RNA secondary structure prediction.
+If my hypothesis is supported, I aim to leverage the insights provided to improve the accuracy and speed of RNA secondary structure prediction.
 
 \chapter{Methodology}
 
