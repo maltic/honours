@@ -147,6 +147,7 @@ std::vector<int> top_down_selection(std::vector<RNAInterval>& intervals)
 	return chosen;
 }
 
+// also called Score Selection in the Dissertation
 std::vector<int> greedy_MFE_selection(std::vector<RNAInterval>& intervals)
 {
 

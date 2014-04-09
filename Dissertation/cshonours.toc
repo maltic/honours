@@ -29,3 +29,7 @@
 \contentsline {chapter}{\numberline {3}Results}{25}
 \contentsline {section}{\numberline {3.1}RNA Interval Selection}{25}
 \contentsline {subsection}{\numberline {3.1.1}Using RNA Intervals For Prediction}{28}
+\contentsline {chapter}{\numberline {4}Discussion}{29}
+\contentsline {section}{\numberline {4.1}Local Optimization}{29}
+\contentsline {section}{\numberline {4.2}The $ab$-splat Algorithm}{30}
+\contentsline {section}{\numberline {4.3}Conclusions}{30}
