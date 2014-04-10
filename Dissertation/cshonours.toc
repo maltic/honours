@@ -31,5 +31,7 @@
 \contentsline {subsection}{\numberline {3.1.1}Using RNA Intervals For Prediction}{28}
 \contentsline {chapter}{\numberline {4}Discussion}{29}
 \contentsline {section}{\numberline {4.1}Local Optimization}{29}
-\contentsline {section}{\numberline {4.2}The $ab$-splat Algorithm}{30}
-\contentsline {section}{\numberline {4.3}Conclusions}{30}
+\contentsline {subsection}{\numberline {4.1.1}Future Work}{30}
+\contentsline {subsection}{\numberline {4.1.2}Implications}{31}
+\contentsline {section}{\numberline {4.2}The $ab$-splat Algorithm}{32}
+\contentsline {section}{\numberline {4.3}Conclusions}{32}
