@@ -1,21 +1,11 @@
-This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012/Debian) (format=pdflatex 2014.3.26)  10 APR 2014 11:51
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2014.4.10)  12 APR 2014 21:55
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
 **cshonours.tex
 (./cshonours.tex
 LaTeX2e <2011/06/27>
-Babel <v3.8m> and hyphenation patterns for english, dumylang, nohyphenation, et
-hiopic, farsi, arabic, pinyin, croatian, bulgarian, ukrainian, russian, slovak,
- czech, danish, dutch, usenglishmax, ukenglish, finnish, french, basque, ngerma
-n, german, swissgerman, ngerman-x-2012-05-30, german-x-2012-05-30, monogreek, g
-reek, ibycus, ancientgreek, hungarian, bengali, tamil, hindi, telugu, gujarati,
- sanskrit, malayalam, kannada, assamese, marathi, oriya, panjabi, italian, lati
-n, latvian, lithuanian, mongolian, mongolianlmc, nynorsk, bokmal, indonesian, e
-speranto, coptic, welsh, irish, interlingua, serbian, serbianc, slovenian, friu
-lan, romansh, estonian, romanian, armenian, uppersorbian, turkish, afrikaans, i
-celandic, kurmanji, polish, portuguese, galician, catalan, spanish, swedish, th
-ai, loaded.
+Babel <3.9f> and hyphenation patterns for 78 languages loaded.
 (./cshonours.cls
 Document Class: cshonours 2000/09/13 v1.4a Modified from Standard LaTeX documen
 t class report.cls by Cara MacNish August 1999/September 2000
@@ -316,13 +306,13 @@ Missing character: There is no € in font cmr12!
 Missing character: There is no ” in font cmr12!
 ) [36] (./cshonours.aux) ) 
 Here is how much of TeX's memory you used:
- 2221 strings out of 493485
- 31753 string characters out of 3143526
- 90137 words of memory out of 3000000
- 5497 multiletter control sequences out of 15000+200000
- 9933 words of font info for 35 fonts, out of 3000000 for 9000
+ 2220 strings out of 493307
+ 31749 string characters out of 6139905
+ 93792 words of memory out of 5000000
+ 5645 multiletter control sequences out of 15000+600000
+ 9933 words of font info for 35 fonts, out of 8000000 for 9000
  957 hyphenation exceptions out of 8191
- 37i,9n,23p,1688b,284s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 37i,9n,23p,1688b,284s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/ams
 fonts/cm/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/
 cm/cmcsc10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cm
@@ -335,7 +325,7 @@ st/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fon
 ts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texlive/texmf-dist/fonts/type
 1/public/amsfonts/cm/cmti12.pfb></usr/share/texlive/texmf-dist/fonts/type1/publ
 ic/amsfonts/cm/cmtt12.pfb>
-Output written on cshonours.pdf (43 pages, 1417143 bytes).
+Output written on cshonours.pdf (43 pages, 1417762 bytes).
 PDF statistics:
  235 PDF objects out of 1000 (max. 8388607)
  152 compressed objects within 2 object streams

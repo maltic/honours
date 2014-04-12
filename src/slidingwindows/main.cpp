@@ -152,7 +152,7 @@ void run_selection_tests (const int n_windows)
 	std::cout << "Loading precomputed windows..." << std::endl;
 	std::vector<PrecomputedWindows> precomp = load_precomputed_windows (std::cin);
 
-	std::sort (precomp.begin(), precomp.end(), precomputed_windows_size_cmp);
+	std::stable_sort (precomp.begin(), precomp.end(), precomputed_windows_size_cmp);
 
 	std::cout << "Finished loading precomputed windows!" << std::endl;
 
@@ -168,6 +168,23 @@ void run_selection_tests (const int n_windows)
 	std::cout << "Done!" << std::endl;
 }
 
+void test_accuracy_landscapes()
+{
+	SelectionTester st;
+	std::cout << "Testing accuracy landscapes.." << std::endl;
+
+	std::cout << "Loading precomputed windows..." << std::endl;
+	std::vector<PrecomputedWindows> precomp = load_precomputed_windows (std::cin);
+
+	std::stable_sort (precomp.begin(), precomp.end(), precomputed_windows_size_cmp);
+
+	std::cout << "Finished loading precomputed windows!" << std::endl;
+
+	st.test_accuracy_landscapes (weighted_activity_selection, precomp);
+
+	std::cout << "Done!" << std::endl;
+}
+
 
 void run_magic_seq_training()
 {
@@ -175,7 +192,8 @@ void run_magic_seq_training()
 	std::cout << "Loading precomputed windows..." << std::endl;
 
 	std::vector<PrecomputedWindows> precomp = load_precomputed_windows (std::cin);
-	// random shuffle time
+
+	// random shuffle
 	std::shuffle ( precomp.begin(), precomp.end(), make_prng() );
 
 	std::cout << "Finished loading precomputed windows!" << std::endl;
@@ -211,13 +229,14 @@ void run_magic_seq_training()
 	}
 
 	std::cout << "Done!" << std::endl;
-
 }
+
+
 
 int main()
 {
 
-	benchmark_ab_splat(24, 1.8, false);
+	run_selection_tests (1);
 	return 0;
 
 	std::string rna, name;

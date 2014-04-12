@@ -85,14 +85,30 @@ public:
 
 			// this commented line was used to produce spreadsheet compatible output
 			std::cout << best_f1score << "\t";
-			for (int & i : best_windows)
-				std::cout << (i + MIN_WINDOW_SIZE) << " ";
+			for (int & w : best_windows)
+				std::cout << (w + MIN_WINDOW_SIZE) << " ";
 			std::cout << "\t" << precomp[i].rna.size() << std::endl;
 
 			avg_f1 += best_f1score;
 		}
 		avg_f1 = avg_f1 / precomp.size();
 		std::cout << "Average best F1 score = " << avg_f1 << std::endl;
+	}
+
+	void test_accuracy_landscapes (const t_selection_algorithm algo, std::vector<PrecomputedWindows>& precomp) {
+		for (int i = 0; i < precomp.size(); ++i)
+		{
+			std::cout << "Exploring accuracy landscape for " << precomp[i].name << std::endl;
+			for (int sz = 0; sz < precomp[i].windows.size(); ++sz)
+			{
+				std::vector<int> selected = algo (precomp[i].windows[sz]);
+				std::string sstruct = get_dotbracket (precomp[i].rna.size(), precomp[i].windows[sz], selected);
+				float f1score = calc_f1score (precomp[i].actual_sstruct, sstruct);
+				std::cout << "Window Size = " << sz + MIN_WINDOW_SIZE << ", f1score = " << f1score << std::endl;
+			}
+		}
+
+
 	}
 };
 
@@ -104,10 +120,10 @@ std::vector<int> bottom_up_selection(std::vector<RNAInterval>& intervals)
 	std::sort(intervals.begin(), intervals.end(), rna_int_size_comp);
 
 	std::vector<int> chosen;
-	for(int i = 0; i < intervals.size(); ++i)
+	for (int i = 0; i < intervals.size(); ++i)
 	{
 		bool choose = true;
-		for(int j = 0; j < chosen.size(); ++j)
+		for (int j = 0; j < chosen.size(); ++j)
 		{
 			if ( !intervals[i].compatible_with(intervals[chosen[j]]) )
 			{
@@ -115,7 +131,7 @@ std::vector<int> bottom_up_selection(std::vector<RNAInterval>& intervals)
 				break;
 			}
 		}
-		if(choose)
+		if (choose)
 			chosen.push_back(i);
 	}
 	return chosen;
