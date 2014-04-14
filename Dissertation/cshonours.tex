@@ -436,13 +436,14 @@ The RNALfold module implements a sliding window RNA folding algorithm. It is des
 
 Version 2.1.6 of the Vienna RNA package was used. The package was built from the C source code after minor modifications were made to the RNALfold module. The Vienna RNA makefile was used to compile the package. The makefile compiles numerous standalone console applications for Vienna RNA's modules. It also creates a static library called RNAlib. This library was linked at compile time, and used to call RNAfold and RNALfold from the algorithms I shall subsequently describe.
 
-The \texttt{Lfold.c} and \texttt{Lfold.h} files (which comprise RNALfold) were modified so that, when the algorithm was executed, RNALfold returned a linked list of local secondary structures and their free energy. Before modification it would instead print them to the standard output stream. The modified versions of these files are available in the files associated with this report.
+The \texttt{Lfold.c} and \texttt{Lfold.h} files (which RNALfold comprises) were modified so that, when the algorithm was executed, RNALfold returned a linked list of local secondary structures and their free energy. Before modification it would instead print them to the standard output stream. The modified versions of these files are available in the files associated with this report.
 
 Statistical tests, regression analyses, and plots were generated using GNU Regression, Econometrics and Time-series Library (as called `gretl') version 1.9.14.
 
 
 \subsection{Test Set}
 The RNA secondary structures used to test algorithms presented in this paper were taken from the RNA STRAND database \cite{andronescu2008rna}. The RNA STRAND database is a free-to-use, curated collection of RNA secondary structures taken from various publicly available databases and publications. A subset of RNA structural data was extracted from the database. This subset contained only RNA structures that were marked having been verified using X-Ray Crystallography, or Nuclear Magnetic Resonance imaging. It also comprises only whole RNAs; none of the RNAs used were fragments or subsequences of larger RNA molecules. Finally, no duplicates were allowed in the test set. Hereafter, I shall refer to this collection of RNA secondary structures as the `testing set'.
+NUMBER OF RNA and RANGE OF LENGTHS.
 
 
 \section{RNA Intervals}
@@ -670,6 +671,7 @@ WAS \& RNAfold & 13.2082 &	0  \\
 
 
 \subsection{Using RNA Intervals For Prediction}
+\label{sec:res_absplat}
 An ordinary least squares linear regression was done to determine the correlation between F-scores recorded for $ab$-splat in the training and validation sets. Figure \ref{fig:abcorrelation} depicts the resulting model. A strong correlation was found ($R^2 = 0.703$, $p < 0.001$) for scores in the training set versus scores in the validation set.
 
 The best $ab$ value pair found in the training set was $a = 24$, $b = 1.8$. The $ab$-splat algorithm was configured using these values. As the data did not appear to be normally distributed, a Wilcoxon Signed-Rank test was done to compare F-scores for $ab$-splat (with the best $ab$ pair) and RNAfold. This test revealed a small difference in the F-scores in the population ($z = 0.1067$), which reflected the small difference in averages (mean RNAfold score = $0.57483$, $ab$-splat = $0.58588$). However, this discrepancy was not statistically significant ($p = 0.915021$).
@@ -709,16 +711,27 @@ Earlier (in Section \ref{sec:softa}), I extracted a single, salient finding from
 
 \section{The $ab$-splat Algorithm}
 
-While the average accuracy was slightly better than Zukers algorithm, this may have been due to chance. The only conclusion we can draw is that both algorithms perform similarly. This was not the expected result.
+Having found support for my hypothesis, I aimed to improve the accuracy and speed of RNA secondary structure prediction using locally optimal windows. This aim was only partially met, but the resulting algorithm still has useful practical applications nonetheless. This algorithm, which I have called $ab$-splat, is theoretically faster than any implementation of the Zuker algorithm. Furthermore, the Zuker algorithm is the fastest known RNA prediction algorithm which has reasonable predictive accuracy. As I shall now argue, $ab$-splat has at least comparable accuracy to RNAfold, which is a state-of-the-art implementation of the Zuker algorithm, and is also faster both in theory, and in practice.
 
-Theoretical complexity confirmed with empirical observation. Possibly the fastest known algorithm.
+\subsection{Accuracy}
+
+My results (details can be found in Section \ref{sec:res_absplat}) showed that, for the RNAs in the testing set, $ab$-splat was slightly more accurate than RNAfold, as it had a small (roughly 2\%) advantage in F-score. However, further testing revealed that this difference was not statistically significant. The null hypothesis for the test used (the Wilcoxon Signed-Rank test) is that there is no difference between the two populations tested. Because this hypothesis could not be rejected ($p > 0.05$), I concluded that the $ab$-splat algorithm has accuracy that is comparable to RNAfold, as there was no statistically significant difference between the F-scores recorded for both algorithms. This may be a limitation of my testing set. Though it was composed of 392 RNAs, it is possible that $ab$-splat could have better or worse relative performance on other data sets. More research must be done before we can definitely say that one algorithm has greater predictive power than the other.
+
+\subsection{Computational Complexity}
+
+I have shown that the time complexity of the $ab$-splat algorithm is $O(n^2)$ in the worst case, given a RNA of length $n$. The Zuker algorithm (and thus RNAfold) require $O(n^3)$ time. I have also shown that this speed up is clear in practice through empirical testing. This is of practical import, as RNA folding can often take considerable computational time. Additionally, $ab$-splat can be made to run efficiently on parallel architectures. Instead of using a sliding window repeatedly with increasing sizes, all windows could be computed in parallel. Thence one could also optimize Weighted Activity Selection by using a parallel sorting algorithm, and computing the $q$ array in parallel. Unfortunately, the parallel version was not implemented; it is therefore a viable direction for future research.
+
+Memory usage was a less important criteria when analysing the performance of $ab$-splat, as time is usually the bottleneck during RNA secondary structure prediction. As a result, I did not test this aspect of $ab$-splats performance. However, I have shown that the theoretical worst case space complexity is $O(n^\frac{3}{2})$; this is more frugal than the Zuker algorithm which requires $O(n^2)$ space.
+
+\subsection{A Better Algorithm}
 
 The accuracy landscape was extremely rugged, local maxima and minima
 Hard to find features which correlate well with accuracy
 Perhaps more careful analysis or machine learning is needed for oracle
 All that is needed is a `good enough' oracle
 
-lessons for RNA design, GC pairs and other rules
+
+lessons from RNA design, GC pairs and other rules
 look for these in the primary sequence and formulate a hypothesis
 
 incorporation of pseudoknots. hotknots etc.

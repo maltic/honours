@@ -23,7 +23,7 @@
 \contentsline {subsection}{\numberline {2.3.3}Score Selection}{20}
 \contentsline {subsection}{\numberline {2.3.4}Weighted Activity Selection}{20}
 \contentsline {subsection}{\numberline {2.3.5}Comparison of RNA Interval Selection Algorithms}{21}
-\contentsline {section}{\numberline {2.4}Prediction Using Windows}{21}
+\contentsline {section}{\numberline {2.4}Prediction Using Windows}{22}
 \contentsline {subsection}{\numberline {2.4.1}Time Complexity}{22}
 \contentsline {subsection}{\numberline {2.4.2}Test Procedure}{23}
 \contentsline {chapter}{\numberline {3}Results}{25}
@@ -34,4 +34,7 @@
 \contentsline {subsection}{\numberline {4.1.1}Future Work}{30}
 \contentsline {subsection}{\numberline {4.1.2}Implications}{31}
 \contentsline {section}{\numberline {4.2}The $ab$-splat Algorithm}{32}
-\contentsline {section}{\numberline {4.3}Conclusions}{32}
+\contentsline {subsection}{\numberline {4.2.1}Accuracy}{32}
+\contentsline {subsection}{\numberline {4.2.2}Computational Complexity}{32}
+\contentsline {subsection}{\numberline {4.2.3}A Better Algorithm}{33}
+\contentsline {section}{\numberline {4.3}Conclusions}{33}
