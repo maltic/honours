@@ -90,6 +90,13 @@
   a neural network.
 \newblock {\em BMC bioinformatics 11}, Suppl 6 (2010), S21.
 
+\bibitem{lee2014rna}
+{\sc Lee, J., Kladwang, W., Lee, M., Cantu, D., Azizyan, M., Kim, H.,
+  Limpaecher, A., Yoon, S., Treuille, A., and Das, R.}
+\newblock Rna design rules from a massive open laboratory.
+\newblock {\em Proceedings of the National Academy of Sciences\/} (2014),
+  201313039.
+
 \bibitem{leung2013coral}
 {\sc Leung, Y.~Y., Ryvkin, P., Ungar, L.~H., Gregory, B.~D., and Wang, L.-S.}
 \newblock Coral: predicting non-coding rnas from small rna-sequencing data.

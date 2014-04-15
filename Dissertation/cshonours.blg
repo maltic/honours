@@ -1,46 +1,46 @@
-This is BibTeX, Version 0.99d (TeX Live 2012/Debian)
+This is BibTeX, Version 0.99d (TeX Live 2013/Debian)
 Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
 The top-level auxiliary file: cshonours.aux
 The style file: acm.bst
 Database file #1: cshonours.bib
-You've used 39 entries,
+You've used 40 entries,
             2253 wiz_defined-function locations,
-            770 strings with 10960 characters,
-and the built_in function-call counts, 14043 in all, are:
-= -- 1383
-> -- 693
+            775 strings with 11210 characters,
+and the built_in function-call counts, 14617 in all, are:
+= -- 1431
+> -- 745
 < -- 0
-+ -- 293
-- -- 246
-* -- 1236
-:= -- 2296
-add.period$ -- 119
-call.type$ -- 39
-change.case$ -- 237
++ -- 314
+- -- 266
+* -- 1294
+:= -- 2397
+add.period$ -- 122
+call.type$ -- 40
+change.case$ -- 250
 chr.to.int$ -- 0
-cite$ -- 39
-duplicate$ -- 415
-empty$ -- 1075
-format.name$ -- 246
-if$ -- 2850
+cite$ -- 40
+duplicate$ -- 424
+empty$ -- 1104
+format.name$ -- 266
+if$ -- 2958
 int.to.chr$ -- 0
-int.to.str$ -- 39
-missing$ -- 41
-newline$ -- 198
-num.names$ -- 78
-pop$ -- 192
+int.to.str$ -- 40
+missing$ -- 42
+newline$ -- 203
+num.names$ -- 80
+pop$ -- 203
 preamble$ -- 1
-purify$ -- 199
+purify$ -- 211
 quote$ -- 0
-skip$ -- 248
+skip$ -- 254
 stack$ -- 0
-substring$ -- 1036
-swap$ -- 106
+substring$ -- 1068
+swap$ -- 108
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 152
+type$ -- 156
 warning$ -- 0
-while$ -- 147
-width$ -- 41
-write$ -- 398
+while$ -- 150
+width$ -- 42
+write$ -- 408

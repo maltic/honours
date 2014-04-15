@@ -725,14 +725,13 @@ Memory usage was a less important criteria when analysing the performance of $ab
 
 \subsection{A Better Algorithm}
 
-The accuracy landscape was extremely rugged, local maxima and minima
-Hard to find features which correlate well with accuracy
-Perhaps more careful analysis or machine learning is needed for oracle
-All that is needed is a `good enough' oracle
+The notable shortcoming of the $ab$-splat algorithm is that it is, at best, not much more accurate than current algorithms. In this sense, the aims of my investigation were not met. This deficiency is unequivocal, and perhaps a little unexpected, given that my original hypothesis was strongly supported, and there do exist locally optimal windows that, when merged, are much more accurate than a globally optimal solution. I now discuss various avenues of inquiry which I believe will lead to algorithms capable of leverage this reservoir of accuracy $ab$-splat was not able to tap.
+
+The landscape of F-scores as a function of window size was extremely rugged, often with many local minima and maxima in close proximity to one another. This implies the difficulty of choosing good window sizes. Indeed, I attempted to define a function that, given a primary RNA sequence, would predict a good window size; I had no success. Features such as the mean and median stem size found by RNAfold did not appear to correlate well with good window sizes. Intriguingly, the length of the RNA did correlate very roughly with accurate window sizes. This proved difficult to use in practice due to the extreme ruggedness of the accuracy landscape. It is possible that machine learning algorithms could find and use features of the primary sequence to make reliable guesses about good window sizes. 
+
+Features used for RNA design might also be useful. RNA design is the reverse problem to RNA prediction: given a target secondary structure we must find a primary sequence that is most likely to fold into it. Because of the computational difficulty of the problem, finding reliable heuristics or rules is useful. Lee et al. \cite{lee2014rna} had tens of thousands of online, human participants learn to design RNA molecules. Using the insights found by these participants, and information found using machine learning, they confirmed several previously postulated rules for RNA design, and found many new ones. Some of these should be readily applicable here. For example, they confirmed that G-C base pairs usually close multiloops, and that adenosine concentration is unusually high outside of stems. Furthermore, they found useful rules for guanine base placement at the end of hairpin loops. These are just some of the readily applicable rules that an `oracle' type algorithm could use to predict good window sizes using only the RNA primary sequence. A hypothesis about various stems could be formed, and thence some prediction about the best window size.
 
 
-lessons from RNA design, GC pairs and other rules
-look for these in the primary sequence and formulate a hypothesis
 
 incorporation of pseudoknots. hotknots etc.
 
