@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012/Debian) (format=pdflatex 2014.3.26)  17 APR 2014 12:02
+This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012/Debian) (format=pdflatex 2014.3.26)  22 APR 2014 13:25
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -232,12 +232,12 @@ Package pdftex.def Info: transcription.png used on input line 52.
 <nuss_rna.png, id=49, 1155.31625pt x 659.46375pt>
 File: nuss_rna.png Graphic file (type png)
  <use nuss_rna.png>
-Package pdftex.def Info: nuss_rna.png used on input line 93.
+Package pdftex.def Info: nuss_rna.png used on input line 92.
 (pdftex.def)             Requested size: 1155.31345pt x 659.46213pt.
  [5 <./nuss_rna.png>] <figure4.png, id=55, 1482.53876pt x 677.53125pt>
 File: figure4.png Graphic file (type png)
  <use figure4.png>
-Package pdftex.def Info: figure4.png used on input line 162.
+Package pdftex.def Info: figure4.png used on input line 161.
 (pdftex.def)             Requested size: 1482.53516pt x 677.52959pt.
 
 [6]
@@ -252,7 +252,7 @@ Missing character: There is no ™ in font cmr12!
 <slidingwindow.png, id=81, 735.74875pt x 278.03876pt>
 File: slidingwindow.png Graphic file (type png)
  <use slidingwindow.png>
-Package pdftex.def Info: slidingwindow.png used on input line 391.
+Package pdftex.def Info: slidingwindow.png used on input line 390.
 (pdftex.def)             Requested size: 735.74695pt x 278.03807pt.
 
 [13 <./slidingwindow.png>] [14] [15]
@@ -263,28 +263,28 @@ Chapter 2.
 File: rnainterval.png Graphic file (type png)
 
 <use rnainterval.png>
-Package pdftex.def Info: rnainterval.png used on input line 454.
+Package pdftex.def Info: rnainterval.png used on input line 452.
 (pdftex.def)             Requested size: 940.51146pt x 238.8919pt.
  <compat.png, id=99, 827.09pt x 192.72pt>
 File: compat.png Graphic file (type png)
 
 <use compat.png>
-Package pdftex.def Info: compat.png used on input line 475.
+Package pdftex.def Info: compat.png used on input line 473.
 (pdftex.def)             Requested size: 827.08797pt x 192.71951pt.
  [18 <./rnainterval.png>]
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 491.
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 489.
 
 
 (/usr/share/texlive/texmf-dist/tex/latex/base/omscmr.fd
 File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 491.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 489.
  [19 <./compat.png>]
 <q-i.png, id=111, 533.995pt x 169.63374pt>
 File: q-i.png Graphic file (type png)
  <use q-i.png>
-Package pdftex.def Info: q-i.png used on input line 519.
+Package pdftex.def Info: q-i.png used on input line 517.
 (pdftex.def)             Requested size: 533.9937pt x 169.63332pt.
  [20 <./q-i.png>]
 [21] [22] [23] [24]
@@ -292,7 +292,7 @@ Chapter 3.
 <wasrnafoldplot.pdf, id=130, 361.35pt x 216.81pt>
 File: wasrnafoldplot.pdf Graphic file (type pdf)
  <use wasrnafoldplot.pdf>
-Package pdftex.def Info: wasrnafoldplot.pdf used on input line 666.
+Package pdftex.def Info: wasrnafoldplot.pdf used on input line 664.
 (pdftex.def)             Requested size: 361.34912pt x 216.80946pt.
 
 [25
@@ -301,7 +301,7 @@ Package pdftex.def Info: wasrnafoldplot.pdf used on input line 666.
 <abcorrelation.pdf, id=148, 361.35pt x 216.81pt>
 File: abcorrelation.pdf Graphic file (type pdf)
  <use abcorrelation.pdf>
-Package pdftex.def Info: abcorrelation.pdf used on input line 682.
+Package pdftex.def Info: abcorrelation.pdf used on input line 680.
 (pdftex.def)             Requested size: 361.34912pt x 216.80946pt.
 
 [28 <./abcorrelation.pdf>]
@@ -319,11 +319,11 @@ Missing character: There is no ” in font cmr12!
 Here is how much of TeX's memory you used:
  2224 strings out of 493485
  31796 string characters out of 3143526
- 90165 words of memory out of 3000000
+ 90166 words of memory out of 3000000
  5500 multiletter control sequences out of 15000+200000
  9933 words of font info for 35 fonts, out of 3000000 for 9000
  957 hyphenation exceptions out of 8191
- 37i,9n,23p,1688b,284s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 37i,9n,23p,1677b,284s stack positions out of 5000i,500n,10000p,200000b,50000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/c
 m/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmcs
 c10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pf
@@ -336,7 +336,7 @@ s/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type
 1/public/amsfonts/cm/cmsy8.pfb></usr/share/texlive/texmf-dist/fonts/type1/publi
 c/amsfonts/cm/cmti12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsf
 onts/cm/cmtt12.pfb>
-Output written on cshonours.pdf (46 pages, 1425795 bytes).
+Output written on cshonours.pdf (46 pages, 1425776 bytes).
 PDF statistics:
  244 PDF objects out of 1000 (max. 8388607)
  158 compressed objects within 2 object streams
