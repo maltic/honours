@@ -1,40 +1,42 @@
 \contentsline {chapter}{Abstract}{ii}
 \contentsline {chapter}{Acknowledgements}{iii}
 \contentsline {chapter}{\numberline {1}Introduction}{1}
-\contentsline {section}{\numberline {1.1}DNA and RNA}{1}
-\contentsline {section}{\numberline {1.2}Dynamic Programming Techniques}{4}
-\contentsline {subsection}{\numberline {1.2.1}Fundamental Algorithms}{4}
-\contentsline {subsection}{\numberline {1.2.2}Pseudoknots}{9}
-\contentsline {section}{\numberline {1.3}Accuracy}{10}
-\contentsline {section}{\numberline {1.4}Alternative Techniques}{11}
-\contentsline {subsection}{\numberline {1.4.1}Soft Computing}{11}
-\contentsline {subsection}{\numberline {1.4.2}Context Free Grammars}{12}
-\contentsline {section}{\numberline {1.5}Locally Optimal Structure Prediction}{13}
-\contentsline {section}{\numberline {1.6}State of the Art: Global Optimization}{14}
-\contentsline {chapter}{\numberline {2}Methodology}{16}
-\contentsline {section}{\numberline {2.1}Materials}{16}
-\contentsline {subsection}{\numberline {2.1.1}Environment}{16}
-\contentsline {subsection}{\numberline {2.1.2}Software}{16}
-\contentsline {subsection}{\numberline {2.1.3}Testing Set}{17}
-\contentsline {section}{\numberline {2.2}RNA Intervals}{17}
-\contentsline {section}{\numberline {2.3}Merging RNA Intervals}{18}
-\contentsline {subsection}{\numberline {2.3.1}Top-Down Selection}{19}
-\contentsline {subsection}{\numberline {2.3.2}Bottom-Up Selection}{20}
-\contentsline {subsection}{\numberline {2.3.3}Score Selection}{20}
-\contentsline {subsection}{\numberline {2.3.4}Weighted Activity Selection}{20}
-\contentsline {subsection}{\numberline {2.3.5}Comparison of RNA Interval Selection Algorithms}{21}
-\contentsline {section}{\numberline {2.4}Prediction Using Windows}{22}
-\contentsline {subsection}{\numberline {2.4.1}Time Complexity}{22}
-\contentsline {subsection}{\numberline {2.4.2}Test Procedure}{23}
-\contentsline {chapter}{\numberline {3}Results}{25}
-\contentsline {section}{\numberline {3.1}RNA Interval Selection}{25}
-\contentsline {subsection}{\numberline {3.1.1}Using RNA Intervals For Prediction}{28}
-\contentsline {chapter}{\numberline {4}Discussion}{29}
-\contentsline {section}{\numberline {4.1}Local Optimization}{29}
-\contentsline {subsection}{\numberline {4.1.1}Future Work}{30}
-\contentsline {subsection}{\numberline {4.1.2}Implications}{31}
-\contentsline {section}{\numberline {4.2}The $ab$-splat Algorithm}{32}
-\contentsline {subsection}{\numberline {4.2.1}Accuracy}{32}
-\contentsline {subsection}{\numberline {4.2.2}Computational Complexity}{32}
-\contentsline {subsection}{\numberline {4.2.3}A Better Algorithm}{33}
-\contentsline {section}{\numberline {4.3}Conclusions}{34}
+\contentsline {chapter}{\numberline {2}Relevant Literature}{2}
+\contentsline {section}{\numberline {2.1}DNA and RNA}{2}
+\contentsline {section}{\numberline {2.2}Dynamic Programming Techniques}{5}
+\contentsline {subsection}{\numberline {2.2.1}The Nussinov Algorithm}{5}
+\contentsline {subsection}{\numberline {2.2.2}The Zuker Algorithm}{7}
+\contentsline {subsection}{\numberline {2.2.3}Pseudoknots}{10}
+\contentsline {section}{\numberline {2.3}Accuracy}{11}
+\contentsline {section}{\numberline {2.4}Alternative Techniques}{12}
+\contentsline {subsection}{\numberline {2.4.1}Soft Computing}{12}
+\contentsline {subsection}{\numberline {2.4.2}Context Free Grammars}{13}
+\contentsline {section}{\numberline {2.5}Locally Optimal Structure Prediction}{14}
+\contentsline {section}{\numberline {2.6}State of the Art: Global Optimization}{15}
+\contentsline {chapter}{\numberline {3}Methodology}{17}
+\contentsline {section}{\numberline {3.1}Materials}{17}
+\contentsline {subsection}{\numberline {3.1.1}Environment}{17}
+\contentsline {subsection}{\numberline {3.1.2}Software}{17}
+\contentsline {subsection}{\numberline {3.1.3}Testing Set}{18}
+\contentsline {section}{\numberline {3.2}RNA Intervals}{18}
+\contentsline {section}{\numberline {3.3}Merging RNA Intervals}{19}
+\contentsline {subsection}{\numberline {3.3.1}Top-Down Selection}{20}
+\contentsline {subsection}{\numberline {3.3.2}Bottom-Up Selection}{21}
+\contentsline {subsection}{\numberline {3.3.3}Score Selection}{21}
+\contentsline {subsection}{\numberline {3.3.4}Weighted Activity Selection}{21}
+\contentsline {subsection}{\numberline {3.3.5}Comparison of RNA Interval Selection Algorithms}{22}
+\contentsline {section}{\numberline {3.4}Prediction Using Windows}{23}
+\contentsline {subsection}{\numberline {3.4.1}Time Complexity}{23}
+\contentsline {subsection}{\numberline {3.4.2}Test Procedure}{24}
+\contentsline {chapter}{\numberline {4}Results}{26}
+\contentsline {section}{\numberline {4.1}RNA Interval Selection}{26}
+\contentsline {section}{\numberline {4.2}Using RNA Intervals For Prediction}{27}
+\contentsline {chapter}{\numberline {5}Discussion}{31}
+\contentsline {section}{\numberline {5.1}Local Optimization}{31}
+\contentsline {subsection}{\numberline {5.1.1}Future Work}{32}
+\contentsline {subsection}{\numberline {5.1.2}Implications}{33}
+\contentsline {section}{\numberline {5.2}The $ab$-splat Algorithm}{34}
+\contentsline {subsection}{\numberline {5.2.1}Accuracy}{34}
+\contentsline {subsection}{\numberline {5.2.2}Computational Complexity}{34}
+\contentsline {subsection}{\numberline {5.2.3}A Better Algorithm}{35}
+\contentsline {section}{\numberline {5.3}Conclusions}{36}

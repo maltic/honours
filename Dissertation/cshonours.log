@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012/Debian) (format=pdflatex 2014.3.26)  22 APR 2014 13:25
+This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012/Debian) (format=pdflatex 2014.3.26)  23 APR 2014 13:34
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -93,35 +93,446 @@ Document Style algorithmicx 1.2 - a greatly improved `algorithmic' style
 Package: algpseudocode 
 
 Document Style - pseudocode environments for use with the `algorithmicx' style
-) (./cshonours.aux)
+) (/usr/share/texlive/texmf-dist/tex/latex/siunitx/siunitx.sty
+(/usr/share/texlive/texmf-dist/tex/latex/l3kernel/expl3.sty
+(/usr/share/texlive/texmf-dist/tex/latex/l3kernel/l3names.sty
+(/usr/share/texlive/texmf-dist/tex/latex/l3kernel/l3bootstrap.sty
+Package: l3bootstrap 2011/12/29 v3110 L3 Experimental bootstrap code
+)
+Package: l3names 2012/03/04 v3494 L3 Experimental namespace for primitives
+)
+(/usr/share/texlive/texmf-dist/tex/latex/etex-pkg/etex.sty
+Package: etex 1998/03/26 v2.0 eTeX basic definition package (PEB)
+\et@xins=\count98
+)
+Package: expl3 2012/04/23 v3570 L3 Experimental code bundle wrapper
+
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/color.sty
+Package: color 2005/11/14 v1.0j Standard LaTeX Color (DPC)
+
+(/usr/share/texlive/texmf-dist/tex/latex/latexconfig/color.cfg
+File: color.cfg 2007/01/18 v1.5 color configuration of teTeX/TeXLive
+)
+Package color Info: Driver file: pdftex.def on input line 130.
+)
+(/usr/share/texlive/texmf-dist/tex/latex/l3kernel/l3basics.sty
+Package: l3basics 2012/03/04 v3491 L3 Experimental basic definitions
+)
+(/usr/share/texlive/texmf-dist/tex/latex/l3kernel/l3expan.sty
+Package: l3expan 2012/02/26 v3460 L3 Experimental argument expansion
+)
+(/usr/share/texlive/texmf-dist/tex/latex/l3kernel/l3tl.sty
+Package: l3tl 2012/03/04 v3490 L3 Experimental token lists
+)
+(/usr/share/texlive/texmf-dist/tex/latex/l3kernel/l3seq.sty
+Package: l3seq 2012/03/04 v3490 L3 Experimental sequences and stacks
+)
+(/usr/share/texlive/texmf-dist/tex/latex/l3kernel/l3int.sty
+Package: l3int 2012/03/04 v3490 L3 Experimental integers
+\c_max_int=\count99
+\l_tmpa_int=\count100
+\l_tmpb_int=\count101
+\l_tmpc_int=\count102
+\g_tmpa_int=\count103
+\g_tmpb_int=\count104
+)
+(/usr/share/texlive/texmf-dist/tex/latex/l3kernel/l3quark.sty
+Package: l3quark 2012/02/12 v3384 L3 Experimental quarks
+)
+(/usr/share/texlive/texmf-dist/tex/latex/l3kernel/l3prg.sty
+Package: l3prg 2012/03/04 v3490 L3 Experimental control structures
+\g_prg_map_int=\count105
+)
+(/usr/share/texlive/texmf-dist/tex/latex/l3kernel/l3clist.sty
+Package: l3clist 2012/03/04 v3490 L3 Experimental comma separated lists
+)
+(/usr/share/texlive/texmf-dist/tex/latex/l3kernel/l3token.sty
+Package: l3token 2012/03/04 v3491 L3 Experimental token manipulation
+)
+(/usr/share/texlive/texmf-dist/tex/latex/l3kernel/l3prop.sty
+Package: l3prop 2012/03/04 v3490 L3 Experimental property lists
+)
+(/usr/share/texlive/texmf-dist/tex/latex/l3kernel/l3msg.sty
+Package: l3msg 2012/04/23 v3568 L3 Experimental messages
+)
+(/usr/share/texlive/texmf-dist/tex/latex/l3kernel/l3file.sty
+Package: l3file 2012/03/09 v3520 L3 Experimental file and I/O operations
+\l_iow_stream_int=\count106
+\l_iow_line_length_int=\count107
+\l_iow_target_length_int=\count108
+\l_iow_current_line_int=\count109
+\l_iow_current_word_int=\count110
+\l_iow_current_indentation_int=\count111
+)
+(/usr/share/texlive/texmf-dist/tex/latex/l3kernel/l3skip.sty
+Package: l3skip 2012/03/05 v3499 L3 Experimental dimensions and skips
+\l_tmpa_dim=\dimen103
+\l_tmpb_dim=\dimen104
+\l_tmpc_dim=\dimen105
+\g_tmpa_dim=\dimen106
+\g_tmpb_dim=\dimen107
+\l_tmpa_skip=\skip46
+\l_tmpb_skip=\skip47
+\l_tmpc_skip=\skip48
+\g_tmpa_skip=\skip49
+\g_tmpb_skip=\skip50
+)
+(/usr/share/texlive/texmf-dist/tex/latex/l3kernel/l3keys.sty
+Package: l3keys 2012/03/03 v3487 L3 Experimental key-value interfaces
+\g_keyval_level_int=\count112
+\l_keys_choice_int=\count113
+)
+(/usr/share/texlive/texmf-dist/tex/latex/l3kernel/l3fp.sty
+Package: l3fp 2012/03/04 v3490 L3 Experimental floating-point operations
+\c_one_million=\count114
+\c_one_hundred_million=\count115
+\c_five_hundred_million=\count116
+\c_one_thousand_million=\count117
+\c_fp_pi_by_four_decimal_int=\count118
+\c_fp_pi_by_four_extended_int=\count119
+\c_fp_pi_decimal_int=\count120
+\c_fp_pi_extended_int=\count121
+\c_fp_two_pi_decimal_int=\count122
+\c_fp_two_pi_extended_int=\count123
+\l_fp_count_int=\count124
+\l_fp_div_offset_int=\count125
+\l_fp_exp_integer_int=\count126
+\l_fp_exp_decimal_int=\count127
+\l_fp_exp_extended_int=\count128
+\l_fp_exp_exponent_int=\count129
+\l_fp_input_a_sign_int=\count130
+\l_fp_input_a_integer_int=\count131
+\l_fp_input_a_decimal_int=\count132
+\l_fp_input_a_exponent_int=\count133
+\l_fp_input_b_sign_int=\count134
+\l_fp_input_b_integer_int=\count135
+\l_fp_input_b_decimal_int=\count136
+\l_fp_input_b_exponent_int=\count137
+\l_fp_input_a_extended_int=\count138
+\l_fp_input_b_extended_int=\count139
+\l_fp_mul_a_i_int=\count140
+\l_fp_mul_a_ii_int=\count141
+\l_fp_mul_a_iii_int=\count142
+\l_fp_mul_a_iv_int=\count143
+\l_fp_mul_a_v_int=\count144
+\l_fp_mul_a_vi_int=\count145
+\l_fp_mul_b_i_int=\count146
+\l_fp_mul_b_ii_int=\count147
+\l_fp_mul_b_iii_int=\count148
+\l_fp_mul_b_iv_int=\count149
+\l_fp_mul_b_v_int=\count150
+\l_fp_mul_b_vi_int=\count151
+\l_fp_mul_output_int=\count152
+\l_fp_output_sign_int=\count153
+\l_fp_output_integer_int=\count154
+\l_fp_output_decimal_int=\count155
+\l_fp_output_exponent_int=\count156
+\l_fp_output_extended_int=\count157
+\l_fp_round_position_int=\count158
+\l_fp_round_target_int=\count159
+\l_fp_split_sign_int=\count160
+\l_fp_internal_int=\count161
+\l_fp_trig_octant_int=\count162
+\l_fp_trig_sign_int=\count163
+\l_fp_trig_decimal_int=\count164
+\l_fp_trig_extended_int=\count165
+\l_fp_internal_dim=\dimen108
+\l_fp_internal_skip=\skip51
+)
+(/usr/share/texlive/texmf-dist/tex/latex/l3kernel/l3box.sty
+Package: l3box 2012/03/04 v3490 L3 Experimental boxes
+\l_tmpb_box=\box28
+\l_box_top_dim=\dimen109
+\l_box_bottom_dim=\dimen110
+\l_box_left_dim=\dimen111
+\l_box_right_dim=\dimen112
+\l_box_top_new_dim=\dimen113
+\l_box_bottom_new_dim=\dimen114
+\l_box_left_new_dim=\dimen115
+\l_box_right_new_dim=\dimen116
+\l_box_internal_box=\box29
+)
+(/usr/share/texlive/texmf-dist/tex/latex/l3kernel/l3coffins.sty
+Package: l3coffins 2012/03/03 v3482 L3 Experimental coffin code layer
+\l_coffin_internal_box=\box30
+\l_coffin_internal_dim=\dimen117
+\l_coffin_offset_x_dim=\dimen118
+\l_coffin_offset_y_dim=\dimen119
+\l_coffin_x_dim=\dimen120
+\l_coffin_y_dim=\dimen121
+\l_coffin_x_prime_dim=\dimen122
+\l_coffin_y_prime_dim=\dimen123
+\l_coffin_Depth_dim=\dimen124
+\l_coffin_Height_dim=\dimen125
+\l_coffin_TotalHeight_dim=\dimen126
+\l_coffin_Width_dim=\dimen127
+\c_empty_coffin=\box31
+\l_coffin_aligned_coffin=\box32
+\l_coffin_aligned_internal_coffin=\box33
+\l_coffin_bounding_shift_dim=\dimen128
+\l_coffin_left_corner_dim=\dimen129
+\l_coffin_right_corner_dim=\dimen130
+\l_coffin_bottom_corner_dim=\dimen131
+\l_coffin_top_corner_dim=\dimen132
+\l_coffin_scaled_total_height_dim=\dimen133
+\l_coffin_scaled_width_dim=\dimen134
+\l_coffin_display_coffin=\box34
+\l_coffin_display_coord_coffin=\box35
+\l_coffin_display_pole_coffin=\box36
+\l_coffin_display_offset_dim=\dimen135
+\l_coffin_display_x_dim=\dimen136
+\l_coffin_display_y_dim=\dimen137
+)
+(/usr/share/texlive/texmf-dist/tex/latex/l3kernel/l3color.sty
+Package: l3color 2011/09/07 v2776 L3 Experimental colour support
+)
+(/usr/share/texlive/texmf-dist/tex/latex/l3kernel/l3luatex.sty
+Package: l3luatex 2012/02/09 v3355 L3 Experimental LuaTeX-specific functions
+\g_cctab_allocate_int=\count166
+\g_cctab_stack_int=\count167
+))
+Package: siunitx 2012/05/03 v2.5c A comprehensive (SI) units package
+
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amstext.sty
+Package: amstext 2000/06/29 v2.01
+
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsgen.sty
+File: amsgen.sty 1999/11/30 v2.0
+\@emptytoks=\toks17
+\ex@=\dimen138
+))
+(/usr/share/texlive/texmf-dist/tex/latex/tools/array.sty
+Package: array 2008/09/09 v2.4c Tabular extension package (FMi)
+\col@sep=\dimen139
+\extrarowheight=\dimen140
+\NC@list=\toks18
+\extratabsurround=\skip52
+\backup@length=\skip53
+)
+(/usr/share/texlive/texmf-dist/tex/latex/l3packages/l3keys2e/l3keys2e.sty
+(/usr/share/texlive/texmf-dist/tex/latex/l3packages/xparse/xparse.sty
+Package: xparse 2012/04/23 v3570 L3 Experimental document command parser
+\l_xparse_current_arg_int=\count168
+\l_xparse_m_args_int=\count169
+\l_xparse_mandatory_args_int=\count170
+\l_xparse_processor_int=\count171
+\l_xparse_v_nesting_int=\count172
+)
+Package: l3keys2e 2012/04/23 v3570 LaTeX2e option processing using LaTeX3 keys
+)
+\l_siunitx_tmp_box=\box37
+\l_siunitx_tmp_dim=\dimen141
+\l_siunitx_tmp_int=\count173
+Variant \prop_get:NVNT already defined; not changing it on line 360
+Variant \prop_get:NVNF already defined; not changing it on line 361
+Variant \prop_get:NVNTF already defined; not changing it on line 362
+\l_siunitx_number_mantissa_length_int=\count174
+\l_siunitx_number_uncert_length_int=\count175
+\l_siunitx_round_int=\count176
+\l_siunitx_process_decimal_int=\count177
+\l_siunitx_process_uncertainty_int=\count178
+\l_siunitx_process_fixed_int=\count179
+\l_siunitx_process_integer_min_int=\count180
+\l_siunitx_process_precision_int=\count181
+\l_siunitx_group_min_int=\count182
+\l_siunitx_angle_marker_box=\box38
+\l_siunitx_angle_unit_box=\box39
+\l_siunitx_angle_marker_dim=\dimen142
+\l_siunitx_angle_unit_dim=\dimen143
+\l_siunitx_unit_int=\count183
+\l_siunitx_unit_denominator_int=\count184
+\l_siunitx_unit_numerator_int=\count185
+\l_siunitx_unit_prefix_int=\count186
+\l_siunitx_unit_prefix_base_int=\count187
+\l_siunitx_unit_prefix_gram_int=\count188
+\l_siunitx_number_product_int=\count189
+\c_siunitx_one_fill_skip=\skip54
+\l_siunitx_table_unit_align_skip=\skip55
+\l_siunitx_table_exponent_dim=\dimen144
+\l_siunitx_table_integer_dim=\dimen145
+\l_siunitx_table_mantissa_dim=\dimen146
+\l_siunitx_table_marker_dim=\dimen147
+\l_siunitx_table_result_dim=\dimen148
+\l_siunitx_table_uncert_dim=\dimen149
+\l_siunitx_table_fill_pre_dim=\dimen150
+\l_siunitx_table_fill_post_dim=\dimen151
+\l_siunitx_table_fill_mid_dim=\dimen152
+\l_siunitx_table_pre_box=\box40
+\l_siunitx_table_post_box=\box41
+\l_siunitx_table_mantissa_box=\box42
+\l_siunitx_table_result_box=\box43
+\l_siunitx_table_number_align_skip=\skip56
+\l_siunitx_table_text_align_skip=\skip57
+.................................................
+. LaTeX info: "xparse/define-command"
+. 
+. Defining document command \DeclareBinaryPrefix with arg. spec. 'mmm' on line
+. 7037.
+.................................................
+.................................................
+. LaTeX info: "xparse/define-command"
+. 
+. Defining document command \DeclareSIPostPower with arg. spec. 'mm' on line
+. 7040.
+.................................................
+.................................................
+. LaTeX info: "xparse/define-command"
+. 
+. Defining document command \DeclareSIPrefix with arg. spec. 'mmm' on line
+. 7043.
+.................................................
+.................................................
+. LaTeX info: "xparse/define-command"
+. 
+. Defining document command \DeclareSIPrePower with arg. spec. 'mm' on line
+. 7046.
+.................................................
+.................................................
+. LaTeX info: "xparse/define-command"
+. 
+. Defining document command \DeclareSIQualifier with arg. spec. 'mm' on line
+. 7049.
+.................................................
+.................................................
+. LaTeX info: "xparse/define-command"
+. 
+. Defining document command \DeclareSIUnit with arg. spec. 'O{}mm' on line
+. 7052.
+.................................................
+.................................................
+. LaTeX info: "xparse/define-command"
+. 
+. Defining document command \DeclareSIUnitWithOptions with arg. spec. 'mmm' on
+. line 7055.
+.................................................
+.................................................
+. LaTeX info: "xparse/define-command"
+. 
+. Defining document command \ang with arg. spec. 'o>{\SplitArgument {2}{;}}m'
+. on line 7070.
+.................................................
+.................................................
+. LaTeX info: "xparse/define-command"
+. 
+. Defining document command \num with arg. spec. 'om' on line 7078.
+.................................................
+.................................................
+. LaTeX info: "xparse/define-command"
+. 
+. Defining document command \numlist with arg. spec. 'o>{\SplitList {;}}m' on
+. line 7086.
+.................................................
+.................................................
+. LaTeX info: "xparse/define-command"
+. 
+. Defining document command \numrange with arg. spec. 'omm' on line 7094.
+.................................................
+.................................................
+. LaTeX info: "xparse/define-command"
+. 
+. Defining document command \SIlist with arg. spec. 'o>{\SplitList {;}}mm' on
+. line 7105.
+.................................................
+.................................................
+. LaTeX info: "xparse/define-command"
+. 
+. Defining document command \SIrange with arg. spec. 'ommm' on line 7116.
+.................................................
+.................................................
+. LaTeX info: "xparse/define-command"
+. 
+. Defining document command \SI with arg. spec. 'omom' on line 7127.
+.................................................
+.................................................
+. LaTeX info: "xparse/define-command"
+. 
+. Defining document command \sisetup with arg. spec. 'm' on line 7130.
+.................................................
+.................................................
+. LaTeX info: "xparse/define-command"
+. 
+. Defining document command \tablenum with arg. spec. 'om' on line 7142.
+.................................................
+.................................................
+. LaTeX info: "xparse/define-command"
+. 
+. Defining document command \si with arg. spec. 'om' on line 7153.
+.................................................
+.................................................
+. LaTeX info: "xparse/define-command"
+. 
+. Defining document command \siunitx_bookmark_num:w with arg. spec. 'om' on
+. line 7197.
+.................................................
+.................................................
+. LaTeX info: "xparse/define-command"
+. 
+. Defining document command \siunitx_bookmark_numrange:w with arg. spec. 'omm'
+. on line 7199.
+.................................................
+.................................................
+. LaTeX info: "xparse/define-command"
+. 
+. Defining document command \siunitx_bookmark_SI:w with arg. spec. 'omom' on
+. line 7201.
+.................................................
+.................................................
+. LaTeX info: "xparse/define-command"
+. 
+. Defining document command \siunitx_bookmark_SIlist:w with arg. spec. 'omm'
+. on line 7203.
+.................................................
+.................................................
+. LaTeX info: "xparse/define-command"
+. 
+. Defining document command \siunitx_bookmark_SIrange:w with arg. spec. 'ommm'
+. on line 7205.
+.................................................
+.................................................
+. LaTeX info: "xparse/define-command"
+. 
+. Defining document command \siunitx_bookmark_si:w with arg. spec. 'om' on
+. line 7206.
+.................................................
+\g_ior_internal_ior=\read1
+
+(/usr/share/texmf/tex/latex/beamer/base/translator/translator.sty
+Package: translator 2010/06/12 ver 1.10
+
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/keyval.sty
+Package: keyval 1999/03/16 v1.13 key=value parser (DPC)
+\KV@toks@=\toks19
+)
+(/usr/share/texmf/tex/latex/beamer/base/translator/translator-language-mappings
+.tex))) (./cshonours.aux)
 \openout1 = `cshonours.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 13.
-LaTeX Font Info:    ... okay on input line 13.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 13.
-LaTeX Font Info:    ... okay on input line 13.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 13.
-LaTeX Font Info:    ... okay on input line 13.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 13.
-LaTeX Font Info:    ... okay on input line 13.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 13.
-LaTeX Font Info:    ... okay on input line 13.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 13.
-LaTeX Font Info:    ... okay on input line 13.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 14.
+LaTeX Font Info:    ... okay on input line 14.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 14.
+LaTeX Font Info:    ... okay on input line 14.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 14.
+LaTeX Font Info:    ... okay on input line 14.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 14.
+LaTeX Font Info:    ... okay on input line 14.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 14.
+LaTeX Font Info:    ... okay on input line 14.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 14.
+LaTeX Font Info:    ... okay on input line 14.
 
 (/usr/share/texlive/texmf-dist/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count98
-\scratchdimen=\dimen103
-\scratchbox=\box28
-\nofMPsegments=\count99
-\nofMParguments=\count100
-\everyMPshowfont=\toks17
-\MPscratchCnt=\count101
-\MPscratchDim=\dimen104
-\MPnumerator=\count102
-\makeMPintoPDFobject=\count103
-\everyMPtoPDFconversion=\toks18
+\scratchcounter=\count190
+\scratchdimen=\dimen153
+\scratchbox=\box44
+\nofMPsegments=\count191
+\nofMParguments=\count192
+\everyMPshowfont=\toks20
+\MPscratchCnt=\count193
+\MPscratchDim=\dimen154
+\MPnumerator=\count194
+\makeMPintoPDFobject=\count195
+\everyMPtoPDFconversion=\toks21
 ) (/usr/share/texlive/texmf-dist/tex/generic/oberdiek/pdftexcmds.sty
 Package: pdftexcmds 2011/11/29 v0.20 Utility functions of pdfTeX for LuaTeX (HO
 )
@@ -151,10 +562,6 @@ Package: kvdefinekeys 2011/04/07 v1.3 Define keys (HO)
 (/usr/share/texlive/texmf-dist/tex/latex/oberdiek/kvoptions.sty
 Package: kvoptions 2011/06/30 v3.11 Key value format for package options (HO)
 
-(/usr/share/texlive/texmf-dist/tex/latex/graphics/keyval.sty
-Package: keyval 1999/03/16 v1.13 key=value parser (DPC)
-\KV@toks@=\toks19
-)
 (/usr/share/texlive/texmf-dist/tex/generic/oberdiek/kvsetkeys.sty
 Package: kvsetkeys 2012/04/25 v1.16 Key value parser (HO)
 
@@ -174,23 +581,33 @@ G,.JBIG2,.JB2,.eps]
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <17.28> on input line 14.
+(/usr/share/texmf/tex/latex/beamer/base/translator/dicts/translator-basic-dicti
+onary/translator-basic-dictionary-English.dict
+Dictionary: translator-basic-dictionary, Language: English 
+)
+(/usr/share/texlive/texmf-dist/tex/latex/siunitx/config/siunitx-abbreviations.c
+fg
+File: siunitx-abbreviations.cfg 2012/05/03 v2.5c siunitx: Abbreviated units
+) (/usr/share/texlive/texmf-dist/tex/latex/siunitx/config/siunitx-binary.cfg
+File: siunitx-binary.cfg 2012/05/03 v2.5c siunitx: Binary units
+)
+\c_siunitx_mathsf_int=\count196
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <12> on input line 14.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <14.4> on input line 14.
+(Font)              <8> on input line 14.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <7> on input line 14.
-
+(Font)              <6> on input line 14.
+\c_siunitx_mathtt_int=\count197
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <17.28> on input line 15.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <14.4> on input line 15.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <7> on input line 15.
 [1
 
-{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <8> on input line 18.
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <6> on input line 18.
- [2
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] [2
 
 ] [3
 
@@ -214,132 +631,141 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 
 ]
 Chapter 1.
-<dna.png, id=32, 800.9925pt x 1003.75pt>
-File: dna.png Graphic file (type png)
- <use dna.png>
-Package pdftex.def Info: dna.png used on input line 42.
-(pdftex.def)             Requested size: 800.99054pt x 1003.74756pt.
- [1
+[1
 
 ]
-<transcription.png, id=37, 1405.25pt x 704.6325pt>
+Chapter 2.
+<dna.png, id=35, 800.9925pt x 1003.75pt>
+File: dna.png Graphic file (type png)
+ <use dna.png>
+Package pdftex.def Info: dna.png used on input line 49.
+(pdftex.def)             Requested size: 800.99054pt x 1003.74756pt.
+ [2
+
+]
+<transcription.png, id=40, 1405.25pt x 704.6325pt>
 File: transcription.png Graphic file (type png)
  <use transcription.png>
-Package pdftex.def Info: transcription.png used on input line 52.
+Package pdftex.def Info: transcription.png used on input line 59.
 (pdftex.def)             Requested size: 1405.24658pt x 704.6308pt.
 
-[2 <./dna.png>] [3 <./transcription.png>] [4]
-<nuss_rna.png, id=49, 1155.31625pt x 659.46375pt>
+[3 <./dna.png>] [4 <./transcription.png>] [5]
+<nuss_rna.png, id=52, 1155.31625pt x 659.46375pt>
 File: nuss_rna.png Graphic file (type png)
  <use nuss_rna.png>
-Package pdftex.def Info: nuss_rna.png used on input line 92.
+Package pdftex.def Info: nuss_rna.png used on input line 99.
 (pdftex.def)             Requested size: 1155.31345pt x 659.46213pt.
- [5 <./nuss_rna.png>] <figure4.png, id=55, 1482.53876pt x 677.53125pt>
+ [6 <./nuss_rna.png>] [7] <figure4.png, id=62, 1482.53876pt x 677.53125pt>
 File: figure4.png Graphic file (type png)
- <use figure4.png>
-Package pdftex.def Info: figure4.png used on input line 161.
-(pdftex.def)             Requested size: 1482.53516pt x 677.52959pt.
 
-[6]
+<use figure4.png>
+Package pdftex.def Info: figure4.png used on input line 170.
+(pdftex.def)             Requested size: 1482.53516pt x 677.52959pt.
 Missing character: There is no â in font cmr12!
 Missing character: There is no € in font cmr12!
 Missing character: There is no ™ in font cmr12!
- [7 <./figure4.png>] [8]
+ [8 <./figure4.png>] [9]
 Missing character: There is no â in font cmr12!
 Missing character: There is no € in font cmr12!
 Missing character: There is no ™ in font cmr12!
- [9] [10] [11] [12]
-<slidingwindow.png, id=81, 735.74875pt x 278.03876pt>
+ [10] [11] [12] [13]
+<slidingwindow.png, id=84, 735.74875pt x 278.03876pt>
 File: slidingwindow.png Graphic file (type png)
  <use slidingwindow.png>
-Package pdftex.def Info: slidingwindow.png used on input line 390.
+Package pdftex.def Info: slidingwindow.png used on input line 399.
 (pdftex.def)             Requested size: 735.74695pt x 278.03807pt.
 
-[13 <./slidingwindow.png>] [14] [15]
-Chapter 2.
-[16
+[14] [15 <./slidingwindow.png>] [16]
+Chapter 3.
+[17
 
-] [17] <rnainterval.png, id=98, 940.51375pt x 238.8925pt>
+] [18] <rnainterval.png, id=102, 940.51375pt x 238.8925pt>
 File: rnainterval.png Graphic file (type png)
 
 <use rnainterval.png>
-Package pdftex.def Info: rnainterval.png used on input line 452.
+Package pdftex.def Info: rnainterval.png used on input line 461.
 (pdftex.def)             Requested size: 940.51146pt x 238.8919pt.
- <compat.png, id=99, 827.09pt x 192.72pt>
+ <compat.png, id=103, 827.09pt x 192.72pt>
 File: compat.png Graphic file (type png)
 
 <use compat.png>
-Package pdftex.def Info: compat.png used on input line 473.
+Package pdftex.def Info: compat.png used on input line 483.
 (pdftex.def)             Requested size: 827.08797pt x 192.71951pt.
- [18 <./rnainterval.png>]
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 489.
+ [19 <./rnainterval.png>]
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 499.
 
 
 (/usr/share/texlive/texmf-dist/tex/latex/base/omscmr.fd
 File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 489.
- [19 <./compat.png>]
-<q-i.png, id=111, 533.995pt x 169.63374pt>
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 499.
+ [20 <./compat.png>]
+<q-i.png, id=114, 533.995pt x 169.63374pt>
 File: q-i.png Graphic file (type png)
  <use q-i.png>
-Package pdftex.def Info: q-i.png used on input line 517.
+Package pdftex.def Info: q-i.png used on input line 527.
 (pdftex.def)             Requested size: 533.9937pt x 169.63332pt.
- [20 <./q-i.png>]
-[21] [22] [23] [24]
-Chapter 3.
-<wasrnafoldplot.pdf, id=130, 361.35pt x 216.81pt>
+ [21 <./q-i.png>]
+[22] [23] [24] [25]
+Chapter 4.
+[26
+
+] <wasrnafoldplot.pdf, id=136, 361.35pt x 216.81pt>
 File: wasrnafoldplot.pdf Graphic file (type pdf)
- <use wasrnafoldplot.pdf>
-Package pdftex.def Info: wasrnafoldplot.pdf used on input line 664.
+
+<use wasrnafoldplot.pdf>
+Package pdftex.def Info: wasrnafoldplot.pdf used on input line 674.
 (pdftex.def)             Requested size: 361.34912pt x 216.80946pt.
-
-[25
-
-] [26] [27 <./wasrnafoldplot.pdf>]
-<abcorrelation.pdf, id=148, 361.35pt x 216.81pt>
+ [27] [28 <./wasrnafoldplot.pdf>]
+<abcorrelation.pdf, id=151, 361.35pt x 216.81pt>
 File: abcorrelation.pdf Graphic file (type pdf)
  <use abcorrelation.pdf>
-Package pdftex.def Info: abcorrelation.pdf used on input line 680.
+Package pdftex.def Info: abcorrelation.pdf used on input line 690.
 (pdftex.def)             Requested size: 361.34912pt x 216.80946pt.
 
-[28 <./abcorrelation.pdf>]
-Chapter 4.
-[29
+<zukerabtime.pdf, id=152, 361.35pt x 216.81pt>
+File: zukerabtime.pdf Graphic file (type pdf)
+ <use zukerabtime.pdf>
+Package pdftex.def Info: zukerabtime.pdf used on input line 700.
+(pdftex.def)             Requested size: 361.34912pt x 216.80946pt.
+ [29 <./abcorrelation.pdf>] [30 <./zukerabtime.pdf>]
+Chapter 5.
+[31
 
-] [30] [31] [32] [33] (./cshonours.bbl [34] [35] [36
+] [32] [33] [34] [35] (./cshonours.bbl [36] [37] [38
 
-] [37] [38]
+] [39] [40]
 Missing character: There is no â in font cmr12!
 Missing character: There is no € in font cmr12!
 Missing character: There is no ” in font cmr12!
-) [39]
+) [41]
 (./cshonours.aux) ) 
 Here is how much of TeX's memory you used:
- 2224 strings out of 493485
- 31796 string characters out of 3143526
- 90166 words of memory out of 3000000
- 5500 multiletter control sequences out of 15000+200000
- 9933 words of font info for 35 fonts, out of 3000000 for 9000
+ 10181 strings out of 493485
+ 217423 string characters out of 3143526
+ 216275 words of memory out of 3000000
+ 13334 multiletter control sequences out of 15000+200000
+ 13068 words of font info for 48 fonts, out of 3000000 for 9000
  957 hyphenation exceptions out of 8191
- 37i,9n,23p,1677b,284s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 38i,10n,27p,1659b,514s stack positions out of 5000i,500n,10000p,200000b,50000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/c
 m/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmcs
 c10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pf
-b></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr
-/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/
-texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texlive
-/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/share/texlive/texmf-d
-ist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/font
-s/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type
-1/public/amsfonts/cm/cmsy8.pfb></usr/share/texlive/texmf-dist/fonts/type1/publi
-c/amsfonts/cm/cmti12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsf
-onts/cm/cmtt12.pfb>
-Output written on cshonours.pdf (46 pages, 1425776 bytes).
+b></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr
+/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/
+texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive
+/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texlive/texmf-
+dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/share/texlive/texmf-dist/fon
+ts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1
+/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/publi
+c/amsfonts/cm/cmsy8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfo
+nts/cm/cmti12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm
+/cmtt12.pfb>
+Output written on cshonours.pdf (48 pages, 1462556 bytes).
 PDF statistics:
- 244 PDF objects out of 1000 (max. 8388607)
- 158 compressed objects within 2 object streams
+ 263 PDF objects out of 1000 (max. 8388607)
+ 171 compressed objects within 2 object streams
  0 named destinations out of 1000 (max. 500000)
- 51 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 56 words of extra memory for PDF output out of 10000 (max. 10000000)
 

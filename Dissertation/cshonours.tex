@@ -3,6 +3,7 @@
 
 \usepackage{graphics}  %optional
 \usepackage{algorithm,algorithmicx,algpseudocode}
+\usepackage[scientific-notation=true]{siunitx}
 
 \title{RNA Folding: Beyond the Thermodynamic Hypothesis}
 \author{Max Ward (20748588)}
@@ -34,8 +35,14 @@ provided by Ken Wessen.
 
 
 \chapter{Introduction}
+The algorithmic prediction of Ribonucleic Acid (RNA) secondary structure is practically and theoretically important. The subject has been actively researched since the early 1970s. Despite this, current techniques are often unreliable, and are unable to accurately predict the structures of some RNAs. This is especially true for algorithms that make predictions without any form of consensus matching against known RNAs. Unfortunately these are the most generally useful algorithms as they can predict RNA structure given only the RNA sequence itself. This may be because they attempt to globally optimize some scoring function; typically the scoring system reflects thermodynamic stability. The core hypothesis of this investigation is that local interactions can be stronger than global interactions during RNA structure formation. Additionally, such interactions can improve the prediction accuracy using our current best models of RNA. If these hypotheses are supported, it follows that improvements in algorithmic prediction of RNA secondary structure can be achieved. However, to understand the importance of RNA we must first understand the better know Deoxyribonucleic Acid (DNA).
+
+
+\chapter{Relevant Literature}
+
+
 \section{DNA and RNA}
-Deoxyribonucleic Acid (DNA) is the basic genetic building block upon which the classification of genetic material into genes and chromosomes is based. The role of DNA as the hereditary unit of genetics was determined in the 1940s \cite{albertsessential}. Soon thereafter, Watson \& Crick \cite{watson1953molecular} published a highly acclaimed paper describing the fundamental chemical structure of DNA. In it, they outlined a double helix formation which has since become as iconic as it is canonical (see Figure \ref{dna}). Each strand of the helix Watson \& Crick discovered is essentially a chain of `nucleotides'. Each nucleotide is made of a sugar-phosphate backbone attached to a single `base'. The bases of corresponding strands form hydrogen bonds which hold the double helix together. The most astonishing and important of their findings was that these bases bond in a reciprocal fashion. They described four bases: Adenine (A), which always bonds to Thymine (T), and Guanine (G), which always bonds to Cytosine (C).
+DNA is the basic genetic building block upon which the classification of genetic material into genes and chromosomes is based. The role of DNA as the hereditary unit of genetics was determined in the 1940s \cite{albertsessential}. Soon thereafter, Watson \& Crick \cite{watson1953molecular} published a highly acclaimed paper describing the fundamental chemical structure of DNA. In it, they outlined a double helix formation which has since become as iconic as it is canonical (see Figure \ref{dna}). Each strand of the helix Watson \& Crick discovered is essentially a chain of `nucleotides'. Each nucleotide is made of a sugar-phosphate backbone attached to a single `base'. The bases of corresponding strands form hydrogen bonds which hold the double helix together. The most astonishing and important of their findings was that these bases bond in a reciprocal fashion. They described four bases: Adenine (A), which always bonds to Thymine (T), and Guanine (G), which always bonds to Cytosine (C).
 
 \begin{figure}
 \begin{center}
@@ -45,7 +52,7 @@ Deoxyribonucleic Acid (DNA) is the basic genetic building block upon which the c
 \label{dna}
 \end{figure}
 
-The reciprocal bonding relationships between bases is what allows replication to occur; a copy of DNA can be made by allowing the correct bases to bond to one of the strands making up its helix. This gives a model for inheritance and cellular replication. However, there remains the question of how DNA can actually code for protein. Proteins are made up amino acids bonded in a specific sequence \cite{albertsessential}. The DNA must therefore code for amino acids. This code, which can be thought of as the `digital' representation for the `analogue' protein used by our cells, needs to be carried to ribosomes which translate it into protein \cite{albertsessential}. This is a task carried out by Ribonucleic Acid (RNA). RNA is very much like DNA in that it can bond reciprocally to another strand with matching bases. The main difference is that it is single stranded in structure, and has Uracil (U) in place of Thymine \cite{albertsessential}. It is important to note that in RNA molecules G and U pairings are also possible. RNA bonds to DNA and, in a sense, reads it. This results in the production of a copy of the DNAs genetic payload. This `downloaded' information is then carried away to be translated into protein \cite{albertsessential}. An example of this is depicted in Figure \ref{transcription}, in which we see a Messenger RNA molecule bonding to and thus making a copy of a section of DNA. As depicted in Figure \ref{transcription}, the 3' end of a DNA or RNA molecule is the end onto which new nucleotides are added. The 5' end is chemically stable, and nucleotides are not usually appended to it \cite{albertsessential}.
+The reciprocal bonding relationships between bases is what allows replication to occur; a copy of DNA can be made by allowing the correct bases to bond to one of the strands making up its helix. This gives a model for inheritance and cellular replication. However, there remains the question of how DNA can actually code for protein. Proteins are made up amino acids bonded in a specific sequence \cite{albertsessential}. The DNA must therefore code for amino acids. This code, which can be thought of as the `digital' representation for the `analogue' protein used by our cells, needs to be carried to ribosomes which translate it into protein \cite{albertsessential}. This is a task carried out by RNAs. RNA is very much like DNA in that it can bond reciprocally to another strand with matching bases. The main difference is that it is single stranded in structure, and has Uracil (U) in place of Thymine \cite{albertsessential}. It is important to note that in RNA molecules G and U pairings are also possible. RNA bonds to DNA and, in a sense, reads it. This results in the production of a copy of the DNAs genetic payload. This `downloaded' information is then carried away to be translated into protein \cite{albertsessential}. An example of this is depicted in Figure \ref{transcription}, in which we see a Messenger RNA molecule bonding to and thus making a copy of a section of DNA. As depicted in Figure \ref{transcription}, the 3' end of a DNA or RNA molecule is the end onto which new nucleotides are added. The 5' end is chemically stable, and nucleotides are not usually appended to it \cite{albertsessential}.
 
 \begin{figure}
 \begin{center}
@@ -74,7 +81,7 @@ RNA secondary structure prediction techniques can be broadly broken into two cat
 
 
 \section{Dynamic Programming Techniques}
-\subsection{Fundamental Algorithms}
+\subsection{The Nussinov Algorithm}
 The first such algorithms were based on relatively naive brute force. All possible secondary structures were enumerated, and the one with
 the most bonds was selected as the solution \cite{nussinov1978algorithms}. While being simplistic
 these first approaches introduce an important assumption: RNA molecules will
@@ -144,6 +151,8 @@ backtracking in the modified algorithm presented by Nussinov \& Jacobson.
 
 The reader should note that the Nussinov algorithm is old technology, and is no longer used for the prediction of RNA secondary structures. I have presented it in detail here because it forms the basis for the most widely used algorithm today. This algorithm in turn forms the basis for my own algorithm.
 
+
+\subsection{The Zuker Algorithm}
 
 Soon after the work of Nussinov \& Jacobson, Zuker \& Stiegler \cite{zuker1981optimal}
 described an altered version of the same algorithm which, instead of maximising
@@ -462,6 +471,7 @@ Once all disjoint structural elements were split up, they were assigned a score.
 
 
 \section{Merging RNA Intervals}
+\label{sec:merging}
 
 Given an RNA sequence, it is easy to generate a set of RNA intervals by running any sliding window algorithm, and storing the RNA intervals generated for each window. Many of these intervals will overlap, or contain fragments of one-another. To construct a plausible and complete secondary structure for the original RNA out of these intervals, a procedure must select a subset of the RNA intervals generated this way. I devised several methods for doing this. The goal of an RNA interval merging algorithm is to produce a valid secondary structure out of a set of RNA intervals which is as accurate (compared to the actual secondary structure) as possible.
 
@@ -557,6 +567,7 @@ Each selection algorithm was run using these data as input. For every RNA, the s
 
 
 \section{Prediction Using Windows}
+\label{sec:absplat}
 In this approach I computed sliding windows using a `splat' of sizes. Weighted Activity Selection was then done on the resulting set of computed RNA intervals. See Section \ref{sec:localopt} for an explanation of why Weighted Activity Selection was chosen. I explored several methods for finding good splats. I present here to most successful technique, which I call `$ab$-splat' prediction. Initially the algorithm started at a small window size, and exponentially increased the scope of the window until a threshold was exceeded. This is explained using pseudocode in Algorithm \ref{absplat}.
 
 \begin{algorithm}
@@ -612,10 +623,9 @@ The best $ab$ pair was used to configure the $ab$-splat algorithm, which was the
 \chapter{Results}
 
 \section{RNA Interval Selection}
+The purpose of the following tests was to determine if any RNA interval merging algorithms (see Section \ref{sec:merging}) could potentially achieve better accuracy than globally optimizing algorithms. The RNAfold package is a modern implementation of the Zuker algorithm, which globally optimizes a thermodynamic scoring scheme. RNAfold is thus used for comparison. I predicted that some merging algorithms should have higher accuracy if local interactions are stronger than global interactions during RNA folding.
 
-The average score between all RNA interval selection algorithms was compared (see Table \ref{tab:summaryselection}). The highest scoring algorithm appeared to be Top-Down Selection, closely followed by Weighted Activity Selection, then by Bottom-Up Selection. To verify this performance gap, a Wilcoxon Signed-Rank Test was done to compare the recorded F-Scores for corresponding RNA. This test was chosen because the data recorded did not appear to be parametric.
-
-While this test reflected the small difference in averages between Weighted Activity Selection and Top-Down Selection ($z = 1.33066$, see Table \ref{tab:wilcoxonselection}), it was not statistically significant ($p > 0.001$). To further test Top-Down Selection and Weighted Activity Selection, another Wilcoxon Signed-Rank Test was done on only RNAs of length $\geq 300$ bases. This revealed a moderate, and statistically significant, difference, indicating that Weighted Activity Selection generally had higher F-Scores for larger RNAs ($p < 0.001, z = 4.55591$). Finally, a Wilcoxon Signed-Rank Test was done between Weighted Activity Selection and Score Selection to check for circular dominance. In accordance with the mean F-score values, Weighted Activity Selection appeared to have higher F-Scores than Score Selection ($p < 0.001, z = 12.0957$).
+The average score between all RNA interval selection algorithms was compared (see Table \ref{tab:summaryselection}). The highest scoring algorithm appeared to be Top-Down Selection, closely followed by Weighted Activity Selection, then by Bottom-Up Selection. To verify this performance gap, a Wilcoxon Signed-Rank Test was done to compare the recorded F-Scores for corresponding RNA. This test was chosen because the data recorded did not appear to be parametric. While this test reflected the small difference in averages between Weighted Activity Selection and Top-Down Selection ($z = 1.33066$, see Table \ref{tab:wilcoxonselection}), it was not statistically significant ($p > 0.001$). To further test Top-Down Selection and Weighted Activity Selection, another Wilcoxon Signed-Rank Test was done on only RNAs of length $\geq 300$ bases. This revealed a moderate, and statistically significant, difference, indicating that Weighted Activity Selection generally had higher F-Scores for larger RNAs ($p < 0.001, z = 4.55591$). Finally, a Wilcoxon Signed-Rank Test was done between Weighted Activity Selection and Score Selection to check for circular dominance. In accordance with the mean F-score values, Weighted Activity Selection appeared to have higher F-Scores than Score Selection ($p < 0.001, z = 12.0957$).
 
 \begin{table}
 \centering
@@ -668,11 +678,11 @@ WAS \& RNAfold & 13.2082 &	0  \\
 \end{figure}
 
 
-\subsection{Using RNA Intervals For Prediction}
+\section{Using RNA Intervals For Prediction}
 \label{sec:res_absplat}
-An ordinary least squares linear regression was done to determine the correlation between F-scores recorded for $ab$-splat in the training and validation sets. Figure \ref{fig:abcorrelation} depicts the resulting model. A strong correlation was found ($R^2 = 0.703$, $p < 0.001$) for scores in the training set versus scores in the validation set.
+The purpose of the following tests was to determine if the $ab$-splat algorithm (see Section \ref{sec:absplat}) was more accurate than RNAfold. Additionally, further tests were done to compare the runtime efficiency of both algorithms. It was expected that $ab$-splat would be more accurate than, and run faster than, RNAfold.
 
-The best $ab$ value pair found in the training set was $a = 24$, $b = 1.8$. The $ab$-splat algorithm was configured using these values. As the data did not appear to be normally distributed, a Wilcoxon Signed-Rank test was done to compare F-scores for $ab$-splat (with the best $ab$ pair) and RNAfold. This test revealed a small difference in the F-scores in the population ($z = 0.1067$), which reflected the small difference in averages (mean RNAfold score = $0.57483$, $ab$-splat = $0.58588$). However, this discrepancy was not statistically significant ($p = 0.915021$).
+An ordinary least squares linear regression was done to determine the correlation between F-scores recorded for $ab$-splat in the training and validation sets. Figure \ref{fig:abcorrelation} depicts the resulting model. A strong correlation was found ($R^2 = 0.703$, $p < 0.001$) for scores in the training set versus scores in the validation set. The best $ab$ value pair found in the training set was $a = 24$, $b = 1.8$. The $ab$-splat algorithm was configured using these values. As the data did not appear to be normally distributed, a Wilcoxon Signed-Rank test was done to compare F-scores for $ab$-splat (with the best $ab$ pair) and RNAfold. This test revealed a small difference in the F-scores in the population ($z = 0.1067$), which reflected the small difference in averages (mean RNAfold score = $0.57483$, $ab$-splat = $0.58588$). However, this discrepancy was not statistically significant ($p = 0.915021$).
 
 
 \begin{figure}
@@ -682,6 +692,32 @@ The best $ab$ value pair found in the training set was $a = 24$, $b = 1.8$. The 
 \caption{Correlation of F-Scores for $ab$-splat in training set versus validation set. R-squared value = 0.702901, $p$-value $< 0.0001$. Standard Error of Regression = 0.025032.}
 \label{fig:abcorrelation}
 \end{figure}
+
+
+
+\begin{figure}
+\begin{center}
+\scalebox{1}{\includegraphics{zukerabtime}}
+\end{center}
+\caption{A comparison of the time taken for RNAfold to run, compared to $ab$-splat. This graph indicates how each scale with increasing RNA length. Best fit regression lines are also shown.}
+\label{fig:zukerabtime}
+\end{figure}
+
+Simple empirical observation was used to compare the runtime of RNAfold and $ab$-splat. A graph representation of the observed times is shown in Figure \ref{fig:zukerabtime}. This graph shows how the runtime of these algorithms grow with increasing RNA length. Both appeared to have a polynomial curve. Further analysis showed that both were best approximated by a polynomial regression. Both regression equations indicated a strong relationship between RNA length and algorithmic runtime ($R^2 > 0.99$). The best fit regression line for RNAfold runtime was $O(n^{2.374})$ where $n$ is RNA length. The $ab$-splat algorithm has a best fit regression line that was $O(n^{2.25})$. A summary of the regression equations can be found in Table \ref{tab:algorithmtimeregression}.
+
+
+\begin{table}
+\centering
+\begin{tabular}{l*{6}{c}r}
+Algorithm	& Regression Equation & $R^2$ value \\
+\hline
+RNAfold &  $y=0.358+4.7 \times 10^{-5} \times x^{2.374}$    &    0.9997    \\
+$ab$-splat & $y=2.506+ 4.67\times 10 ^{-5} \times x^{2.25}$    &    0.9985  \\
+\end{tabular}
+
+\caption{Summary of best fit regression lines for RNAfold and $ab$-splat.}
+\label{tab:algorithmtimeregression}
+\end{table}
 
 \chapter{Discussion}
 
