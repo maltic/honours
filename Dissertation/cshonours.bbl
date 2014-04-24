@@ -24,6 +24,12 @@
 \newblock {\em Proceedings of the Royal Society of London. Series B: Biological
   Sciences 266}, 1433 (1999), 2053--2059.
 
+\bibitem{bellaousov2013rnastructure}
+{\sc Bellaousov, S., Reuter, J.~S., Seetin, M.~G., and Mathews, D.~H.}
+\newblock Rnastructure: web servers for rna secondary structure prediction and
+  analysis.
+\newblock {\em Nucleic acids research 41}, W1 (2013), W471--W474.
+
 \bibitem{condon2003problems}
 {\sc Condon, A.}
 \newblock Problems on rna secondary structure prediction and design.
@@ -141,12 +147,6 @@
 \newblock Design, implementation and evaluation of a practical pseudoknot
   folding algorithm based on thermodynamics.
 \newblock {\em BMC bioinformatics 5}, 1 (2004), 104.
-
-\bibitem{reuter2010rnastructure}
-{\sc Reuter, J.~S., and Mathews, D.~H.}
-\newblock Rnastructure: software for rna secondary structure prediction and
-  analysis.
-\newblock {\em BMC bioinformatics 11}, 1 (2010), 129.
 
 \bibitem{rivas2013four}
 {\sc Rivas, E.}

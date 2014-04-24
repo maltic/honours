@@ -76,7 +76,7 @@ Secondary and tertiary structures can be treated hierarchically. As a result, it
 It holds to reason that an algorithm for RNA secondary structure prediction can never be realised if we do not understand how these structures form, or their general morphology. For this reason it is important to understand how true RNA secondary structures can be determined, and the limitations of these techniques. DNA and RNA molecules can be analysed using X-ray crystallographic methods. These types of approaches work because the wavelengths of some X-rays are the same as the dimensions of DNA and RNA inter-atomic bonds. The diffraction of X-ray light by these molecules can thus be observed, and their structures can subsequently be inferred by analysis of the resulting data. Nuclear Magnetic Resonance (NMR) is another technique which can be applied to the analysis of DNA or RNA. It relies on the spin of atoms when in a magnetic field. These spin signals can be used to determine the atomic composition and topology of a molecule. This has the advantage of not requiring the molecule under observation to be crystallized before analysis. Arguably NMR gives a better in vivo view of RNAs and DNAs, which are fundamentally flexible structures. NMR also has some disadvantages; for instance, it is less accurate than X-ray crystallography, and cannot be used on extremely large molecules. The reason these techniques cannot be used for all RNA structural assays is that they are extremely expensive and time consuming. For more information refer to \emph{Principles of Nucleic Acid Structure} by Stephen Neidle \cite{neidle2010principles}.
 
 
-RNA secondary structure prediction techniques can be broadly broken into two categories: those that use auxiliary information to assist in prediction, and those that predict structure ex nihilo---that is, with nothing but the `proband' sequence we require a structure for. The former approach typically does consensus matching between some sequences for which a user already knows the secondary structures, and a sequence for which the structure is unknown \cite{hofacker2008rna}. In this paper I investigate the latter approach because it requires deeper knowledge about why and how RNAs fold. Also, it is the more general of the two.
+RNA secondary structure prediction techniques can be broadly broken into two categories: those that use auxiliary information to assist in prediction, and those that predict structure ex nihilo---that is, with nothing but the `proband' sequence we require a structure for. The former approach typically does consensus matching between some sequences for which a user already knows the secondary structures, and a sequence for which the structure is unknown \cite{hofacker2008rna}. In this paper I investigate the latter approach because it requires deeper knowledge about why and how RNAs fold. Also, it is the more general of the two, requiring only an RNA sequence, and not a large number of analogous sequences.
 
 
 
@@ -90,7 +90,7 @@ nonetheless accurate measure of energetic stability, as every bond increases the
 stability of a structure \cite{nussinov1978algorithms}. In the late 1970s, when the first large RNA molecules
 were being successfully sequenced, Nussinov et al. \cite{nussinov1978algorithms} introduced an algorithm
 based on loop matching for bonding pairs. Their algorithm finds a
-single structure with maximal bonds, with the restriction that all bonding pairs must be entirely nested. It does this in $O(N^3)$ time and using $O(N^2)$ space by utilizing dynamic programming techniques. Thence Nussinov \& Jacobson \cite{nussinov1980fast} introduced
+single structure having maximal bonds, with the restriction that all bonding pairs must be entirely nested. It does this in $O(N^3)$ time and using $O(N^2)$ space by utilizing dynamic programming techniques. Thence Nussinov \& Jacobson \cite{nussinov1980fast} introduced
 a refined version of the same algorithm, and began testing it against experimentally verified RNA secondary structures. They had mixed success; transfer RNAs
 (tRNAs) were conspicuous in their difference from predicted structures.
 
@@ -112,7 +112,7 @@ depicted in Figure \ref{nuss_rna}. Part A of Figure \ref{nuss_rna} shows bonds a
 graph. In it, we see the nested nature of the structures being explored by the
 Nussinov algorithm. Part B shows how these structures translate to actual RNAs in vivo. It also introduces the standard decompositions
 of secondary structures, namely the hairpin loop, the interior loop, and the branch
-junction or multi loop. Unlabelled in the diagram are stems; these are stacked
+junction or multiloop. Unlabelled in the diagram are stems; these are stacked
 base pairings, for example $B1$, $Bn - 1$ and $B2$, $Bn - 2$.
 
 
@@ -134,13 +134,13 @@ D = \max \left\lbrace M(i, k) + M(k+1, j) \right\rbrace \: when \: i < k < j
 
 
 
-The recurrence relation for the Nussinov algorithm is defind in Equation \ref{eq:nuss_eq}. The first two cases ($A$ and $B$) find the score associated with not allowing $i$ and $j$ to bond. Case $C$ conversely determines the score given that $i$ and $j$ are bonded. The final case $D$ computes the score associated with a bifurcation. A bifurcation here means decomposition of the RNA into two separate structures. This recurrence relation implies a $O(N^3)$
-worst case time complexity and a $O(N^2)$ space complexity, as an $O(N^2)$ state space (all combinations of $i$ and $j$) is explored
+The recurrence relation for the Nussinov algorithm is defined in Equation \ref{eq:nuss_eq}. The first two cases ($A$ and $B$) find the score associated with not allowing the bases corresponding to indexes $i$ and $j$ to bond. Case $C$ conversely determines the score given that $i$ and $j$ are bonded. The final case $D$ computes the score associated with a bifurcation. A bifurcation here means decomposition of the RNA into two separate structures. This recurrence relation implies a $O(N^3)$
+worst case time complexity and a $O(N^2)$ space complexity, as a $O(N^2)$ state space (all combinations of $i$ and $j$) is explored
 with a linear time recurrence relation. In the original algorithm a constant ($p = 3$) was introduced that indicated the minimum size of a hairpin loop, as real RNAs typically do not have hairpin loops of fewer bases. The recurrence relation presented here has also been modified for the sake of clarity (cases $A$ and $B$ can be merged into case $D$) but the logic of the algorithm is equivalent.
 
 
 This algorithm can also be extended to accommodate a more advanced energy
-model. Instead of weighting each bond equally they can be weighted
+model. Instead of weighting each bond equally, bonds can be weighted
 according to the proportion they are expected to contribute to the molecule's
 stability \cite{nussinov1980fast}. When considering the value of a bond, it might be given greater
 weight if it adds to the formation of a stem (a stabilizing structure), or
@@ -149,18 +149,18 @@ destabilize RNA molecules \cite{nussinov1980fast}. Unfortunately it is hard to f
 such weights, and determining which substructure a bond contributes to requires
 backtracking in the modified algorithm presented by Nussinov \& Jacobson.
 
-The reader should note that the Nussinov algorithm is old technology, and is no longer used for the prediction of RNA secondary structures. I have presented it in detail here because it forms the basis for the most widely used algorithm today. This algorithm in turn forms the basis for my own algorithm.
+The reader should note that the Nussinov algorithm is old technology, and is no longer used for the prediction of RNA secondary structures. I have presented it in detail here because it forms the basis for the Zuker algorithm, which will now be discussed in detail.
 
 
 \subsection{The Zuker Algorithm}
 
 Soon after the work of Nussinov \& Jacobson, Zuker \& Stiegler \cite{zuker1981optimal}
 described an altered version of the same algorithm which, instead of maximising
-base pairs, minimized the free energy of secondary structures. This is done
+base pair weights, minimized the free energy of secondary structures. This is done
 by introducing a number of thermodynamic rules for canonical structures like
 hairpin loops, internal bulges, multiloops, unbonded base pairs, and stacked base
-pairs. The algorithm is similar to the Nussinov algorithm, but adds another mutually recursive dynamic programming recurrence to inject
-a complex and relatively comprehensive scoring system. The original thermodynamic scoring system used is borrowed from the work of Studnicka et al. \cite{studnicka1978computer} who presented a
+pairs. The algorithm is similar to the Nussinov algorithm, but requires another mutually recursive dynamic programming recurrence to inject
+a relatively comprehensive thermodynamic scoring system. The original thermodynamic scoring scheme is borrowed from the work of Studnicka et al. \cite{studnicka1978computer} who presented a
 complex but theoretically similar algorithm, albeit with
 much worse asymptotic and implementation complexities. 
 
@@ -175,18 +175,17 @@ publication \cite{zuker1981optimal}.}
 \end{figure}
 
 First I shall introduce some useful terminology which should clarify aspects of Zuker \& Stiegler’s
-algorithm. The bases of an RNA molecule can be thought of as vertices in a planar graph. Edges between such vertices are then represented as chords on a semicircular diagram (Figures \ref{nuss_rna} and \ref{zuk_struct}). These chords are not allowed to touch. A chord
+algorithm. The bases of an RNA molecule can be thought of as vertices in a planar graph. Edges between such vertices may then be represented as chords on a semicircular diagram (see Figures \ref{nuss_rna} and \ref{zuk_struct}). These chords are not allowed to touch. A chord
 is admissible if it represents a chemically valid bond, and an
 admissible structure is a structure whose graph contains only admissible bonds.
 Thence, one can define a face of such a graph as any planar region bounded on all
-sides---either by chords, or the edge of the graph. The
+sides. The
 folding algorithm of Zuker \& Stiegler considers such faces as the basic contributing factor to a molecule's stability, unlike the algorithm of Nussinov \& Jacobson
 which considers only individual bonds.
 
 
 Let $E(F)$ represent the energy of a face $F$; impossible structures are given
-an energy value of infinity, for example hairpin loops with less than three bases in the
-intervening loop region. In addition let $V(i, j)$ be defined as the minimum free
+an energy value of infinity, for example, hairpin loops smaller than three bases. In addition let $V(i, j)$ be defined as the minimum free
 energy given that bases $i$ and $j$ are bonded, and let $W(i, j)$ represent
 the minimum free energy of all structures contained within bases $i$ and $j$ inclusive.
 Note that for $W(i, j)$ there need not be a bond between bases $i$ and $j$. Also,
@@ -207,8 +206,8 @@ $$E3 = \min \left\lbrace W (i + 1, i') + W (i' + 1, j - 1) \right\rbrace \: wher
 
 As shown by the definition provided in Equation \ref{eq:zuk_v1_eq}, $V (i, j)$ is computed by minimizing
 three cases. The first case considers the bond between $i$ and $j$ closing off a hairpin
-loop (H in Figure \ref{zuk_struct}). The second accounts for situations in which $i$ and $j$ are bonded. This can result in a bulge (BU in Figure \ref{zuk_struct}), internal loop (I in Figure \ref{zuk_struct}), or the continuation of a stacking region with the
-interior bond $i',j'$ (S in Figure \ref{zuk_struct}). The third and final case considers bifurcations ending with a bond between $i$ and $j$ (BF in Figure \ref{zuk_struct}).
+loop (H in Figure \ref{zuk_struct}). The second accounts for situations in which the bond from $i$ to $j$ results in a bulge (BU in Figure \ref{zuk_struct}), internal loop (I in Figure \ref{zuk_struct}), or the continuation of a stacking region with the
+interior bond $i',j'$ (S in Figure \ref{zuk_struct}). The third and final case considers possible bifurcations contained within the bond between $i$ and $j$ (BF in Figure \ref{zuk_struct}).
 
 \begin{equation} \label{eq:zuk_v1_eq2}
 W (i, j) = \min \left\lbrace W(i + 1, j), W(i, j - 1), V(i, j), E4 \right\rbrace
@@ -218,42 +217,36 @@ E4 = \min \left\lbrace W (i, i') + W (i' + 1, j) \right\rbrace \: where \: i < i
 $$
 
 Equation \ref{eq:zuk_v1_eq2} is the recurrence for $W(i, j)$ as described by Zuker \& Stiegler.
-Again there are three cases. The first two cases $W (i + 1, j)$ and $W(i, j - 1)$
-should be thought of as a single case which consider situations in which there
-is no bond between $i$ and $j$. This is similar to cases $A$ and $B$ from the Nussinov algorithm (Equation \ref{eq:nuss_eq}). The third case considers taking the bond from
+Again there are three cases. The first two cases, $W (i + 1, j)$ and $W(i, j - 1)$,
+should be thought of as a type of case in which possibilities having no bond between $i$ and $j$ are considered. This is similar to cases $A$ and $B$ from the Nussinov algorithm (Equation \ref{eq:nuss_eq}). The third case considers taking the bond from
 $i$ to $j$. The fourth and final case allows for bifurcations in which two bonding regions split
 the structure into two sections. The final minimum free energy of the best structure is defined by $W(1, n)$, where $n$ is the length of the RNA molecule. It should
 be noted that the free energy for small molecules (fewer than 6 nucleotides in length) can easily be
 precomputed, and forms the base case of the given recurrence relations. Because of
 its efficiency ($O(N^3)$ time and $O(N^2)$ space), robustness, and extensibility, this method is,
-even today, still the most popular available. The most widely used packages for RNA secondary structure prediction all contain implementations of the Zuker algorithm \cite{lorenz2011viennarna, reuter2010rnastructure}.
+even today, still the most popular available. The most widely used packages for RNA secondary structure prediction all contain implementations of the Zuker algorithm. Some notable examples are RNAfold from the Vienna RNA Package \cite{lorenz2011viennarna}, Zuker's own implementation Mfold \cite{zuker2003mfold}, and the recently updated RNAstructure \cite{bellaousov2013rnastructure}. The Zuker algorithm suffers a major shortcoming, however. Because all bonding regions are assumed to be nested, it
+cannot handle the case of `pseudoknots'. 
 
 
-The Zuker algorithm suffers a major shortcoming, however. Because all bonding regions are assumed to be nested, it
-cannot handle the case of `pseudoknots'. Pseudoknots are structures in which a bonding pair may have its first
+\section{Pseudoknots}
+
+Pseudoknots are structures in which a bonding pair may have its first
 base inside another bonding pair, and the other base outside said bonding pair.
-In short, it is not properly nested. 
-
-These structures are not common,
+In short, it is not properly nested. These structures are not common,
 but have been experimentally verified in numerous RNAs \cite{taufer2009pseudobase}. Additionally, pseudoknots also appear to perform useful biological functions. For
 example, pseudoknots have been shown to allow frame shifting during translation
 of proteins \cite{namy2006mechanical}. In layman’s terms, pseudoknots can change the way RNA is read
-when being translated into protein. Such frame shifting is used extensively by
+when being translated into protein. Frame shifting is used extensively by
 viruses, particularly HIV \cite{namy2006mechanical}. Unfortunately, the problem of finding optimal
-structures with pseudoknots has been shown to be NP-Complete \cite{lyngso2000rna}.
-
-
-
-\subsection{Pseudoknots}
-In my investigation I did not consider the prediction of pseudoknotted RNAs as they are uncommon and difficult to model. However, I deem it important to understand how such structures could be integrated into the algorithms presented in this paper. As such, I have included a brisk overview of pseudoknot prediction techniques.
+structures with pseudoknots has been shown to be NP-Complete \cite{lyngso2000rna}. In my investigation I did not consider the prediction of pseudoknotted RNAs as they are uncommon and difficult to model. However, I deem it important to understand how such structures could be integrated into the algorithms presented in this paper. As such, I have included a brisk overview of pseudoknot prediction techniques.
 
 Despite the problem being NP-Complete, in 1999 Rivas \& Eddy \cite{rivas1999dynamic} introduced an ingenious dynamic
-programming algorithm based on a new thermodynamic model encompassing pseudoknots. Their algorithm could predict a large set of pseudoknot classes using
+programming algorithm based on a new thermodynamic model encompassing pseudoknots. Their algorithm could predict a large (but incomplete) set of pseudoknot classes using
 $O(N^6)$ time and $O(N^4)$ memory. They generalised the Zuker method by using a gap matrix to represent multiple regions being considered for bonding, rather than
 the single continuous region used in the Zuker method. Because of its extreme
 space and time requirements this algorithm is used only sparingly in practice; other thermodynamic based methods for pseudoknot prediction have
 been formulated using similar principals. Deogun et al. \cite{deogun2004rna} described an algorithm which could handle a restricted class of pseudoknots (only those containing
-non-recursive pseudoknots) in $O(N^4)$ time and using $O(N^3)$ space. Shortly after which Reeder \& Giegerich \cite{reeder2004design} presented an algorithm which could predict
+non-recursive pseudoknots) in $O(N^4)$ time and using $O(N^3)$ space. Shortly after which Reeder \& Giegerich \cite{reeder2004design} presented an algorithm that could predict
 only simple recursive pseudoknots that met their `canonization' criteria, and which required $O(N^4)$ time and $O(N^2)$ space. While
 seemingly restrictive, this did, in fact, predict a large array of pseudoknots accurately. 
 
@@ -263,13 +256,13 @@ In recent years different approaches have been explored. In 2010 Sperschneider \
 \section{Accuracy}
 \label{sec:accuracy}
 It is important to test and compare the accuracy of various prediction methods.
-As such, well established nomenclature and techniques have been developed over
-the history of RNA structure prediction. These methods are simple but effective. Usually accuracy is determined by comparing predicted structures to known
+As such, well established techniques have been developed over
+the history of RNA structure prediction. Usually accuracy is determined by comparing predicted structures to known
 structures. True Positives ($TP$) is defined as the number of base pairs which appear in both the predicted structure and the actual structure. False Positives
 ($FP$) is the number of predicted base pairs not in the true
 structure \cite{lorenz2011viennarna}. Similarly, False Negatives ($FN$) is defined as the number of base
 pairings in the reference structure but not present in the predicted structure \cite{lorenz2011viennarna}.
-Sensitivity is also called the True Positive Rate ($TPR$), and can be defined using the previously introduced values. I have given a mathematical definition of the $TPR$ in Equation \ref{eq:tpr}.
+Sensitivity, also called the True Positive Rate ($TPR$), can be defined using the previously introduced values. I have given a mathematical definition of the $TPR$ in Equation \ref{eq:tpr}.
 
 \begin{equation} \label{eq:tpr}
  \frac{TP}{TP + FN}
@@ -283,7 +276,7 @@ using these values (see Equation \ref{eq:ppv}).
  \frac{TP}{TP + FP}
 \end{equation}
 
-RNAfold is one of the leading RNA folding algorithms, and is made available
+RNAfold \cite{lorenz2011viennarna} is one of the leading RNA folding algorithms, and is made available
 as part of the Vienna RNA package \cite{lorenz2011viennarna}. At its heart, it is an implementation
 of the original dynamic programming algorithm first discovered by Zuker, albeit
 with a more refined energy model. It is an extremely efficient implementation of
@@ -301,69 +294,53 @@ lagged behind pknotsRE and pknotsRG in sensitivity, but executed orders of magni
 no pseudoknots while also exhibiting unrivalled computation speed \cite{lorenz2011viennarna}.
 
 
-\section{Alternative Techniques}
+\section{Locally Optimal Structure Prediction}
+\label{sec:locopt}
 
 
-\subsection{Soft Computing}
-The use of soft computing techniques has also yielded some success in the prediction of RNA secondary structure. Koessler et al. \cite{koessler2010predictive} modelled RNA structures
-as a tree of internal structures, then used artificial neural networks to recognize
-which of these trees appeared most RNA like. These trees are generated by constructing basic secondary structures and combinatorially merging them together
-to form many trees, each of which is represented as a vector of simpler trees.
-This vector is used as the input to the neural network. 
-
-This kind of combinatorial blending of RNA stems is also a techniques shared by genetic algorithms. Indeed, this
-is precisely the starting point of Van Batenburg, Gultyaev, and Pleij \cite{van1995apl}, who
-used a simple genetic algorithm to predict secondary structure. Their algorithm
-started by computing an array of all possible stems; each genome was represented
-as a binary string where \texttt{1} indicates a stem is in the candidate structure, and \texttt{0}
-indicates that it was not. Their genetic algorithm proceeded by seeding the genomes
-with random bits, then in a series of generation steps performed typical binary
-mutation, crossover, and breeding, conserving and selectively breeding the fittest
-solutions. Fitness was defined in their algorithm as the summed total length
-(number of bonds) of all stems. In an improved version the summed stacking
-free energy reduction of all stems was used.
-
-Unfortunately they discovered a problem with this approach: the population
-contained a relatively large portion of zero fitness individuals. This was because
-many combinations of stems are incompatible with each other, yielding impossible
-structures. Instead of giving these structures zero fitness, they altered their algorithm slightly to disallow crossover for stems that created an invalid structure.
-In addition to this, they also explored an important advantage of genetic algorithms for RNA secondary structure prediction: that of kinetic folding. Kinetic
-folding is the hypothesis that some RNAs, particularly large ones, have a rugged
-energy landscape, and because of the incremental process of transcription and
-folding (which happen simultaneously) become stuck in suboptimal areas during
-folding \cite{treiber2001beyond, van1995apl}. 
-
-The algorithm of Van Batenburg, Gultyaev, and Pleij simulated
-this process by limiting the size of stems that could contribute to a genome, and
-increasing this size over time until the length of the RNA was reached. This
-single modification to their algorithm yielded the greatest improvement in predictive power. It should also be noted that it could also predict pseudoknots, as
-the algorithm did not force stems to be nested. Despite this, their approach was
-still less accurate than the dynamic programming approaches they compared it
-to. This was likely because their energy model was puerile in comparison rather than because the algorithm was flawed.
+DNA sequences, unlike typical RNA sequences, are very large indeed. Usually
+on the order of hundreds of megabytes of data. DNA sequences often contain subsequences that code for RNAs. Functionally important RNAs typically have
+a recognizable secondary structure. When searching a large genome for functional RNAs, one can use a sliding window of fixed size to find locally optimal
+structures (see Figure \ref{fig:slidingwindow}). This can be done by running a typical cubic time implementation of the Zuker algorithm at every window location. Let $L$ be defined as the chosen
+window size, and $N$ represent the length of the genome. This leads to a total complexity of $O(NL^3)$. While not prohibitive, this becomes intractable for many
+genomes, which are typically extremely large---millions or billions of bases. 
 
 
-Indeed, Wiese, Deschenes, and Hendriks \cite{wiese2008rnapredict} introduced an improved
-genetic algorithm based on the same principles as that of Van Batenburg, Gultyaev,
-and Pleij, but instead using an advanced energy model for fitness. They then
-demonstrated that it outperformed the popular dynamic programming algorithm
-Mfold \cite{zuker2003mfold}, which uses a similarly complex model. Wiese, Deschenes, and Hendriks noted that as the length of RNA molecules increased the correlation between lower free energy and accuracy decreased. The concluded that this was due to the incompleteness of our current thermodynamic model of RNA folding. The algorithm of Van Batenburg, Gultyaev, and Pleij avoided this problem by simulating kinetic folding. Such a heuristic was not present in the algorithm of Wiese, Deschenes, and Hendriks.
+\begin{figure}
+\begin{center}
+\scalebox{0.3}{\includegraphics{slidingwindow}}
+\end{center}
+\caption{Depiction of how sliding windows can explore an RNA sequence.}
+\label{fig:slidingwindow}
+\end{figure}
+
+In 2004, Hofacker, Priwitzer, and Stadler \cite{hofacker2004prediction} provided an excellent insight, and were
+able to lower this bound to $O(NL^2)$. It was now possible to scan large genomes
+for interesting RNA secondary structure motifs. This was achieved by modifying the Zuker algorithm. Specifically, the dynamic programming table from the previous step was used to quickly fill the table for
+the next window in quadratic time; because consecutive windows overlap, preceding information can be meaningfully used in each forward computational step.
+As a result it requires only a single table of size $O(L^2)$, and as such its memory complexity is only $O(N + L^2)$. Later, in 2009, Horesh et al. \cite{horesh2009rnaslider} managed
+to lower the expected time bound to $O(NL)$ under the assumption that one is
+folding RNAs that are typical of naturally occurring sequences. This average case time complexity was experimentally verified, as their algorithm was shown to outperform that of Hofacker, Priwitzer, and Stadler. 
+
+Clearly good algorithms are
+available for the folding of consecutive RNA windows. For even modest sized
+RNAs, such algorithms are orders of magnitude faster than holistic secondary
+structure prediction algorithms. However, this comes with the major caveat of not actually predicting
+a complete secondary structure, but only a set of locally optimal structures.
 
 
-
-\subsection{Context Free Grammars}
+\section{Context Free Grammars}
 RNA sequences and their secondary structures can be represented as Context Free
 Grammars (CFGs). Various production rules output different internal structures (such as
-hairpin loops, or internal bulges), with the terminals producing the bases A, U, G,
+hairpin loops, or internal bulges) as symbols, with the terminals being the bases A, U, G,
 and C. This is a fundamentally different approach to those discussed previously,
 however CFGs can, in fact, use the same thermodynamic energy model. Stochastic Context Free Grammars (SCFGs) can be used to encode the plausibility of
 production rules, and thus find the most plausible parse tree using a thermodynamic model \cite{rivas2012range}. In addition, these kinds of algorithms can be trained to
 incorporate statistical information such as phylogenetic similarity, or machine
-learned parameters \cite{rivas2012range}. 
-
-These kinds of methods have trouble with pseudoknots as non-nested structures are not compatible with CFGs.
+learned parameters \cite{rivas2012range}. These kinds of methods have trouble with pseudoknots, as non-nested structures are not compatible with CFGs.
 A notable workaround was applied by Kato, Seki, and Kasami \cite{kato2006stochastic}, who used
 multiple context free grammars to model pseudoknots. However, their approach
-increases the time and space requirements prodigiously.
+increases time and space requirements prodigiously.
 
 
 The greatest strength of context free grammar based approaches is that they
@@ -380,52 +357,63 @@ set of trained parameters based on conditional log-linear models. CONTRAfold
 achieved an average prediction sensitivity higher than RNAfold \cite{lorenz2011viennarna}, and also higher
 than that of Mfold \cite{zuker2003mfold}, an RNA prediction package similar to RNAfold.
 
-\section{Locally Optimal Structure Prediction}
-\label{sec:locopt}
 
 
-DNA sequences, unlike typical RNA sequences, are very large indeed. Usually
-on the order of hundreds of megabytes of data. Such sequences contain DNA
-subsequences that code for RNAs. Functionally important RNAs typically have
-a recognizable secondary structure. When searching a large genome for functional RNAs, one can use a sliding window of fixed size to find locally optimal
-structures (see Figure \ref{fig:slidingwindow}). This can be done by running a typical cubic time algorithm like
-RNAfold or Mfold at every window location. Let $L$ be defined as the chosen
-window size, and $N$ represent the length of the genome. This leads to a total complexity of $O(NL^3)$. While not prohibitive, this becomes intractable for many
-genomes which are typically extremely large---millions or billions of bases. 
+
+\section{Soft Computing}
+The use of soft computing techniques has also yielded some success in the prediction of RNA secondary structure. Koessler et al. \cite{koessler2010predictive} modelled RNA structures
+as a tree of internal substructures, then used artificial neural networks to recognize
+which of these trees appeared most RNA like. These trees are generated by constructing basic secondary structures and combinatorially merging them together
+to form many trees, each of which is represented as a vector of simpler trees.
+This vector is used as the input to the neural network. 
+
+This kind of combinatorial blending of RNA stems is also a techniques shared by genetic algorithms. Indeed, this
+is precisely the starting point of Van Batenburg, Gultyaev, and Pleij \cite{van1995apl}, who
+used a simple genetic algorithm to predict secondary structure. Their algorithm
+started by computing an array of all possible stems; each genome was represented
+as a binary string where \texttt{1} indicates a stem is in the candidate structure, and \texttt{0}
+indicates that it was not. Their genetic algorithm proceeded by seeding the genomes
+with random bits, then in a series of generation steps performed typical binary
+mutation, crossover, and breeding, conserving and selectively breeding the fittest
+solutions. Fitness was defined in their algorithm as the summed length
+(number of bonds) of all stems. In an improved version, the summed stacking
+free energy reduction of all stems was used instead.
+
+Unfortunately they discovered a problem with this approach: the population
+contained a relatively large portion of zero fitness individuals. This is because
+many combinations of stems are incompatible with each other, yielding impossible
+structures. Instead of giving these structures zero fitness, they altered their algorithm slightly to disallow crossover for stems that create an invalid structure.
+In addition to this, they also explored an important advantage of genetic algorithms for RNA secondary structure prediction: that of kinetic folding. Kinetic
+folding is the hypothesis that some RNAs, particularly large ones, have a rugged
+energy landscape, and because of the incremental process of transcription and
+folding (which happen simultaneously) become stuck in suboptimal areas during
+folding \cite{treiber2001beyond, van1995apl}. 
+
+The algorithm of Van Batenburg, Gultyaev, and Pleij simulated
+this process by limiting the size of stems that could contribute to a genome, and
+increasing this size over time until the length of the RNA was reached. This
+single modification to their algorithm yielded the greatest improvement in predictive power. It should also be noted that it can predict pseudoknots, as
+the algorithm does not force stems to be nested. Despite this, their approach was
+still less accurate than the dynamic programming approaches they compared it
+to. This is likely because their energy model was puerile in comparison, rather than because the algorithm is flawed.
 
 
-\begin{figure}
-\begin{center}
-\scalebox{0.3}{\includegraphics{slidingwindow}}
-\end{center}
-\caption{Depiction of how sliding windows can explore an RNA sequence.}
-\label{fig:slidingwindow}
-\end{figure}
+Indeed, Wiese, Deschenes, and Hendriks \cite{wiese2008rnapredict} introduced an improved
+genetic algorithm based on the same principles as that of Van Batenburg, Gultyaev,
+and Pleij, but instead using an advanced energy model for fitness. They then
+demonstrated that it outperforms the popular dynamic programming algorithm
+Mfold \cite{zuker2003mfold}, which uses a similarly complex model. Wiese, Deschenes, and Hendriks noted that as the length of RNA molecules increased the correlation between lower free energy and accuracy decreased. They concluded that this was due to the incompleteness of our current thermodynamic model of RNA folding. The algorithm of Van Batenburg, Gultyaev, and Pleij avoided this problem by simulating kinetic folding. Such a heuristic was not present in the algorithm of Wiese, Deschenes, and Hendriks.
 
-In 2004, Hofacker, Priwitzer, and Stadler \cite{hofacker2004prediction} provided an excellent insight, and were
-able to lower this bound to $O(NL^2)$, making it possible to scan large genomes
-for interesting RNA secondary structure motifs. This was achieved by using the
-dynamic programming table from the previous step to quickly fill the table for
-the next window in quadratic time; because consecutive windows overlap, preceding information can be meaningfully used in each forward computational step.
-As a result it requires only a single table of size $O(L^2)$, and as such its memory complexity is only $O(N + L^2)$.
+\section{Kinetic Folding}
 
-Later, in 2009, Horesh et al. \cite{horesh2009rnaslider} managed
-to lower the expected time bound to $O(NL)$ under the assumption that one is
-folding RNAs that are typical of naturally occurring sequences. This average case time complexity was experimentally verified, and their algorithm was shown to outperform that of Hofacker, Priwitzer, and Stadler. 
-
-Clearly good algorithms are
-available for the folding of consecutive RNA windows. For even modest sized
-RNAs such algorithms are orders of magnitude faster than holistic secondary
-structure prediction algorithms. With the major caveat of not actually predicting
-a complete secondary structure, but only a set of locally optimal structures.
 
 \section{State of the Art: Global Optimization}
 \label{sec:softa}
-Current state of the art algorithms fold RNA in a way that globally maximises their score according to some model. The Zuker algorithm, for example, finds the global minimum free energy configuration. SCFG based algorithms maximise the probability of the final parse tree. This bias is largely due to the `thermodynamic hypothesis'. Anfinsen \cite{anfinsen1973principles} presented this hypothesis as the underlying principle for the formation of biologically active proteins. He held that proteins fold into a minimum Gibbs free energy conformation in their typical biological environment; defined as the molecules physiological state: pH, temperature, ion concentration. Furthermore, through natural selection, molecules that are most likely to fold into the correct shape have evolved, and the atomic interactions of such molecules fully determine their final state. This insight has been invaluable for folding proteins and RNAs in silico. Despite this, it has recently become clear that methods for the prediction of RNA secondary structures have hit an upper limit in accuracy.
+Current state of the art algorithms fold RNA in a way that globally maximises score according to some model. The Zuker algorithm, for example, finds the global minimum free energy configuration. SCFG based algorithms maximise the probability of a parse tree. This bias is largely due to the `Thermodynamic Hypothesis'. Anfinsen \cite{anfinsen1973principles} presented this hypothesis as the underlying principle for the formation of biologically active proteins. He held that proteins fold into a minimum Gibbs free energy conformation in their typical biological environment. (Environment being defined as the molecules physiological state: pH, temperature, and ion concentration.) Furthermore, through natural selection, molecules that are most likely to fold into the correct shape have evolved. Therefore we should be able to determine the structure of biologically active molecules (particularly proteins in Anfinsens original thesis) by finding a minimal free energy conformation, given the building blocks of the molecule. This insight has been invaluable for folding proteins and RNAs in silico. Despite this, it has recently become clear that methods for the prediction of RNA secondary structures have hit an upper limit in accuracy.
 
-In her discussion of modern RNA prediction, Rivas \cite{rivas2013four} unified pseudoknot-free RNA folding algorithms. Her core observation is that all such prediction algorithms contain the same four key components: an architecture, or the production rules of a grammar; a scoring scheme, or how scores are assigned to these production rules; and the parametrization of the scoring scheme, or the specific values assigned to it. These features are referred to by Rivas, and by myself in the following discussion, as the `model'. The fourth and final feature is the folding algorithm used to find the best structure given the model. Here Rivas notes that the two dominant folding algorithms are interchangeable. The Cocke-Younger-Kasami (CYK) algorithm used to parse SCFGs, and the MFE algorithm based on the work of Zuker, are isomorphic for the purpose of parsing RNA grammars. Rivas additionally notes that all scoring schemes and parametrizations appear to hit an accuracy upper limit, and that complex, machine learned models are only slightly more accurate than thermodynamic models. In fact, relatively basic grammars with hundreds of parameters seem to perform almost equivalently to those with tens of thousands. While Rivas managed to unify many aspects of RNA prediction she did not recognise that all such algorithms are based on those same assumptions underpinning the thermodynamic hypothesis: they seek to globally maximise a scoring function for the final RNA secondary structure. 
+In her discussion of modern RNA prediction, Rivas \cite{rivas2013four} unified pseudoknot-free RNA folding algorithms. Her core observation is that all such prediction algorithms contain the same four key components: an architecture, or the production rules of a grammar; a scoring scheme, or how scores are assigned to these production rules; and the parametrization of the scoring scheme, or the specific values assigned to it. These features are referred to by Rivas, and by myself in the following discussion, as the `model'. The fourth and final feature is the folding algorithm used to find the best structure given the model. Here Rivas notes that the two dominant folding algorithms are interchangeable. The Cocke-Younger-Kasami (CYK) algorithm, used to parse SCFGs, and free energy minimizing algorithms based on the work of Zuker are isomorphic for the purpose of parsing RNA grammars. Rivas additionally notes that all scoring schemes and parametrizations appear to hit an accuracy upper limit, and that complex, machine learned models are only slightly more accurate than thermodynamic models. In fact, relatively basic grammars with hundreds of parameters seem to perform almost equivalently to those with tens of thousands. While Rivas managed to unify many aspects of RNA prediction she did not recognise that all such algorithms are based on those same assumptions underpinning the thermodynamic hypothesis: they seek to globally maximise a scoring function for the final RNA secondary structure. 
 
-I propose that, in RNA molecules, local interactions are stronger than global interactions. As a result RNA molecules will misfold into a global structure made up of locally optimal structures. This is my core hypothesis. If this assumption is correct it follows that there exists a set of `windows' that when folded using any reasonable model will be more accurate than the corresponding global optimum using the same model. There is already some evidence for this hypothesis. Dawson et al. \cite{dawson2013new} used variable Kuhn lengths to accurately predict RNAs containing less than 100 nucleotides. Kuhn length is the size of a segment in a polymer chain. It is a simplifying assumption that allows one to treat the entire chain as a sequence of Kuhn segments. In addition, Dawson et al. showed that the energy landscape of these RNAs, when the correct Kuhn length was applied, was funnel shaped. Without such simplifying assumptions the energy landscape of RNAs is notoriously rugged, with in vivo secondary structures often becoming `trapped' in suboptimal states; this is most apparent in large RNAs \cite{ditzler2008rugged}.
+I propose that, in RNA molecules, local interactions are stronger than global interactions. As a result RNA molecules will misfold into a global structure made up of locally optimal structures. This is my core hypothesis. If this assumption is correct it follows that there exists a set of `windows' that, when folded using any reasonable model, will be more accurate than the corresponding global optimum using the same model. There is already some evidence for this hypothesis. Dawson et al. \cite{dawson2013new} used variable Kuhn lengths to accurately predict RNAs containing less than 100 nucleotides. Kuhn length is the size of a segment in a polymer chain. It is a simplifying assumption that allows one to treat the entire chain as a sequence of Kuhn segments. In addition, Dawson et al. showed that the energy landscape of these RNAs, when the correct Kuhn length was applied, was funnel shaped. Without such simplifying assumptions the energy landscape of RNAs is notoriously rugged, with in vivo secondary structures often becoming `trapped' in suboptimal states; this is most apparent in large RNAs \cite{ditzler2008rugged}.
 
 If my hypothesis is supported, I aim to leverage the insights provided to improve the accuracy and speed of RNA secondary structure prediction.
 
@@ -436,11 +424,11 @@ If my hypothesis is supported, I aim to leverage the insights provided to improv
 All algorithms were implemented and tested using Ubuntu 13.10 running on an Intel i5-3210m processor with four gigabytes of RAM. The GNU C compiler (GCC) version 4.8.2 was used to compile all C and C++ code. 
 
 \subsection{Software}
-The Vienna RNA package \cite{lorenz2011viennarna} was used as a base for all algorithms presented in this paper. This package contains many useful programs for working with RNA. The RNAfold and RNALfold modules were used in this investigation. 
+The Vienna RNA Package \cite{lorenz2011viennarna} was used as a base for all algorithms presented in this paper. This package contains many useful programs for working with RNA. The RNAfold and RNALfold modules were used in this investigation. 
 
 RNAfold is a modern implementation of Zuker's folding algorithm. It predicts the minimum free energy secondary structure of an RNA given the primary sequence. It can also calculate the Boltzmann partition function, producing a matrix of base pair probabilities. Additionally the RNAfold tool can compute the energy of any arbitrary secondary structure, given a corresponding RNA primary sequence, under it's thermodynamic energy model.
 
-The RNALfold module implements a sliding window RNA folding algorithm. It is designed to find all locally optimal secondary structures for an RNA of size $n$, using a window of fixed size $L$. RNALfold implements Hofacker, Priwitzer, and Stadler's algorithm \cite{hofacker2004prediction}, and thus uses $O(nL^2)$ time and $O(n + L^2)$ space. I note here that this is not the most optimal algorithm available. As I have discussed in section~\ref{sec:locopt}, Horesh et al. \cite{horesh2009rnaslider} presented an algorithm that also folds consecutive windows using a similar model. However, they achieved a typical time complexity of $O(nL)$. This algorithm was not used because the implementation give by the authors is based on an older energy model taken from the Mfold package. RNALfold is based on the same energy model as RNAfold, which has been recently updated \cite{lorenz2011viennarna}. For the sake of accurate comparison to RNAfold, and to ensure a state-of-the-art energy model, RNALfold was used.
+The RNALfold module implements a sliding window RNA folding algorithm. It is designed to find all locally optimal secondary structures for an RNA of size $n$, using a window of fixed size $L$. RNALfold implements Hofacker, Priwitzer, and Stadler's algorithm \cite{hofacker2004prediction}, and thus uses $O(nL^2)$ time and $O(n + L^2)$ space. I note here that this is not the most optimal algorithm available. As I have discussed in section~\ref{sec:locopt}, Horesh et al. \cite{horesh2009rnaslider} presented an algorithm that also folds consecutive windows using a similar model. However, they achieved a typical time complexity of $O(nL)$. This algorithm was not used because the implementation give by the authors is based on an older energy model taken from the Mfold \cite{zuker2003mfold} package. RNALfold is based on the same energy model as RNAfold, which has been recently updated \cite{lorenz2011viennarna}. For the sake of accurate comparison to RNAfold, and to ensure a state-of-the-art energy model, RNALfold was used.
 
 Version 2.1.6 of the Vienna RNA package was used. The package was built from the C source code after minor modifications were made to the RNALfold module. The Vienna RNA makefile was used to compile the package. The makefile compiles numerous standalone console applications for Vienna RNA's modules. It also creates a static library called RNAlib. This library was linked at compile time, and used to call RNAfold and RNALfold from the algorithms I shall subsequently describe.
 

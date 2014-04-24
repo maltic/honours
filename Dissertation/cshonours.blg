@@ -1,46 +1,46 @@
-This is BibTeX, Version 0.99d (TeX Live 2013/Debian)
+This is BibTeX, Version 0.99d (TeX Live 2012/Debian)
 Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
 The top-level auxiliary file: cshonours.aux
 The style file: acm.bst
 Database file #1: cshonours.bib
 You've used 40 entries,
             2253 wiz_defined-function locations,
-            775 strings with 11210 characters,
-and the built_in function-call counts, 14617 in all, are:
-= -- 1431
-> -- 745
+            776 strings with 11274 characters,
+and the built_in function-call counts, 14746 in all, are:
+= -- 1445
+> -- 755
 < -- 0
-+ -- 314
-- -- 266
-* -- 1294
-:= -- 2397
++ -- 318
+- -- 270
+* -- 1309
+:= -- 2416
 add.period$ -- 122
 call.type$ -- 40
-change.case$ -- 250
+change.case$ -- 252
 chr.to.int$ -- 0
 cite$ -- 40
 duplicate$ -- 424
-empty$ -- 1104
-format.name$ -- 266
-if$ -- 2958
+empty$ -- 1110
+format.name$ -- 270
+if$ -- 2982
 int.to.chr$ -- 0
 int.to.str$ -- 40
 missing$ -- 42
 newline$ -- 203
 num.names$ -- 80
-pop$ -- 203
+pop$ -- 205
 preamble$ -- 1
-purify$ -- 211
+purify$ -- 213
 quote$ -- 0
 skip$ -- 254
 stack$ -- 0
-substring$ -- 1068
+substring$ -- 1090
 swap$ -- 108
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
 type$ -- 156
 warning$ -- 0
-while$ -- 150
+while$ -- 151
 width$ -- 42
 write$ -- 408
