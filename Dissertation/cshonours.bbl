@@ -96,6 +96,11 @@
   a neural network.
 \newblock {\em BMC bioinformatics 11}, Suppl 6 (2010), S21.
 
+\bibitem{kramer1981secondary}
+{\sc Kramer, F.~R., and Mills, D.~R.}
+\newblock Secondary structure formation during rna synthesis.
+\newblock {\em Nucleic acids research 9}, 19 (1981), 5109--5124.
+
 \bibitem{lee2014rna}
 {\sc Lee, J., Kladwang, W., Lee, M., Cantu, D., Azizyan, M., Kim, H.,
   Limpaecher, A., Yoon, S., Treuille, A., and Das, R.}
@@ -119,6 +124,11 @@
 \newblock Rna pseudoknot prediction in energy-based models.
 \newblock {\em Journal of computational biology 7}, 3-4 (2000), 409--427.
 
+\bibitem{morgan1996evidence}
+{\sc Morgan, S.~R., and Higgs, P.~G.}
+\newblock Evidence for kinetic effects in the folding of large rna molecules.
+\newblock {\em The Journal of chemical physics 105}, 16 (1996), 7152--7157.
+
 \bibitem{namy2006mechanical}
 {\sc Namy, O., Moran, S.~J., Stuart, D.~I., Gilbert, R.~J., and Brierley, I.}
 \newblock A mechanical explanation of rna pseudoknot function in programmed
@@ -141,6 +151,12 @@
 {\sc Nussinov, R., Pieczenik, G., Griggs, J.~R., and Kleitman, D.~J.}
 \newblock Algorithms for loop matchings.
 \newblock {\em SIAM Journal on Applied mathematics 35}, 1 (1978), 68--82.
+
+\bibitem{proctor2013cofold}
+{\sc Proctor, J.~R., and Meyer, I.~M.}
+\newblock Cofold: an rna secondary structure prediction method that takes
+  co-transcriptional folding into account.
+\newblock {\em Nucleic acids research 41}, 9 (2013), e102--e102.
 
 \bibitem{reeder2004design}
 {\sc Reeder, J., and Giegerich, R.}

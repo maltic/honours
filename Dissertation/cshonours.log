@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012/Debian) (format=pdflatex 2014.3.26)  24 APR 2014 19:26
+This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012/Debian) (format=pdflatex 2014.3.26)  25 APR 2014 10:31
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -675,23 +675,23 @@ File: slidingwindow.png Graphic file (type png)
 Package pdftex.def Info: slidingwindow.png used on input line 311.
 (pdftex.def)             Requested size: 735.74695pt x 278.03807pt.
 
-[12 <./slidingwindow.png>] [13] [14] [15] [16]
+[12 <./slidingwindow.png>] [13] [14] [15] [16] [17]
 Chapter 3.
-[17
+[18
 
-] [18] <rnainterval.png, id=102, 940.51375pt x 238.8925pt>
+] [19] <rnainterval.png, id=105, 940.51375pt x 238.8925pt>
 File: rnainterval.png Graphic file (type png)
 
 <use rnainterval.png>
 Package pdftex.def Info: rnainterval.png used on input line 449.
 (pdftex.def)             Requested size: 940.51146pt x 238.8919pt.
- <compat.png, id=103, 827.09pt x 192.72pt>
+ <compat.png, id=106, 827.09pt x 192.72pt>
 File: compat.png Graphic file (type png)
 
 <use compat.png>
 Package pdftex.def Info: compat.png used on input line 471.
 (pdftex.def)             Requested size: 827.08797pt x 192.71951pt.
- [19 <./rnainterval.png>]
+ [20 <./rnainterval.png>]
 LaTeX Font Info:    Try loading font information for OMS+cmr on input line 487.
 
 
@@ -700,52 +700,52 @@ File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
 (Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 487.
- [20 <./compat.png>]
-<q-i.png, id=114, 533.995pt x 169.63374pt>
+ [21 <./compat.png>]
+<q-i.png, id=117, 533.995pt x 169.63374pt>
 File: q-i.png Graphic file (type png)
  <use q-i.png>
 Package pdftex.def Info: q-i.png used on input line 515.
 (pdftex.def)             Requested size: 533.9937pt x 169.63332pt.
- [21 <./q-i.png>]
-[22] [23] [24] [25]
+ [22 <./q-i.png>]
+[23] [24] [25] [26]
 Chapter 4.
-[26
+[27
 
-] <wasrnafoldplot.pdf, id=136, 361.35pt x 216.81pt>
+] <wasrnafoldplot.pdf, id=139, 361.35pt x 216.81pt>
 File: wasrnafoldplot.pdf Graphic file (type pdf)
 
 <use wasrnafoldplot.pdf>
 Package pdftex.def Info: wasrnafoldplot.pdf used on input line 662.
 (pdftex.def)             Requested size: 361.34912pt x 216.80946pt.
- [27] [28 <./wasrnafoldplot.pdf>]
-<abcorrelation.pdf, id=151, 361.35pt x 216.81pt>
+ [28] [29 <./wasrnafoldplot.pdf>]
+<abcorrelation.pdf, id=154, 361.35pt x 216.81pt>
 File: abcorrelation.pdf Graphic file (type pdf)
  <use abcorrelation.pdf>
 Package pdftex.def Info: abcorrelation.pdf used on input line 678.
 (pdftex.def)             Requested size: 361.34912pt x 216.80946pt.
 
-<zukerabtime.pdf, id=152, 361.35pt x 216.81pt>
+<zukerabtime.pdf, id=155, 361.35pt x 216.81pt>
 File: zukerabtime.pdf Graphic file (type pdf)
  <use zukerabtime.pdf>
 Package pdftex.def Info: zukerabtime.pdf used on input line 688.
 (pdftex.def)             Requested size: 361.34912pt x 216.80946pt.
- [29 <./abcorrelation.pdf>] [30 <./zukerabtime.pdf>]
+ [30 <./abcorrelation.pdf>] [31 <./zukerabtime.pdf>]
 Chapter 5.
-[31
+[32
 
-] [32] [33] [34] [35] (./cshonours.bbl [36] [37] [38
+] [33] [34] [35] [36] (./cshonours.bbl [37] [38] [39
 
-] [39] [40]
+] [40] [41]
 Missing character: There is no â in font cmr12!
 Missing character: There is no € in font cmr12!
 Missing character: There is no ” in font cmr12!
-) [41]
+) [42]
 (./cshonours.aux) ) 
 Here is how much of TeX's memory you used:
- 10181 strings out of 493485
- 217427 string characters out of 3143526
- 216275 words of memory out of 3000000
- 13334 multiletter control sequences out of 15000+200000
+ 10184 strings out of 493485
+ 217487 string characters out of 3143526
+ 216287 words of memory out of 3000000
+ 13337 multiletter control sequences out of 15000+200000
  13068 words of font info for 48 fonts, out of 3000000 for 9000
  957 hyphenation exceptions out of 8191
  38i,10n,27p,1659b,514s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -762,10 +762,10 @@ ts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1
 c/amsfonts/cm/cmsy8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfo
 nts/cm/cmti12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm
 /cmtt12.pfb>
-Output written on cshonours.pdf (48 pages, 1464203 bytes).
+Output written on cshonours.pdf (49 pages, 1465723 bytes).
 PDF statistics:
- 263 PDF objects out of 1000 (max. 8388607)
- 171 compressed objects within 2 object streams
+ 267 PDF objects out of 1000 (max. 8388607)
+ 174 compressed objects within 2 object streams
  0 named destinations out of 1000 (max. 500000)
  56 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -13,30 +13,30 @@
 \contentsline {section}{\numberline {2.7}Soft Computing}{14}
 \contentsline {section}{\numberline {2.8}Kinetic Folding}{15}
 \contentsline {section}{\numberline {2.9}State of the Art: Global Optimization}{15}
-\contentsline {chapter}{\numberline {3}Methodology}{17}
-\contentsline {section}{\numberline {3.1}Materials}{17}
-\contentsline {subsection}{\numberline {3.1.1}Environment}{17}
-\contentsline {subsection}{\numberline {3.1.2}Software}{17}
-\contentsline {subsection}{\numberline {3.1.3}Testing Set}{18}
-\contentsline {section}{\numberline {3.2}RNA Intervals}{18}
-\contentsline {section}{\numberline {3.3}Merging RNA Intervals}{19}
-\contentsline {subsection}{\numberline {3.3.1}Top-Down Selection}{20}
-\contentsline {subsection}{\numberline {3.3.2}Bottom-Up Selection}{21}
-\contentsline {subsection}{\numberline {3.3.3}Score Selection}{21}
-\contentsline {subsection}{\numberline {3.3.4}Weighted Activity Selection}{21}
-\contentsline {subsection}{\numberline {3.3.5}Comparison of RNA Interval Selection Algorithms}{22}
-\contentsline {section}{\numberline {3.4}Prediction Using Windows}{23}
-\contentsline {subsection}{\numberline {3.4.1}Time Complexity}{23}
-\contentsline {subsection}{\numberline {3.4.2}Test Procedure}{24}
-\contentsline {chapter}{\numberline {4}Results}{26}
-\contentsline {section}{\numberline {4.1}RNA Interval Selection}{26}
-\contentsline {section}{\numberline {4.2}Using RNA Intervals For Prediction}{27}
-\contentsline {chapter}{\numberline {5}Discussion}{31}
-\contentsline {section}{\numberline {5.1}Local Optimization}{31}
-\contentsline {subsection}{\numberline {5.1.1}Future Work}{32}
-\contentsline {subsection}{\numberline {5.1.2}Implications}{33}
-\contentsline {section}{\numberline {5.2}The $ab$-splat Algorithm}{34}
-\contentsline {subsection}{\numberline {5.2.1}Accuracy}{34}
-\contentsline {subsection}{\numberline {5.2.2}Computational Complexity}{34}
-\contentsline {subsection}{\numberline {5.2.3}A Better Algorithm}{35}
-\contentsline {section}{\numberline {5.3}Conclusions}{36}
+\contentsline {chapter}{\numberline {3}Methodology}{18}
+\contentsline {section}{\numberline {3.1}Materials}{18}
+\contentsline {subsection}{\numberline {3.1.1}Environment}{18}
+\contentsline {subsection}{\numberline {3.1.2}Software}{18}
+\contentsline {subsection}{\numberline {3.1.3}Testing Set}{19}
+\contentsline {section}{\numberline {3.2}RNA Intervals}{19}
+\contentsline {section}{\numberline {3.3}Merging RNA Intervals}{20}
+\contentsline {subsection}{\numberline {3.3.1}Top-Down Selection}{21}
+\contentsline {subsection}{\numberline {3.3.2}Bottom-Up Selection}{22}
+\contentsline {subsection}{\numberline {3.3.3}Score Selection}{22}
+\contentsline {subsection}{\numberline {3.3.4}Weighted Activity Selection}{22}
+\contentsline {subsection}{\numberline {3.3.5}Comparison of RNA Interval Selection Algorithms}{23}
+\contentsline {section}{\numberline {3.4}Prediction Using Windows}{24}
+\contentsline {subsection}{\numberline {3.4.1}Time Complexity}{24}
+\contentsline {subsection}{\numberline {3.4.2}Test Procedure}{25}
+\contentsline {chapter}{\numberline {4}Results}{27}
+\contentsline {section}{\numberline {4.1}RNA Interval Selection}{27}
+\contentsline {section}{\numberline {4.2}Using RNA Intervals For Prediction}{28}
+\contentsline {chapter}{\numberline {5}Discussion}{32}
+\contentsline {section}{\numberline {5.1}Local Optimization}{32}
+\contentsline {subsection}{\numberline {5.1.1}Future Work}{33}
+\contentsline {subsection}{\numberline {5.1.2}Implications}{34}
+\contentsline {section}{\numberline {5.2}The $ab$-splat Algorithm}{35}
+\contentsline {subsection}{\numberline {5.2.1}Accuracy}{35}
+\contentsline {subsection}{\numberline {5.2.2}Computational Complexity}{35}
+\contentsline {subsection}{\numberline {5.2.3}A Better Algorithm}{36}
+\contentsline {section}{\numberline {5.3}Conclusions}{37}
