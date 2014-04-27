@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012/Debian) (format=pdflatex 2014.3.26)  25 APR 2014 10:31
+This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012/Debian) (format=pdflatex 2014.3.26)  27 APR 2014 14:20
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -638,7 +638,7 @@ Chapter 2.
 <dna.png, id=35, 800.9925pt x 1003.75pt>
 File: dna.png Graphic file (type png)
  <use dna.png>
-Package pdftex.def Info: dna.png used on input line 49.
+Package pdftex.def Info: dna.png used on input line 47.
 (pdftex.def)             Requested size: 800.99054pt x 1003.74756pt.
  [2
 
@@ -646,20 +646,20 @@ Package pdftex.def Info: dna.png used on input line 49.
 <transcription.png, id=40, 1405.25pt x 704.6325pt>
 File: transcription.png Graphic file (type png)
  <use transcription.png>
-Package pdftex.def Info: transcription.png used on input line 59.
+Package pdftex.def Info: transcription.png used on input line 57.
 (pdftex.def)             Requested size: 1405.24658pt x 704.6308pt.
 
 [3 <./dna.png>] [4 <./transcription.png>] [5]
 <nuss_rna.png, id=52, 1155.31625pt x 659.46375pt>
 File: nuss_rna.png Graphic file (type png)
  <use nuss_rna.png>
-Package pdftex.def Info: nuss_rna.png used on input line 99.
+Package pdftex.def Info: nuss_rna.png used on input line 97.
 (pdftex.def)             Requested size: 1155.31345pt x 659.46213pt.
  [6 <./nuss_rna.png>] [7] <figure4.png, id=62, 1482.53876pt x 677.53125pt>
 File: figure4.png Graphic file (type png)
 
 <use figure4.png>
-Package pdftex.def Info: figure4.png used on input line 170.
+Package pdftex.def Info: figure4.png used on input line 168.
 (pdftex.def)             Requested size: 1482.53516pt x 677.52959pt.
 Missing character: There is no â in font cmr12!
 Missing character: There is no € in font cmr12!
@@ -672,7 +672,7 @@ Missing character: There is no ™ in font cmr12!
 <slidingwindow.png, id=77, 735.74875pt x 278.03876pt>
 File: slidingwindow.png Graphic file (type png)
  <use slidingwindow.png>
-Package pdftex.def Info: slidingwindow.png used on input line 311.
+Package pdftex.def Info: slidingwindow.png used on input line 309.
 (pdftex.def)             Requested size: 735.74695pt x 278.03807pt.
 
 [12 <./slidingwindow.png>] [13] [14] [15] [16] [17]
@@ -683,28 +683,28 @@ Chapter 3.
 File: rnainterval.png Graphic file (type png)
 
 <use rnainterval.png>
-Package pdftex.def Info: rnainterval.png used on input line 449.
+Package pdftex.def Info: rnainterval.png used on input line 447.
 (pdftex.def)             Requested size: 940.51146pt x 238.8919pt.
  <compat.png, id=106, 827.09pt x 192.72pt>
 File: compat.png Graphic file (type png)
 
 <use compat.png>
-Package pdftex.def Info: compat.png used on input line 471.
+Package pdftex.def Info: compat.png used on input line 469.
 (pdftex.def)             Requested size: 827.08797pt x 192.71951pt.
  [20 <./rnainterval.png>]
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 487.
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 485.
 
 
 (/usr/share/texlive/texmf-dist/tex/latex/base/omscmr.fd
 File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 487.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 485.
  [21 <./compat.png>]
 <q-i.png, id=117, 533.995pt x 169.63374pt>
 File: q-i.png Graphic file (type png)
  <use q-i.png>
-Package pdftex.def Info: q-i.png used on input line 515.
+Package pdftex.def Info: q-i.png used on input line 513.
 (pdftex.def)             Requested size: 533.9937pt x 169.63332pt.
  [22 <./q-i.png>]
 [23] [24] [25] [26]
@@ -715,19 +715,19 @@ Chapter 4.
 File: wasrnafoldplot.pdf Graphic file (type pdf)
 
 <use wasrnafoldplot.pdf>
-Package pdftex.def Info: wasrnafoldplot.pdf used on input line 662.
+Package pdftex.def Info: wasrnafoldplot.pdf used on input line 660.
 (pdftex.def)             Requested size: 361.34912pt x 216.80946pt.
  [28] [29 <./wasrnafoldplot.pdf>]
 <abcorrelation.pdf, id=154, 361.35pt x 216.81pt>
 File: abcorrelation.pdf Graphic file (type pdf)
  <use abcorrelation.pdf>
-Package pdftex.def Info: abcorrelation.pdf used on input line 678.
+Package pdftex.def Info: abcorrelation.pdf used on input line 676.
 (pdftex.def)             Requested size: 361.34912pt x 216.80946pt.
 
 <zukerabtime.pdf, id=155, 361.35pt x 216.81pt>
 File: zukerabtime.pdf Graphic file (type pdf)
  <use zukerabtime.pdf>
-Package pdftex.def Info: zukerabtime.pdf used on input line 688.
+Package pdftex.def Info: zukerabtime.pdf used on input line 686.
 (pdftex.def)             Requested size: 361.34912pt x 216.80946pt.
  [30 <./abcorrelation.pdf>] [31 <./zukerabtime.pdf>]
 Chapter 5.
@@ -762,7 +762,7 @@ ts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1
 c/amsfonts/cm/cmsy8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfo
 nts/cm/cmti12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm
 /cmtt12.pfb>
-Output written on cshonours.pdf (49 pages, 1465723 bytes).
+Output written on cshonours.pdf (49 pages, 1466727 bytes).
 PDF statistics:
  267 PDF objects out of 1000 (max. 8388607)
  174 compressed objects within 2 object streams
