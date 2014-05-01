@@ -10,6 +10,8 @@
 #include <utility>
 #include <chrono>
 #include <cmath>
+
+
 #include "../common/rnainterval.h"
 #include "../common/vienna.h"
 #include "../common/rna_util.h"
@@ -23,9 +25,6 @@ std::string splat_prediction_ga (const std::vector<int>& splat, const Precompute
 {
 	std::vector<RNAInterval> all_windows;
 
-	// int upper_bound = rna.size() * ( 3.0 / log2 (rna.size()) ) ;
-	// this is O(n lg n), might be better to do sqrt(n) * c => O(sqrt(n))
-	// now implemented!
 	int upper_bound = sqrt ( precomp.rna.size() ) * 9.0;
 
 	for(int i = 0; i < splat.size() && splat[i] <= upper_bound; ++i)
@@ -46,9 +45,6 @@ int splat_prediction(const std::vector<int>& splat, const std::string& rna, cons
     Clock::time_point t0 = Clock::now();
 	std::vector<RNAInterval> all_windows;
 
-	// int upper_bound = rna.size() * ( 3.0 / log2 (rna.size()) ) ;
-	// this is O(n lg n), might be better to do sqrt(n) * c => O(sqrt(n))
-	// now implemented!
 	int upper_bound = sqrt ( rna.size() ) * 9.0;
 
 	for(int i = 0; i < splat.size() && splat[i] <= upper_bound; ++i)

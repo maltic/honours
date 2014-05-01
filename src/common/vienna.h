@@ -6,6 +6,7 @@
 #include <string>
 #include "rnainterval.h"
 #include <vector>
+#include <iostream>
 
 //include external lib
 extern "C" 
@@ -13,13 +14,39 @@ extern "C"
     #include "vienna/fold.h"
     #include "vienna/Lfold.h"
     #include "vienna/part_func.h"
+    #include "vienna/MEA.h"
+}
+
+RNAInterval MEA_fold(const std::string& rna) {
+
+    // std::cerr << "a" << std::endl;
+    
+    double fe = pf_fold_par (rna.c_str(), NULL, NULL, 1, 0, 0);
+
+    // std::cerr << "b" << std::endl;
+
+    char *ss = new char[rna.size()+1];
+    for (int i = 0; i < rna.size(); ++i)
+        ss[i] = '.';
+    ss[rna.size()] = '\0';
+    
+    double *bppm = export_bppm();
+    plist *pl = NULL;
+    assign_plist_from_pr(&pl, bppm, rna.size(), 0.0);
+
+    float score = MEA(pl, ss, 1.0);
+    RNAInterval ret(0, rna.size()-1, -score, ss);
+
+    delete[] ss;
+    return ret;
+
 }
 
 
 std::vector<std::vector<double> > boltzmann_fold (const std::string& rna)
 {
     double fe = pf_fold (rna.c_str(), NULL);
-    double * bppm = export_bppm();
+    double *bppm = export_bppm();
     plist *pl = NULL;
     assign_plist_from_pr (&pl, bppm, rna.size(), 0.0);
     int i = 0;
@@ -32,15 +59,22 @@ std::vector<std::vector<double> > boltzmann_fold (const std::string& rna)
     return probs;
 }
 
+
+
 RNAInterval zuker_fold(const std::string& rna, const int l, const int r)
 {
     //get the interval string and calculate the score
 	int sz = r-l+1;
-    char* ss = new char[sz+1];
+    char *ss = new char[sz+1];
     double score = fold(rna.substr(l, sz).c_str(), ss);
     RNAInterval ret(l, r, -score, ss);
     delete[] ss;
     return ret;
+}
+
+RNAInterval zuker_fold(const std::string& rna)
+{
+    return zuker_fold(rna, 0, rna.size()-1);
 }
 
 std::vector<RNAInterval> zuker_multi_fold(const std::string& rna, const int windowSize) {

@@ -1,18 +1,20 @@
 #ifndef PRECOMPUTED_WINDOWS_H
 #define PRECOMPUTED_WINDOWS_H
 
+// This header contains functions to precompute windows for RNA and print it to std out
+// In addition, it allows one to load this precomputed RNA info from std in
+
+
 #include <vector>
 #include <string>
 #include <iostream>
-#include "../common/rnainterval.h"
 #include <utility>
 #include <set>
+#include "../common/rnainterval.h"
+#include "../common/vienna.h"
 
 const unsigned MIN_WINDOW_SIZE = 5;
 const unsigned MAX_WINDOW_SIZE = 500;
-
-// This header contains functions to precompute windows for RNA and print it to std out
-// In addition, it allows one to load this precomputed RNA info from std in
 
 // Represents all the precomputed windows for a given RNA record
 struct PrecomputedWindows
