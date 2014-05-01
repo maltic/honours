@@ -8,7 +8,7 @@
 #include <vector>
 #include <iostream>
 
-//include external lib
+//include external libs
 extern "C" 
 {
     #include "vienna/fold.h"

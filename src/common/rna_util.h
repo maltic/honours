@@ -4,6 +4,8 @@
 #include <vector>
 #include <stack>
 #include <utility>
+#include <string>
+
 #include "rnainterval.h"
 
 
