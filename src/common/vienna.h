@@ -38,6 +38,7 @@ RNAInterval MEA_fold(const std::string& rna) {
     RNAInterval ret(0, rna.size()-1, -score, ss);
 
     delete[] ss;
+    free(pl);
     return ret;
 
 }
@@ -56,6 +57,7 @@ std::vector<std::vector<double> > boltzmann_fold (const std::string& rna)
         probs[pl[i].i-1][pl[i].j-1] = pl[i].p;
         ++i;
     }
+    free(pl);
     return probs;
 }
 
