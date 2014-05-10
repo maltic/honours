@@ -415,7 +415,7 @@ I propose that, in RNA molecules, local interactions are stronger than global in
 
 If my hypothesis is supported, I aim to leverage the insights provided to improve the accuracy and speed of RNA secondary structure prediction.
 
-\chapter{Locally Optimizing Algorithms}
+\chapter{Locally Optimal Algorithms}
 
 \section{Forward}
 This chapter contains the novel algorithmic approaches applied in my investigation. First I clarify what local optimization means, and define some useful terms. Specifically, I shall explain how locally optimal structures are computed, and the terminology I use to describe components of this process. Thence I describe some algorithms which can be used to merge locally optimal structures into a global structure. Building upon these algorithms, I introduce $ab$-splat, a novel algorithm for the prediction of RNA secondary structures.
@@ -602,24 +602,23 @@ The RNA secondary structures used to test algorithms presented in this paper wer
 
 
 
-\section{Test Procedure}
+\section{Test Configuration}
 
 \subsection{RNA Interval Merging Algorithms}
 %needs work
-In order to test and compare these selection algorithms, all the windows of size five to 500 were precomputed for every RNA in the testing set. This is to say that the sliding window algorithm was run for a window size of five, then six, up to and including size 500 for each RNA, and the resulting RNA intervals were cached. The minimum size of five was chosen because meaningful stems do not form with a size fewer than five nucleotides. The maximum of 500 was due to space and time constraints. Computing these windows took several days, and used 2.5 gigabytes of memory to store. Each selection algorithm was run using these data as input. For every RNA, the single most accurate window size was recorded, along with the accuracy value. Accuracy was judged as the F-Score, which is the harmonic mean of sensitivity and precision (defined in Section \ref{sec:accuracy}).
+In order to test and compare the various RNA interval merging algorithms (outlined in Section \ref{sec:merging}), all the windows of size five to 500 were precomputed for every RNA in the testing set. This is to say that the sliding window algorithm was run for a window size of five, then six, up to and including size 500 for each RNA, and the resulting RNA intervals were cached. The minimum size of five was chosen because meaningful stems do not form with a size fewer than five nucleotides. The maximum of 500 was due to space and time constraints. Computing these windows took several days, and used 2.5 gigabytes of memory to store. Each selection algorithm was run using these data as input. For every RNA, the single most accurate window size was recorded, along with the accuracy value. Accuracy was judged as the F-Score, which is the harmonic mean of sensitivity and precision (defined in Section \ref{sec:accuracy}).
 
 
 \subsection{$ab$-splat}
 
-A brute force method was used to test a combinatorial set of values for $a$ and $b$ such that $10 \leq a \leq 30$ and $1.5 \leq b \leq 4.0$. In this method, all integer values for $a$ were attempted, and values for $b$ were generated with a step size of \texttt{0.1}. This method was exhaustive, but slow. To speed up computation, precomputed window were used. This meant that the \texttt{Threshold} function had to be altered slightly, as only windows up to size 500 were precomputed:  $min(\sqrt{ \texttt {RNA Length } } \times 9.5, \: 500)$.
+The aim of the first test done on $ab$-splat was to find good values for $a$ and $b$. A brute force method was used to test a combinatorial set of values for $a$ and $b$ such that $10 \leq a \leq 30$ and $1.5 \leq b \leq 4.0$. In this method, all integer values for $a$ were attempted, and values for $b$ were generated with a step size of \texttt{0.1}. This method was exhaustive, but slow. To speed up computation, precomputed window were used. This meant that the \texttt{Threshold} function had to be altered slightly, as only windows up to size 500 were precomputed ($min(\sqrt{ \texttt {RNA Length } } \times 9.5, \: 500)$). To compare different $ab$ pairs, the testing set was randomly partitioned into two sets containing an equal number of RNAs. One of these sets I called the training set, the other I called the validation set. The aforementioned brute force search was done on the training set, and the F-Scores for $ab$ pairs was recorded; $ab$ pairs with highest F-Scores were deemed the best. These scores were then validated by running the same procedure on the validation set, then attempting to correlate the scores of $ab$ pairs between training and validation sets. This  indicated if high scores in the training set were related to high scores in the validation set. Correlation scores also allowed me to determine if results found in the training set were valid.
 
-To test this algorithm, the testing set was randomly partitioned into two sets containing an equal number of RNAs. One of these sets I called the training set, the other I called the validation set. The aforementioned brute force search was done on the training set, and the F-Scores for $ab$ pairs was recorded; $ab$ pairs with highest F-Scores were deemed the best. These scores were then validated by running the same procedure on the validation set, then attempting to correlate the scores of $ab$ pairs between training and validation sets. This  indicated if high scores in the training set were related to high scores in the validation set. Correlation scores also allowed me to determine if results found in the training set were valid.
-
-The best $ab$ pair was used to configure the $ab$-splat algorithm, which was then run on the full testing set, and it's F-Scores recorded. These F-Scores were then compared directly to F-Scores produced by RNAfold, which was also run on the full testing set. In addition to this, the time to execute each algorithm was recorded and compared. Precomputed windows were not used so that the runtime and accuracy could be fairly compared to RNAfold. Because of this, the standard \texttt{Threshold} function was used.
+The motivation for the second test done on $ab$-splat was to compare it to RNAfold in terms of accuracy and run-time. The best $ab$ pair was used to configure the $ab$-splat algorithm, which was then run on the full testing set, and it's F-Scores recorded. These F-Scores were then compared directly to F-Scores produced by RNAfold, which was also run on the full testing set. In addition to this, the time to execute each algorithm was recorded and compared. Precomputed windows were not used so that the runtime and accuracy could be fairly compared to RNAfold. Because of this, the standard \texttt{Threshold} function was used.
 
 
+\section{Test Procedure \& Results}
 
-\section{RNA Interval Selection}
+\subsection{Interval Selection}
 The purpose of the following tests was to determine if any RNA interval merging algorithms (see Section \ref{sec:merging}) could potentially achieve better accuracy than globally optimizing algorithms. The RNAfold package is a modern implementation of the Zuker algorithm, which globally optimizes a thermodynamic scoring scheme. RNAfold is thus used for comparison. I predicted that some merging algorithms should have higher accuracy if local interactions are stronger than global interactions during RNA folding.
 
 The average score between all RNA interval selection algorithms was compared (see Table \ref{tab:summaryselection}). The highest scoring algorithm appeared to be Top-Down Selection, closely followed by Weighted Activity Selection, then by Bottom-Up Selection. To verify this performance gap, a Wilcoxon Signed-Rank Test was done to compare the recorded F-Scores for corresponding RNA. This test was chosen because the data recorded did not appear to be parametric. While this test reflected the small difference in averages between Weighted Activity Selection and Top-Down Selection ($z = 1.33066$, see Table \ref{tab:wilcoxonselection}), it was not statistically significant ($p > 0.001$). To further test Top-Down Selection and Weighted Activity Selection, another Wilcoxon Signed-Rank Test was done on only RNAs of length $\geq 300$ bases. This revealed a moderate, and statistically significant, difference, indicating that Weighted Activity Selection generally had higher F-Scores for larger RNAs ($p < 0.001, z = 4.55591$). Finally, a Wilcoxon Signed-Rank Test was done between Weighted Activity Selection and Score Selection to check for circular dominance. In accordance with the mean F-score values, Weighted Activity Selection appeared to have higher F-Scores than Score Selection ($p < 0.001, z = 12.0957$).
@@ -675,7 +674,7 @@ WAS \& RNAfold & 13.2082 &	0  \\
 \end{figure}
 
 
-\section{Using RNA Intervals For Prediction}
+\subsection{RNA Intervals For Prediction}
 \label{sec:res_absplat}
 The purpose of the following tests was to determine if the $ab$-splat algorithm (see Section \ref{sec:absplat}) was more accurate than RNAfold. Additionally, further tests were done to compare the runtime efficiency of both algorithms. It was expected that $ab$-splat would be more accurate than, and run faster than, RNAfold.
 
