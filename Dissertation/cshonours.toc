@@ -5,14 +5,14 @@
 \contentsline {section}{\numberline {2.1}DNA and RNA}{2}
 \contentsline {section}{\numberline {2.2}Dynamic Programming Techniques}{5}
 \contentsline {subsection}{\numberline {2.2.1}The Nussinov Algorithm}{5}
-\contentsline {subsection}{\numberline {2.2.2}The Zuker Algorithm}{7}
+\contentsline {subsection}{\numberline {2.2.2}The Zuker Algorithm}{8}
 \contentsline {section}{\numberline {2.3}Pseudoknots}{10}
 \contentsline {section}{\numberline {2.4}Accuracy}{11}
 \contentsline {section}{\numberline {2.5}Locally Optimal Structure Prediction}{12}
 \contentsline {section}{\numberline {2.6}Context Free Grammars}{13}
 \contentsline {section}{\numberline {2.7}Soft Computing}{14}
 \contentsline {section}{\numberline {2.8}Kinetic Folding}{15}
-\contentsline {section}{\numberline {2.9}State of the Art: Global Optimization}{15}
+\contentsline {section}{\numberline {2.9}State of the Art: Global Optimization}{16}
 \contentsline {chapter}{\numberline {3}Locally Optimal Algorithms}{18}
 \contentsline {section}{\numberline {3.1}Forward}{18}
 \contentsline {section}{\numberline {3.2}RNA Intervals}{18}

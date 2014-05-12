@@ -4,7 +4,7 @@
 \contentsline {figure}{\numberline {2.2}{\ignorespaces RNA transcription. Diagram taken from \emph {Essential Cell Biology} \cite {albertsessential}.}}{4}
 \contentsline {figure}{\numberline {2.3}{\ignorespaces RNA secondary structure as described in the Nussinov algorithm. Taken from the original publication \cite {nussinov1980fast}.}}{6}
 \contentsline {figure}{\numberline {2.4}{\ignorespaces Diagram of faces used in the Zuker algorithm. Taken from original publication \cite {zuker1981optimal}.}}{8}
-\contentsline {figure}{\numberline {2.5}{\ignorespaces Depiction of how sliding windows can explore an RNA sequence.}}{12}
+\contentsline {figure}{\numberline {2.5}{\ignorespaces Depiction of how sliding windows can explore a RNA sequence.}}{13}
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {3.1}{\ignorespaces The relationship between a sliding window and it's RNA intervals. RNA secondary structures are represented using dot-bracket notation.}}{19}
 \contentsline {figure}{\numberline {3.2}{\ignorespaces Case 1 shows RNA intervals that are not compatible. Case 2 shows an example of compatible intervals.}}{20}
