@@ -1,11 +1,11 @@
-This is BibTeX, Version 0.99d (TeX Live 2012/Debian)
+This is BibTeX, Version 0.99d (TeX Live 2013/Debian)
 Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
 The top-level auxiliary file: cshonours.aux
 The style file: acm.bst
 Database file #1: cshonours.bib
 You've used 43 entries,
             2253 wiz_defined-function locations,
-            794 strings with 11744 characters,
+            794 strings with 11743 characters,
 and the built_in function-call counts, 15772 in all, are:
 = -- 1553
 > -- 791

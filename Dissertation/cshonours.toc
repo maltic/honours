@@ -23,7 +23,7 @@
 \contentsline {subsection}{\numberline {3.3.4}Weighted Activity Selection}{21}
 \contentsline {subsection}{\numberline {3.3.5}Closing Remarks}{22}
 \contentsline {section}{\numberline {3.4}Prediction Using Windows}{22}
-\contentsline {subsection}{\numberline {3.4.1}Time Complexity}{22}
+\contentsline {subsection}{\numberline {3.4.1}Time Complexity}{23}
 \contentsline {chapter}{\numberline {4}Method \& Results}{25}
 \contentsline {section}{\numberline {4.1}Materials}{25}
 \contentsline {subsection}{\numberline {4.1.1}Environment}{25}
