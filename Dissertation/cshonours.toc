@@ -35,7 +35,7 @@
 \contentsline {section}{\numberline {4.3}Test Procedure \& Results}{28}
 \contentsline {subsection}{\numberline {4.3.1}Interval Selection}{28}
 \contentsline {subsection}{\numberline {4.3.2}RNA Intervals For Prediction}{29}
-\contentsline {chapter}{\numberline {5}Discussion}{33}
+\contentsline {chapter}{\numberline {5}Discussion \& Conclusions}{33}
 \contentsline {section}{\numberline {5.1}Local Optimization}{33}
 \contentsline {subsection}{\numberline {5.1.1}Future Work}{34}
 \contentsline {subsection}{\numberline {5.1.2}Implications}{35}
