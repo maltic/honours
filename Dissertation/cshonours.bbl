@@ -6,6 +6,11 @@
 \newblock {\em Essential Cell Biology}, third~ed.
 \newblock Garland Science: New York, 2009.
 
+\bibitem{amaral2008eukaryotic}
+{\sc Amaral, P.~P., Dinger, M.~E., Mercer, T.~R., and Mattick, J.~S.}
+\newblock The eukaryotic genome as an rna machine.
+\newblock {\em Science 319}, 5871 (2008), 1787--1789.
+
 \bibitem{andronescu2008rna}
 {\sc Andronescu, M., Bereg, V., Hoos, H.~H., and Condon, A.}
 \newblock Rna strand: the rna secondary structure and statistical analysis
@@ -124,6 +129,16 @@
 \newblock Rna pseudoknot prediction in energy-based models.
 \newblock {\em Journal of computational biology 7}, 3-4 (2000), 409--427.
 
+\bibitem{makeyev2008multilevel}
+{\sc Makeyev, E.~V., and Maniatis, T.}
+\newblock Multilevel regulation of gene expression by micrornas.
+\newblock {\em Science 319}, 5871 (2008), 1789--1790.
+
+\bibitem{mattick2007new}
+{\sc Mattick, J.~S.}
+\newblock A new paradigm for developmental biology.
+\newblock {\em Journal of Experimental Biology 210}, 9 (2007), 1526--1547.
+
 \bibitem{morgan1996evidence}
 {\sc Morgan, S.~R., and Higgs, P.~G.}
 \newblock Evidence for kinetic effects in the folding of large rna molecules.
@@ -151,6 +166,12 @@
 {\sc Nussinov, R., Pieczenik, G., Griggs, J.~R., and Kleitman, D.~J.}
 \newblock Algorithms for loop matchings.
 \newblock {\em SIAM Journal on Applied mathematics 35}, 1 (1978), 68--82.
+
+\bibitem{pontius2007initial}
+{\sc Pontius, J.~U., Mullikin, J.~C., Smith, D.~R., Lindblad-Toh, K., Gnerre,
+  S., Clamp, M., Chang, J., Stephens, R., Neelam, B., Volfovsky, N., et~al.}
+\newblock Initial sequence and comparative analysis of the cat genome.
+\newblock {\em Genome research 17}, 11 (2007), 1675--1689.
 
 \bibitem{proctor2013cofold}
 {\sc Proctor, J.~R., and Meyer, I.~M.}
