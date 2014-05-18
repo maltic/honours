@@ -3,44 +3,44 @@ Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
 The top-level auxiliary file: cshonours.aux
 The style file: acm.bst
 Database file #1: cshonours.bib
-You've used 47 entries,
+You've used 48 entries,
             2253 wiz_defined-function locations,
-            818 strings with 12521 characters,
-and the built_in function-call counts, 17449 in all, are:
-= -- 1716
-> -- 889
+            824 strings with 12685 characters,
+and the built_in function-call counts, 17773 in all, are:
+= -- 1750
+> -- 901
 < -- 0
-+ -- 375
-- -- 318
-* -- 1565
-:= -- 2854
-add.period$ -- 143
-call.type$ -- 47
-change.case$ -- 296
++ -- 380
+- -- 322
+* -- 1594
+:= -- 2906
+add.period$ -- 146
+call.type$ -- 48
+change.case$ -- 301
 chr.to.int$ -- 0
-cite$ -- 47
-duplicate$ -- 487
-empty$ -- 1313
-format.name$ -- 318
-if$ -- 3521
+cite$ -- 48
+duplicate$ -- 496
+empty$ -- 1340
+format.name$ -- 322
+if$ -- 3587
 int.to.chr$ -- 0
-int.to.str$ -- 47
-missing$ -- 49
-newline$ -- 238
-num.names$ -- 94
-pop$ -- 235
+int.to.str$ -- 48
+missing$ -- 50
+newline$ -- 243
+num.names$ -- 96
+pop$ -- 238
 preamble$ -- 1
-purify$ -- 250
+purify$ -- 254
 quote$ -- 0
-skip$ -- 290
+skip$ -- 295
 stack$ -- 0
-substring$ -- 1344
-swap$ -- 122
+substring$ -- 1374
+swap$ -- 124
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 184
+type$ -- 188
 warning$ -- 0
-while$ -- 179
-width$ -- 49
-write$ -- 478
+while$ -- 183
+width$ -- 50
+write$ -- 488

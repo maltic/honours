@@ -436,7 +436,7 @@ Some definitions are provided here to elucidate concepts discussed in the follow
 
 
 \subsection{Top-Down Selection}
-In this method, $W$ is sorted by RNA interval size in descending order. The algorithm then examines each element of $W$ in order. If an element of $W$ is compatible with all elements of $S$, it is added to $S$.
+In this method, $W$ is sorted by RNA interval size (number of bases) in descending order. The algorithm then examines each element of $W$ in order. If an element of $W$ is compatible with all elements of $S$, it is added to $S$.
 
 \begin{algorithm}
   \caption{Top-Down Selection}
@@ -504,7 +504,7 @@ The initial sort (see line 1 in Algorithm \ref{was}) requires $O(n \log n)$ time
 
 \subsection{Closing Remarks}
 
-The RNA interval merging algorithms discussed all have the same $O(n \log n)$ worst case time complexity, and the same auxiliary space complexity of $O(n)$. None of these algorithms have large constant factors. Therefore, my final choice of algorithm was based solely on the accuracy of computed secondary structures. Additionally, I wish to make clear that these algorithms are not novel in isolation. Is it their application to RNA folding that I claim is novel. The Weighted Activity Selection algorithm in particular was not created by me; it is a canonical dynamic programming algorithm. However, I could find no credited inventor.
+The RNA interval merging algorithms discussed all have the same $O(n \log n)$ worst case time complexity, and the same auxiliary space complexity of $O(n)$. None of these algorithms have large constant factors. Therefore, my final choice of algorithm was based solely on the accuracy of computed secondary structures. Additionally, I wish to make clear that these algorithms are not novel in isolation. Is it their application to RNA folding that I claim is novel. The Weighted Activity Selection algorithm in particular was not created by me; it is a canonical dynamic programming algorithm. However, I could find no credited inventor for it.
 
 
 
@@ -512,7 +512,7 @@ The RNA interval merging algorithms discussed all have the same $O(n \log n)$ wo
 
 \section{Prediction Using Windows}
 \label{sec:absplat}
-RNA interval merging algorithms are not able to make good predictions in isolation. Hence, an approach was devised to predict RNA secondary structures using them. In this approach I computed sliding windows for a set of sizes---commonly called a `splat'. Weighted Activity Selection was then done on the resulting set of computed RNA intervals. See Section \ref{sec:localopt} for an explanation of why Weighted Activity Selection was chosen. I explored several methods for finding good splats. I present here the most successful technique, which I call `$ab$-splat' prediction. Initially the algorithm started at a small window size, and exponentially increased the scope of the window until a threshold was exceeded. This is explained using pseudocode in Algorithm \ref{absplat}.
+RNA interval merging algorithms are not able to make good predictions in isolation. Hence, an approach was devised to predict RNA secondary structures using them. In this approach I computed sliding windows for a set of sizes---a sample like this is often called a `splat'. Weighted Activity Selection was then done on the resulting set of computed RNA intervals. See Section \ref{sec:localopt} for an explanation of why Weighted Activity Selection was chosen. I explored several methods for finding good splats. I present here the most successful technique, which I call `$ab$-splat' prediction. Initially the algorithm started at a small window size, and exponentially increased the scope of the window until a threshold was exceeded. This is explained using pseudocode in Algorithm \ref{absplat}.
 
 \begin{algorithm}
   \caption{$ab$-splat}
@@ -522,7 +522,7 @@ RNA interval merging algorithms are not able to make good predictions in isolati
   \State Let $i = a$
   \State Let $S = \{\}$
   \While{$i \leq $ \Call{Treshold}{$RNA$} }
-  	\State $S = S \: \cup $ \Call{ComputeSlidingWindows}{$RNA$, $i$}
+  	\State $S = S \: \cup $ \Call{ComputeSlidingWindow}{$RNA$, $i$}
   	\State $i = i \times b$
   \EndWhile
   \State \Return \Call{WeightedActivitySelection}{$S$}
@@ -533,19 +533,19 @@ The \texttt{Threshold} function was defined as $\sqrt{ \texttt{RNA Length} } \ti
 
 \subsection{Time Complexity}
 
-The time complexity of this algorithm is non-trivial to deduce. The runtime of \texttt{ComputeSlidingWindows} is $O(nL^2)$ where $L$ is the window size, and $n$ is the length of the RNA. It is called once for every window size. In addition \texttt{WeightedActivitySelection} uses $O(n \log n)$ time, where $n$ is the number of RNA intervals in the set $S$. I shall now show that $ab$-splat has a worst case time complexity of $O(n^2)$.
+The time complexity of this algorithm is non-trivial to deduce. The runtime of \texttt{ComputeSlidingWindow} is $O(nL^2)$ where $L$ is the window size, and $n$ is the length of the RNA. It is called once for every window size. In addition \texttt{WeightedActivitySelection} uses $O(n \log n)$ time, where $n$ is the number of RNA intervals in the set $S$. I shall now show that $ab$-splat has a worst case time complexity of $O(n^2)$.
 
 \begin{equation} \label{eq:abtimeone}
 	n a^2 + n(a b)^2 + n(a b^2)^2 + n(a b^3)^2 + \cdots + n^2
 \end{equation}
 
-Equation \ref{eq:abtimeone} shows the number of steps required to run the sliding window algorithm for every window size in $ab$-splat. The second term represents $L^2$ for exponentially increasing $ab$ pairs. Clearly the worst case is where $L$ is $\Theta(\sqrt{n})$ and hence $L^2$ is $\Theta(n)$ leading to a largest computational cost of $\Theta(n^2)$. Factoring out $n^2$, we get Equation \ref{eq:abtimetwo}.
+Equation \ref{eq:abtimeone} shows the number of steps required to run the sliding window algorithm for every window size in $ab$-splat. The second term represents $L^2$ for exponentially increasing $ab$ pairs. Clearly the worst case is where $L$ is $O(\sqrt{n})$ and hence $L^2$ is $O(n)$ leading to a largest computational cost of $O(n^2)$. Factoring out $n^2$, we get Equation \ref{eq:abtimetwo}.
 
 \begin{equation} \label{eq:abtimetwo}
 	n^2 ( \frac{n a^2}{n^2} + \frac{n(a b)^2}{n^2} + \frac{n(a b^2)^2}{n^2} + \frac{n(a b^3)^2}{n^2} + \cdots + 1)
 \end{equation}
 
-In the limit to infinity all terms except \texttt{1} tend toward zero. Hence we are left with a final time complexity of $O(n^2)$ for computing all required sliding windows. Now I shall show that this dominates the cost of running Weighted Activity Selection.
+Given that $a$ and $b$ are constant, in the limit to infinity all terms except \texttt{1} tend toward zero. Hence we are left with a final time complexity of $O(n^2)$ for computing all required sliding windows. Now I shall show that this dominates the cost of running Weighted Activity Selection.
 
 Every window size produces $O(n)$ windows of size $L$. Every such window can contain at most $O(L)$ RNA intervals. Equation \ref{eq:intervalsone} shows the total number of RNA intervals produced. By factoring out $n^\frac{3}{2}$ in a similar manner to Equation \ref{eq:abtimetwo} described above, we see that the number of RNA intervals is $O(n^\frac{3}{2})$.
 
@@ -554,7 +554,7 @@ Every window size produces $O(n)$ windows of size $L$. Every such window can con
 	n a + n(a b) + n(a b^2) + n(a b^3) + \cdots + n^\frac{3}{2}
 \end{equation}
 
-Weighted Activity Selection uses $O(n \log n)$ time. As we have $O(n^\frac{3}{2})$ windows in the worst case, this leads to a worst case time complexity of $O(n^\frac{3}{2} \log n^\frac{3}{2})$, which is dominated by $O(n^2)$. Computing the largest sliding window requires only $O(n)$ space, since it uses $O(L^2)$ space in all cases. Weighted Activity Selection will additionally require only $O(n^\frac{3}{2})$ space. As all of these RNA intervals must be stored in $S$, $ab$-splat will thus use $O(n^\frac{3}{2})$ memory in the worst case. In contrast, the Zuker algorithm requires $O(n^3)$ time and $O(n^2)$ space. The computational bottleneck is usually time, however. 
+Weighted Activity Selection uses $O(n \log n)$ time. As we have $O(n^\frac{3}{2})$ windows in the worst case, this leads to a worst case time complexity of $O(n^\frac{3}{2} \log n)$, which is dominated by $O(n^2)$. Computing the largest sliding window requires only $O(n)$ space, since it uses $O(L^2)$ space in all cases. Weighted Activity Selection will additionally require only $O(n^\frac{3}{2})$ space. As all of these RNA intervals must be stored in $S$, $ab$-splat will thus use $O(n^\frac{3}{2})$ memory in the worst case. In contrast, the Zuker algorithm requires $O(n^3)$ time and $O(n^2)$ space. The computational bottleneck is usually time, however. 
 
 
 \chapter{Method \& Results}
@@ -568,17 +568,17 @@ All algorithms were implemented and tested using Ubuntu 13.10 running on an Inte
 \subsection{Software}
 The ViennaRNA Package \cite{lorenz2011viennarna} was used as a base for all algorithms presented in this paper. This package contains many useful programs for working with RNA. The RNAfold and RNALfold modules were used in this investigation. 
 
-RNAfold is a modern implementation of Zuker's folding algorithm. It predicts the minimum free energy secondary structure of a RNA given the primary sequence. It can also calculate the Boltzmann partition function, producing a matrix of base pair probabilities. Additionally the RNAfold tool can compute the energy of any arbitrary secondary structure, given a corresponding RNA primary sequence. The computed free energy is, of course, an approximation based on RNAfold's thermodynamic energy model.
+RNAfold is a modern implementation of Zuker's folding algorithm. It predicts the minimum free energy secondary structure of a RNA given the primary sequence. It can also calculate the Boltzmann partition function, producing a matrix of base pair probabilities. Additionally the RNAfold module can compute the energy of any arbitrary secondary structure, given a corresponding RNA primary sequence. The computed free energy is, of course, an approximation based on RNAfold's thermodynamic energy model.
 
-The RNALfold module implements a sliding window RNA folding algorithm. It is designed to find all locally optimal secondary structures for a RNA of size $n$, using a window of fixed size $L$. RNALfold implements Hofacker, Priwitzer, and Stadler's algorithm \cite{hofacker2004prediction}, and thus uses $O(nL^2)$ time and $O(n + L^2)$ space. I note here that this is not the most optimal algorithm available. As discussed in Section~\ref{sec:locopt}, Horesh et al. \cite{horesh2009rnaslider} presented an algorithm that also folds consecutive windows using a similar model. However, they achieved a typical time complexity of $O(nL)$. This algorithm was not used because the implementation provided by the authors is based on an older energy model taken from the Mfold \cite{zuker2003mfold} package. RNALfold is based on the same energy model as RNAfold, which has been recently updated \cite{lorenz2011viennarna}. For the sake of accurate comparison to RNAfold, and to ensure a state of the art energy model, RNALfold was used.
+The RNALfold module implements a sliding window RNA folding algorithm. It is designed to find all locally optimal secondary structures for a RNA of size $n$, using a window of fixed size $L$. RNALfold implements Hofacker, Priwitzer, and Stadler's algorithm \cite{hofacker2004prediction}, and thus uses $O(nL^2)$ time and $O(n + L^2)$ space. This is not the most optimal algorithm available. As discussed in Section~\ref{sec:locopt}, Horesh et al. \cite{horesh2009rnaslider} presented an algorithm that also folds consecutive windows using a similar model. However, they achieved a typical time complexity of $O(nL)$. This algorithm was not used because the implementation provided by the authors is based on an older energy model taken from the Mfold \cite{zuker2003mfold} package. RNALfold is based on the same energy model as RNAfold, which has been recently updated \cite{lorenz2011viennarna}. For the sake of accurate comparison to RNAfold, and to ensure a state of the art energy model, RNALfold was used.
 
 Version 2.1.6 of the ViennaRNA package was used. The package was built from the C source code after minor modifications were made to the RNALfold module. The ViennaRNA makefile was used to compile the package. The makefile compiles numerous standalone console applications for ViennaRNA's modules. It also creates a static library called RNAlib. This library was linked at compile time, and used to call RNAfold and RNALfold in the novel algorithms implemented as part of this investigation. The \texttt{Lfold.c} and \texttt{Lfold.h} files (which RNALfold comprises) were modified so that, when the algorithm was executed, RNALfold returned a linked list of local secondary structures and their free energy. Before modification it would instead print them to the standard output stream. The modified versions of these files are available in the files associated with this report.
 
-Statistical tests, regression analyses, and plots were generated using GNU Regression, Econometrics and Time-series Library (as called `gretl') version 1.9.14.
+Statistical tests, regression analyses, and plots were generated using GNU Regression, Econometrics and Time-series Library \cite{baiocchi2003gretl} version 1.9.14.
 
 
 \subsection{Testing Set}
-The RNA secondary structures used to test algorithms presented in this paper were taken from the RNA STRAND database \cite{andronescu2008rna}. The RNA STRAND database is a free-to-use, curated collection of RNA secondary structures taken from various publicly available databases and publications. A subset of RNA structural data was extracted from the database. This subset contained only RNA structures that were marked having been verified using X-Ray crystallography, or nuclear magnetic resonance imaging. It also comprises only whole RNAs; none of the RNAs used were fragments or subsequences of larger RNA molecules. Finally, no duplicates were allowed in the selected set. Hereafter, I shall refer to this collection of RNA secondary structures as the `testing set'. The testing set contained 392 different RNA molecules ranging in length from 20 to 3032 nucleotides.
+The RNA secondary structures used to test algorithms presented in this paper were taken from the RNA STRAND database \cite{andronescu2008rna}. The RNA STRAND database is a free-to-use, curated collection of RNA secondary structures taken from various publicly available databases and publications. A subset of RNA structural data was extracted from the database. This subset contained only RNA structures that were marked having been verified using X-ray crystallography, or NMR imaging. It also comprises only whole RNAs; none of the RNAs used were fragments or subsequences of larger RNA molecules. Finally, no duplicates were allowed in the selected set. Hereafter, I shall refer to this collection of RNA secondary structures as the `testing set'. The testing set contained 392 different RNA molecules ranging in length from 20 to 3032 nucleotides.
 
 
 
@@ -587,14 +587,14 @@ The RNA secondary structures used to test algorithms presented in this paper wer
 
 \subsection{RNA Interval Merging Algorithms}
 %needs work
-In order to test and compare the various RNA interval merging algorithms (outlined in Section \ref{sec:merging}), all the windows of size five to 500 were precomputed for every RNA in the testing set. This is to say that the sliding window algorithm was run for a window size of five, then six, up to and including size 500 for each RNA, and the resulting RNA intervals were cached. The minimum size of five was chosen because meaningful stems do not form with a size fewer than five nucleotides. The maximum of 500 was due to space and time constraints. Computing these windows took several days, and used 2.5 gigabytes of memory to store. Each selection algorithm was run using these data as input. For every RNA, the single most accurate window size was recorded, along with the accuracy value. Accuracy was judged as the F-Score, which is the harmonic mean of sensitivity and precision (defined in Section \ref{sec:accuracy}).
+In order to test and compare the various RNA interval merging algorithms (outlined in Section \ref{sec:merging}), all the windows of size five to 500 were precomputed for every RNA in the testing set. This is to say that the sliding window algorithm was run for a window size of five, then six, up to and including size 500 for each RNA, and the resulting RNA intervals were cached. The minimum size of five was chosen because meaningful stems do not form with a size fewer than five nucleotides. The maximum of 500 was due to space and time constraints. Computing these windows took several days, and used 2.5 gigabytes of memory to store. Each selection algorithm was run using these data as input. Every possible window size was tried exhaustively. For every RNA, the single most accurate window size was recorded, along with the accuracy value. Accuracy was judged as the F-score, which is the harmonic mean of sensitivity and precision (defined in Section \ref{sec:accuracy}).
 
 
 \subsection{$ab$-splat}
 
-The aim of the first test done on $ab$-splat was to find good values for $a$ and $b$. A brute force method was used to test a combinatorial set of values for $a$ and $b$ such that $10 \leq a \leq 30$ and $1.5 \leq b \leq 4.0$. In this method, all integer values for $a$ were attempted, and values for $b$ were generated with a step size of \texttt{0.1}. This method was exhaustive, but slow. To speed up computation, precomputed windows were used. This meant that the \texttt{Threshold} function had to be altered slightly, as only windows up to size 500 were precomputed ($min(\sqrt{ \texttt {RNA Length } } \times 9.5, \: 500)$). To compare different $ab$ pairs, the testing set was randomly partitioned into two sets containing an equal number of RNAs. One of these sets I called the training set, the other I called the validation set. The aforementioned brute force search was done on the training set, and the F-Scores for $ab$ pairs was recorded; $ab$ pairs with highest F-Scores were deemed the best. These scores were then validated by running the same procedure on the validation set, then attempting to correlate the scores of $ab$ pairs between training and validation sets. This  indicated if high scores in the training set were related to high scores in the validation set. Correlation scores also allowed me to determine if results found in the training set were valid.
+The aim of the first test done on $ab$-splat was to find good values for $a$ and $b$. A brute force method was used to test a combinatorial set of values for $a$ and $b$ such that $10 \leq a \leq 30$ and $1.5 \leq b \leq 4.0$. In this method, all integer values for $a$ were attempted, and values for $b$ were generated with a step size of \texttt{0.1}. This method was exhaustive, but slow. To speed up computation, precomputed windows were used. This meant that the \texttt{Threshold} function was altered slightly to $\min(\sqrt{ \texttt {RNA Length } } \times 9.5, \: 500)$, as only windows up to size 500 were precomputed. To compare different $ab$ pairs, the testing set was randomly partitioned into two sets containing an equal number of RNAs. One of these sets I called the training set, the other I called the validation set. The aforementioned brute force search was done on the training set, and the F-scores for $ab$ pairs was recorded; $ab$ pairs with highest F-scores were deemed the best. These scores were then validated by running the same procedure on the validation set, then attempting to correlate the scores of $ab$ pairs between training and validation sets. This  indicated if high scores in the training set were related to high scores in the validation set. Correlating scores also allowed me to determine if results found in the training set were statistically valid.
 
-The motivation for the second test done on $ab$-splat was to compare it to RNAfold in terms of accuracy and run-time. The best $ab$ pair was used to configure the $ab$-splat algorithm, which was then run on the full testing set, and its F-Scores recorded. These F-Scores were then compared directly to F-Scores produced by RNAfold, which was also run on the full testing set. In addition to this, the time to execute each algorithm was recorded and compared. Precomputed windows were not used so that the runtime and accuracy could be fairly compared to RNAfold. Because of this, the standard \texttt{Threshold} function was used.
+The motivation for the second test done on $ab$-splat was to compare it to RNAfold in terms of accuracy and run-time. The best $ab$ pair was used to configure the $ab$-splat algorithm, which was then run on the full testing set, and its F-scores recorded. These F-scores were then compared directly to F-scores produced by RNAfold, which was also run on the full testing set. In addition to this, the time to execute each algorithm was recorded and compared. Precomputed windows were not used so that the runtime and accuracy could be fairly compared to RNAfold. Because of this, the standard \texttt{Threshold} function was used.
 
 
 \section{Test Procedure \& Results}
@@ -602,7 +602,7 @@ The motivation for the second test done on $ab$-splat was to compare it to RNAfo
 \subsection{Interval Selection}
 The purpose of the following tests was to determine if any RNA interval merging algorithms (see Section \ref{sec:merging}) could potentially achieve better accuracy than globally optimizing algorithms. The RNAfold package is a modern implementation of the Zuker algorithm, which globally optimizes a thermodynamic scoring scheme. RNAfold is thus used for comparison. I predicted that some merging algorithms should have higher accuracy if local interactions are stronger than global interactions during RNA folding.
 
-The average score between all RNA interval selection algorithms was compared (see Table \ref{tab:summaryselection}). The highest scoring algorithm appeared to be Top-Down Selection, closely followed by Weighted Activity Selection, then by Bottom-Up Selection. To verify this performance gap, a Wilcoxon Signed-Rank test was done to compare the recorded F-Scores for corresponding RNA. This test was chosen because the data recorded did not appear to be parametric. While this test reflected the small difference in averages between Weighted Activity Selection and Top-Down Selection ($z = 1.33066$, see Table \ref{tab:wilcoxonselection}), it was not statistically significant ($p > 0.001$). To further test Top-Down Selection and Weighted Activity Selection, another Wilcoxon Signed-Rank test was done on only RNAs of length $\geq 300$ bases. This revealed a moderate and statistically significant difference, indicating that Weighted Activity Selection generally had higher F-Scores for larger RNAs ($p < 0.001, z = 4.55591$). Finally, a Wilcoxon Signed-Rank test was done between Weighted Activity Selection and Score Selection to check for circular dominance. In accordance with the mean F-score values, Weighted Activity Selection appeared to have higher F-Scores than Score Selection ($p < 0.001, z = 12.0957$).
+The average score between all RNA interval selection algorithms was compared (see Table \ref{tab:summaryselection}). The highest scoring algorithm appeared to be Top-Down Selection, closely followed by Weighted Activity Selection, then by Bottom-Up Selection. To verify this performance gap, a Wilcoxon Signed-Rank test was done to compare the recorded F-scores for corresponding RNA. This test was chosen because the data recorded did not appear to be parametric. While this test reflected the small difference in averages between Weighted Activity Selection and Top-Down Selection ($z = 1.33066$, see Table \ref{tab:wilcoxonselection}), it was not statistically significant ($p > 0.05$). To further test Top-Down Selection and Weighted Activity Selection, another Wilcoxon Signed-Rank test was done on only RNAs of length $\geq 300$ bases. This revealed a moderate and statistically significant difference, indicating that Weighted Activity Selection generally had higher F-scores for larger RNAs ($p < 0.001, z = 4.55591$). Finally, a Wilcoxon Signed-Rank test was done between Weighted Activity Selection and Score Selection to check for circular dominance. In accordance with the mean F-score values, Weighted Activity Selection appeared to have higher F-scores than Score Selection ($p < 0.001, z = 12.0957$).
 
 \begin{table}
 \centering
@@ -617,13 +617,13 @@ TDS & 0.71684   &     0.80000  \\
 RNAfold & 0.57483    &    0.60870 \\
 \end{tabular}
 
-\caption{Summary statics of recorded F-Scores for Weighted Activity Selection (WAS), Top-Down Selection (TDS), Bottom-Up Selection (BUS), Score Selection (SS), and RNAfold.}
+\caption{Summary statics of recorded F-scores for Weighted Activity Selection (WAS), Top-Down Selection (TDS), Bottom-Up Selection (BUS), Score Selection (SS), and RNAfold.}
 \label{tab:summaryselection}
 \end{table}
 
 
 
-A Wilcoxon Signed-Rank test was also used to compare the best recorded F-Scores for all RNA interval selection algorithms, and those recorded for RNAfold (see Table \ref{tab:wilcoxonselection}). All tests were statistically significant ($p < 0.001$). All algorithms but Bottom-Up Selection were shown to outperform RNAfold; Weighted Activity Selection in particular ($z = 13.2082$). Figure \ref{fig:wasrnafold} clearly depicts this performance difference.
+A Wilcoxon Signed-Rank test was also used to compare the best recorded F-scores for all RNA interval selection algorithms, and those recorded for RNAfold (see Table \ref{tab:wilcoxonselection}). All tests were statistically significant ($p < 0.001$). All algorithms but Bottom-Up Selection were shown to outperform RNAfold; Weighted Activity Selection in particular ($z = 13.2082$). Figure \ref{fig:wasrnafold} clearly depicts this performance difference.
 
 
 \begin{table}
@@ -641,7 +641,7 @@ TDS \& RNAfold & 13.119 &	0  \\
 WAS \& RNAfold & 13.2082 &	0  \\
 \end{tabular}
 
-\caption{Results of Wilcoxon Signed-Rank testing for F-Scores. Weighted Activity Selection (WAS), Top-Down Selection (TDS), Bottom-Up Selection (BUS), Score Selection (SS), and RNAfold are included.}
+\caption{Results of Wilcoxon Signed-Rank testing for F-scores. Weighted Activity Selection (WAS), Top-Down Selection (TDS), Bottom-Up Selection (BUS), Score Selection (SS), and RNAfold are included.}
 \label{tab:wilcoxonselection}
 \end{table}
 
@@ -650,7 +650,7 @@ WAS \& RNAfold & 13.2082 &	0  \\
 \begin{center}
 \scalebox{1}{\includegraphics{wasrnafoldplot}}
 \end{center}
-\caption{F-Scores for matching RNA test cases achieved by Weighted Activity Selection and RNAfold plotted against one-another. The green line represents parity. Any points above the line are cases in which Weighted Activity Selection performed better, points below the line indicate that RNAfold was more accurate. Note that a maximum F-Score is \texttt{1.0}.}
+\caption{F-scores for matching RNA test cases achieved by Weighted Activity Selection and RNAfold plotted against one-another. The green line represents parity. Any points above the line are cases in which Weighted Activity Selection performed better, points below the line indicate that RNAfold was more accurate. Note that a maximum F-score is \texttt{1.0}.}
 \label{fig:wasrnafold}
 \end{figure}
 
@@ -666,7 +666,7 @@ An Ordinary Least Squares linear regression was done to determine the correlatio
 \begin{center}
 \scalebox{1}{\includegraphics{abcorrelation}}
 \end{center}
-\caption{Correlation of F-Scores for $ab$-splat in training set versus validation set. R-squared value = 0.702901, $p$-value $< 0.0001$. Standard Error of Regression = 0.025032.}
+\caption{Correlation of F-scores for $ab$-splat in training set versus validation set. R-squared value = 0.702901, $p$-value $< 0.0001$. Standard Error of Regression = 0.025032.}
 \label{fig:abcorrelation}
 \end{figure}
 

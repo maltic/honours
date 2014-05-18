@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012/Debian) (format=pdflatex 2014.3.26)  17 MAY 2014 21:14
+This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012/Debian) (format=pdflatex 2014.3.26)  18 MAY 2014 13:13
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -775,10 +775,10 @@ Missing character: There is no ” in font cmr12!
  [43])
 [44] (./cshonours.aux) ) 
 Here is how much of TeX's memory you used:
- 10737 strings out of 493485
- 223602 string characters out of 3143526
- 227078 words of memory out of 3000000
- 13879 multiletter control sequences out of 15000+200000
+ 10738 strings out of 493485
+ 223621 string characters out of 3143526
+ 227082 words of memory out of 3000000
+ 13880 multiletter control sequences out of 15000+200000
  14417 words of font info for 54 fonts, out of 3000000 for 9000
  957 hyphenation exceptions out of 8191
  38i,10n,27p,1994b,518s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -795,7 +795,7 @@ type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/
 public/amsfonts/cm/cmsy8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/
 amsfonts/cm/cmti12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfon
 ts/cm/cmtt12.pfb>
-Output written on cshonours.pdf (51 pages, 1471962 bytes).
+Output written on cshonours.pdf (51 pages, 1471675 bytes).
 PDF statistics:
  273 PDF objects out of 1000 (max. 8388607)
  178 compressed objects within 2 object streams
