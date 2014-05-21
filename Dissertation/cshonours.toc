@@ -1,47 +1,45 @@
 \contentsline {chapter}{Abstract}{ii}
 \contentsline {chapter}{Acknowledgements}{iii}
 \contentsline {chapter}{\numberline {1}Introduction}{1}
-\contentsline {section}{\numberline {1.1}Forward}{1}
-\contentsline {section}{\numberline {1.2}DNA \& RNA}{1}
-\contentsline {chapter}{\numberline {2}Relevant Literature}{6}
-\contentsline {section}{\numberline {2.1}Dynamic Programming Techniques}{6}
-\contentsline {subsection}{\numberline {2.1.1}The Nussinov Algorithm}{6}
-\contentsline {subsection}{\numberline {2.1.2}The Zuker Algorithm}{8}
-\contentsline {section}{\numberline {2.2}Pseudoknots}{10}
-\contentsline {section}{\numberline {2.3}Accuracy}{11}
-\contentsline {section}{\numberline {2.4}Local Structure Prediction}{12}
-\contentsline {section}{\numberline {2.5}Context Free Grammars}{13}
-\contentsline {section}{\numberline {2.6}Soft Computing}{14}
-\contentsline {section}{\numberline {2.7}Kinetic Folding}{16}
-\contentsline {section}{\numberline {2.8}State of the Art: Global Optimization}{16}
-\contentsline {chapter}{\numberline {3}Locally Optimal Algorithms}{18}
-\contentsline {section}{\numberline {3.1}Forward}{18}
-\contentsline {section}{\numberline {3.2}RNA Intervals}{18}
-\contentsline {section}{\numberline {3.3}Merging RNA Intervals}{19}
-\contentsline {subsection}{\numberline {3.3.1}Top-Down Selection}{19}
-\contentsline {subsection}{\numberline {3.3.2}Bottom-Up Selection}{20}
-\contentsline {subsection}{\numberline {3.3.3}Score Selection}{21}
-\contentsline {subsection}{\numberline {3.3.4}Weighted Activity Selection}{21}
-\contentsline {subsection}{\numberline {3.3.5}Closing Remarks}{22}
-\contentsline {section}{\numberline {3.4}Prediction Using Windows}{22}
-\contentsline {subsection}{\numberline {3.4.1}Time Complexity}{23}
-\contentsline {chapter}{\numberline {4}Method \& Results}{25}
-\contentsline {section}{\numberline {4.1}Materials}{25}
-\contentsline {subsection}{\numberline {4.1.1}Environment}{25}
-\contentsline {subsection}{\numberline {4.1.2}Software}{25}
-\contentsline {subsection}{\numberline {4.1.3}Testing Set}{26}
-\contentsline {section}{\numberline {4.2}Test Configuration}{27}
-\contentsline {subsection}{\numberline {4.2.1}RNA Interval Merging Algorithms}{27}
-\contentsline {subsection}{\numberline {4.2.2}$ab$-splat}{27}
-\contentsline {section}{\numberline {4.3}Test Procedure \& Results}{28}
-\contentsline {subsection}{\numberline {4.3.1}Interval Selection}{28}
-\contentsline {subsection}{\numberline {4.3.2}RNA Intervals For Prediction}{29}
-\contentsline {chapter}{\numberline {5}Discussion \& Conclusions}{33}
-\contentsline {section}{\numberline {5.1}Local Optimization}{33}
-\contentsline {subsection}{\numberline {5.1.1}Future Work}{34}
-\contentsline {subsection}{\numberline {5.1.2}Implications}{35}
-\contentsline {section}{\numberline {5.2}The $ab$-splat Algorithm}{36}
-\contentsline {subsection}{\numberline {5.2.1}Accuracy}{36}
-\contentsline {subsection}{\numberline {5.2.2}Computational Complexity}{36}
-\contentsline {subsection}{\numberline {5.2.3}A Better Algorithm}{37}
-\contentsline {section}{\numberline {5.3}Conclusions}{38}
+\contentsline {section}{\numberline {1.1}DNA \& RNA}{1}
+\contentsline {chapter}{\numberline {2}Relevant Literature}{7}
+\contentsline {section}{\numberline {2.1}Dynamic Programming Techniques}{7}
+\contentsline {subsection}{\numberline {2.1.1}The Nussinov Algorithm}{7}
+\contentsline {subsection}{\numberline {2.1.2}The Zuker Algorithm}{9}
+\contentsline {section}{\numberline {2.2}Pseudoknots}{11}
+\contentsline {section}{\numberline {2.3}Accuracy}{12}
+\contentsline {section}{\numberline {2.4}Local Structure Prediction}{13}
+\contentsline {section}{\numberline {2.5}Context Free Grammars}{14}
+\contentsline {section}{\numberline {2.6}Soft Computing}{15}
+\contentsline {section}{\numberline {2.7}Kinetic Folding}{17}
+\contentsline {section}{\numberline {2.8}State of the Art: Global Optimization}{17}
+\contentsline {chapter}{\numberline {3}Locally Optimal Algorithms}{19}
+\contentsline {section}{\numberline {3.1}RNA Intervals}{19}
+\contentsline {section}{\numberline {3.2}Merging RNA Intervals}{20}
+\contentsline {subsubsection}{Top-Down Selection}{21}
+\contentsline {subsubsection}{Bottom-Up Selection}{22}
+\contentsline {subsubsection}{Score Selection}{22}
+\contentsline {subsubsection}{Weighted Activity Selection}{22}
+\contentsline {subsection}{\numberline {3.2.1}Closing Remarks}{22}
+\contentsline {section}{\numberline {3.3}Prediction Using Windows}{23}
+\contentsline {subsection}{\numberline {3.3.1}Time Complexity}{24}
+\contentsline {chapter}{\numberline {4}Method \& Results}{26}
+\contentsline {section}{\numberline {4.1}Materials}{26}
+\contentsline {subsection}{\numberline {4.1.1}Environment}{26}
+\contentsline {subsection}{\numberline {4.1.2}Software}{26}
+\contentsline {subsection}{\numberline {4.1.3}Testing Set}{27}
+\contentsline {section}{\numberline {4.2}Test Configuration}{28}
+\contentsline {subsection}{\numberline {4.2.1}RNA Interval Merging Algorithms}{28}
+\contentsline {subsection}{\numberline {4.2.2}$ab$-splat}{28}
+\contentsline {section}{\numberline {4.3}Test Procedure \& Results}{29}
+\contentsline {subsection}{\numberline {4.3.1}Interval Selection}{29}
+\contentsline {subsection}{\numberline {4.3.2}RNA Intervals For Prediction}{30}
+\contentsline {chapter}{\numberline {5}Discussion \& Conclusions}{34}
+\contentsline {section}{\numberline {5.1}Local Optimization}{34}
+\contentsline {subsection}{\numberline {5.1.1}Future Work}{35}
+\contentsline {subsection}{\numberline {5.1.2}Implications}{36}
+\contentsline {section}{\numberline {5.2}The $ab$-splat Algorithm}{37}
+\contentsline {subsection}{\numberline {5.2.1}Accuracy}{37}
+\contentsline {subsection}{\numberline {5.2.2}Computational Complexity}{37}
+\contentsline {subsection}{\numberline {5.2.3}A Better Algorithm}{38}
+\contentsline {section}{\numberline {5.3}Conclusions}{39}

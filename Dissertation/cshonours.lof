@@ -1,16 +1,17 @@
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {1.1}{\ignorespaces The structure and composition of DNA. Diagram taken from \emph {Essential Cell Biology} \cite {albertsessential}.}}{2}
 \contentsline {figure}{\numberline {1.2}{\ignorespaces RNA transcription. Diagram taken from \emph {Essential Cell Biology} \cite {albertsessential}.}}{3}
+\contentsline {figure}{\numberline {1.3}{\ignorespaces A simple example of how a RNA sequence might fold. Dotted lines represent potential bonds between nucleotides, double lines represent actual bonds. The progression of folding follows from left to right.}}{5}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {2.1}{\ignorespaces RNA secondary structure as described in the Nussinov algorithm. Taken from the original publication \cite {nussinov1980fast}.}}{7}
-\contentsline {figure}{\numberline {2.2}{\ignorespaces Diagram of faces used in the Zuker algorithm. Taken from original publication \cite {zuker1981optimal}.}}{9}
-\contentsline {figure}{\numberline {2.3}{\ignorespaces Depiction of how sliding windows can explore a RNA sequence.}}{13}
+\contentsline {figure}{\numberline {2.1}{\ignorespaces RNA secondary structure as described in the Nussinov algorithm. Taken from the original publication \cite {nussinov1980fast}.}}{8}
+\contentsline {figure}{\numberline {2.2}{\ignorespaces Diagram of faces used in the Zuker algorithm. Taken from original publication \cite {zuker1981optimal}.}}{10}
+\contentsline {figure}{\numberline {2.3}{\ignorespaces Depiction of how sliding windows can explore a RNA sequence.}}{14}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {3.1}{\ignorespaces The relationship between a sliding window and its RNA intervals. RNA secondary structures are represented using dot-bracket notation.}}{19}
-\contentsline {figure}{\numberline {3.2}{\ignorespaces Case 1 shows RNA intervals that are not compatible. Case 2 shows an example of compatible intervals.}}{20}
-\contentsline {figure}{\numberline {3.3}{\ignorespaces The interval stored in $q[i]$ for the RNA interval $W[i]$.}}{21}
+\contentsline {figure}{\numberline {3.1}{\ignorespaces The relationship between a sliding window and its RNA intervals. RNA secondary structures are represented using dot-bracket notation.}}{20}
+\contentsline {figure}{\numberline {3.2}{\ignorespaces Case 1 shows RNA intervals that are not compatible. Case 2 shows an example of compatible intervals.}}{21}
+\contentsline {figure}{\numberline {3.3}{\ignorespaces The interval stored in $q[i]$ for the RNA interval $W[i]$.}}{22}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {4.1}{\ignorespaces F-scores for matching RNA test cases achieved by Weighted Activity Selection and RNAfold plotted against one-another. The green line represents parity. Any points above the line are cases in which Weighted Activity Selection performed better, points below the line indicate that RNAfold was more accurate. Note that a maximum F-score is \texttt {1.0}.}}{30}
-\contentsline {figure}{\numberline {4.2}{\ignorespaces Correlation of F-scores for $ab$-splat in training set versus validation set. R-squared value = 0.702901, $p$-value $< 0.0001$. Standard Error of Regression = 0.025032.}}{31}
-\contentsline {figure}{\numberline {4.3}{\ignorespaces A comparison of the time taken for RNAfold to run against $ab$-splat. This graph indicates how much time RNAfold and $ab$-splat use with increasing RNA length. Best fit regression lines are also shown.}}{32}
+\contentsline {figure}{\numberline {4.1}{\ignorespaces F-scores for matching RNA test cases achieved by Weighted Activity Selection and RNAfold plotted against one-another. The green line represents parity. Any points above the line are cases in which Weighted Activity Selection performed better, points below the line indicate that RNAfold was more accurate. Note that a maximum F-score is \texttt {1.0}.}}{31}
+\contentsline {figure}{\numberline {4.2}{\ignorespaces Correlation of F-scores for $ab$-splat in training set versus validation set. R-squared value = 0.702901, $p$-value $< 0.0001$. Standard Error of Regression = 0.025032.}}{32}
+\contentsline {figure}{\numberline {4.3}{\ignorespaces A comparison of the time taken for RNAfold to run against $ab$-splat. This graph indicates how much time RNAfold and $ab$-splat use with increasing RNA length. Best fit regression lines are also shown.}}{33}
 \addvspace {10\p@ }
