@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012/Debian) (format=pdflatex 2014.3.26)  22 MAY 2014 14:09
+This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012/Debian) (format=pdflatex 2014.3.26)  24 MAY 2014 17:02
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -718,53 +718,55 @@ Package pdftex.def Info: slidingwindow.png used on input line 309.
 
 [14 <./slidingwindow.png>] [15] [16] [17] [18]
 Chapter 3.
-<rnainterval.png, id=109, 940.51375pt x 238.8925pt>
-File: rnainterval.png Graphic file (type png)
- <use rnainterval.png>
-Package pdftex.def Info: rnainterval.png used on input line 421.
-(pdftex.def)             Requested size: 940.51146pt x 238.8919pt.
-
 [19
 
-] <compat.png, id=113, 827.09pt x 192.72pt>
+] <rnainterval.png, id=112, 940.51375pt x 238.8925pt>
+File: rnainterval.png Graphic file (type png)
+ <use rnainterval.png>
+Package pdftex.def Info: rnainterval.png used on input line 423.
+(pdftex.def)             Requested size: 940.51146pt x 238.8919pt.
+
+[20 <./rnainterval.png>] <compat.png, id=117, 827.09pt x 192.72pt>
 File: compat.png Graphic file (type png)
- <use compat.png>
-Package pdftex.def Info: compat.png used on input line 440.
+
+<use compat.png>
+Package pdftex.def Info: compat.png used on input line 442.
 (pdftex.def)             Requested size: 827.08797pt x 192.71951pt.
- [20 <./rnainterval.png>]
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 455.
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 457.
 
  (/usr/share/texlive/texmf-dist/tex/latex/base/omscmr.fd
 File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 455.
- [21 <./compat.png>] <q-i.png, id=124, 533.995pt x 169.63374pt>
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 457.
+
+[21 <./compat.png>] <q-i.png, id=124, 533.995pt x 169.63374pt>
 File: q-i.png Graphic file (type png)
  <use q-i.png>
-Package pdftex.def Info: q-i.png used on input line 483.
+Package pdftex.def Info: q-i.png used on input line 485.
 (pdftex.def)             Requested size: 533.9937pt x 169.63332pt.
- [22 <./q-i.png>] [23] [24] [25]
+
+[22 <./q-i.png>] [23] [24] [25]
 Chapter 4.
 [26
 
-] [27] [28] [29] <wasrnafoldplot.pdf, id=153, 361.35pt x 216.81pt>
+] [27] [28] [29] <wasrnafoldplot.pdf, id=155, 361.35pt x 216.81pt>
 File: wasrnafoldplot.pdf Graphic file (type pdf)
 
 <use wasrnafoldplot.pdf>
-Package pdftex.def Info: wasrnafoldplot.pdf used on input line 669.
+Package pdftex.def Info: wasrnafoldplot.pdf used on input line 667.
 (pdftex.def)             Requested size: 361.34912pt x 216.80946pt.
  [30] [31 <./wasrnafoldplot.pdf>]
-<abcorrelation.pdf, id=168, 361.35pt x 216.81pt>
+<abcorrelation.pdf, id=170, 361.35pt x 216.81pt>
 File: abcorrelation.pdf Graphic file (type pdf)
  <use abcorrelation.pdf>
-Package pdftex.def Info: abcorrelation.pdf used on input line 685.
+Package pdftex.def Info: abcorrelation.pdf used on input line 683.
 (pdftex.def)             Requested size: 361.34912pt x 216.80946pt.
 
-<zukerabtime.pdf, id=169, 361.35pt x 216.81pt>
+<zukerabtime.pdf, id=171, 361.35pt x 216.81pt>
 File: zukerabtime.pdf Graphic file (type pdf)
  <use zukerabtime.pdf>
-Package pdftex.def Info: zukerabtime.pdf used on input line 695.
+Package pdftex.def Info: zukerabtime.pdf used on input line 693.
 (pdftex.def)             Requested size: 361.34912pt x 216.80946pt.
  [32 <./abcorrelation.pdf>] [33 <./zukerabtime.pdf>]
 Chapter 5.
@@ -779,30 +781,31 @@ Missing character: There is no ” in font cmr12!
  [43]) [44]
 (./cshonours.aux) ) 
 Here is how much of TeX's memory you used:
- 10744 strings out of 493485
- 223726 string characters out of 3143526
- 227094 words of memory out of 3000000
- 13885 multiletter control sequences out of 15000+200000
+ 10743 strings out of 493485
+ 223716 string characters out of 3143526
+ 228085 words of memory out of 3000000
+ 13884 multiletter control sequences out of 15000+200000
  14417 words of font info for 54 fonts, out of 3000000 for 9000
  957 hyphenation exceptions out of 8191
  38i,10n,27p,2000b,518s stack positions out of 5000i,500n,10000p,200000b,50000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/c
 m/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmcs
 c10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pf
-b></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr
-/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/
-texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive
-/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texlive/texmf-
-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/share/texlive/texmf-dist/fon
-ts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1
-/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/publi
-c/amsfonts/cm/cmsy8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfo
-nts/cm/cmti12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm
-/cmtt12.pfb>
-Output written on cshonours.pdf (52 pages, 1488198 bytes).
+b></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr
+/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/
+texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive
+/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-
+dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texlive/texmf-dist/fo
+nts/type1/public/amsfonts/cm/cmr6.pfb></usr/share/texlive/texmf-dist/fonts/type
+1/public/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public
+/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfo
+nts/cm/cmsy8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/
+cmti12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12
+.pfb>
+Output written on cshonours.pdf (52 pages, 1497941 bytes).
 PDF statistics:
- 280 PDF objects out of 1000 (max. 8388607)
- 183 compressed objects within 2 object streams
+ 284 PDF objects out of 1000 (max. 8388607)
+ 186 compressed objects within 2 object streams
  0 named destinations out of 1000 (max. 500000)
  61 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -413,7 +413,9 @@ If my hypothesis is supported, I aim to leverage locally optimal windows to impr
 This chapter contains descriptions of the novel algorithmic approaches applied in my investigation. First I clarify what local optimization means, and define some useful terms. Specifically, I shall explain how locally optimal structures are computed, and the terminology I use to describe components of this process. Thence I describe some algorithms which can be used to merge locally optimal structures into a global structure. Building upon these algorithms, I introduce $ab$-splat, a novel algorithm for the prediction of RNA secondary structures.
 
 \section{RNA Intervals}
-Running an algorithm which generates consecutive windows of size $L$ over a RNA primary sequence of size $n$ will produce $n-L+1$ windows of size $L$. Each of these windows may contain one or more discrete structural elements. For example, a window may contain two disjoint stems. After generating these windows, a post-processing step was executed in which any such disjoint secondary structural elements were split up. Once all disjoint structural elements were split up, they were assigned a score. This score was proportional to their free energy reduction. I call this pair of stem and score a `RNA interval'. Every window generated using a sliding window algorithm was processed into a collection of RNA intervals. A window may contain none or many RNA intervals depending on the density of stems. Figure \ref{fig:rnainterval} contains a diagrammatic representation of both the sliding window, and the RNA intervals it comprises. In the diagram, only a single window is shown, however the same logic holds for all previous and subsequent windows. RNA structure is represented using dot-bracket notation. In this style, every matching pair of parentheses represents bonded base pairs. Conversely, a full stop represents an unbonded base. In the figure, curly braces indicate the ends of windows and RNA intervals. The computed structure for the window contains two disjoint structural elements, these are split into two RNA intervals. These are disjoint because they are contained within no other bond; an RNA interval begins and ends at a top level bonding pair.
+Running an algorithm which generates consecutive windows of size $L$ over a RNA primary sequence of size $n$ produces $n-L+1$ windows of size $L$. Each of these windows contains the optimal secondary structure for that subsequence of RNA. This structure is computed with complete disregard for any interactions outside the bases encompassed by the window. It is therefore locally optimal, but not globally optimal. The secondary structure may contain no bonds at all, or it might contain an elaborate structure. Such a structure might have disjoint components. An example of this is shown in Figure \ref{fig:rnainterval}, in which there are two distinct substructures which are part of no larger substructure. A substructure is disjoint if and only if no bond encompasses it and another substructure.
+
+I extracted all disjoint substructures from the structures computed by the sliding window algorithm. I called these `RNA intervals'. This was done so that structures from different windows could be effectively blended. Every RNA interval was assigned a score. This score was defined as the amount of free energy reduction which that RNA interval contributes. Figure \ref{fig:rnainterval} contains a diagrammatic representation of both the sliding window, and the RNA intervals it comprises. In the diagram, only a single window is shown, however the same logic holds for all previous and subsequent windows. RNA structure is represented using dot-bracket notation. In this style, every matching pair of parentheses represents bonded base pairs. Conversely, a full stop represents an unbonded base. In the figure, curly braces indicate the ends of windows and RNA intervals. The computed structure for the window contains two disjoint substructures, these are split into two RNA intervals. These are disjoint because they are contained within no other bond. The RNA interval merging algorithms, which I shall now discuss, worked on these disjoint substructures, rather than on the entire structures produced by the sliding window.
 
 
 \begin{figure}
@@ -521,7 +523,7 @@ The RNA interval merging algorithms discussed all have the same $O(n \log n)$ wo
 
 \section{Prediction Using Windows}
 \label{sec:absplat}
-RNA interval merging algorithms are not able to make good predictions in isolation. Hence, an approach was devised to predict RNA secondary structures using them. In this approach I computed sliding windows for a set of sizes---a sample like this is often called a `splat'. Weighted Activity Selection was then done on the resulting set of computed RNA intervals.  This was because it appeared to be the best RNA interval merging algorithm, see Section \ref{sec:localopt} for details. I explored several methods for finding good splats. I present here the most successful technique, which I call `$ab$-splat' prediction. Initially the algorithm started at a small window size, and exponentially increased the scope of the window until a threshold was exceeded. This is explained using pseudocode in Algorithm \ref{absplat}.
+RNA interval merging algorithms are not able to make good predictions in isolation. Hence, an approach was devised to predict RNA secondary structures using them. In this approach I computed sliding windows for a set of sizes---a sample like this is often called a `splat'. Weighted Activity Selection was then done on the resulting set of computed RNA intervals.  This was because it appeared to be the best RNA interval merging algorithm, see Section \ref{sec:localopt} for details. I explored several methods for finding good splats. I present here the most successful technique, which I call `$ab$-splat' prediction. Initially the algorithm starts at a small window size, and exponentially increases the scope of the window until a threshold is exceeded. This is explained using pseudocode in Algorithm \ref{absplat}.
 
 \begin{algorithm}
   \caption{$ab$-splat}
@@ -538,7 +540,7 @@ RNA interval merging algorithms are not able to make good predictions in isolati
   \end{algorithmic}
 \end{algorithm}
 
-The \texttt{Threshold} function was defined as $\sqrt{ \texttt{RNA Length} } \times 9.5$. This formula was found using empirical experimentation.
+The \texttt{Threshold} function was defined as $\sqrt{ \texttt{RNA Length} } \times 9.5$. This formula was found using empirical experimentation. In addition, $a$ and $b$ are arbitrary constants set by the user. I shall discuss how I found good values for them in Section \ref{sec:absplatmethod}. The \texttt{ComputeSlidingWindow} function was a modified implementation of Hofacker, Priwitzer, and Stadler's \cite{hofacker2004prediction} algorithm, described in Section \ref{sec:localopt}. It first computes all consecutive windows for a fixed size $i$, breaks these up into RNA intervals, and returns the set of these RNA intervals.
 
 \subsection{Time Complexity}
 
@@ -546,33 +548,29 @@ The time complexity of this algorithm is non-trivial to deduce. The runtime of \
 
 The sequence of window sizes explored by $ab$-splat given any values for $a$ and $b$ are as follows.
 
+\begin{equation} \label{eq:windowsizes}
+	ab^0, \; ab^1, \; ab^2, \; ab^3 \; \cdots ab^{\log_b \sqrt{n}-1}
+\end{equation}
+
+This sequence is of course bounded by the \texttt{Treshold} function which means that all terms are $O(\sqrt{n})$. It follows that there are $O(\log_b \sqrt{n})$ terms in the series.  Geometric progressions of this type have the following identity.
+
+
 \begin{equation}
-	a, \; ab, \; ab^2, \; ab^3 \; \cdots \; 9.5\times\sqrt{n}
+	ab^0 +  ab^1 +  ab^2 +  ab^3 +  \cdots + ab^{n-1} = \frac{a(1-b^n)}{1-b}
 \end{equation}
 
-This sequence is of course bounded by the threshold function. Note that $n$ is the length a RNA. Because \texttt{ComputeSlidingWindow} requires $O(nL^2)$ time, the sum amount of time required is defined by Equation \ref{eq:abtimeone}.
+Which means that the closed form of Equation \ref{eq:windowsizes} is as follows.
 
-\begin{equation}  \label{eq:abtimeone}
-	n a^2 + n(a b)^2 + n(a b^2)^2 + n(a b^3)^2 + \cdots + n^2
+\begin{equation}
+  \frac{a(1-b^{\log_b \sqrt{n}})}{1-b}
 \end{equation}
 
+Since $a$ and $b$ are both constant values, this is $O(\sqrt{n})$. Thus, the sum of all window sizes as defined in Equation \ref{eq:windowsizes} is $O(\sqrt{n})$. \texttt{ComputeSlidingWindow} is run for every window size defined in this sequence. Since the time complexity of \texttt{ComputeSlidingWindow} is $O(nL^2)$, and the sum of all window sizes is $O(\sqrt{n})$, the cumulative work is $O(n(\sqrt{n})^2)$ which trivially simplifies to $O(n^2)$. Now I shall show that this dominates the cost of running Weighted Activity Selection.
 
-All irrelevant constant factors have been removed, as they do not contribute to the asymptotic time complexity. Factoring out $n^2$, we get Equation \ref{eq:abtimetwo}.
-
-\begin{equation} \label{eq:abtimetwo}
-	n^2 ( \frac{n a^2}{n^2} + \frac{n(a b)^2}{n^2} + \frac{n(a b^2)^2}{n^2} + \frac{n(a b^3)^2}{n^2} + \cdots + 1)
-\end{equation}
-
-Given that $a$ and $b$ are constant, in the limit to infinity all terms except \texttt{1} tend toward zero. Hence we are left with a final time complexity of $O(n^2)$ for computing all required sliding windows. Now I shall show that this dominates the cost of running Weighted Activity Selection.
-
-Every window size produces $O(n)$ windows of size $L$. Every such window can contain at most $O(L)$ RNA intervals. Equation \ref{eq:intervalsone} shows the total number of RNA intervals produced. By factoring out $n^\frac{3}{2}$ in a similar manner to Equation \ref{eq:abtimetwo} described above, we see that the number of RNA intervals is $O(n^\frac{3}{2})$.
+Every window size produces $O(n)$ windows of size $L$. Every such window can contain at most $O(L)$ RNA intervals. Because the sum of all windows sizes is $O(\sqrt{n})$, and we collect $O(n)$ sets of windows, we are left with an upper bound of $O(n^\frac{3}{2})$ RNA intervals in total.
 
 
-\begin{equation} \label{eq:intervalsone}
-	n a + n(a b) + n(a b^2) + n(a b^3) + \cdots + n^\frac{3}{2}
-\end{equation}
-
-Weighted Activity Selection uses $O(n \log n)$ time. As we have $O(n^\frac{3}{2})$ windows in the worst case, this leads to a worst case time complexity of $O(n^\frac{3}{2} \log n)$, which is dominated by $O(n^2)$. Computing the largest sliding window requires only $O(n)$ space, since it uses $O(L^2)$ space in all cases. Weighted Activity Selection will additionally require only $O(n^\frac{3}{2})$ space. As all of these RNA intervals must be stored in $S$, $ab$-splat will thus use $O(n^\frac{3}{2})$ memory in the worst case. In contrast, the Zuker algorithm requires $O(n^3)$ time and $O(n^2)$ space. The computational bottleneck is usually time, however. 
+Weighted Activity Selection uses $O(n \log n)$ time. As we have $O(n^\frac{3}{2})$ RNA intervals in the worst case, this leads to a worst case time complexity of $O(n^\frac{3}{2} \log n)$, which is dominated by $O(n^2)$. Computing the largest sliding window requires only $O(n)$ space, since it uses $O(L^2)$ space in all cases, and the largest window size is $O(\sqrt{n})$. Weighted Activity Selection additionally requires only $O(n^\frac{3}{2})$ space. As all of these RNA intervals must be stored in $S$, $ab$-splat will thus use $O(n^\frac{3}{2})$ memory in the worst case. In contrast, the Zuker algorithm requires $O(n^3)$ time and $O(n^2)$ space. The computational bottleneck is usually time, however. 
 
 
 \chapter{Method \& Results}
@@ -609,7 +607,7 @@ In order to test and compare the various RNA interval merging algorithms (outlin
 
 
 \subsection{$ab$-splat}
-
+\label{sec:absplatmethod}
 The aim of the first test done on $ab$-splat was to find good values for $a$ and $b$. A brute force method was used to test a combinatorial set of values for $a$ and $b$ such that $10 \leq a \leq 30$ and $1.5 \leq b \leq 4.0$. In this method, all integer values for $a$ were attempted, and values for $b$ were generated with a step size of \texttt{0.1}. This method was exhaustive, but slow. To speed up computation, precomputed windows were used. This meant that the \texttt{Threshold} function was altered slightly to $\min(\sqrt{ \texttt {RNA Length } } \times 9.5, \: 500)$, as only windows up to size 500 were precomputed. To compare different $ab$ pairs, the testing set was randomly partitioned into two sets containing an equal number of RNAs. One of these sets I called the training set, the other I called the validation set. The aforementioned brute force search was done on the training set, and the F-scores for $ab$ pairs recorded; $ab$ pairs with highest F-scores were deemed the best. These scores were then validated by running the same procedure on the validation set, then attempting to correlate the scores of $ab$ pairs between training and validation sets. This  indicated if high scores in the training set were related to high scores in the validation set. Correlating scores also allowed me to determine if results found in the training set were statistically valid.
 
 The motivation for the second test done on $ab$-splat was to compare it to RNAfold in terms of accuracy and run-time. The best $ab$ pair was used to configure the $ab$-splat algorithm, which was then run on the full testing set, and its F-scores recorded. These F-scores were then compared directly to F-scores produced by RNAfold, which was also run on the full testing set. In addition to this, the time to execute each algorithm was recorded and compared. Precomputed windows were not used so that the runtime and accuracy could be fairly compared to RNAfold. Because of this, the standard \texttt{Threshold} function was used.

@@ -20,7 +20,7 @@
 \contentsline {subsubsection}{Bottom-Up Selection}{22}
 \contentsline {subsubsection}{Score Selection}{22}
 \contentsline {subsubsection}{Weighted Activity Selection}{22}
-\contentsline {subsection}{\numberline {3.2.1}Closing Remarks}{22}
+\contentsline {subsection}{\numberline {3.2.1}Closing Remarks}{23}
 \contentsline {section}{\numberline {3.3}Prediction Using Windows}{23}
 \contentsline {subsection}{\numberline {3.3.1}Time Complexity}{24}
 \contentsline {chapter}{\numberline {4}Method \& Results}{26}

@@ -15,7 +15,7 @@
 {\sc Andronescu, M., Bereg, V., Hoos, H.~H., and Condon, A.}
 \newblock Rna strand: the rna secondary structure and statistical analysis
   database.
-\newblock {\em BMC bioinformatics 9}, 1 (2008), 340.
+\newblock {\em BMC Bioinformatics 9}, 1 (2008), 340.
 
 \bibitem{anfinsen1973principles}
 {\sc Anfinsen, C.}
@@ -38,7 +38,7 @@
 {\sc Bellaousov, S., Reuter, J.~S., Seetin, M.~G., and Mathews, D.~H.}
 \newblock Rnastructure: web servers for rna secondary structure prediction and
   analysis.
-\newblock {\em Nucleic acids research 41}, W1 (2013), W471--W474.
+\newblock {\em Nucleic Acids Research 41}, W1 (2013), W471--W474.
 
 \bibitem{condon2003problems}
 {\sc Condon, A.}
@@ -49,7 +49,7 @@
 \bibitem{conn1998rna}
 {\sc Conn, G.~L., and Draper, D.~E.}
 \newblock Rna structure.
-\newblock {\em Current opinion in structural biology 8}, 3 (1998), 278--285.
+\newblock {\em Current Opinion in Structural Biology 8}, 3 (1998), 278--285.
 
 \bibitem{dawson2013new}
 {\sc Dawson, W., Takai, T., Ito, N., Shimizu, K., and Kawai, G.}
@@ -68,7 +68,7 @@
 {\sc Ditzler, M.~A., Rueda, D., Mo, J., H{\aa}kansson, K., and Walter, N.~G.}
 \newblock A rugged free energy landscape separates multiple functional rna
   folds throughout denaturation.
-\newblock {\em Nucleic acids research 36}, 22 (2008), 7088--7099.
+\newblock {\em Nucleic Acids Research 36}, 22 (2008), 7088--7099.
 
 \bibitem{do2006contrafold}
 {\sc Do, C.~B., Woods, D.~A., and Batzoglou, S.}
@@ -91,7 +91,7 @@
 {\sc Horesh, Y., Wexler, Y., Lebenthal, I., Ziv-Ukelson, M., and Unger, R.}
 \newblock Rnaslider: a faster engine for consecutive windows folding and its
   application to the analysis of genomic folding asymmetry.
-\newblock {\em BMC bioinformatics 10}, 1 (2009), 76.
+\newblock {\em BMC Bioinformatics 10}, 1 (2009), 76.
 
 \bibitem{kato2006stochastic}
 {\sc Kato, Y., Seki, H., and Kasami, T.}
@@ -104,12 +104,12 @@
 {\sc Koessler, D.~R., Knisley, D.~J., Knisley, J., and Haynes, T.}
 \newblock A predictive model for secondary rna structure using graph theory and
   a neural network.
-\newblock {\em BMC bioinformatics 11}, Suppl 6 (2010), S21.
+\newblock {\em BMC Bioinformatics 11}, Suppl 6 (2010), S21.
 
 \bibitem{kramer1981secondary}
 {\sc Kramer, F.~R., and Mills, D.~R.}
 \newblock Secondary structure formation during rna synthesis.
-\newblock {\em Nucleic acids research 9}, 19 (1981), 5109--5124.
+\newblock {\em Nucleic Acids Research 9}, 19 (1981), 5109--5124.
 
 \bibitem{lee2014rna}
 {\sc Lee, J., Kladwang, W., Lee, M., Cantu, D., Azizyan, M., Kim, H.,
@@ -121,7 +121,7 @@
 \bibitem{leung2013coral}
 {\sc Leung, Y.~Y., Ryvkin, P., Ungar, L.~H., Gregory, B.~D., and Wang, L.-S.}
 \newblock Coral: predicting non-coding rnas from small rna-sequencing data.
-\newblock {\em Nucleic acids research 41}, 14 (2013), e137--e137.
+\newblock {\em Nucleic Acids Research 41}, 14 (2013), e137--e137.
 
 \bibitem{lorenz2011viennarna}
 {\sc Lorenz, R., Bernhart, S.~H., Zu~Siederdissen, C.~H., Tafer, H., Flamm, C.,
@@ -132,7 +132,7 @@
 \bibitem{lyngso2000rna}
 {\sc Lyngs{\o}, R.~B., and Pedersen, C.~N.}
 \newblock Rna pseudoknot prediction in energy-based models.
-\newblock {\em Journal of computational biology 7}, 3-4 (2000), 409--427.
+\newblock {\em Journal of Computational Biology 7}, 3-4 (2000), 409--427.
 
 \bibitem{makeyev2008multilevel}
 {\sc Makeyev, E.~V., and Maniatis, T.}
@@ -147,7 +147,7 @@
 \bibitem{morgan1996evidence}
 {\sc Morgan, S.~R., and Higgs, P.~G.}
 \newblock Evidence for kinetic effects in the folding of large rna molecules.
-\newblock {\em The Journal of chemical physics 105}, 16 (1996), 7152--7157.
+\newblock {\em The Journal of Chemical Physics 105}, 16 (1996), 7152--7157.
 
 \bibitem{namy2006mechanical}
 {\sc Namy, O., Moran, S.~J., Stuart, D.~I., Gilbert, R.~J., and Brierley, I.}
@@ -157,7 +157,7 @@
 
 \bibitem{neidle2010principles}
 {\sc Neidle, S.}
-\newblock {\em Principles of nucleic acid structure}.
+\newblock {\em Principles of Nucleic Acid Structure}.
 \newblock Academic Press, 2010.
 
 \bibitem{nussinov1980fast}
@@ -176,31 +176,31 @@
 {\sc Pontius, J.~U., Mullikin, J.~C., Smith, D.~R., Lindblad-Toh, K., Gnerre,
   S., Clamp, M., Chang, J., Stephens, R., Neelam, B., Volfovsky, N., et~al.}
 \newblock Initial sequence and comparative analysis of the cat genome.
-\newblock {\em Genome research 17}, 11 (2007), 1675--1689.
+\newblock {\em Genome Research 17}, 11 (2007), 1675--1689.
 
 \bibitem{proctor2013cofold}
 {\sc Proctor, J.~R., and Meyer, I.~M.}
 \newblock Cofold: an rna secondary structure prediction method that takes
   co-transcriptional folding into account.
-\newblock {\em Nucleic acids research 41}, 9 (2013), e102--e102.
+\newblock {\em Nucleic Acids Research 41}, 9 (2013), e102--e102.
 
 \bibitem{reeder2004design}
 {\sc Reeder, J., and Giegerich, R.}
 \newblock Design, implementation and evaluation of a practical pseudoknot
   folding algorithm based on thermodynamics.
-\newblock {\em BMC bioinformatics 5}, 1 (2004), 104.
+\newblock {\em BMC Bioinformatics 5}, 1 (2004), 104.
 
 \bibitem{rivas2013four}
 {\sc Rivas, E.}
 \newblock The four ingredients of single-sequence rna secondary structure
   prediction. a unifying perspective.
-\newblock {\em RNA biology 10}, 7 (2013), 1185.
+\newblock {\em RNA Biology 10}, 7 (2013), 1185.
 
 \bibitem{rivas1999dynamic}
 {\sc Rivas, E., and Eddy, S.~R.}
 \newblock A dynamic programming algorithm for rna structure prediction
   including pseudoknots.
-\newblock {\em Journal of molecular biology 285}, 5 (1999), 2053--2068.
+\newblock {\em Journal of Molecular Biology 285}, 5 (1999), 2053--2068.
 
 \bibitem{rivas2012range}
 {\sc Rivas, E., Lang, R., and Eddy, S.~R.}
@@ -212,7 +212,7 @@
 {\sc Sperschneider, J., and Datta, A.}
 \newblock Dotknot: pseudoknot prediction using the probability dot plot under a
   refined energy model.
-\newblock {\em Nucleic acids research 38}, 7 (2010), e103--e103.
+\newblock {\em Nucleic Acids Research 38}, 7 (2010), e103--e103.
 
 \bibitem{sperschneider2011heuristic}
 {\sc Sperschneider, J., Datta, A., and Wise, M.~J.}
@@ -224,24 +224,24 @@
 {\sc Studnicka, G.~M., Rahn, G.~M., Cummings, I.~W., and Salser, W.~A.}
 \newblock Computer method for predicting the secondary structure of
   single-stranded rna.
-\newblock {\em Nucleic acids research 5}, 9 (1978), 3365--3388.
+\newblock {\em Nucleic Acids Research 5}, 9 (1978), 3365--3388.
 
 \bibitem{taufer2009pseudobase}
 {\sc Taufer, M., Licon, A., Araiza, R., Mireles, D., Van~Batenburg, F.,
   Gultyaev, A.~P., and Leung, M.-Y.}
 \newblock Pseudobase++: an extension of pseudobase for easy searching,
   formatting and visualization of pseudoknots.
-\newblock {\em Nucleic acids research 37}, suppl 1 (2009), D127--D135.
+\newblock {\em Nucleic Acids Research 37}, suppl 1 (2009), D127--D135.
 
 \bibitem{tinoco1999rna}
 {\sc Tinoco~Jr, I., and Bustamante, C.}
 \newblock How rna folds.
-\newblock {\em Journal of molecular biology 293}, 2 (1999), 271--281.
+\newblock {\em Journal of Molecular Biology 293}, 2 (1999), 271--281.
 
 \bibitem{treiber2001beyond}
 {\sc Treiber, D.~K., and Williamson, J.~R.}
 \newblock Beyond kinetic traps in rna folding.
-\newblock {\em Current opinion in structural biology 11}, 3 (2001), 309--314.
+\newblock {\em Current Opinion in Structural Biology 11}, 3 (2001), 309--314.
 
 \bibitem{van1995apl}
 {\sc Van~Batenburg, F., Gultyaev, A.~P., and Pleij, C.~W.}
@@ -265,18 +265,18 @@
 {\sc Xu, Z., Almudevar, A., and Mathews, D.~H.}
 \newblock Statistical evaluation of improvement in rna secondary structure
   prediction.
-\newblock {\em Nucleic acids research 40}, 4 (2012), e26--e26.
+\newblock {\em Nucleic Acids Research 40}, 4 (2012), e26--e26.
 
 \bibitem{zuker2003mfold}
 {\sc Zuker, M.}
 \newblock Mfold web server for nucleic acid folding and hybridization
   prediction.
-\newblock {\em Nucleic acids research 31}, 13 (2003), 3406--3415.
+\newblock {\em Nucleic Acids Research 31}, 13 (2003), 3406--3415.
 
 \bibitem{zuker1981optimal}
 {\sc Zuker, M., and Stiegler, P.}
 \newblock Optimal computer folding of large rna sequences using thermodynamics
   and auxiliary information.
-\newblock {\em Nucleic acids research 9}, 1 (1981), 133--148.
+\newblock {\em Nucleic Acids Research 9}, 1 (1981), 133--148.
 
 \end{thebibliography}
