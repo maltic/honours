@@ -8,6 +8,9 @@
 \documentclass[final]{beamer}
 \usepackage[scale=1.24]{beamerposter}
 \usepackage{graphicx}			% allows us to import images
+\usepackage{amsmath}
+\usepackage{algorithm,algorithmicx,algpseudocode}
+\usepackage[scientific-notation=true]{siunitx}
 
 %-----------------------------------------------------------
 % Custom commands that I use frequently
@@ -69,7 +72,7 @@
 %-----------------------------------------------------------
 
 \title{RNA Folding: Beyond The Thermodynamic Hypothesis}
-\author{Max Ward and Amitava Datta}
+\author{Max Ward (supervised by Amitava Datta)}
 \institute{Computer Science and Software Engineering, University of Western Australia}
 
 %-----------------------------------------------------------
@@ -87,7 +90,7 @@
       
       
       \begin{block}{Introduction \& Motivation}
-RNA is a biologically active molecule with many poorly understood functions. For example, it is,
+Ribonucleic Acid (RNA) is a biologically active molecule with many poorly understood functions. For example, it is,
 \vspace{0.25in}
 \begin{itemize}
 \item Involved in regulation of DNA expression \\
@@ -112,119 +115,159 @@ Quick and accurate prediction of RNA structure is therefore essential. RNA foldi
           \begin{center}
             \includegraphics[width=10in]{RNAexample.png} \\
             \caption{A RNA molecule}
-            \label{fig:corrSubsys}
+            \label{fig:RNAexample}
           \end{center}
         \end{figure}
       \end{block}
     \end{column}
-
+    
+    
+    
+    
+    
     \begin{column}{\sepwid}\end{column}			% empty spacer column
-    \begin{column}{\twocolwid}							% create a two-column-wide column and then we will split it up later
-      \begin{columns}[t,totalwidth=\twocolwid]	% split up that two-column-wide column
-        \begin{column}{\onecolwid}\vspace{-.69in}
-          \begin{block}{Unitarily-Correctable Codes}
-            \rmfamily{A correctable subsystem $\cl{B}$ is said to be a \emph{unitarily-correctable code} (UCC) for $\cl{E}$ if the recovery operation is simply a conjugation-by-unitary channel $\cl{U}(\cdot) := U(\cdot)U^*$.
-            \vspace{0.1in}
-            \begin{itemize}\justifying	% the \justifying command forces the items in the list to have full justification (they don't by default)
-              \item Since finding correctable subsystems in full generality is an extremely difficult problem, restricting our attention to unitarily-correctable codes seems potentially wise.
-              \item These codes are of physical interest; they are codes in which the two-step process of recovery only involves the conjugation-by-unitary step (and not the projective measurement step).
-              \item It has been shown \cite{KS06} that if a quantum channel $\cl{E}$ is unital, then we can unambiguously define \emph{the unitarily-correctable code algebra} of $\cl{E}$, denoted $UCC(\cl{E})$, to be the albebra composed of the direct sum of all of the unitarily-correctable codes.
-              \item In terms of Figure~1, unitarily-correctable codes are those for which $p_1 = 1$ and $p_2 = p_3 = 0$ (i.e., there is just one block on the right).
-            \end{itemize}}
-          \end{block}
-        \end{column}
-        \begin{column}{\onecolwid}\vspace{-.69in}
-          \begin{block}{The Multiplicative Domain}
-            \rmfamily{The \emph{multiplicative domain} of $\cl{E}$ \cite{Cho74}, denoted $MD(\cl{E})$, is defined to be the following set:
-            \begin{align*}
-              \big\{ a \in \cl{L}(\cl{H}) : & \, \cl{E}(a)\cl{E}(b) = \cl{E}(ab)\text{ and } \\
-              & \, \cl{E}(b)\cl{E}(a) = \cl{E}(ba) \ \forall \, b \in \cl{L}(\cl{H}) \big\}.
-            \end{align*}
-
-            \begin{itemize}
-              \item $\cl{E}$ behaves particularly nicely when restricted to $MD(\cl{E})$ (as a $*$-homomorphishm, in fact).
-              \item $MD(\cl{E})$ was first studied by operator theorists over thirty years ago.
-              \item $MD(\cl{E})$ is an algebra, and hence \cite{Dav96} is unitarily equivalent to a direct sum of tensor blocks:
-              \begin{equation}\label{opalgform}
-                MD(\cl{E}) \cong \oplus_k \big(I_{\mathcal{A}_k} \otimes \mathcal{L}(\mathcal{B}_k)\big) \, \oplus \, 0_\mathcal{K}.
-              \end{equation}
-            \end{itemize}
+    \begin{column}{\onecolwid}
+    
+    
+    
+    \begin{block}{Sliding Windows}
+            Hofacker, Priwitzer, and Stadler \cite{hofacker2008rna} devised an algorithm to compute the structure of consecutive windows over a RNA in $O(nL^2)$ time, where $n$ is RNA length and $L$ is window size. This is useful when searching DNA (which can be very large) for RNA structural motifs.
+\vspace{0.25in}
+        \begin{figure}
+          \begin{center}
+            \includegraphics[width=10in]{slidingwindow.png} \\
+            \caption{A sliding window over a RNA sequence}
+            \label{fig:slidingwindow}
+          \end{center}
+        \end{figure}            
             \vspace{0.25in}
-            \begin{figure}
-              \begin{center}
-                \includegraphics[width=10in]{MD.png}
-                \caption{The action of a quantum channel on its multiplicative domain.}
-                \label{fig:multDom}
-              \end{center}
-            \end{figure}}
+         
           \end{block}
-        \end{column}
-      \end{columns}
-      \vskip2.5ex
-      \begin{alertblock}{The Great Connection}		% an ACTUAL two-column-wide column
-        \rmfamily{By looking at Figures 1 and 2, we expect that there might be some connection between correctable subsystems for a channel $\cl{E}$ and its multiplicative domain. Indeed, one of our main results is that the two situations coincide when $\cl{E}$ is unital and the subsystem is unitarily-correctable.}
-      \end{alertblock}
-      \begin{columns}[t,totalwidth=\twocolwid]
-        \begin{column}{\onecolwid}
-        \begin{block}{Main Result}
-          \rmfamily{\textbf{Theorem.} \emph{Let $\cl{E}$ be a unital quantum channel. Then $MD(\cl{E}) = UCC(\cl{E})$.}
-          \begin{itemize}\justifying
-            \item This theorem says that when we write $MD(\cl{E})$ in the form of Equation~\eqref{opalgform}, the $\cl{B}_k$'s are exactly the unitarily-correctable codes for $\cl{E}$.
-            \item When $\cl{E}$ is not unital, $MD(\cl{E})$ in general only captures a subclass of the unitarily-correctable codes for $\cl{E}$.
-            \item Because $MD(\cl{E})$ is easy to compute, this provides a concrete method of finding some UCCs.
-          \end{itemize}}
-        \end{block}
-      \end{column}
-      \begin{column}{\onecolwid}
-        \begin{block}{Generalization}
-          \rmfamily{In the same spirit as the multiplicative domain, we can define ``generalized multiplicative domains'' for channels by requiring not that the channel be multiplicative with itself, but rather that it be multiplicative with some $*$-homomorphism.
-          \begin{itemize}\justifying
-            \item Generalized multiplicative domains capture \emph{all} correctable codes for \emph{arbitrary} channels.
-            \item Unlike the multiplicative domain, these algebras in general are very difficult to compute.
-          \end{itemize}}
-        \end{block}
-      \end{column}
-    \end{columns}
-  \end{column}
-  \begin{column}{\sepwid}\end{column}			% empty spacer column
-  \begin{column}{\onecolwid}
-    \begin{block}{Conclusions and Outlook}
-      \rmfamily{This characterization provides a simple way to find all unitarily-correctable codes for unital channels and even some codes for non-unital channels. General correctable subsystems can be characterized in terms of algebras that are analogous to the multiplicative domain, though in general it is not clear how to calculate them -- further research in this area would be of great interest.}
-    \end{block}
-    \vskip2ex
-    \begin{block}{For Further Information}
-      \small{\rmfamily{For the details of our work:
-      \begin{itemize}
-        \item Choi, M.-D., Johnston, N., and Kribs, D. W.. Journal of Physics A: Mathematical and Theoretical \textbf{42}, 245303 (2009).
-        \item Johnston, N., and Kribs, D. W., \emph{Generalized Multiplicative Domains and Quantum Error Correction} (2009, preprint).
-      \end{itemize}
-      \vspace{0.1in}\noindent Preprints and this poster can be downloaded from:
-      \begin{itemize}
-        \item www.arxiv.org
-        \item www.nathanieljohnston.com
-      \end{itemize}}}
-    \end{block}
+    
+     \begin{block}{Weighted Activity Selection}
+The weighted activity selection problem is a classical optimization problem, and is defined as follows. Given a set of weighted intervals on a line, find a subset of intervals such that none overlap, and the sum of their weights is maximized. Such a subset can be found in $O(n \log n)$ time using dynamic programming.
+\vspace{0.25in}
+         
+          \end{block} 
+          
+          
+     \begin{block}{Testing Local Interactions}
+To test if local interactions were stronger than global interactions, I examined window sizes 5 to 500. For every window size,
+
+\vspace{0.25in}
+\begin{itemize}
+\item The sliding window algorithm was run. The structure computed for every window position was saved in a set $S$. \\
+\item Every structure in the set $S$ was assigned a score. This score was defined as the free energy of the structure. The lower the free energy of a molecule, the more stable it is. \\
+\item Weighed activity selection was done on the set $S$ to create a structure with minimum sum free energy.
+\end{itemize}
+\vspace{0.25in}
+This procedure was run on a large corpus of test RNA molecules whose structure had been experimentally determined. The single most accurate prediction was recorded.
+
+         
+          \end{block} 
+    
+    \end{column}
+    
+    
+    
+    
+    
+    
+ \begin{column}{\sepwid}\end{column}			% empty spacer column
+    \begin{column}{\onecolwid}
+    
+    
+    
+    \begin{block}{Local Versus Global}
+
+        \begin{figure}
+          \begin{center}
+            \includegraphics[width=10in]{wasrnafoldplot.pdf} \\
+            \caption{Scatter plot of the best locally optimized structure, versus the prediction of RNAfold}
+            \label{fig:wasvsrnafoldplot}
+          \end{center}
+        \end{figure}            
+            \vspace{0.25in}
+
+The Zuker algorithm, first described in 1984 \cite{someone}, is the most widely used RNA folding algorithm today. Because it has been continually refined, it is considered state of the art. In addition, the Zuker algorithm finds a structure with minimum free energy, it globally optimizes a thermodynamic scoring function. RNAfold \cite{someone} is a modern implementation of the Zuker algorithm, and was chosen for comparison.
+
+
+As can be seen in Figure \ref{fig:wasvsrnafoldplot}, the procedure I described earlier was consistently more accurate than RNAfold. This result was verified by a Wilcoxon Signed-rank test ($p < 0.001$). This strongly supports my hypothesis. Because there exist window sizes for almost all tested RNA which are more accurate than the global optimum, local interactions appear to be more important than global interactions during RNA folding.
+            
+         
+          \end{block}
+    
+     \begin{block}{The $ab$-splat Algorithm}
+I also introduced the $ab$-splat algorithm, which is a complete RNA prediction algorithm. It utilizes locally optimal sliding windows, and weighted activity selection.
+\vspace{0.25in}
+        \begin{figure}
+          \begin{center}
+            \includegraphics[width=10in]{pseudo.png} \\
+            %\caption{A sliding window over a RNA sequence}
+            \label{fig:psuedocode}
+          \end{center}
+        \end{figure}        
+
+
+          \end{block} 
+          
+          
+          
+    
+    \end{column}    
+    
+    
+
+ \begin{column}{\sepwid}\end{column}			% empty spacer column
+    \begin{column}{\onecolwid}
+    
+        \begin{block}{Testing $ab$-splat}
+
+
+Machine learning was used to find good values ($a = blah$, $b = blah$). In addition, an effective \texttt{Threshold} function ($9.5 \times \sqrt{RNA\_Length}$) was found through empirical testing. Using this \texttt{Threshold} function, the time complexity of $ab$-splat is $O(n^2)$, where $n$ is RNA length. This is an order of magnitude faster than the Zuker algorithm, which requires $O(n^3)$ time. Again, RNAfold was used for comparison.
+       \vspace{0.25in}
+        \begin{figure}
+          \begin{center}
+            \includegraphics[width=10in]{zukerabtime.pdf} \\
+            \caption{Time taken by RNAfold (red), and by $ab$-splat (blue)}
+            \label{fig:zukerabtime}
+          \end{center}
+        \end{figure}
+A Wilcoxon Signed-rank test showed that there was no statistically significant different in accuracy between RNAfold and $ab$-splat. This implies that both algorithms are equally accurate. However, the $ab$-splat algorithm was much faster in theory, and in practice (see Figure \ref{fig:zukerabtime}).   
+         
+          \end{block}
+    
+    
     \vskip2ex
     \begin{block}{References}
-      \small{\rmfamily{\begin{thebibliography}{99}
-      \bibitem{KLPL06} D.~W. Kribs, R. Laflamme, D. Poulin, M. Lesosky, Quantum Inf. \& Comp. \textbf{6} (2006), 383-399.
-      \bibitem{zanardi97} P. Zanardi, M. Rasetti, Phys. Rev. Lett. \textbf{79},  3306 (1997).
-      \bibitem{KS06} D.~W. Kribs, R.~W. Spekkens, Phys. Rev. A \textbf{74}, 042329 (2006).
-      \bibitem{Cho74} M.-D. Choi, Illinois J. Math., \textbf{18} (1974), 565-574.
-      \bibitem{Dav96} K.~R. Davidson, \emph{$C^*$-algebras by example}, Fields Institute Monographs, 6. American Mathematical Society, Providence, RI, 1996.
-      \end{thebibliography}}}
-    \end{block}
-    \vskip2ex
-    \begin{block}{Acknowledgements}
-      \small{\rmfamily{M.-D.C. was supported by an NSERC Discovery Grant. N.J. was supported by an NSERC Canada Graduate Scholarship and the University of Guelph Brock Scholarship. D.W.K. was supported by an NSERC Discovery Grant and Discovery Accelerator Supplement, an Ontario Early Researcher Award, and CIF, OIT.}} \\
+         
+	
+	\small{\begin{thebibliography}{99}
+		        \bibitem{hofacker2008rna} D.~W. Kribs, R. Laflamme, D. Poulin, M. Lesosky, Quantum Inf. \& Comp. \textbf{6} (2006), 383-399.
+		        \bibitem{zanardi97} P. Zanardi, M. Rasetti, Phys. Rev. Lett. \textbf{79},  3306 (1997). 
+		        \end{thebibliography}}
+
+      
       \vspace{0.5in}
       \begin{center}
-        \begin{tabular}{ccc}
-          \includegraphics[width=3in]{TO.png} & \hspace{1.5in} & \includegraphics[width=3in]{guelph.png}
-        \end{tabular}
+          \includegraphics[width=3in]{UWA.jpg}
       \end{center}
     \end{block}
-  \end{column}
+          
+          
+          
+    
+    \end{column}    
+    
+    
+    
+    
+    
+
+
+        
+        
+  
   \begin{column}{\sepwid}\end{column}			% empty spacer column
  \end{columns}
 \end{frame}
