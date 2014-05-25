@@ -90,7 +90,7 @@
       
       
       \begin{block}{Introduction \& Motivation}
-Ribonucleic Acid (RNA) is a biologically active molecule with many poorly understood functions. For example, it is,
+Ribonucleic Acid (RNA) is a biologically active molecule with many poorly understood functions. For example, it is:
 \vspace{0.25in}
 \begin{itemize}
 \item Involved in regulation of DNA expression \\
@@ -145,19 +145,19 @@ Quick and accurate prediction of RNA structure is therefore essential. RNA foldi
           \end{block}
     
      \begin{block}{Weighted Activity Selection}
-The weighted activity selection problem is a classical optimization problem, and is defined as follows. Given a set of weighted intervals on a line, find a subset of intervals such that none overlap, and the sum of their weights is maximized. Such a subset can be found in $O(n \log n)$ time using dynamic programming.
+The weighted activity selection problem is a classical optimization problem, and is defined as follows: Given a set of weighted intervals on a line, find a subset of intervals such that none overlap, and the sum of their weights is maximized. Such a subset can be found in $O(n \log n)$ time using dynamic programming.
 \vspace{0.25in}
          
           \end{block} 
           
           
      \begin{block}{Testing Local Interactions}
-To test if local interactions were stronger than global interactions, I examined window sizes 5 to 500. For every window size,
+To test if local interactions were stronger than global interactions, I examined window sizes 5 to 500. For every window size:
 
 \vspace{0.25in}
 \begin{itemize}
-\item The sliding window algorithm was run. The structure computed for every window position was saved in a set $S$. \\
-\item Every structure in the set $S$ was assigned a score. This score was defined as the free energy of the structure. The lower the free energy of a molecule, the more stable it is. \\
+\item The sliding window algorithm was run. The structures computed for every window position were saved in a set $S$. \\
+\item Every structure in the set $S$ was assigned a score. This score was defined as the free energy of the structure. The lower the free energy of a structure, the more stable it is. \\
 \item Weighed activity selection was done on the set $S$ to create a structure with minimum sum free energy.
 \end{itemize}
 \vspace{0.25in}
@@ -189,16 +189,16 @@ This procedure was run on a large corpus of test RNA molecules whose structure h
         \end{figure}            
             \vspace{0.25in}
 
-The Zuker algorithm, first described in 1984 \cite{someone}, is the most widely used RNA folding algorithm today. Because it has been continually refined, it is considered state of the art. In addition, the Zuker algorithm finds a structure with minimum free energy, it globally optimizes a thermodynamic scoring function. RNAfold \cite{someone} is a modern implementation of the Zuker algorithm, and was chosen for comparison.
+The Zuker algorithm, first described in 1981 \cite{zuker1981}, is the most widely used RNA folding algorithm today. Because it has been continually refined, it is considered state of the art. In addition, the Zuker algorithm finds a structure with minimum free energy, it globally optimizes a thermodynamic scoring function. RNAfold \cite{vienna} is a modern implementation of the Zuker algorithm, and was chosen for comparison.
 
 
-As can be seen in Figure \ref{fig:wasvsrnafoldplot}, the procedure I described earlier was consistently more accurate than RNAfold. This result was verified by a Wilcoxon Signed-rank test ($p < 0.001$). This strongly supports my hypothesis. Because there exist window sizes for almost all tested RNA which are more accurate than the global optimum, local interactions appear to be more important than global interactions during RNA folding.
+As can be seen in Figure \ref{fig:wasvsrnafoldplot}, the procedure I described earlier was consistently more accurate than RNAfold. This result was verified by a Wilcoxon signed-rank test ($p < 0.001$). This strongly supports my hypothesis. Because there exist window sizes for almost all tested RNA which are more accurate than the global optimum, local interactions appear to be more important than global interactions during RNA folding.
             
          
           \end{block}
     
      \begin{block}{The $ab$-splat Algorithm}
-I also introduced the $ab$-splat algorithm, which is a complete RNA prediction algorithm. It utilizes locally optimal sliding windows, and weighted activity selection.
+I also created the $ab$-splat algorithm, which is a complete structure prediction algorithm. It utilizes locally optimal sliding windows, and weighted activity selection.
 \vspace{0.25in}
         \begin{figure}
           \begin{center}
@@ -224,7 +224,7 @@ I also introduced the $ab$-splat algorithm, which is a complete RNA prediction a
         \begin{block}{Testing $ab$-splat}
 
 
-Machine learning was used to find good values ($a = blah$, $b = blah$). In addition, an effective \texttt{Threshold} function ($9.5 \times \sqrt{RNA\_Length}$) was found through empirical testing. Using this \texttt{Threshold} function, the time complexity of $ab$-splat is $O(n^2)$, where $n$ is RNA length. This is an order of magnitude faster than the Zuker algorithm, which requires $O(n^3)$ time. Again, RNAfold was used for comparison.
+Machine learning was used to find good values for $a$ and $b$ ($a = 24$, $b = 1.8$). In addition, an effective \texttt{Threshold} function ($9.5 \times \sqrt{RNA\_Length}$) was found through empirical testing. Using this \texttt{Threshold} function, the time complexity of $ab$-splat is $O(n^2)$, where $n$ is RNA length. This is an order of magnitude faster than the Zuker algorithm, which requires $O(n^3)$ time. Again, RNAfold was used for comparison.
        \vspace{0.25in}
         \begin{figure}
           \begin{center}
@@ -233,7 +233,7 @@ Machine learning was used to find good values ($a = blah$, $b = blah$). In addit
             \label{fig:zukerabtime}
           \end{center}
         \end{figure}
-A Wilcoxon Signed-rank test showed that there was no statistically significant different in accuracy between RNAfold and $ab$-splat. This implies that both algorithms are equally accurate. However, the $ab$-splat algorithm was much faster in theory, and in practice (see Figure \ref{fig:zukerabtime}).   
+A Wilcoxon signed-rank test showed that there was no statistically significant different in accuracy between RNAfold and $ab$-splat. This implies that both algorithms are equally accurate. However, the $ab$-splat algorithm was much faster in theory, and in practice (see Figure \ref{fig:zukerabtime}).   
          
           \end{block}
     
@@ -243,12 +243,20 @@ A Wilcoxon Signed-rank test showed that there was no statistically significant d
          
 	
 	\small{\begin{thebibliography}{99}
-		        \bibitem{hofacker2008rna} D.~W. Kribs, R. Laflamme, D. Poulin, M. Lesosky, Quantum Inf. \& Comp. \textbf{6} (2006), 383-399.
-		        \bibitem{zanardi97} P. Zanardi, M. Rasetti, Phys. Rev. Lett. \textbf{79},  3306 (1997). 
+		        
+	\bibitem{hofacker2008rna}	    Hofacker, I. L., Priwitzer, B., and Stadler, P. F. Prediction of locally stable rna secondary structures for genome-wide surveys. \emph{Bioinformatics} \textbf{20}, 2 (2004), 186-190
+	
+\bibitem{zuker1981}
+Zuker, M., and Stiegler, P. Optimal computer folding of large rna sequences using thermodynamics and auxiliary information. \emph{Nucleic Acids Research} \textbf{9}, 1 (1981), 133-148.
+
+\bibitem{vienna}
+Lorenz, R., Bernhart, S. H., Zu Siederdissen, C. H., Tafer, H., Flamm, C., Stadler, P. F., Hofacker, I. L., et al. Viennarna package 2.0. \emph{Algorithms for Molecular Biology} \textbf{6}, 1 (2011), 26.
+
+
 		        \end{thebibliography}}
 
       
-      \vspace{0.5in}
+      \vspace{0.3in}
       \begin{center}
           \includegraphics[width=3in]{UWA.jpg}
       \end{center}
