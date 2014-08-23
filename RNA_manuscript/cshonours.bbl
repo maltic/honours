@@ -1,0 +1,89 @@
+\begin{thebibliography}{10}
+
+\bibitem{andronescu2008rna}
+{\sc Andronescu, M., Bereg, V., Hoos, H.~H., and Condon, A.}
+\newblock Rna strand: the rna secondary structure and statistical analysis
+  database.
+\newblock {\em BMC Bioinformatics 9}, 1 (2008), 340.
+
+\bibitem{anfinsen1973principles}
+{\sc Anfinsen, C.}
+\newblock Principles that govern the protein folding chains.
+\newblock {\em Science 181\/} (1973), 233--230.
+
+\bibitem{baiocchi2003gretl}
+{\sc Baiocchi, G., and Distaso, W.}
+\newblock Gretl: Econometric software for the gnu generation.
+\newblock {\em Journal of Applied Econometrics 18}, 1 (2003), 105--110.
+
+\bibitem{condon2003problems}
+{\sc Condon, A.}
+\newblock Problems on rna secondary structure prediction and design.
+\newblock In {\em Automata, Languages and Programming}. Springer, 2003,
+  pp.~22--32.
+
+\bibitem{ditzler2008rugged}
+{\sc Ditzler, M.~A., Rueda, D., Mo, J., H{\aa}kansson, K., and Walter, N.~G.}
+\newblock A rugged free energy landscape separates multiple functional rna
+  folds throughout denaturation.
+\newblock {\em Nucleic Acids Research 36}, 22 (2008), 7088--7099.
+
+\bibitem{hofacker2004prediction}
+{\sc Hofacker, I.~L., Priwitzer, B., and Stadler, P.~F.}
+\newblock Prediction of locally stable rna secondary structures for genome-wide
+  surveys.
+\newblock {\em Bioinformatics 20}, 2 (2004), 186--190.
+
+\bibitem{horesh2009rnaslider}
+{\sc Horesh, Y., Wexler, Y., Lebenthal, I., Ziv-Ukelson, M., and Unger, R.}
+\newblock Rnaslider: a faster engine for consecutive windows folding and its
+  application to the analysis of genomic folding asymmetry.
+\newblock {\em BMC Bioinformatics 10}, 1 (2009), 76.
+
+\bibitem{kramer1981secondary}
+{\sc Kramer, F.~R., and Mills, D.~R.}
+\newblock Secondary structure formation during rna synthesis.
+\newblock {\em Nucleic Acids Research 9}, 19 (1981), 5109--5124.
+
+\bibitem{lee2014rna}
+{\sc Lee, J., Kladwang, W., Lee, M., Cantu, D., Azizyan, M., Kim, H.,
+  Limpaecher, A., Yoon, S., Treuille, A., and Das, R.}
+\newblock Rna design rules from a massive open laboratory.
+\newblock {\em Proceedings of the National Academy of Sciences\/} (2014),
+  201313039.
+
+\bibitem{lorenz2011viennarna}
+{\sc Lorenz, R., Bernhart, S.~H., Zu~Siederdissen, C.~H., Tafer, H., Flamm, C.,
+  Stadler, P.~F., Hofacker, I.~L., et~al.}
+\newblock Viennarna package 2.0.
+\newblock {\em Algorithms for Molecular Biology 6}, 1 (2011), 26.
+
+\bibitem{morgan1996evidence}
+{\sc Morgan, S.~R., and Higgs, P.~G.}
+\newblock Evidence for kinetic effects in the folding of large rna molecules.
+\newblock {\em The Journal of Chemical Physics 105}, 16 (1996), 7152--7157.
+
+\bibitem{proctor2013cofold}
+{\sc Proctor, J.~R., and Meyer, I.~M.}
+\newblock Cofold: an rna secondary structure prediction method that takes
+  co-transcriptional folding into account.
+\newblock {\em Nucleic Acids Research 41}, 9 (2013), e102--e102.
+
+\bibitem{rivas2013four}
+{\sc Rivas, E.}
+\newblock The four ingredients of single-sequence rna secondary structure
+  prediction. a unifying perspective.
+\newblock {\em RNA Biology 10}, 7 (2013), 1185.
+
+\bibitem{treiber2001beyond}
+{\sc Treiber, D.~K., and Williamson, J.~R.}
+\newblock Beyond kinetic traps in rna folding.
+\newblock {\em Current Opinion in Structural Biology 11}, 3 (2001), 309--314.
+
+\bibitem{zuker2003mfold}
+{\sc Zuker, M.}
+\newblock Mfold web server for nucleic acid folding and hybridization
+  prediction.
+\newblock {\em Nucleic Acids Research 31}, 13 (2003), 3406--3415.
+
+\end{thebibliography}

@@ -1,0 +1,28 @@
+\contentsline {chapter}{Abstract}{ii}
+\contentsline {chapter}{\numberline {1}Introduction}{1}
+\contentsline {section}{\numberline {1.1}Relevant Algorithms}{2}
+\contentsline {section}{\numberline {1.2}Locally Optimal Algorithms}{3}
+\contentsline {subsection}{\numberline {1.2.1}RNA Intervals}{3}
+\contentsline {subsection}{\numberline {1.2.2}Merging RNA Intervals}{4}
+\contentsline {subsubsection}{Weighted Activity Selection}{4}
+\contentsline {subsection}{\numberline {1.2.3}Prediction Using Windows}{5}
+\contentsline {subsubsection}{Time Complexity}{5}
+\contentsline {chapter}{\numberline {2}Results}{7}
+\contentsline {section}{\numberline {2.1}Interval Selection}{7}
+\contentsline {section}{\numberline {2.2}RNA Intervals For Prediction}{8}
+\contentsline {chapter}{\numberline {3}Discussion \& Conclusions}{12}
+\contentsline {section}{\numberline {3.1}Local Optimization}{12}
+\contentsline {subsection}{\numberline {3.1.1}Future Work}{13}
+\contentsline {subsection}{\numberline {3.1.2}Implications}{13}
+\contentsline {section}{\numberline {3.2}The $ab$-splat Algorithm}{14}
+\contentsline {subsection}{\numberline {3.2.1}Accuracy}{14}
+\contentsline {subsection}{\numberline {3.2.2}Computational Complexity}{15}
+\contentsline {subsection}{\numberline {3.2.3}A Better Algorithm}{15}
+\contentsline {section}{\numberline {3.3}Conclusions}{16}
+\contentsline {section}{\numberline {3.4}Materials}{17}
+\contentsline {subsection}{\numberline {3.4.1}Environment}{17}
+\contentsline {subsection}{\numberline {3.4.2}Software}{17}
+\contentsline {subsection}{\numberline {3.4.3}Testing Set}{18}
+\contentsline {section}{\numberline {3.5}Test Configuration}{19}
+\contentsline {subsection}{\numberline {3.5.1}RNA Interval Merging Algorithms}{19}
+\contentsline {subsection}{\numberline {3.5.2}$ab$-splat}{19}
